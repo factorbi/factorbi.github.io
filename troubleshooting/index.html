@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <meta name="author" content="Factor BI Team">
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Troubleshooting - Bipost Documentation</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../css/highlight.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Troubleshooting";
+    var mkdocs_page_input_path = "troubleshooting.md";
+    var mkdocs_page_url = "/troubleshooting/";
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js"></script>
+  <script src="../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../js/highlight.pack.js"></script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> Bipost Documentation</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="..">Home</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../setupaws/">Link your AWS Account</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../installation/">Download & Install</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../bipostexe/">Configure & Run</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../bipostapi/">Bipost API</a>
+	    </li>
+          
+            <li class="toctree-l1 current">
+		
+    <a class="current" href="./">Troubleshooting</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l2"><a href="#troubleshooting">Troubleshooting</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#check-log">Check Log</a></li>
+        
+            <li><a class="toctree-l3" href="#customdatajson-syntax-error">customData.json syntax error</a></li>
+        
+            <li><a class="toctree-l3" href="#date-format-inside-postjson">Date format inside post.json</a></li>
+        
+            <li><a class="toctree-l3" href="#no-information-to-sync">No information to Sync</a></li>
+        
+            <li><a class="toctree-l3" href="#time-to-sync-and-load-to-aurora">Time to sync and load to Aurora</a></li>
+        
+            <li><a class="toctree-l3" href="#upload-limit">Upload Limit</a></li>
+        
+            <li><a class="toctree-l3" href="#special-characters">Special Characters</a></li>
+        
+            <li><a class="toctree-l3" href="#schema-limitations">Schema Limitations</a></li>
+        
+            <li><a class="toctree-l3" href="#no-internet-connection">No Internet Connection</a></li>
+        
+            <li><a class="toctree-l3" href="#firewall-restrictions">Firewall Restrictions</a></li>
+        
+            <li><a class="toctree-l3" href="#appdatalocal-folder">AppData\Local folder</a></li>
+        
+        </ul>
+    
+
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../about/">About</a>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">Bipost Documentation</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Troubleshooting</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h1>
+<p>When you use manual sync and it is completed successfully, the following dialog appears.</p>
+<p><img alt="Screenshot" src="../img/sync_completed.png" /></p>
+<p>If you face any errors, try looking here.</p>
+<hr />
+<h2 id="check-log">Check Log<a class="headerlink" href="#check-log" title="Permanent link">&para;</a></h2>
+<p>After you make a sync, you are able to check on you PC the compressed file uploaded.</p>
+<ol>
+<li>
+<p>Open a new Windows Explorer window and enter <code>%LocalAppData%\biPost</code></p>
+</li>
+<li>
+<p>Open corresponding ZIP file and review contents.</p>
+</li>
+</ol>
+<p>It might me also useful to check after a <strong>Sync Completed</strong> process, and <strong>before</strong> you press <strong>OK</strong>, open <code>%LocalAppData%\biPost</code> and check the files that were just created.</p>
+<p>If you need to check which files where loaded to Aurora, check <a href="../bipostapi/#load-data">aurora_s3_load_history.</a></p>
+<hr />
+<h2 id="customdatajson-syntax-error">customData.json syntax error<a class="headerlink" href="#customdatajson-syntax-error" title="Permanent link">&para;</a></h2>
+<p>Misspelled fields or tables on customData.json may appear as:</p>
+<p><img alt="Screenshot" src="../img/customDataSyntaxError.png" /></p>
+<hr />
+<h2 id="date-format-inside-postjson">Date format inside post.json<a class="headerlink" href="#date-format-inside-postjson" title="Permanent link">&para;</a></h2>
+<p>If immediately after launching biPost.exe this error appears <code>String was not recognized as valid DateTime</code>, try the following:</p>
+<p>Open <code>post.json</code> file and delete all datetime strings found inside <code>" "</code>. Do not delete the double quotation marks.</p>
+<p><img alt="Screenshot" src="../img/String_was_not_recognized_as_valid_DateTime.png" /></p>
+<hr />
+<h2 id="no-information-to-sync">No information to Sync<a class="headerlink" href="#no-information-to-sync" title="Permanent link">&para;</a></h2>
+<p>If <code>No information to Sync</code> message appears, verify that customData.json is set to send at least one table.</p>
+<hr />
+<h2 id="time-to-sync-and-load-to-aurora">Time to sync and load to Aurora<a class="headerlink" href="#time-to-sync-and-load-to-aurora" title="Permanent link">&para;</a></h2>
+<p>When a new Sync is initiated on biPost.exe, it may take a few minutes to extract, compress and upload to information to S3. While this is happening, no messages/icons will show that biPost.exe is working and maybe you will see <code>(Not responding)</code> on the top of the window, this is normal.</p>
+<p>If you launch Windows Task Manager probably you'll see that <code>biPost.exe *32</code> is running and consuming a considerable amount of CPU.</p>
+<p>Once the compressed package it uploaded to S3, it may take 1 to 3 minutes to process and load your data to MySQL.</p>
+<p>If you need to check which tables where loaded, check <a href="../bipostapi/#load-data">aurora_s3_load_history.</a></p>
+<hr />
+<h2 id="upload-limit">Upload Limit<a class="headerlink" href="#upload-limit" title="Permanent link">&para;</a></h2>
+<p>Depending on the number of columns on each table and the amount of data of each row, it is possible that a large amount of data sent on a single sync may not load on your Aurora DB.</p>
+<p>We have tested different scenarios and a 100,000 row limit for a single sync works fine.</p>
+<p>We recommend using <a href="../bipostexe/#recursive-sync">Recursive Sync</a> for large tables that have a datetime field available.</p>
+<hr />
+<h2 id="special-characters">Special Characters<a class="headerlink" href="#special-characters" title="Permanent link">&para;</a></h2>
+<p>Some special characters on <code>char</code> and <code>varchar</code> fields are not supported and thus removed by biPost.exe
+For example:</p>
+<ul>
+<li>Enter</li>
+<li>()</li>
+</ul>
+<hr />
+<h2 id="schema-limitations">Schema Limitations<a class="headerlink" href="#schema-limitations" title="Permanent link">&para;</a></h2>
+<ul>
+<li><code>bit</code> datatype is converted to <code>VARCHAR(1)</code> on Aurora.</li>
+<li><code>NULL</code> values on float, money and int datatypes are converted to value <code>0</code> (zero) on Aurora.</li>
+<li>Tables without a <code>PRIMARY KEY</code> will not load data on Aurora.</li>
+</ul>
+<hr />
+<h2 id="no-internet-connection">No Internet Connection<a class="headerlink" href="#no-internet-connection" title="Permanent link">&para;</a></h2>
+<p>If there is no internet connection available, biPost will show the following message:</p>
+<p><img alt="Screenshot" src="../img/NameResolutionFailure.png" /></p>
+<hr />
+<h2 id="firewall-restrictions">Firewall Restrictions<a class="headerlink" href="#firewall-restrictions" title="Permanent link">&para;</a></h2>
+<p>If your internet connection has a firewall, it may show different errors like: </p>
+<ul>
+<li>The remote name could not be resolved.</li>
+<li>A WebException with status SendFailure was thrown.</li>
+<li>A WebException with status NameResolutionFailure was thrown.</li>
+<li>Error making request with Error Code ExpectationFailed and Http Status Code ExpectationFailed.</li>
+</ul>
+<p><img alt="Screenshot" src="../img/Error_Code_ExpectationFailed.png" /></p>
+<h3 id="grant-firewall-to-reach-amazon-s3">Grant Firewall to reach Amazon S3:<a class="headerlink" href="#grant-firewall-to-reach-amazon-s3" title="Permanent link">&para;</a></h3>
+<p>Create a policy to Allow to:</p>
+<ul>
+<li><code>54.230.0.0/15</code></li>
+<li><code>52.192.0.0/11</code></li>
+</ul>
+<p><img alt="Screenshot" src="../img/FirewallAllowTo.png" /></p>
+<hr />
+<h2 id="appdatalocal-folder">AppData\Local folder<a class="headerlink" href="#appdatalocal-folder" title="Permanent link">&para;</a></h2>
+<p>Sometimes it is necessary to manually delete the content of <code>\AppData\Local\biPost</code> folder.</p>
+<p>Open a new Windows Explorer window and enter <code>%LocalAppData%\biPost</code>. Select all and delete.</p>
+<pre><code>************** Exception Text **************
+System.IO.IOException: The process cannot access the file '012a3b4c-56d7-8ef9-0123-456789a012bc_post.zip' because it is being used by another process.
+</code></pre>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../about/" class="btn btn-neutral float-right" title="About">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../bipostapi/" class="btn btn-neutral" title="Bipost API"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+      <p>© 2016 - 2017, <a href="https://www.factorbi.com">Factor BI, S.A. de C.V.</a> All rights reserved.</p>
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+    
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../bipostapi/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../about/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script src="../js/theme.js"></script>
+
+</body>
+</html>

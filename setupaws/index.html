@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <meta name="author" content="Factor BI Team">
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Link your AWS Account - Bipost Documentation</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../css/highlight.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Link your AWS Account";
+    var mkdocs_page_input_path = "setupaws.md";
+    var mkdocs_page_url = "/setupaws/";
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js"></script>
+  <script src="../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../js/highlight.pack.js"></script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> Bipost Documentation</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="..">Home</a>
+	    </li>
+          
+            <li class="toctree-l1 current">
+		
+    <a class="current" href="./">Link your AWS Account</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l2"><a href="#link-your-aws-account">Link your AWS Account</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#dont-have-an-aws-account">Don't have an AWS account?</a></li>
+        
+            <li><a class="toctree-l3" href="#check-closest-aws-region-to-you-location">Check closest AWS Region to you location</a></li>
+        
+            <li><a class="toctree-l3" href="#get-canonical-user-id-from-your-iam-home">Get Canonical User ID from your IAM Home</a></li>
+        
+            <li><a class="toctree-l3" href="#create-aurora-instance">Create Aurora Instance</a></li>
+        
+            <li><a class="toctree-l3" href="#rds-instance-security-group">RDS Instance Security Group</a></li>
+        
+            <li><a class="toctree-l3" href="#create-iam-policy-to-grant-access-to-s3">Create IAM Policy to Grant Access to S3</a></li>
+        
+            <li><a class="toctree-l3" href="#create-iam-role-to-allow-rds-access-to-s3">Create IAM Role to Allow RDS Access to S3</a></li>
+        
+            <li><a class="toctree-l3" href="#set-iam-role-to-aurora-cluster">Set IAM Role to Aurora Cluster</a></li>
+        
+            <li><a class="toctree-l3" href="#create-cluster-parameter-group">Create Cluster Parameter Group</a></li>
+        
+            <li><a class="toctree-l3" href="#create-db-parameter-group">Create DB Parameter Group</a></li>
+        
+            <li><a class="toctree-l3" href="#set-cluster-parameter-group">Set Cluster Parameter Group</a></li>
+        
+            <li><a class="toctree-l3" href="#set-instance-parameter-group">Set Instance Parameter Group</a></li>
+        
+            <li><a class="toctree-l3" href="#verify-instance-configuration">Verify Instance Configuration</a></li>
+        
+            <li><a class="toctree-l3" href="#test-connection-to-your-rds-aurora">Test connection to your RDS Aurora</a></li>
+        
+            <li><a class="toctree-l3" href="#send-instance-connection-details-to-factor-bi">Send Instance Connection Details to Factor BI</a></li>
+        
+            <li><a class="toctree-l3" href="#security-of-your-rds-instance-for-production">Security of your RDS Instance for Production</a></li>
+        
+        </ul>
+    
+
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../installation/">Download & Install</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../bipostexe/">Configure & Run</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../bipostapi/">Bipost API</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../troubleshooting/">Troubleshooting</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../about/">About</a>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">Bipost Documentation</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Link your AWS Account</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="link-your-aws-account">Link your AWS Account<a class="headerlink" href="#link-your-aws-account" title="Permanent link">&para;</a></h1>
+<p>Follow these instructions to link your AWS Account and RDS Aurora instance to Bipost API.</p>
+<p><strong>IMPORTANT NOTICE: Many settings suggested here are for testing purposes. If you are to use the following AWS services for production you may want to follow your company policies and understand how to use AWS security according to your needs.</strong></p>
+<hr />
+<h2 id="dont-have-an-aws-account">Don't have an AWS account?<a class="headerlink" href="#dont-have-an-aws-account" title="Permanent link">&para;</a></h2>
+<ol>
+<li>
+<p>Create an AWS account here <a href="http://aws.amazon.com" target="_blank">aws.amazon.com</a></p>
+<p><img alt="Screenshot" src="../img/Create_an_AWS_Account.png" /></p>
+</li>
+<li>
+<p>AWS usually makes an automated verification phone call, we suggest to provide a land line.</p>
+</li>
+<li>Provide payment information.</li>
+<li>Select Basic Support (free plan).</li>
+<li>Check if you can open <a href="https://console.aws.amazon.com/rds/home">RDS Dashboard</a>, by searching under <em>AWS services</em>.</li>
+<li>Congrats you have an AWS account!</li>
+</ol>
+<hr />
+<h2 id="check-closest-aws-region-to-you-location">Check closest AWS Region to you location<a class="headerlink" href="#check-closest-aws-region-to-you-location" title="Permanent link">&para;</a></h2>
+<p><a href="http://cloudping.info">cloudping.info</a></p>
+<p>Click the link above and hit <strong>HTTP Ping</strong> and look for the lowest latency.</p>
+<p>Maybe you want to try this at different times of the day.</p>
+<p>Take note of the closest region.</p>
+<p><img alt="Screenshot" src="../img/CloudPing.png" /></p>
+<hr />
+<h2 id="get-canonical-user-id-from-your-iam-home">Get Canonical User ID from your IAM Home<a class="headerlink" href="#get-canonical-user-id-from-your-iam-home" title="Permanent link">&para;</a></h2>
+<ol>
+<li>Upper right corner of your AWS console, click your account name (or follow next link).</li>
+<li><a href="https://console.aws.amazon.com/iam/home#/security_credential">My Security Credentials.</a></li>
+<li>Click <em>Continue to Security Credentials</em> if dialog appears.</li>
+<li>Account Identifiers.</li>
+<li>
+<p>Copy AWS Account ID and Canonical User ID.</p>
+<blockquote>
+<p>Copy the entire string that starts with <em>AWS Account ID</em> up to the very end of a long hex string of 64 characters.</p>
+</blockquote>
+<p><img alt="Screenshot" src="../img/Your_Security_Credentials.png" /></p>
+</li>
+<li>
+<p>Email the above to <a href="mailto:jaime@factorbi.com">jaime@factorbi.com</a> so we can configure a dedicated bucket for your API calls.</p>
+</li>
+</ol>
+<p><em>Q: Is it secure to provide these numbers?</em></p>
+<p>Yes, we use your <a href="http://docs.aws.amazon.com/general/latest/gr/acct-identifiers.html">Canonical User ID</a> to create and provide access to a new and dedicated S3 bucket for your AWS Account. Further on you will link this bucket to you RDS instance.</p>
+<hr />
+<h2 id="create-aurora-instance">Create Aurora Instance<a class="headerlink" href="#create-aurora-instance" title="Permanent link">&para;</a></h2>
+<h3 id="aurora-db-details">Aurora DB Details<a class="headerlink" href="#aurora-db-details" title="Permanent link">&para;</a></h3>
+<ol>
+<li>From AWS Console Home, upper right corner (next to you name) be sure to select the <a href="../setupaws/#check-closest-aws-region-to-you-location">closest region to your location.</a></li>
+<li>From AWS Console Home, search RDS.</li>
+<li>From <a href="https://console.aws.amazon.com/rds/home">RDS Dashboard</a>, click Instances.</li>
+<li>Launch DB Instance, blue button.</li>
+<li>Select Engine: <strong>Amazon Aurora</strong>, click select.</li>
+<li>DB Instance Class: for testing purposes select the smallest available, currently <strong>t2.small</strong></li>
+<li>Multi-AZ Deployment: for testing purposes select <strong>No</strong></li>
+<li>DB Instance Identifier: assign a name, lower-case and no special characters.</li>
+<li>Master Username: <strong>root</strong></li>
+<li>Master Password: assign a hard password and store it in a secure place.</li>
+<li>Confirm Password.</li>
+<li>On your left pane it is displayed an estimated monthly cost. For further information check On-Demand Pricing: <a href="https://aws.amazon.com/rds/pricing/">RDS Pricing</a></li>
+<li>Click Next Step, blue button.</li>
+</ol>
+<p><img alt="Screenshot" src="../img/AuroraDB_Details.png" /></p>
+<h3 id="aurora-network-security">Aurora Network &amp; Security<a class="headerlink" href="#aurora-network-security" title="Permanent link">&para;</a></h3>
+<ol>
+<li>VPC: <strong>Create new VPC</strong></li>
+<li>Subnet Group: <strong>Create new DB Subnet Group</strong></li>
+<li>Publicly Accessible: <strong>Yes</strong></li>
+<li>Availability Zone: <strong>No Preference</strong></li>
+<li>VPC Security Group: <strong>Create new Security Group</strong></li>
+</ol>
+<p><img alt="Screenshot" src="../img/Aurora_NetworkAndSecurity.png" /></p>
+<h3 id="aurora-database-options">Aurora Database Options<a class="headerlink" href="#aurora-database-options" title="Permanent link">&para;</a></h3>
+<ol>
+<li>DB Cluster Identifier: <strong>leave blank</strong></li>
+<li>Database Name: <strong>leave blank</strong></li>
+<li>Database Port: <strong>3306</strong></li>
+<li>DB Parameter Group: <strong>default.aurora5.6</strong></li>
+<li>DB Cluster Parameter Group: <strong>default.aurora5.6</strong></li>
+<li>Option Group: <strong>leave default</strong></li>
+<li>Enable Encryption: <strong>No</strong></li>
+</ol>
+<h3 id="aurora-failover">Aurora Failover<a class="headerlink" href="#aurora-failover" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Priority: <strong>tier-0</strong></li>
+</ul>
+<h3 id="aurora-backup">Aurora Backup<a class="headerlink" href="#aurora-backup" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Backup Retention Period: <strong>1 day</strong></li>
+</ul>
+<h3 id="aurora-monitoring">Aurora Monitoring<a class="headerlink" href="#aurora-monitoring" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Enable Enhanced Monitoring: <strong>No</strong></li>
+</ul>
+<h3 id="aurora-maintenance">Aurora Maintenance<a class="headerlink" href="#aurora-maintenance" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Auto Minor Version Upgrade: <strong>Yes</strong></li>
+<li>Maintenance Windows: <strong>No Preference</strong></li>
+</ol>
+<p><img alt="Screenshot" src="../img/Aurora_Failover.png" /></p>
+<h3 id="launch-db-instance">Launch DB Instance<a class="headerlink" href="#launch-db-instance" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p>Click Launch DB Instance blue button.</p>
+</li>
+<li>
+<p>This process may take a while, sometimes 30 minutes or more.</p>
+</li>
+<li>
+<p>You can check <strong>Status</strong> of your instance by going to <strong>Instances</strong> on left navigation pane.</p>
+</li>
+</ul>
+<hr />
+<h2 id="rds-instance-security-group">RDS Instance Security Group<a class="headerlink" href="#rds-instance-security-group" title="Permanent link">&para;</a></h2>
+<p>Once the instance has <strong>Status:</strong> <code>available</code> proceed:</p>
+<ol>
+<li>Click check box way left of your DB Instance name.</li>
+<li>Click <strong>Instance Actions \ See Details</strong> gray button, on top.</li>
+<li>
+<p>Lookup for <strong>Security Groups</strong> and click the blue string to the right, it may appear as </p>
+<blockquote>
+<p><code>default (sg-XXXXXXXX)</code></p>
+</blockquote>
+<p><img alt="Screenshot" src="../img/Instance_details.png" /></p>
+</li>
+<li>
+<p>You are now on EC2 Dashboard and Security Group ID is already selected.</p>
+</li>
+<li>Click <strong>Actions \ Edit inbound rules</strong></li>
+<li>Click <strong>Add Rule</strong>, under Type select <code>MYSQL/Aurora</code></li>
+<li>Source <strong>Custom</strong> and type value: <code>0.0.0.0/0</code></li>
+<li>
+<p>Repeat steps 6 &amp; 7, and type value <code>::/0</code></p>
+<p><img alt="Screenshot" src="../img/Inbound_rules.png" /></p>
+</li>
+<li>
+<p>Click <strong>Save</strong> blue button.</p>
+</li>
+<li>Click <strong>Actions \ Edit outbound rules</strong></li>
+<li>Verify if Type: <code>All traffic</code>, Destination: <code>Custom</code> and value: <code>0.0.0.0/0</code> is already set, if not, add the rule. </li>
+<li>Go back to <a href="https://console.aws.amazon.com/rds/home">RDS Dashboard</a>, select your instance, click <strong>Instance Actions \ Reboot</strong>, confirm with blue button on the right.</li>
+<li>Wait until <strong>Status</strong> is <code>available</code> and check if <strong>Security Groups</strong> are <code>( active )</code></li>
+</ol>
+<hr />
+<h2 id="create-iam-policy-to-grant-access-to-s3">Create IAM Policy to Grant Access to S3<a class="headerlink" href="#create-iam-policy-to-grant-access-to-s3" title="Permanent link">&para;</a></h2>
+<p>From this point on you need the newly S3 bucket ARN that we provided over email. </p>
+<p>If you haven't emailed us with your Canonical User ID, please follow <a href="../setupaws/#get-canonical-user-id-from-your-iam-home">these steps.</a></p>
+<ol>
+<li>Open <a href="https://console.aws.amazon.com/iam/home?#home">IAM Console.</a></li>
+<li>In the left navigation pane choose <strong>Policies.</strong></li>
+<li><strong>Create policy</strong> blue button.</li>
+<li>
+<p>Select <strong>Policy Generator</strong></p>
+<blockquote>
+<p>Effect: <code>Allow</code></p>
+<p>AWS Service: <code>Amazon S3</code></p>
+<p>Actions: check <code>GetObject</code> and <code>GetObjectVersion</code></p>
+<p>Amazon Resource Name (ARN): <strong>arn you received over email</strong>, example: </p>
+<p><code>arn:aws:s3:::bipost-000111222</code></p>
+</blockquote>
+</li>
+<li>
+<p>Click <strong>Add Statement</strong></p>
+</li>
+<li>
+<p>Repeat step 4 adding <code>/*</code> at the end of ARN bucket string, as follows:</p>
+<blockquote>
+<p>Effect: <code>Allow</code></p>
+<p>AWS Service: <code>Amazon S3</code></p>
+<p>Actions: check <code>GetObject</code> and <code>GetObjectVersion</code></p>
+<p>Amazon Resource Name (ARN): example: <code>arn:aws:s3:::bipost-000111222/*</code></p>
+</blockquote>
+<p><img alt="Screenshot" src="../img/Policy_Statement.png" /></p>
+</li>
+<li>
+<p>Click <strong>Next Step</strong> blue button.</p>
+</li>
+<li><strong>Policy Name:</strong> <code>AllowAuroraToS3</code></li>
+<li>Optionally add <strong>Description</strong>.</li>
+<li>
+<p><strong>Policy Document</strong>: double check that JSON looks like this:</p>
+<pre><code>{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "Stmt9999999999999",
+            "Effect": "Allow",
+            "Action": [
+                "s3:GetObject",
+                "s3:GetObjectVersion"
+            ],
+            "Resource": [
+                "arn:aws:s3:::bipost-000111222"
+            ]
+        },
+        {
+            "Sid": "Stmt9999999777999",
+            "Effect": "Allow",
+            "Action": [
+                "s3:GetObject",
+                "s3:GetObjectVersion"
+            ],
+            "Resource": [
+                "arn:aws:s3:::bipost-000111222/*"
+            ]
+        }
+    ]
+}
+</code></pre>
+</li>
+<li>
+<p>Click <strong>Create Policy</strong></p>
+</li>
+</ol>
+<p>Further information from AWS go to: <a href="http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Aurora.Authorizing.AWSServices.S3CreatePolicy.html">Allowing Amazon Aurora to Access Amazon S3 Resources</a></p>
+<hr />
+<h2 id="create-iam-role-to-allow-rds-access-to-s3">Create IAM Role to Allow RDS Access to S3<a class="headerlink" href="#create-iam-role-to-allow-rds-access-to-s3" title="Permanent link">&para;</a></h2>
+<ol>
+<li>Open <a href="https://console.aws.amazon.com/iam/home?#home">IAM Console.</a></li>
+<li>In the left navigation pane choose <strong>Roles.</strong></li>
+<li><strong>Create New Role</strong> blue button.</li>
+<li>
+<p>Choose <strong>AWS Service Role,</strong> scroll down and select <strong>Amazon RDS</strong></p>
+<p><img alt="Screenshot" src="../img/Role_type.png" /></p>
+</li>
+<li>
+<p><strong>Attach Policy,</strong> leave blank and click <strong>Next Step</strong> blue button.</p>
+</li>
+<li>Role name: <code>RDSLoadFromS3</code></li>
+<li>Click <strong>Create role</strong> blue button.</li>
+<li>Click on your newly created role. This will open a Summary.</li>
+<li>
+<p>Under Permissions, click <strong>Attach Policy</strong> blue button.</p>
+<p><img alt="Screenshot" src="../img/Attach_policy.png" /></p>
+</li>
+<li>
+<p>Use Filter and select <strong>Policy Type: Customer Managed</strong></p>
+</li>
+<li>Click the check box of your newly created Policy: <code>AllowAuroraToS3</code></li>
+<li>Click <strong>Attach Policy</strong> blue button.</li>
+<li>Copy <strong>Role ARN</strong> string and save it for further use. It may look like this: <code>arn:aws:iam::123456789012:role/RDSLoadFromS3</code></li>
+</ol>
+<p>Further information from AWS go to: <a href="http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Aurora.Authorizing.AWSServices.CreateRole.html">Creating an IAM Role to Allow Amazon Aurora to Access AWS Services</a></p>
+<hr />
+<h2 id="set-iam-role-to-aurora-cluster">Set IAM Role to Aurora Cluster<a class="headerlink" href="#set-iam-role-to-aurora-cluster" title="Permanent link">&para;</a></h2>
+<ol>
+<li>Open <a href="https://console.aws.amazon.com/rds/">RDS console.</a></li>
+<li>Choose <strong>Clusters</strong> on left pane.</li>
+<li>Click check box of your newly cluster.</li>
+<li>Click <strong>Manage IAM Roles</strong> gray button, on top.</li>
+<li>Select the role you just created: <code>RDSLoadFromS3</code> and click <strong>Done</strong>, blue button.</li>
+</ol>
+<hr />
+<h2 id="create-cluster-parameter-group">Create Cluster Parameter Group<a class="headerlink" href="#create-cluster-parameter-group" title="Permanent link">&para;</a></h2>
+<p>If you are already using a custom DB Cluster Parameter Group, you can select that group instead of creating a new DB Cluster Parameter Group.</p>
+<ol>
+<li>Open <a href="https://console.aws.amazon.com/rds/">RDS console.</a></li>
+<li>On left pane go to <strong>Parameter Groups.</strong></li>
+<li>
+<p>Click <strong>Create Parameter Group</strong> blue button on top.</p>
+<blockquote>
+<p>Parameter Group Family: <code>aurora5.6</code></p>
+<p>Type: <code>DB Cluster Parameter Group</code></p>
+<p>Group Name: <code>AuroraClusterAllowAWSAccess</code></p>
+<p>Description: <code>Allow cluster access to Amazon S3</code></p>
+</blockquote>
+</li>
+<li>
+<p>Click <strong>Create</strong> blue button.</p>
+</li>
+<li>Click check box on your new <code>auroraclusterallowawsaccess</code> parameter group and click <strong>Edit Parameters</strong> gray button on top.</li>
+<li>
+<p>Set the following:</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Edit Values</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>aurora_load_from_s3_role</td>
+<td>paste <a href="../setupaws/#create-iam-role-to-allow-rds-access-to-s3">Role ARN string</a></td>
+<td><code>arn:aws:iam::123456789012:role/RDSLoadFromS3</code></td>
+</tr>
+<tr>
+<td>aurora_select_into_s3_role</td>
+<td>paste <a href="../setupaws/#create-iam-role-to-allow-rds-access-to-s3">Role ARN string</a></td>
+<td><code>arn:aws:iam::123456789012:role/RDSLoadFromS3</code></td>
+</tr>
+<tr>
+<td>aws_default_s3_role</td>
+<td>paste <a href="../setupaws/#create-iam-role-to-allow-rds-access-to-s3">Role ARN string</a></td>
+<td><code>arn:aws:iam::123456789012:role/RDSLoadFromS3</code></td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>Click <strong>Save Changes</strong> blue button.</p>
+</li>
+</ol>
+<p>Further information from AWS go to: <a href="http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Aurora.Authorizing.AWSServices.AddRoleToDBCluster.html">Associating an IAM Role with a DB Cluster</a></p>
+<hr />
+<h2 id="create-db-parameter-group">Create DB Parameter Group<a class="headerlink" href="#create-db-parameter-group" title="Permanent link">&para;</a></h2>
+<p>If you are already using a custom DB Parameter Group, you can select that group instead of creating a new DB Parameter Group.</p>
+<ol>
+<li>Open <a href="https://console.aws.amazon.com/rds/">RDS console.</a></li>
+<li>On left pane go to <strong>Parameter Groups.</strong></li>
+<li>
+<p>Click <strong>Create Parameter Group</strong> blue button on top.</p>
+<blockquote>
+<p>Parameter Group Family: <code>aurora5.6</code></p>
+<p>Type: <code>DB Parameter Group</code></p>
+<p>Group Name: <code>AuroraInstanceAllowAWSAccess</code></p>
+<p>Description: <code>Allow instance access to Amazon S3</code></p>
+</blockquote>
+</li>
+<li>
+<p>Click <strong>Create</strong> blue button.</p>
+</li>
+<li>Click check box on your new <code>aurorainstanceallowawsaccess</code> parameter group and click <strong>Edit Parameters</strong> gray button on top.</li>
+<li>
+<p>Set the following:</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Edit Values</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>log_bin_trust_function_creators</td>
+<td>1</td>
+</tr>
+<tr>
+<td>max_allowed_packet</td>
+<td>1073741824</td>
+</tr>
+<tr>
+<td>max_connections</td>
+<td>16000</td>
+</tr>
+<tr>
+<td>max_user_connections</td>
+<td>4294967295</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>Click <strong>Save Changes</strong> blue button.</p>
+</li>
+</ol>
+<hr />
+<h2 id="set-cluster-parameter-group">Set Cluster Parameter Group<a class="headerlink" href="#set-cluster-parameter-group" title="Permanent link">&para;</a></h2>
+<ol>
+<li>Open <a href="https://console.aws.amazon.com/rds/">RDS console.</a></li>
+<li>On left pane go to <strong>Clusters.</strong></li>
+<li>Click check box on your new cluster.</li>
+<li>Click <strong>Modify Cluster</strong> gray button on top.</li>
+<li>Under Database Options, set <strong>DB Cluster Parameter Group</strong> to <code>auroraclusterallowawsaccess</code>.</li>
+<li>Click check box <strong>Apply Immediately</strong> and click <strong>Continue</strong> blue button.</li>
+<li>Review changes and click <strong>Modify Cluster</strong> blue button.</li>
+</ol>
+<h2 id="set-instance-parameter-group">Set Instance Parameter Group<a class="headerlink" href="#set-instance-parameter-group" title="Permanent link">&para;</a></h2>
+<ol>
+<li>Open <a href="https://console.aws.amazon.com/rds/">RDS console.</a></li>
+<li>On left pane go to <strong>Instances.</strong></li>
+<li>Click check box on your new instance.</li>
+<li>Click <strong>Instance Actions \ Modify</strong> gray button on top.</li>
+<li>Under Database Options, set <strong>DB Parameter Group</strong> to <code>aurorainstanceallowawsaccess</code></li>
+<li>You may also notice that <strong>DB Cluster Parameter Group</strong> is set to <code>auroraclusterallowawsaccess</code></li>
+<li>Click check box <strong>Apply Immediately</strong> and click <strong>Continue</strong> blue button.</li>
+<li>Review changes and click <strong>Modify DB Instance</strong> blue button.</li>
+<li>Click <strong>Instance Actions \ Reboot</strong> gray button on top.</li>
+<li>Confirm reboot with blue button.</li>
+</ol>
+<hr />
+<h2 id="verify-instance-configuration">Verify Instance Configuration<a class="headerlink" href="#verify-instance-configuration" title="Permanent link">&para;</a></h2>
+<ol>
+<li>Open <a href="https://console.aws.amazon.com/rds/">RDS console.</a></li>
+<li>On left pane go to <strong>Instances.</strong></li>
+<li>Click check box on your new instance.</li>
+<li>Click <strong>Instance Actions \ See Details</strong> gray button on top.</li>
+<li>
+<p>Verify the following:</p>
+<blockquote>
+<p>Enpoint: <strong>( authorized )</strong></p>
+<p>Parameter Group: <strong>aurorainstanceallowawsaccess ( in-sync )</strong></p>
+<p>DB Cluster Parameter Group: <strong>auroraclusterallowawsaccess ( in-sync )</strong></p>
+<p>Security Groups: <strong>default (sg-XXXXXXXX) ( active )</strong></p>
+<p>Publicly Accessible: <strong>Yes</strong></p>
+<p>DB Instance Status: <strong>available</strong></p>
+</blockquote>
+</li>
+</ol>
+<hr />
+<h2 id="test-connection-to-your-rds-aurora">Test connection to your RDS Aurora<a class="headerlink" href="#test-connection-to-your-rds-aurora" title="Permanent link">&para;</a></h2>
+<ol>
+<li>
+<p>Download and install any <strong>MySQL client</strong> of your preference: </p>
+<pre><code>For Mac you may use "Sequel Pro" or "MySQL Workbench"
+For Windows you may use "MySQL Workbench" or "HeidiSQL"
+</code></pre>
+</li>
+<li>
+<p>On your AWS Console go to <a href="https://console.aws.amazon.com/rds/home">RDS Dashboard</a>, select your instance and copy the <strong>Cluster Endpoint</strong>, which is a blue string with more than 60 characters. </p>
+</li>
+<li>
+<p>Launch your MySQL client and configure a new connection:</p>
+<blockquote>
+<p><strong>Name:</strong> type any name of your preference.</p>
+<p><strong>Host:</strong> Paste the Cluster Endpoint and delete the suffix :3306</p>
+<p><strong>Username:</strong> root</p>
+<p><strong>Password:</strong> type the Master Password</p>
+<p><strong>Port:</strong> 3306</p>
+<p><strong>Database:</strong> Leave blank</p>
+<p><strong>Connect using SSL:</strong> No</p>
+</blockquote>
+</li>
+<li>
+<p>Click Connect and verify that you can successfully connect to your RDS instance.</p>
+</li>
+</ol>
+<hr />
+<h2 id="send-instance-connection-details-to-factor-bi">Send Instance Connection Details to Factor BI<a class="headerlink" href="#send-instance-connection-details-to-factor-bi" title="Permanent link">&para;</a></h2>
+<p>Email all the information you used to <a href="../setupaws/#test-connection-to-your-rds-aurora">Test connection to your RDS Aurora</a> to <a href="mailto:jaime@factorbi.com">jaime@factorbi.com</a> so we can add your instance to our Bipost API.</p>
+<hr />
+<h2 id="security-of-your-rds-instance-for-production">Security of your RDS Instance for Production<a class="headerlink" href="#security-of-your-rds-instance-for-production" title="Permanent link">&para;</a></h2>
+<p>If your are ready to use Bipost API for production, we highly recommend the following:</p>
+<ol>
+<li>Use <strong>MySQL client</strong> to create a new user.</li>
+<li>Set a strong password.</li>
+<li>
+<p>Set the following Global Privileges:</p>
+<p><img alt="Screenshot" src="../img/MySQL_Global_Privileges.png" /></p>
+</li>
+</ol>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../installation/" class="btn btn-neutral float-right" title="Download & Install">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href=".." class="btn btn-neutral" title="Home"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+      <p>© 2016 - 2017, <a href="https://www.factorbi.com">Factor BI, S.A. de C.V.</a> All rights reserved.</p>
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+    
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href=".." style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../installation/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script src="../js/theme.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Synchronization for Microsoft SQL Server and Firebird to AWS Aurora.">
+  <meta name="author" content="Factor BI Team">
+  <link rel="shortcut icon" href="./img/favicon.ico">
+  <title>Home - Bipost Documentation</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="./css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="./css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="./css/highlight.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Home";
+    var mkdocs_page_input_path = "index.md";
+    var mkdocs_page_url = "/";
+  </script>
+  
+  <script src="./js/jquery-2.1.1.min.js"></script>
+  <script src="./js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="./js/highlight.pack.js"></script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="." class="icon icon-home"> Bipost Documentation</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="./search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1 current">
+		
+    <a class="current" href=".">Home</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l2"><a href="#overview">Overview</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#how-it-works">How it works</a></li>
+        
+            <li><a class="toctree-l3" href="#private-cloud">Private Cloud</a></li>
+        
+            <li><a class="toctree-l3" href="#road-map">Road Map</a></li>
+        
+            <li><a class="toctree-l3" href="#release-notes">Release Notes</a></li>
+        
+        </ul>
+    
+
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="setupaws/">Link your AWS Account</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="installation/">Download & Install</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="bipostexe/">Configure & Run</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="bipostapi/">Bipost API</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="troubleshooting/">Troubleshooting</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="about/">About</a>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href=".">Bipost Documentation</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Home</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h1>
+<p>Bipost is a simple and straightforward database synchronization tool built for developers in mind. </p>
+<p>Currently it can synchronize <a href="http://www.microsoft.com/en-us/sql-server">Microsoft SQL Server®</a> and <a href="https://firebirdsql.org/">Firebird SQL</a> (running on Windows) to any given <a href="https://aws.amazon.com/rds/aurora/">Amazon Aurora MySQL</a> database.</p>
+<p>It is created to keep your databases on-premises while providing a way to asynchronous extract and load specific sets of data to AWS Aurora.</p>
+<p>It uses a similar <em>Extract, Transform &amp; Load</em> or <em>ETL</em> technique with recurring syncing.</p>
+<p><img alt="Screenshot" src="./img/BipostSyncDiagram_med.png" /></p>
+<h2 id="how-it-works">How it works<a class="headerlink" href="#how-it-works" title="Permanent link">&para;</a></h2>
+<ul>
+<li>On every sync biPost.exe reads table schema's and data, creates a compressed file and uploads it to S3.</li>
+<li>Destination bucket triggers an API which reads schema's, creates database and tables (if they don't exist) and loads the data.</li>
+<li>On every upload MySQL uses a <code>REPLACE</code> command so if you set the appropriate primary keys on source database, data would be updated in destination (and avoid duplicates).</li>
+<li>You can customize query criteria by using <a href="./bipostexe/#customdatajson">customData.json</a> file.</li>
+<li>biPost.exe can run manually or automatically with a scheduled <a href="./bipostexe/#schedule">Windows Task.</a></li>
+</ul>
+<h2 id="private-cloud">Private Cloud<a class="headerlink" href="#private-cloud" title="Permanent link">&para;</a></h2>
+<p>Bipost API allows to load data to private AWS accounts.</p>
+<p>Each RDS Aurora instance loads data by accessing a dedicated bucket, exclusive to your AWS account.</p>
+<h2 id="road-map">Road Map<a class="headerlink" href="#road-map" title="Permanent link">&para;</a></h2>
+<p>We are currently developing a secure web page to automate all settings that are exchanged over email. Thank you for your patience and we look forward to provide a world-class service.</p>
+<h2 id="release-notes">Release Notes<a class="headerlink" href="#release-notes" title="Permanent link">&para;</a></h2>
+<h4 id="040">0.4.0<a class="headerlink" href="#040" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Custom connections added.</li>
+<li><a href="./bipostapi/#initial-statement">Initial statement</a> added to API.</li>
+<li>Special characters are deleted on string columns of 100 characters length or up.</li>
+</ul>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="setupaws/" class="btn btn-neutral float-right" title="Link your AWS Account">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+      <p>© 2016 - 2017, <a href="https://www.factorbi.com">Factor BI, S.A. de C.V.</a> All rights reserved.</p>
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+    
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+      
+        <span style="margin-left: 15px"><a href="setupaws/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script src="./js/theme.js"></script>
+
+</body>
+</html>
+
+<!--
+MkDocs version : 0.16.3
+Build Date UTC : 2017-08-20 23:29:30
+-->
