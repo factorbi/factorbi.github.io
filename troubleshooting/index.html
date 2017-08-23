@@ -194,11 +194,14 @@ For example:</p>
 <li>Enter</li>
 <li>()</li>
 </ul>
+<p>On <strong>SQL Server</strong>, all special characters on strings of 100 length or more are removed, leaving only letters and numbers.</p>
 <hr />
 <h2 id="schema-limitations">Schema Limitations<a class="headerlink" href="#schema-limitations" title="Permanent link">&para;</a></h2>
 <ul>
-<li><code>bit</code> datatype is converted to <code>VARCHAR(1)</code> on Aurora.</li>
-<li><code>NULL</code> values on float, money and int datatypes are converted to value <code>0</code> (zero) on Aurora.</li>
+<li><code>NULL</code> values on char and varchar are converted to <code>''</code> on MySQL.</li>
+<li><code>NULL</code> values on float, money and int datatypes are converted to value <code>0</code> (zero) on MySQL.</li>
+<li><code>NULL</code> values on datetime are converted to <code>0000-00-00 00:00:00</code> on MySQL.</li>
+<li><code>bit</code> datatype is converted to <code>VARCHAR(1)</code> on MySQL.</li>
 <li>Tables without a <code>PRIMARY KEY</code> will not load data on Aurora.</li>
 </ul>
 <hr />
