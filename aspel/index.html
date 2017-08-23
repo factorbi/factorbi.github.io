@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <meta name="author" content="Factor BI Team">
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Aspel - Bipost Documentation</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../css/highlight.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Aspel";
+    var mkdocs_page_input_path = "aspel.md";
+    var mkdocs_page_url = "/aspel/";
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js"></script>
+  <script src="../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../js/highlight.pack.js"></script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> Bipost Documentation</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="..">Home</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../setupaws/">Link your AWS Account</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../installation/">Download & Install</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../bipostexe/">Bipost.exe</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../bipostapi/">Bipost API</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../troubleshooting/">Troubleshooting</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../microsip/">Microsip</a>
+	    </li>
+          
+            <li class="toctree-l1 current">
+		
+    <a class="current" href="./">Aspel</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l2"><a href="#aspel-sae">Aspel SAE</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#tablas-aspel">Tablas Aspel</a></li>
+        
+            <li><a class="toctree-l3" href="#anadir-tablas-a-la-sincronizacion">Añadir tablas a la Sincronización</a></li>
+        
+            <li><a class="toctree-l3" href="#tablas-bi">Tablas B.I.</a></li>
+        
+        </ul>
+    
+
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../about/">About</a>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">Bipost Documentation</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Aspel</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="aspel-sae">Aspel SAE<a class="headerlink" href="#aspel-sae" title="Permanent link">&para;</a></h1>
+<p>Aspel SAE es un sistema administrativo que fabrica la empresa <a href="http://www.aspel.com.mx/"><em>Aspel de México, S.A. de C.V.</em></a></p>
+<p>Factor BI ofrece una serie de objetos en MySQL que facilitan la creación de un Business Intelligence.</p>
+<p>En nuestro <a href="https://github.com/factorbi/bi-aspel">repositorio de GitHub</a> podrás encontrar estos objetos bajo la licencia <strong>GNU GPLv3</strong> GNU GENERAL PUBLIC LICENSE Versión 3, 29 de Junio 2007.</p>
+<hr />
+<h2 id="tablas-aspel">Tablas Aspel<a class="headerlink" href="#tablas-aspel" title="Permanent link">&para;</a></h2>
+<p>Al <a href="../bipostexe/#configuration">configurar biPost.exe</a> con <code>System: SAE</code>, de fábrica se incluye un listado de tablas en la sincronización, las cuales son:</p>
+<pre><code>almacenes
+clie
+clin
+color
+compc
+compd
+compo
+conc
+conm
+conp
+cuen_det
+cuen_m
+factd
+factf
+factp
+inve
+minve
+moned
+paga_det
+paga_m
+par_compc
+par_compd
+par_compo
+par_factd
+par_factf
+par_factp
+prov
+prvprod
+talla
+vend
+</code></pre>
+<p>En la base de datos del sistema Aspel SAE cada tabla tiene un sufijo <code>01</code>, <code>02</code>, etc., de acuerdo a la empresa que se ha creado. Por ejemplo la tabla de las facturas podrías encontrarla como <code>factf01</code> y para otra razón social como <code>factf02</code>.</p>
+<p>Bipost automáticamente elimina estos sufijos por lo que las tablas en MySQL serán creadas sin el sufijo. Esta funcionalidad aplica incluso cuando se añaden tablas con <code>customData.json</code>.</p>
+<p>En el siguiente link está el listado de tablas de Aspel SAE.</p>
+<p><a href="http://bit.ly/tablas_aspel">Tablas Aspel SAE, archivo Google Sheets.</a></p>
+<p><strong>NOTA:</strong> La lista del link anterior puede no estar completa. </p>
+<p>Para obtener el listado completo de tablas de acuerdo a tu base de datos, puedes usar el siguiente query en Firebird:</p>
+<pre><code>select rdb$relation_name
+from rdb$relations
+where rdb$view_blr is null
+and (rdb$system_flag is null or rdb$system_flag = 0)
+order by rdb$relation_name;
+</code></pre>
+<hr />
+<h2 id="anadir-tablas-a-la-sincronizacion">Añadir tablas a la Sincronización<a class="headerlink" href="#anadir-tablas-a-la-sincronizacion" title="Permanent link">&para;</a></h2>
+<p>Para incluir tablas adicionales en la sincronización, se utiliza el archivo <code>customData.json</code>, por ejemplo:</p>
+<pre><code>[
+  {
+    "active": "true",
+    "table": "CLIE_CLIB",
+    "fields": "CVE_CLIE, CAMPLIB1, CAMPLIB2, CAMPLIB3, CAMPLIB4, CAMPLIB5, CAMPLIB6",
+    "join": "",
+    "filter": "",
+    "recursiveDateField": ""
+  },
+  {
+    "active": "true",
+    "table": "AFACT",
+    "fields": "CVE_AFACT, FVTA_COM, FDESCTO, FDES_FIN, FIMP, FCOMI, RVTA_COM, RDESCTO, RDES_FIN, RIMP, RCOMI, DVTA_COM, DDESCTO, DDES_FIN, DIMP, DCOMI, PVTA_COM, PDESCTO, PDES_FIN, PIMP, PCOMI, CVTA_COM, CDESCTO, CDES_FIN, CIMP, CCOMI, VVTA_COM, VDESCTO, VDES_FIN, VIMP, VCOMI, WVTA_COM, WDESCTO, WDES_FIN, WIMP, WCOMI, PER_ACUM",
+    "join": "",
+    "filter": "",
+    "recursiveDateField": ""
+  }
+]
+</code></pre>
+<p>Notar que no se incluye el sufijo <code>01</code>, <code>02</code>, etc. de las tablas.</p>
+<p>Los parámetros <code>join</code>, <code>filter</code> y <code>recursiveDateField</code> no están soportados hasta el momento para Firebird SQL.</p>
+<p>Observar que puede estar <code>"active": ""</code>.</p>
+<p>Para más información sobre la configuración de customData.json ver <a href="../bipostexe/#customdatajson">aquí.</a></p>
+<hr />
+<h2 id="tablas-bi">Tablas B.I.<a class="headerlink" href="#tablas-bi" title="Permanent link">&para;</a></h2>
+<p>Al correr los scripts del <a href="https://github.com/factorbi/bi-aspel">repositorio de GitHub,</a> se crean las siguientes tablas.</p>
+<table>
+<thead>
+<tr>
+<th>Tabla</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>T</td>
+<td>Tiraje de numeración consecutiva.</td>
+</tr>
+<tr>
+<td>time</td>
+<td>Util para usarse con dimensiones de tiempo en el B.I.</td>
+</tr>
+<tr>
+<td>ym</td>
+<td>Util para usarse con dimensiones año y mes en el B.I.</td>
+</tr>
+<tr>
+<td>biabc</td>
+<td>Clasificación ABC de los inventarios.</td>
+</tr>
+<tr>
+<td>biblia</td>
+<td>Matriz de estadísticas de inventario por mes.</td>
+</tr>
+<tr>
+<td>modulosgrupo1</td>
+<td>Util para un flujo de efectivo. Contiene un resumen de varios módulos del sistema.</td>
+</tr>
+<tr>
+<td>businessDay</td>
+<td>Días laborales de la empresa.</td>
+</tr>
+<tr>
+<td>customDates</td>
+<td>Pasa una fecha específica a las funciones <code>fnSyncDate()</code>, <code>fnAgingDate</code> y <code>fnServiceDate</code></td>
+</tr>
+<tr>
+<td>dateInfo</td>
+<td>Se llena al ejecutar <code>spPostFinal</code> y se utiliza en diferentes vistas.</td>
+</tr>
+<tr>
+<td>ymInfo</td>
+<td>Se llena al ejecutar <code>spPostFinal</code> y se utiliza en diferentes vistas.</td>
+</tr>
+<tr>
+<td>syncInfo</td>
+<td>Contiene información de la sincronización.</td>
+</tr>
+<tr>
+<td>logPostInitial</td>
+<td>Log de sincronizaciones, se ejecuta al inicio (antes de cargar la data).</td>
+</tr>
+<tr>
+<td>logPostFinal</td>
+<td>Log de sincronizaciones, se ejecuta al final (después de cargar la data).</td>
+</tr>
+<tr>
+<td>matrixrep1</td>
+<td>Estructura matricial útil para reportes en Google Data Studio.</td>
+</tr>
+<tr>
+<td>contagrupo1</td>
+<td>Resumen contable por año y mes.</td>
+</tr>
+<tr>
+<td>contagrupo2</td>
+<td>Resumen contable por fecha.</td>
+</tr>
+<tr>
+<td>eqtabla</td>
+<td>Tabla para agregar equivalencias.</td>
+</tr>
+</tbody>
+</table>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../about/" class="btn btn-neutral float-right" title="About">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../microsip/" class="btn btn-neutral" title="Microsip"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+      <p>© 2016 - 2017, <a href="https://www.factorbi.com">Factor BI, S.A. de C.V.</a> All rights reserved.</p>
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+    
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../microsip/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../about/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script src="../js/theme.js"></script>
+
+</body>
+</html>
