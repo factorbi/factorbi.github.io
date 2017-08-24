@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <meta name="author" content="Factor BI Team">
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Intelisis - Bipost Documentation</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../css/highlight.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Intelisis";
+    var mkdocs_page_input_path = "intelisis.md";
+    var mkdocs_page_url = "/intelisis/";
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js"></script>
+  <script src="../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../js/highlight.pack.js"></script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> Bipost Documentation</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="..">Home</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../setupaws/">Link your AWS Account</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../installation/">Download & Install</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../bipostexe/">Bipost.exe</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../bipostapi/">Bipost API</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../troubleshooting/">Troubleshooting</a>
+	    </li>
+          
+            <li class="toctree-l1 current">
+		
+    <a class="current" href="./">Intelisis</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l2"><a href="#intelisis-erp">Intelisis ERP</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#tablas-intelisis">Tablas Intelisis</a></li>
+        
+            <li><a class="toctree-l3" href="#recomendaciones">Recomendaciones</a></li>
+        
+        </ul>
+    
+
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../microsip/">Microsip</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../aspel/">Aspel</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../about/">About</a>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">Bipost Documentation</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Intelisis</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="intelisis-erp">Intelisis ERP<a class="headerlink" href="#intelisis-erp" title="Permanent link">&para;</a></h1>
+<p>Intelisis es un ERP que fabrica la empresa <a href="http://www.intelisis.com/"><em>Intelisis Software, S.A. de C.V.</em></a></p>
+<p>Al ser éste un sistema grande, las soluciones de Business Intelligence se desarrollan a la medida de cada necesidad.</p>
+<p>En nuestro <a href="https://github.com/factorbi/">repositorio de GitHub</a> existen proyectos de B.I. para otros sistemas y se pueden usar como guía de referencia y adaptarse. Estos objetos se proveen bajo la licencia <strong>GNU GPLv3</strong> GNU GENERAL PUBLIC LICENSE Versión 3, 29 de Junio 2007.</p>
+<hr />
+<h2 id="tablas-intelisis">Tablas Intelisis<a class="headerlink" href="#tablas-intelisis" title="Permanent link">&para;</a></h2>
+<p>Al configurar biPost.exe con <code>System: Intelisis</code>, de fábrica se incluye la tabla <code>Venta</code> en la sincronización.</p>
+<p><img alt="Screenshot" src="../img/bipost4.png" /></p>
+<p>Cuando se incluye el check <a href="../bipostexe/#general-settings">Include Catalogs,</a> de fábrica se incluen las siguientes tablas:</p>
+<pre><code>Agente
+Alm
+Art
+Condicion
+Cta
+Cte
+Empresa
+EmpresaCfg
+EmpresaCfg2
+EmpresaGral
+Mon
+MonHist
+Prov
+Sucursal
+UEN
+Version
+</code></pre>
+<hr />
+<h2 id="recomendaciones">Recomendaciones<a class="headerlink" href="#recomendaciones" title="Permanent link">&para;</a></h2>
+<h4 id="crear-dos-carpetas">Crear dos carpetas<a class="headerlink" href="#crear-dos-carpetas" title="Permanent link">&para;</a></h4>
+<p>Crea siempre dos carpetas de Bipost, esto te permitirá sincronizar catálogos y movimientos en forma independiente.</p>
+<h4 id="carpeta-catalogos">Carpeta Catálogos<a class="headerlink" href="#carpeta-catalogos" title="Permanent link">&para;</a></h4>
+<p>Tu primer carpeta donde está Bipost la puedes nombrar <code>biPost_catalogos</code> y utilizarás <strong>customData.json</strong> para enviar únicamente catálogos. Este archivo puede verse de la siguiente forma:</p>
+<pre><code>[
+  {
+    "active": "true",
+    "table": "MovTipo",
+    "fields": "Modulo, Mov, Clave ",
+    "join": "",
+    "filter": "",
+    "recursiveDateField": ""
+  },
+  {
+    "active": "true",
+    "table": "Cta",
+    "fields": "Cuenta, Rama, Descripcion, Tipo, EsAcreedora, EsAcumulativa, CentrosCostos, Estatus, ClaveSAT ",
+    "join": "",
+    "filter": "",
+    "recursiveDateField": ""
+  },
+  {
+    "active": "true",
+    "table": "CentroCostos",
+    "fields": "CentroCostos, Rama, Descripcion, EsAcumulativo, Grupo, SubGrupo, SubSubGrupo, Estatus ",
+    "join": "",
+    "filter": "",
+    "recursiveDateField": ""
+  }
+]
+</code></pre>
+<p>Abre biPost.exe y asegúrate de quitar el check <a href="../bipostexe/#recursive-sync">Recursive Sync</a>.</p>
+<p>Usando el JSON del ejemplo anterior, se enviará en cada sincronización <strong>todos los renglones</strong> de las tablas <code>MovTipo</code>, <code>Cta</code> y <code>CentroCostos</code>. Debido a que Bipost API utiliza una <a href="../bipostapi/#load-data">sentencia <code>REPLACE</code></a> en la base destino de MySQL, los registros se reemplazan utilizando la llave primaria de la tabla origen.</p>
+<p><strong>NOTA:</strong> Si la tabla que vas a enviar tiene más de 100,000 registros, es recomendable que filtres el query utilizando la opción <code>"filter":</code>.</p>
+<h4 id="carpeta-recursivo">Carpeta Recursivo<a class="headerlink" href="#carpeta-recursivo" title="Permanent link">&para;</a></h4>
+<p>Genera una copia de la carpeta <code>biPost_catalogos</code>, puedes nombrarla <code>biPost_recursivo</code>. Abre el archivo <strong>customData.json</strong> y especifica las tablas de movimientos que vas a enviar, por ejemplo:</p>
+<pre><code>[
+  {
+    "active": "true",
+    "table": "Cont",
+    "fields": "Cont.ID, Cont.Empresa, Cont.Mov, Cont.MovID, Cont.FechaEmision, Cont.FechaContable, Cont.Proyecto, Cont.Moneda, Cont.TipoCambio, Cont.Estatus, Cont.Ejercicio, Cont.Periodo, Cont.Moneda2, Cont.TipoCambio2",
+    "join": "MovTipo WITH (NOLOCK) ON Cont.Mov = MovTipo.Mov AND MovTipo.Modulo = 'CONT' ",
+    "filter": "Cont.Estatus &lt;&gt; 'SINAFECTAR' AND MovTipo.clave IN ('CONT.P','CONT.C') ",
+    "recursiveDateField": "Cont.FechaEmision"
+  },
+  {
+    "active": "true",
+    "table": "ContD",
+    "fields": "ContD.ID, ContD.Renglon, ContD.RenglonSub, ContD.Cuenta, ContD.SubCuenta, ContD.SubCuenta2, ContD.SubCuenta3, ContD.Debe, ContD.Debe2, ContD.Haber, ContD.Haber2, ContD.Sucursal, ContD.SucursalContable ",
+    "join": "Cont WITH (NOLOCK) ON Cont.ID = ContD.ID JOIN MovTipo WITH (NOLOCK) ON Cont.Mov = MovTipo.Mov AND MovTipo.Modulo = 'CONT' ",
+    "filter": "Cont.Estatus &lt;&gt; 'SINAFECTAR' AND MovTipo.clave IN ('CONT.P','CONT.C') ",
+    "recursiveDateField": "Cont.FechaEmision"
+  }
+]
+</code></pre>
+<p>Es importante que incluyas el parámetro <code>"recursiveDateField":</code> ya que lo utiliza Bipost para optimizar la extracción y subida de información, por ejemplo: Supongamos que la tabla ContD tiene millones de registros, por tanto al momento de configurar <code>"recursiveDateField":</code> lo utilizarás en conjunto con el check <code>Recursive Sync</code>, ubicado en la pestaña <a href="../bipostexe/#general-settings"><em>General Settings</em></a> de biPost.exe:</p>
+<p><img alt="Screenshot" src="../img/bipost7.png" /></p>
+<p>El rango de fechas que especifiques en <em>General Settings</em> se utilizará para generar una extracción y subida individual al bucket de S3 por cada, reduciendo el tamaño de los datos y el tiempo de carga hacia MySQL.</p>
+<p>Mediante esta opción se pueden cargar históricos de varios años.</p>
+<h4 id="uso-del-filter">Uso del Filter<a class="headerlink" href="#uso-del-filter" title="Permanent link">&para;</a></h4>
+<p>En el ejemplo customData.json anterior, se utilizó el siguiente filtro para la tabla <strong>ContD</strong>:</p>
+<p><code>"filter": "Cont.Estatus &lt;&gt; 'SINAFECTAR'</code></p>
+<p>Si un registro del módulo Contabilidad se cancela, cambia su estatus a <code>CANCELADO</code> por tanto el query a la base de datos incluye los estatus <code>CANCELADO</code> para que estos cambios se vean reflejados en la base de MySQL.</p>
+<p>Si por el contrario se utiliza el filtro <code>"Cont.Estatus = 'CONCLUIDO'</code> entonces el query omite los estatus <code>CANCELADO</code> y al cambiar un ID a estatus <code>CANCELADO</code> no se reflejará el cambio en la base de MySQL, causando inconsistencias.</p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../microsip/" class="btn btn-neutral float-right" title="Microsip">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../troubleshooting/" class="btn btn-neutral" title="Troubleshooting"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+      <p>© 2016 - 2017, <a href="https://www.factorbi.com">Factor BI, S.A. de C.V.</a> All rights reserved.</p>
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+    
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../troubleshooting/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../microsip/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script src="../js/theme.js"></script>
+
+</body>
+</html>
