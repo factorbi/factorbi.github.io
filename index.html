@@ -60,6 +60,8 @@
         
             <li><a class="toctree-l3" href="#private-cloud">Private Cloud</a></li>
         
+            <li><a class="toctree-l3" href="#architecture">Architecture</a></li>
+        
             <li><a class="toctree-l3" href="#road-map">Road Map</a></li>
         
             <li><a class="toctree-l3" href="#release-notes">Release Notes</a></li>
@@ -93,6 +95,11 @@
             <li class="toctree-l1">
 		
     <a class="" href="troubleshooting/">Troubleshooting</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="businessintelligence/">Business Intelligence</a>
 	    </li>
           
             <li class="toctree-l1">
@@ -153,6 +160,7 @@
 <p>It is created to keep your databases on-premises while providing a way to asynchronous extract and load specific sets of data to AWS Aurora.</p>
 <p>It uses a similar <em>Extract, Transform &amp; Load (ETL)</em> technique with recurring syncing.</p>
 <p><img alt="Screenshot" src="./img/BipostSyncDiagram2_med.png" /></p>
+<hr />
 <h2 id="how-it-works">How it works<a class="headerlink" href="#how-it-works" title="Permanent link">&para;</a></h2>
 <ul>
 <li>On every sync biPost.exe reads table schema's and data, creates a compressed file and uploads it to S3.</li>
@@ -161,11 +169,27 @@
 <li>You can customize query criteria by using <a href="./bipostexe/#customdatajson">customData.json</a> file.</li>
 <li>biPost.exe can run manually or automatically with a scheduled <a href="./bipostexe/#schedule">Windows Task.</a></li>
 </ul>
+<hr />
 <h2 id="private-cloud">Private Cloud<a class="headerlink" href="#private-cloud" title="Permanent link">&para;</a></h2>
 <p>Bipost API allows to load data to private AWS accounts.</p>
 <p>Each RDS Aurora instance loads data by accessing a dedicated bucket, exclusive to your AWS account.</p>
+<hr />
+<h2 id="architecture">Architecture<a class="headerlink" href="#architecture" title="Permanent link">&para;</a></h2>
+<p><img alt="Screenshot" src="./img/Bipost_Architecture.png" /></p>
+<ul>
+<li>Bipost Sync is built with <a href="https://aws.amazon.com/sdk-for-net/">AWS SDK for .NET</a></li>
+<li>Upload to S3 is done through AWS SDK technology.</li>
+<li>S3 triggers an event and calls Bipost API built with <a href="https://aws.amazon.com/lambda/">Lambda.</a></li>
+<li>Lambda reads data and credentials and proceeds to connect to MySQL-Aurora.</li>
+<li><a href="./(https://aws.amazon.com/rds/aurora/)">MySQL-Aurora</a> is a managed database service, you don't have to worry about servers, software patching and other managing tasks.</li>
+<li>Aurora loads data from S3 dedicated bucket.</li>
+</ul>
+<p>Done! Start building something amazing on top! </p>
+<p>Check the <a href="./businessintelligence">Business Intelligence use case.</a></p>
+<hr />
 <h2 id="road-map">Road Map<a class="headerlink" href="#road-map" title="Permanent link">&para;</a></h2>
 <p>We are currently developing a secure web page to automate all settings that are exchanged over email. Thank you for your patience and we look forward to provide a world-class service.</p>
+<hr />
 <h2 id="release-notes">Release Notes<a class="headerlink" href="#release-notes" title="Permanent link">&para;</a></h2>
 <h4 id="040">0.4.0<a class="headerlink" href="#040" title="Permanent link">&para;</a></h4>
 <ul>
@@ -221,5 +245,5 @@
 
 <!--
 MkDocs version : 0.16.3
-Build Date UTC : 2017-08-24 17:23:21
+Build Date UTC : 2017-08-25 17:49:01
 -->
