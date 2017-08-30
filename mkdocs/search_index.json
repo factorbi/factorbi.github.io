@@ -2,22 +2,22 @@
     "docs": [
         {
             "location": "/", 
-            "text": "Overview\n\n\nBipost is a simple database synchronization tool built for developers in mind. \n\n\nCurrently it can synchronize \nMicrosoft SQL Server\u00ae\n and \nFirebird SQL\n (running on Windows) to any given \nAmazon Aurora MySQL\n database.\n\n\nIt is created to keep your databases on-premises while providing a way to asynchronous extract and load specific sets of data to AWS Aurora.\n\n\nIt uses a similar \nExtract, Transform \n Load (ETL)\n technique with recurring syncing.\n\n\n\n\n\n\nHow it works\n\n\n\n\nOn every sync biPost.exe reads table schema's and data, creates a compressed file and uploads it to S3.\n\n\nDestination bucket triggers an API which reads schema's, creates database and tables (if they don't exist) and loads the data.\n\n\nOn every upload MySQL uses a \nREPLACE\n command so if you set the appropriate primary keys on source database, data would be updated in destination (and avoid duplicates).\n\n\nYou can customize query criteria by using \ncustomData.json\n file.\n\n\nbiPost.exe can run manually or automatically with a scheduled \nWindows Task.\n\n\n\n\n\n\nPrivate Cloud\n\n\nBipost API allows to load data to private AWS accounts.\n\n\nEach RDS Aurora instance loads data by accessing a dedicated bucket, exclusive to your AWS account.\n\n\n\n\nArchitecture\n\n\n\n\n\n\nBipost Sync is built with \nAWS SDK for .NET\n\n\nUpload to S3 is done through AWS SDK technology.\n\n\nS3 triggers an event and calls Bipost API built with \nLambda.\n\n\nLambda reads data and credentials and proceeds to connect to MySQL-Aurora.\n\n\nMySQL-Aurora\n is a managed database service, you don't have to worry about servers, software patching and other managing tasks.\n\n\nAurora loads data from S3 dedicated bucket.\n\n\n\n\nDone! Start building something amazing on top! \n\n\nCheck the \nBusiness Intelligence use case.\n\n\n\n\nRoad Map\n\n\nWe are currently developing a secure web page to automate all settings that are exchanged over email. Thank you for your patience and we look forward to provide a world-class service.\n\n\n\n\nRelease Notes\n\n\n0.4.0\n\n\n\n\nCustom connections added.\n\n\nInitial statement\n added to API.\n\n\nSpecial characters are deleted on string columns of 100 characters length or up.", 
+            "text": "Overview\n\n\nBipost (beta) is a simple database synchronization tool built for developers in mind. \n\n\nCurrently it can synchronize \nMicrosoft SQL Server\u00ae\n and \nFirebird SQL\n (running on Windows) to any given \nAmazon Aurora MySQL\n database.\n\n\nIt is created to keep your databases on-premises while providing a way to extract and load specific sets of data to AWS Aurora.\n\n\nIt uses a similar \nETL\n technique with recurring syncing in this order: Extract, Load \n Transform.\n\n\n\n\n\n\nHow it works\n\n\n\n\nOn every sync biPost.exe reads table schema's and data, creates a compressed file and uploads it to S3.\n\n\nYou can customize query criteria to your source DB using \ncustomData.json\n file.\n\n\nDestination bucket triggers an API which reads schema's, creates database and tables (if they don't exist) and loads the data.\n\n\nBefore and after data is loaded to MySQL you are able to call procedures and transform your data.\n\n\nOn every upload MySQL uses a \nREPLACE\n command so if you set the appropriate primary keys on source database, data would be updated in destination (and avoid duplicates).\n\n\nbiPost.exe can run manually or automatically with a scheduled \nWindows Task.\n\n\n\n\n\n\nPrivate Cloud\n\n\nBipost API calls your RDS instance on your AWS account.\n\n\nEach RDS Aurora instance loads data by accessing a dedicated bucket, exclusive to your AWS account.\n\n\n\n\nArchitecture\n\n\n\n\n\n\nBipost Sync is built with \nAWS SDK for .NET\n\n\nUpload to S3 is done through AWS SDK technology.\n\n\nS3 triggers an event and calls Bipost API built with \nLambda.\n\n\nLambda reads data and credentials and proceeds to connect to MySQL-Aurora.\n\n\nMySQL-Aurora\n is a managed database service, you don't have to worry about servers, software patching and other managing tasks.\n\n\nAurora loads data from S3 dedicated bucket.\n\n\n\n\nDone! Start building something amazing on top! \n\n\nCheck the \nBusiness Intelligence use case.\n\n\n\n\nRoad Map\n\n\nWe are currently developing a secure web page to automate all settings that are exchanged over email. Thank you for your patience and we look forward to provide a world-class service.\n\n\n\n\nRelease Notes\n\n\n0.4.0 (beta)\n\n\n\n\nCustom connections added.\n\n\nInitial statement\n added to API.\n\n\nSpecial characters are deleted on string columns of 100 characters length or up.", 
             "title": "Home"
         }, 
         {
             "location": "/#overview", 
-            "text": "Bipost is a simple database synchronization tool built for developers in mind.   Currently it can synchronize  Microsoft SQL Server\u00ae  and  Firebird SQL  (running on Windows) to any given  Amazon Aurora MySQL  database.  It is created to keep your databases on-premises while providing a way to asynchronous extract and load specific sets of data to AWS Aurora.  It uses a similar  Extract, Transform   Load (ETL)  technique with recurring syncing.", 
+            "text": "Bipost (beta) is a simple database synchronization tool built for developers in mind.   Currently it can synchronize  Microsoft SQL Server\u00ae  and  Firebird SQL  (running on Windows) to any given  Amazon Aurora MySQL  database.  It is created to keep your databases on-premises while providing a way to extract and load specific sets of data to AWS Aurora.  It uses a similar  ETL  technique with recurring syncing in this order: Extract, Load   Transform.", 
             "title": "Overview"
         }, 
         {
             "location": "/#how-it-works", 
-            "text": "On every sync biPost.exe reads table schema's and data, creates a compressed file and uploads it to S3.  Destination bucket triggers an API which reads schema's, creates database and tables (if they don't exist) and loads the data.  On every upload MySQL uses a  REPLACE  command so if you set the appropriate primary keys on source database, data would be updated in destination (and avoid duplicates).  You can customize query criteria by using  customData.json  file.  biPost.exe can run manually or automatically with a scheduled  Windows Task.", 
+            "text": "On every sync biPost.exe reads table schema's and data, creates a compressed file and uploads it to S3.  You can customize query criteria to your source DB using  customData.json  file.  Destination bucket triggers an API which reads schema's, creates database and tables (if they don't exist) and loads the data.  Before and after data is loaded to MySQL you are able to call procedures and transform your data.  On every upload MySQL uses a  REPLACE  command so if you set the appropriate primary keys on source database, data would be updated in destination (and avoid duplicates).  biPost.exe can run manually or automatically with a scheduled  Windows Task.", 
             "title": "How it works"
         }, 
         {
             "location": "/#private-cloud", 
-            "text": "Bipost API allows to load data to private AWS accounts.  Each RDS Aurora instance loads data by accessing a dedicated bucket, exclusive to your AWS account.", 
+            "text": "Bipost API calls your RDS instance on your AWS account.  Each RDS Aurora instance loads data by accessing a dedicated bucket, exclusive to your AWS account.", 
             "title": "Private Cloud"
         }, 
         {
@@ -36,9 +36,9 @@
             "title": "Release Notes"
         }, 
         {
-            "location": "/#040", 
+            "location": "/#040-beta", 
             "text": "Custom connections added.  Initial statement  added to API.  Special characters are deleted on string columns of 100 characters length or up.", 
-            "title": "0.4.0"
+            "title": "0.4.0 (beta)"
         }, 
         {
             "location": "/setupaws/", 
@@ -477,7 +477,7 @@
         }, 
         {
             "location": "/about/", 
-            "text": "History\n\n\nBipost was once designed to ease the use of \nCloud Business Intelligence\n tools.\n\n\nOver time, we started using Bipost as an extension of on-premises systems (like ERP's) to AWS cloud. Using MySQL Aurora and other AWS services, we build tailored made enterprise web applications.\n\n\n\n\nEnterprise Applications\n\n\nWe build tailored made enterprise web applications with integration to on-premises Relational Database Systems (RDBMS) using Bipost.\n\n\nWe use \nForm.io\n along with other technologies.\n\n\n\n\n\n\nFeedback\n\n\nWe are always happy to hear about our users.\n\n\nPlease send us an email to: \njaime@factorbi.com", 
+            "text": "History\n\n\nBipost was once designed to ease the use of \nCloud Business Intelligence\n tools.\n\n\nOver time, we started using Bipost as an extension of on-premises systems (like ERP's) to AWS cloud. Using MySQL Aurora and other AWS services, we build tailored made enterprise web applications.\n\n\n\n\nEnterprise Applications\n\n\nWe build tailored made enterprise web applications with integration to on-premises Relational Database Systems (RDBMS) using Bipost.\n\n\nWe use \nForm.io\n along with other technologies.\n\n\n\n\n\n\nFeedback\n\n\nWe are always happy to hear about you.\n\n\nPlease send us an email to: \njaime@factorbi.com", 
             "title": "About"
         }, 
         {
@@ -492,7 +492,7 @@
         }, 
         {
             "location": "/about/#feedback", 
-            "text": "We are always happy to hear about our users.  Please send us an email to:  jaime@factorbi.com", 
+            "text": "We are always happy to hear about you.  Please send us an email to:  jaime@factorbi.com", 
             "title": "Feedback"
         }
     ]

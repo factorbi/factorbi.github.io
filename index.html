@@ -155,23 +155,24 @@
             <div class="section">
               
                 <h1 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h1>
-<p>Bipost is a simple database synchronization tool built for developers in mind. </p>
+<p>Bipost (beta) is a simple database synchronization tool built for developers in mind. </p>
 <p>Currently it can synchronize <a href="http://www.microsoft.com/en-us/sql-server">Microsoft SQL Server®</a> and <a href="https://firebirdsql.org/">Firebird SQL</a> (running on Windows) to any given <a href="https://aws.amazon.com/rds/aurora/">Amazon Aurora MySQL</a> database.</p>
-<p>It is created to keep your databases on-premises while providing a way to asynchronous extract and load specific sets of data to AWS Aurora.</p>
-<p>It uses a similar <em>Extract, Transform &amp; Load (ETL)</em> technique with recurring syncing.</p>
+<p>It is created to keep your databases on-premises while providing a way to extract and load specific sets of data to AWS Aurora.</p>
+<p>It uses a similar <em>ETL</em> technique with recurring syncing in this order: Extract, Load &amp; Transform.</p>
 <p><img alt="Screenshot" src="./img/BipostSyncDiagram2_med.png" /></p>
 <hr />
 <h2 id="how-it-works">How it works<a class="headerlink" href="#how-it-works" title="Permanent link">&para;</a></h2>
 <ul>
 <li>On every sync biPost.exe reads table schema's and data, creates a compressed file and uploads it to S3.</li>
+<li>You can customize query criteria to your source DB using <a href="./bipostexe/#customdatajson">customData.json</a> file.</li>
 <li>Destination bucket triggers an API which reads schema's, creates database and tables (if they don't exist) and loads the data.</li>
+<li>Before and after data is loaded to MySQL you are able to call procedures and transform your data.</li>
 <li>On every upload MySQL uses a <code>REPLACE</code> command so if you set the appropriate primary keys on source database, data would be updated in destination (and avoid duplicates).</li>
-<li>You can customize query criteria by using <a href="./bipostexe/#customdatajson">customData.json</a> file.</li>
 <li>biPost.exe can run manually or automatically with a scheduled <a href="./bipostexe/#schedule">Windows Task.</a></li>
 </ul>
 <hr />
 <h2 id="private-cloud">Private Cloud<a class="headerlink" href="#private-cloud" title="Permanent link">&para;</a></h2>
-<p>Bipost API allows to load data to private AWS accounts.</p>
+<p>Bipost API calls your RDS instance on your AWS account.</p>
 <p>Each RDS Aurora instance loads data by accessing a dedicated bucket, exclusive to your AWS account.</p>
 <hr />
 <h2 id="architecture">Architecture<a class="headerlink" href="#architecture" title="Permanent link">&para;</a></h2>
@@ -191,7 +192,7 @@
 <p>We are currently developing a secure web page to automate all settings that are exchanged over email. Thank you for your patience and we look forward to provide a world-class service.</p>
 <hr />
 <h2 id="release-notes">Release Notes<a class="headerlink" href="#release-notes" title="Permanent link">&para;</a></h2>
-<h4 id="040">0.4.0<a class="headerlink" href="#040" title="Permanent link">&para;</a></h4>
+<h4 id="040-beta">0.4.0 (beta)<a class="headerlink" href="#040-beta" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Custom connections added.</li>
 <li><a href="./bipostapi/#initial-statement">Initial statement</a> added to API.</li>
@@ -245,5 +246,5 @@
 
 <!--
 MkDocs version : 0.16.3
-Build Date UTC : 2017-08-25 17:49:01
+Build Date UTC : 2017-08-30 15:53:15
 -->
