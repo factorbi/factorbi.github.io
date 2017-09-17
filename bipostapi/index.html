@@ -76,7 +76,7 @@
     
         <ul>
         
-            <li><a class="toctree-l3" href="#create-schemas">Create Schemas</a></li>
+            <li><a class="toctree-l3" href="#create-alter-schemas">Create-Alter Schemas</a></li>
         
             <li><a class="toctree-l3" href="#initial-statement">Initial Statement</a></li>
         
@@ -153,15 +153,15 @@
             <div class="section">
               
                 <h1 id="bipost-api">Bipost API<a class="headerlink" href="#bipost-api" title="Permanent link">&para;</a></h1>
-<p>Bipost API runs on AWS with a Lambda function.
+<p>Bipost API runs with <a href="http://docs.aws.amazon.com/lambda/latest/dg/welcome.html">Lambda.</a>
 It has 4 main stages which are described next.</p>
-<h2 id="create-schemas">Create Schemas<a class="headerlink" href="#create-schemas" title="Permanent link">&para;</a></h2>
+<h2 id="create-alter-schemas">Create-Alter Schemas<a class="headerlink" href="#create-alter-schemas" title="Permanent link">&para;</a></h2>
 <ul>
 <li>
 <p>If it doesn't exist, database is created with:</p>
 <ul>
 <li>
-<p>Name: Over email we ask for this name for every <strong>Service No.</strong> provided.</p>
+<p>Name: Over email we ask for this name for each <strong>Service No.</strong> provided.</p>
 </li>
 <li>
 <p>Encoding: <code>cp1252 West European (latin1)</code></p>
@@ -173,6 +173,9 @@ It has 4 main stages which are described next.</p>
 </li>
 <li>
 <p>Tables are created with the full set of fields found on source db. </p>
+</li>
+<li>
+<p>Alter tables to match source schemas. Columns are never deleted.</p>
 </li>
 <li>
 <p>Fields will appear on a different position as the source db.</p>

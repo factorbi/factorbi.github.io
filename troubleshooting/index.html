@@ -89,7 +89,7 @@
         
             <li><a class="toctree-l3" href="#no-information-to-sync">No information to Sync</a></li>
         
-            <li><a class="toctree-l3" href="#time-to-sync-and-load-to-aurora">Time to sync and load to Aurora</a></li>
+            <li><a class="toctree-l3" href="#elapsed-time-to-sync-and-load-to-aurora">Elapsed time to sync and load to Aurora</a></li>
         
             <li><a class="toctree-l3" href="#upload-limit">Upload Limit</a></li>
         
@@ -102,6 +102,8 @@
             <li><a class="toctree-l3" href="#firewall-restrictions">Firewall Restrictions</a></li>
         
             <li><a class="toctree-l3" href="#appdatalocal-folder">AppData\Local folder</a></li>
+        
+            <li><a class="toctree-l3" href="#mysql-schemas-are-created-but-no-data-is-loaded">MySQL schemas are created but no data is loaded</a></li>
         
         </ul>
     
@@ -196,10 +198,10 @@
 <h2 id="no-information-to-sync">No information to Sync<a class="headerlink" href="#no-information-to-sync" title="Permanent link">&para;</a></h2>
 <p>If <code>No information to Sync</code> message appears, verify that customData.json is set to send at least one table.</p>
 <hr />
-<h2 id="time-to-sync-and-load-to-aurora">Time to sync and load to Aurora<a class="headerlink" href="#time-to-sync-and-load-to-aurora" title="Permanent link">&para;</a></h2>
-<p>When a new Sync is initiated on biPost.exe, it may take a few minutes to extract, compress and upload to information to S3. While this is happening, no messages/icons will show that biPost.exe is working and maybe you will see <code>(Not responding)</code> on the top of the window, this is normal.</p>
+<h2 id="elapsed-time-to-sync-and-load-to-aurora">Elapsed time to sync and load to Aurora<a class="headerlink" href="#elapsed-time-to-sync-and-load-to-aurora" title="Permanent link">&para;</a></h2>
+<p>When a new Sync is initiated on biPost.exe, it may take a few seconds to a few minutes to extract, compress and upload to S3. While this is happening, no messages/icons will show that biPost.exe is working and maybe you will see <code>(Not responding)</code> on the top of the window, this is normal.</p>
 <p>If you launch Windows Task Manager probably you'll see that <code>biPost.exe *32</code> is running and consuming a considerable amount of CPU.</p>
-<p>Once the compressed package it uploaded to S3, it may take 1 to 3 minutes to process and load your data to MySQL.</p>
+<p>Once the compressed package is uploaded to S3, it may take 1 to 3 minutes to process and load your data to MySQL.</p>
 <p>If you need to check which tables where loaded, check <a href="../bipostapi/#load-data">aurora_s3_load_history.</a></p>
 <hr />
 <h2 id="upload-limit">Upload Limit<a class="headerlink" href="#upload-limit" title="Permanent link">&para;</a></h2>
@@ -245,12 +247,66 @@ For example:</p>
 <li><code>52.192.0.0/11</code></li>
 </ul>
 <p><img alt="Screenshot" src="../img/FirewallAllowTo.png" /></p>
+<p>AWS can have multiple IP addresses for S3 service, so in case the above IP's don't work check the <a href="https://aws.amazon.com/blogs/aws/aws-ip-ranges-json/">AWS Public IP Address Ranges documentation</a> and look for </p>
+<pre><code>  "region": "GLOBAL",
+  "service": "AMAZON"
+</code></pre>
+<p>and</p>
+<pre><code>  "region": "us-east-1",
+  "service": "AMAZON"
+</code></pre>
+<p><a href="https://ip-ranges.amazonaws.com/ip-ranges.json">https://ip-ranges.amazonaws.com/ip-ranges.json</a></p>
 <hr />
 <h2 id="appdatalocal-folder">AppData\Local folder<a class="headerlink" href="#appdatalocal-folder" title="Permanent link">&para;</a></h2>
 <p>Sometimes it is necessary to manually delete the content of <code>\AppData\Local\biPost</code> folder.</p>
 <p>Open a new Windows Explorer window and enter <code>%LocalAppData%\biPost</code>. Select all and delete.</p>
 <pre><code>************** Exception Text **************
 System.IO.IOException: The process cannot access the file '012a3b4c-56d7-8ef9-0123-456789a012bc_post.zip' because it is being used by another process.
+</code></pre>
+<hr />
+<h2 id="mysql-schemas-are-created-but-no-data-is-loaded">MySQL schemas are created but no data is loaded<a class="headerlink" href="#mysql-schemas-are-created-but-no-data-is-loaded" title="Permanent link">&para;</a></h2>
+<p>Two things might be causing this problem:</p>
+<h6 id="1-rds-instance-cannot-reach-s3-bucket">1. RDS instance cannot reach S3 bucket.<a class="headerlink" href="#1-rds-instance-cannot-reach-s3-bucket" title="Permanent link">&para;</a></h6>
+<p>When we look at our CloudWatch logs, we see <code>Unable to initialize S3Stream</code>, so do the following:</p>
+<p>Double check that <a href="../setupaws/#create-iam-policy-to-grant-access-to-s3">IAM Policy to Grant Access to S3</a> is attached to [IAM Role] and that is added and active on <a href="../setupaws/#set-iam-role-to-aurora-cluster">IAM Cluster Role.</a></p>
+<p>Check that <a href="../setupaws/#set-cluster-parameter-group">Cluster Parameter Group</a> and <a href="../setupaws/#set-instance-parameter-group">Instance Parameter Group</a> are correctly configured.</p>
+<p>If after this you still experience this error, check out <a href="../troubleshooting/#manually-debugging-s3stream">Manually debugging S3Stream.</a></p>
+<h6 id="2-name-of-your-destination-database-must-be-all-lower-case">2. Name of your destination database must be all lower case.<a class="headerlink" href="#2-name-of-your-destination-database-must-be-all-lower-case" title="Permanent link">&para;</a></h6>
+<p>When we look at our CloudWatch logs, we see:</p>
+<p><code>SequelizeConnectionError: ER_BAD_DB_ERROR: Unknown database</code></p>
+<p>Double check that your DB name is all lower case.</p>
+<h3 id="manually-debugging-s3stream">Manually debugging S3Stream<a class="headerlink" href="#manually-debugging-s3stream" title="Permanent link">&para;</a></h3>
+<p>In this section we will use the syntax and some parameters that are explained by <a href="http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Aurora.LoadFromS3.html">AWS Documentation for LOAD DATA FROM S3</a>.</p>
+<p>Using MySQL Workbench (or any client of your preference), open a connection to your MySQL instance preferably using <code>root</code> account.</p>
+<p><strong>Syntax</strong></p>
+<pre><code>LOAD DATA FROM S3 's3://{my-bucket-name}/{my-36-digit-service-number}/process_{my-36-digit-service-number}{YYYY_M_D-of-yesterday}_post/{my-example-table}.csv'
+REPLACE INTO TABLE `{my-database-name}`.`{my-example-table}`
+CHARACTER SET 'utf8' 
+FIELDS TERMINATED BY '|'
+ENCLOSED BY '\"'
+LINES TERMINATED BY '\r\n'
+IGNORE 1 LINES 
+({column_1},{column_2},...,{column_n});
+</code></pre>
+<p>Replace curly brackets with your data.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>my-bucket-name</strong>: Name of your dedicated bucket, assigned by Factor BI.</li>
+<li><strong>my-36-digit-service-number</strong>: Number assigned to your service.</li>
+<li><strong>YYYY_M_D-of-yesterday</strong>: Date for yesterday on GMT America/Mexico_City.</li>
+<li><strong>my-example-table</strong>: Pick any of the tables that you are synchronizing.</li>
+<li><strong>my-database-name</strong>: Name of your destination DB on MySQL.</li>
+<li><strong>{column_1},{column_2},...,{column_n}</strong>: List all the columns in the same order as they appear in the .CSV file created on <a href="../troubleshooting/#appdatalocal-folder">AppData\Local folder</a>.</li>
+</ul>
+<p><strong>Example</strong></p>
+<pre><code>LOAD DATA FROM S3 's3://bipostdata-f0123abc4567/a1bcd23e-4fa5-67b8-cd9e-f0123abc4567/process_a1bcd23e-4fa5-67b8-cd9e-f0123abc45672017_9_13_post/CLIE.csv'
+REPLACE INTO TABLE `mytestdb`.`clie`
+CHARACTER SET 'utf8' 
+FIELDS TERMINATED BY '|'
+ENCLOSED BY '\"'
+LINES TERMINATED BY '\r\n'
+IGNORE 1 LINES 
+(CLAVE,STATUS,NOMBRE,RFC,CALLE,NUMINT,NUMEXT,CRUZAMIENTOS,CRUZAMIENTOS2,COLONIA,CODIGO,LOCALIDAD,MUNICIPIO,ESTADO,NACIONALIDAD,REFERDIR,TELEFONO,CLASIFIC,FAX,PAG_WEB,CURP,CVE_ZONA,IMPRIR,MAIL,NIVELSEC,ENVIOSILEN,EMAILPRED,DIAREV,DIAPAGO,CON_CREDITO,DIASCRED,LIMCRED,SALDO,LISTA_PREC,CVE_BITA,ULT_PAGOD,ULT_PAGOM,ULT_PAGOF,DESCUENTO,ULT_VENTAD,ULT_COMPM,FCH_ULTCOM,VENTAS,CVE_VEND,CVE_OBS,TIPO_EMPRESA,MATRIZ,PROSPECTO,CALLE_ENVIO,NUMINT_ENVIO,NUMEXT_ENVIO,CRUZAMIENTOS_ENVIO,CRUZAMIENTOS_ENVIO2,COLONIA_ENVIO,LOCALIDAD_ENVIO,MUNICIPIO_ENVIO,ESTADO_ENVIO,PAIS_ENVIO,CODIGO_ENVIO,CVE_ZONA_ENVIO,REFERENCIA_ENVIO,CUENTA_CONTABLE,ADDENDAF,ADDENDAD,NAMESPACE,METODODEPAGO,NUMCTAPAGO,MODELO,DES_IMPU1,DES_IMPU2,DES_IMPU3,DES_IMPU4,DES_PER,LAT_GENERAL,LON_GENERAL,LAT_ENVIO,LON_ENVIO,UUID,VERSION_SINC,USO_CFDI,CVE_PAIS_SAT,NUMIDREGFISCAL,FORMADEPAGOSAT);
 </code></pre>
               
             </div>

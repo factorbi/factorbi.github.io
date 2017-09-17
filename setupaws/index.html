@@ -205,6 +205,7 @@
 <p><img alt="Screenshot" src="../img/CloudPing.png" /></p>
 <hr />
 <h2 id="get-canonical-user-id-from-your-iam-home">Get Canonical User ID from your IAM Home<a class="headerlink" href="#get-canonical-user-id-from-your-iam-home" title="Permanent link">&para;</a></h2>
+<p>To perform the following steps, you need to sign in with the <strong>root</strong> AWS account.</p>
 <ol>
 <li>Upper right corner of your AWS console, click your account name (or follow next link).</li>
 <li><a href="https://console.aws.amazon.com/iam/home#/security_credential">My Security Credentials.</a></li>
@@ -337,7 +338,7 @@
 <p>AWS Service: <code>Amazon S3</code></p>
 <p>Actions: check <code>GetObject</code> and <code>GetObjectVersion</code></p>
 <p>Amazon Resource Name (ARN): <strong>arn you received over email</strong>, example: </p>
-<p><code>arn:aws:s3:::bipost-000111222</code></p>
+<p><code>arn:aws:s3:::bipostdata-123456789012</code></p>
 </blockquote>
 </li>
 <li>
@@ -349,7 +350,7 @@
 <p>Effect: <code>Allow</code></p>
 <p>AWS Service: <code>Amazon S3</code></p>
 <p>Actions: check <code>GetObject</code> and <code>GetObjectVersion</code></p>
-<p>Amazon Resource Name (ARN): example: <code>arn:aws:s3:::bipost-000111222/*</code></p>
+<p>Amazon Resource Name (ARN): example: <code>arn:aws:s3:::bipostdata-123456789012/*</code></p>
 </blockquote>
 <p><img alt="Screenshot" src="../img/Policy_Statement.png" /></p>
 </li>
@@ -371,7 +372,7 @@
                 "s3:GetObjectVersion"
             ],
             "Resource": [
-                "arn:aws:s3:::bipost-000111222"
+                "arn:aws:s3:::bipostdata-123456789012"
             ]
         },
         {
@@ -382,7 +383,7 @@
                 "s3:GetObjectVersion"
             ],
             "Resource": [
-                "arn:aws:s3:::bipost-000111222/*"
+                "arn:aws:s3:::bipostdata-123456789012/*"
             ]
         }
     ]
