@@ -432,6 +432,7 @@
 <li>Click <strong>Manage IAM Roles</strong> gray button, on top.</li>
 <li>Select the role you just created: <code>RDSLoadFromS3</code> and click <strong>Done</strong>, blue button.</li>
 </ol>
+<p><img alt="Screenshot" src="../img/RDS_Manage_IAM_Role.png" /></p>
 <hr />
 <h2 id="create-cluster-parameter-group">Create Cluster Parameter Group<a class="headerlink" href="#create-cluster-parameter-group" title="Permanent link">&para;</a></h2>
 <p>If you are already using a custom DB Cluster Parameter Group, you can select that group instead of creating a new DB Cluster Parameter Group.</p>
@@ -617,6 +618,7 @@ For Windows you may use "MySQL Workbench" or "HeidiSQL"
 <ol>
 <li>Use <strong>MySQL client</strong> to create a new user.</li>
 <li>Set a strong password.</li>
+<li>Gran the new user with the following: <code>GRANT LOAD FROM S3 ON *.* TO 'your-user-name';</code></li>
 <li>
 <p>Set the following Global Privileges:</p>
 <p><img alt="Screenshot" src="../img/MySQL_Global_Privileges.png" /></p>
@@ -624,7 +626,7 @@ For Windows you may use "MySQL Workbench" or "HeidiSQL"
 </ol>
 <hr />
 <h2 id="console-access-to-bucket">Console Access to Bucket<a class="headerlink" href="#console-access-to-bucket" title="Permanent link">&para;</a></h2>
-<p>Bipost synchronization uses S3 to upload the data that is extracted from the on-premises database. The bucket is located within a Factor BI AWS account so we can efficiently handle  API calls, patches and new releases. </p>
+<p>Bipost synchronization uses S3 to upload the data that is extracted from the on-premises database. The bucket is located within Factor BI AWS account so we can efficiently handle API calls, patches and new releases. </p>
 <p>Remember, we create a unique S3 bucket for each one of our customers, so nothing gets mixed up.</p>
 <p>Sometimes you may want to access this bucket and review files and folders.</p>
 <p>To accomplish this we provide an <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/console_controlling-access.html">AWS Console access</a> with a user, password and a direct link to your bucket.</p>
