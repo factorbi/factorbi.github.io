@@ -209,7 +209,7 @@ Version
 </code></pre>
 <p>Abre biPost.exe y asegúrate de quitar el check <a href="../bipostexe/#recursive-sync">Recursive Sync</a>.</p>
 <p>Usando el JSON del ejemplo anterior, se enviará en cada sincronización <strong>todos los renglones</strong> de las tablas <code>MovTipo</code>, <code>Cta</code> y <code>CentroCostos</code>. Debido a que Bipost API utiliza una <a href="../bipostapi/#load-data">sentencia <code>REPLACE</code></a> en la base destino de MySQL, los registros se reemplazan utilizando la llave primaria de la tabla origen.</p>
-<p><strong>NOTA:</strong> Si la tabla que vas a enviar tiene más de 100,000 registros, es recomendable que filtres el query utilizando la opción <code>"filter":</code>.</p>
+<p><strong>NOTA:</strong> Si la tabla que vas a enviar tiene más de un millón de registros, es recomendable que filtres el query utilizando la opción <code>"filter":</code>.</p>
 <h4 id="carpeta-recursivo">Carpeta Recursivo<a class="headerlink" href="#carpeta-recursivo" title="Permanent link">&para;</a></h4>
 <p>Genera una copia de la carpeta <code>biPost_catalogos</code>, puedes nombrarla <code>biPost_recursivo</code>. Abre el archivo <strong>customData.json</strong> y especifica las tablas de movimientos que vas a enviar, por ejemplo:</p>
 <pre><code>[

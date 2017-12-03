@@ -155,20 +155,32 @@
             <div class="section">
               
                 <h1 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h1>
-<p>Bipost (beta) is a simple database synchronization tool built for developers in mind. </p>
-<p>Currently it can synchronize <a href="http://www.microsoft.com/en-us/sql-server">Microsoft SQL Server®</a> and <a href="https://firebirdsql.org/">Firebird SQL</a> (running on Windows) to any given <a href="https://aws.amazon.com/rds/aurora/">Amazon Aurora MySQL</a> database.</p>
+<p><strong>New! Now synchronize both ways!</strong> Learn more <a href="./#bidirectional-syncing">here.</a></p>
+<p>Bipost (beta) is a simple database synchronization tool built for developers in mind.</p>
+<p>Synchronize <a href="http://www.microsoft.com/en-us/sql-server">Microsoft SQL Server®</a> and <a href="https://firebirdsql.org/">Firebird SQL</a> (running on Windows) to any given <a href="https://aws.amazon.com/rds/aurora/details/mysql-details/">Amazon Aurora MySQL</a> instance, and back to your on-premises.</p>
 <p>It is created to keep your databases on-premises while providing a way to extract and load specific sets of data to AWS Aurora.</p>
 <p>It uses a similar <em>ETL</em> technique with recurring syncing in this order: Extract, Load &amp; Transform.</p>
 <p><img alt="Screenshot" src="./img/BipostSyncDiagram2_med.png" /></p>
 <hr />
 <h2 id="how-it-works">How it works<a class="headerlink" href="#how-it-works" title="Permanent link">&para;</a></h2>
 <ul>
-<li>On every sync biPost.exe reads table schema's and data, creates a compressed file and uploads it to S3.</li>
-<li>You can customize query criteria to your source DB using <a href="./bipostexe/#customdatajson">customData.json</a> file.</li>
+<li>On every sync biPost.exe reads table schema's and data and uploads it to S3.</li>
+<li>Customize query criteria to your source DB using <a href="./bipostexe/#customdatajson">customData.json</a> file.</li>
 <li>Destination bucket triggers an API which reads schema's, creates database and tables (if they don't exist) and loads the data.</li>
-<li>Before and after data is loaded to MySQL you are able to call procedures and transform your data.</li>
-<li>On every upload MySQL uses a <code>REPLACE</code> command so if you set the appropriate primary keys on source database, data would be updated in destination (and avoid duplicates).</li>
+<li>Before and after data is loaded to Aurora-MySQL you are able to call procedures and transform your data.</li>
+<li>Data on destination won't be duplicated if appropriate primary keys are set on source DB.</li>
 <li>biPost.exe can run manually or automatically with a scheduled <a href="./bipostexe/#schedule">Windows Task.</a></li>
+</ul>
+<h3 id="bidirectional-syncing">Bidirectional syncing<a class="headerlink" href="#bidirectional-syncing" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Synchronize from Aurora-MySQL to on-premises.</li>
+<li>Once upload to Aurora finishes and transformations are done, the API initiates a download process.</li>
+<li>Customize query criteria to your Aurora DB by using <a href="./bipostexe/#outdatajson">outData.json</a> file.</li>
+<li>API reads table schema's and data and is returned to your on-premises Windows.</li>
+<li>Configure to insert the returned data to your source DB (SQL Server or Firebird SQL), and Bipost.exe handles schema's create/alter and data loading.</li>
+<li>Primary keys set on Aurora are used on source DB to avoid duplicates.</li>
+<li>Before and after data is loaded to your source DB you are able to call procedures and transform your data.</li>
+<li>Learn more <a href="./bipostexe/#download-data">here.</a></li>
 </ul>
 <hr />
 <h2 id="private-cloud">Private Cloud<a class="headerlink" href="#private-cloud" title="Permanent link">&para;</a></h2>
@@ -178,25 +190,33 @@
 <h2 id="architecture">Architecture<a class="headerlink" href="#architecture" title="Permanent link">&para;</a></h2>
 <p><img alt="Screenshot" src="./img/Bipost_Architecture.png" /></p>
 <ul>
-<li>Bipost Sync is built with <a href="https://aws.amazon.com/sdk-for-net/">AWS SDK for .NET</a></li>
 <li>Upload to S3 is done through AWS SDK technology.</li>
 <li>S3 triggers an event and calls Bipost API built with <a href="https://aws.amazon.com/lambda/">Lambda.</a></li>
-<li>Lambda reads data and credentials and proceeds to connect to MySQL-Aurora.</li>
-<li><a href="./(https://aws.amazon.com/rds/aurora/)">MySQL-Aurora</a> is a managed database service, you don't have to worry about servers, software patching and other managing tasks.</li>
-<li>Aurora loads data from S3 dedicated bucket.</li>
+<li>Lambda reads data and credentials and proceeds to connect to Aurora-MySQL.</li>
+<li><a href="./(https://aws.amazon.com/rds/aurora/)">Aurora-MySQL</a> is a managed database service, you don't have to worry about servers, software patching and other managing tasks.</li>
+<li>Aurora loads data from S3.</li>
 </ul>
-<p>Done! Start building something amazing on top! </p>
-<p>Check the <a href="./businessintelligence">Business Intelligence use case.</a></p>
+<p>Done! Start building something amazing!</p>
+<p>Checkout the <a href="./businessintelligence">Business Intelligence use case.</a></p>
 <hr />
 <h2 id="road-map">Road Map<a class="headerlink" href="#road-map" title="Permanent link">&para;</a></h2>
 <p>We are currently developing a secure web page to automate all settings that are exchanged over email. Thank you for your patience and we look forward to provide a world-class service.</p>
 <hr />
 <h2 id="release-notes">Release Notes<a class="headerlink" href="#release-notes" title="Permanent link">&para;</a></h2>
+<h4 id="056-beta-2017-12-02">0.5.6 (beta) 2017-12-02<a class="headerlink" href="#056-beta-2017-12-02" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Bidirectional syncing is here!</li>
+<li>Synchronize to any AWS Region.</li>
+<li>Performance improvements to API, now able to load nearly 1.5 million rows (or 280 MB uncompressed files) on a single call. Future releases will support much more since <a href="https://aws.amazon.com/about-aws/whats-new/2017/11/aws-lambda-doubles-maximum-memory-capacity-for-lambda-functions/">AWS Lambda recently doubled maximum memory capacity to 3 GB.</a></li>
+<li>Firebird transaction READ UNCOMMITTED to prevent Bipost.exe from being stopped while other transactions are still not committed.</li>
+<li>Initial and final statements on Aurora MySQL are disabled on recursive sync. This prevents excessive workload on your RDS instance.</li>
+<li>Bug fixes to API and Bipost.exe.</li>
+</ul>
 <h4 id="042-beta-2017-09-16">0.4.2 (beta) 2017-09-16<a class="headerlink" href="#042-beta-2017-09-16" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Table schemas are now synchronized against source definition on every sync, details <a href="./bipostapi/#create-alter-schemas">here.</a></li>
-<li>Bipost.exe bugfixes.</li>
-<li>Bipost API bugfixes.</li>
+<li>Bipost.exe bug fixes.</li>
+<li>Bipost API bug fixes.</li>
 </ul>
 <h4 id="040-beta-2017-08-20">0.4.0 (beta) 2017-08-20<a class="headerlink" href="#040-beta-2017-08-20" title="Permanent link">&para;</a></h4>
 <ul>
@@ -252,5 +272,5 @@
 
 <!--
 MkDocs version : 0.16.3
-Build Date UTC : 2017-11-08 19:53:31
+Build Date UTC : 2017-12-03 00:01:28
 -->

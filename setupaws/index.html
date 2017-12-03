@@ -93,6 +93,8 @@
         
             <li><a class="toctree-l3" href="#security-of-your-rds-instance-for-production">Security of your RDS Instance for Production</a></li>
         
+            <li><a class="toctree-l3" href="#security-for-downloading-data">Security for Downloading Data</a></li>
+        
             <li><a class="toctree-l3" href="#console-access-to-bucket">Console Access to Bucket</a></li>
         
         </ul>
@@ -199,7 +201,7 @@
 <hr />
 <h2 id="check-closest-aws-region-to-you-location">Check closest AWS Region to you location<a class="headerlink" href="#check-closest-aws-region-to-you-location" title="Permanent link">&para;</a></h2>
 <p><a href="http://cloudping.info">cloudping.info</a></p>
-<p>Click the link above and hit <strong>HTTP Ping</strong> and look for the lowest latency.</p>
+<p>Click the above link and hit <strong>HTTP Ping</strong> and look for the lowest latency.</p>
 <p>Maybe you want to try this at different times of the day.</p>
 <p>Take note of the closest region.</p>
 <p><img alt="Screenshot" src="../img/CloudPing.png" /></p>
@@ -299,7 +301,7 @@
 <li>Click check box way left of your DB Instance name.</li>
 <li>Click <strong>Instance Actions \ See Details</strong> gray button, on top.</li>
 <li>
-<p>Lookup for <strong>Security Groups</strong> and click the blue string to the right, it may appear as </p>
+<p>Lookup for <strong>Security Groups</strong> and click the blue string to the right, it may appear as</p>
 <blockquote>
 <p><code>default (sg-XXXXXXXX)</code></p>
 </blockquote>
@@ -319,13 +321,13 @@
 <p>Click <strong>Save</strong> blue button.</p>
 </li>
 <li>Click <strong>Actions \ Edit outbound rules</strong></li>
-<li>Verify if Type: <code>All traffic</code>, Destination: <code>Custom</code> and value: <code>0.0.0.0/0</code> is already set, if not, add the rule. </li>
+<li>Verify if Type: <code>All traffic</code>, Destination: <code>Custom</code> and value: <code>0.0.0.0/0</code> is already set, if not, add the rule.</li>
 <li>Go back to <a href="https://console.aws.amazon.com/rds/home">RDS Dashboard</a>, select your instance, click <strong>Instance Actions \ Reboot</strong>, confirm with blue button on the right.</li>
 <li>Wait until <strong>Status</strong> is <code>available</code> and check if <strong>Security Groups</strong> are <code>( active )</code></li>
 </ol>
 <hr />
 <h2 id="create-iam-policy-to-grant-access-to-s3">Create IAM Policy to Grant Access to S3<a class="headerlink" href="#create-iam-policy-to-grant-access-to-s3" title="Permanent link">&para;</a></h2>
-<p>From this point on you need the newly S3 bucket ARN that we provided over email. </p>
+<p>From this point on you need the newly S3 bucket ARN that we provided over email.</p>
 <p>If you haven't emailed us with your Canonical User ID, please follow <a href="../setupaws/#get-canonical-user-id-from-your-iam-home">these steps.</a></p>
 <ol>
 <li>Open <a href="https://console.aws.amazon.com/iam/home?#home">IAM Console.</a></li>
@@ -337,7 +339,7 @@
 <p>Effect: <code>Allow</code></p>
 <p>AWS Service: <code>Amazon S3</code></p>
 <p>Actions: check <code>GetObject</code> and <code>GetObjectVersion</code></p>
-<p>Amazon Resource Name (ARN): <strong>arn you received over email</strong>, example: </p>
+<p>Amazon Resource Name (ARN): <strong>arn you received over email</strong>, example:</p>
 <p><code>arn:aws:s3:::bipostdata-123456789012</code></p>
 </blockquote>
 </li>
@@ -585,13 +587,13 @@
 <h2 id="test-connection-to-your-rds-aurora">Test connection to your RDS Aurora<a class="headerlink" href="#test-connection-to-your-rds-aurora" title="Permanent link">&para;</a></h2>
 <ol>
 <li>
-<p>Download and install any <strong>MySQL client</strong> of your preference: </p>
+<p>Download and install any <strong>MySQL client</strong> of your preference:</p>
 <pre><code>For Mac you may use "Sequel Pro" or "MySQL Workbench"
 For Windows you may use "MySQL Workbench" or "HeidiSQL"
 </code></pre>
 </li>
 <li>
-<p>On your AWS Console go to <a href="https://console.aws.amazon.com/rds/home">RDS Dashboard</a>, select your instance and copy the <strong>Cluster Endpoint</strong>, which is a blue string with more than 60 characters. </p>
+<p>On your AWS Console go to <a href="https://console.aws.amazon.com/rds/home">RDS Dashboard</a>, select your instance and copy the <strong>Cluster Endpoint</strong>, which is a blue string with more than 60 characters.</p>
 </li>
 <li>
 <p>Launch your MySQL client and configure a new connection:</p>
@@ -611,7 +613,7 @@ For Windows you may use "MySQL Workbench" or "HeidiSQL"
 </ol>
 <hr />
 <h2 id="send-instance-connection-details-to-factor-bi">Send Instance Connection Details to Factor BI<a class="headerlink" href="#send-instance-connection-details-to-factor-bi" title="Permanent link">&para;</a></h2>
-<p>Email all the information you used to <a href="../setupaws/#test-connection-to-your-rds-aurora">Test connection to your RDS Aurora</a> to <a href="mailto:jaime@factorbi.com">jaime@factorbi.com</a> so we can add your instance to our Bipost API.</p>
+<p>Email all the information you used to <a href="../setupaws/#test-connection-to-your-rds-aurora">Test connection to your RDS Aurora</a> to <a href="mailto:jaime@factorbi.com">jaime@factorbi.com</a> so we can connect your instance to Bipost API.</p>
 <hr />
 <h2 id="security-of-your-rds-instance-for-production">Security of your RDS Instance for Production<a class="headerlink" href="#security-of-your-rds-instance-for-production" title="Permanent link">&para;</a></h2>
 <p>If your are ready to use Bipost API for production, we highly recommend the following:</p>
@@ -625,8 +627,36 @@ For Windows you may use "MySQL Workbench" or "HeidiSQL"
 </li>
 </ol>
 <hr />
+<h2 id="security-for-downloading-data">Security for Downloading Data<a class="headerlink" href="#security-for-downloading-data" title="Permanent link">&para;</a></h2>
+<p>If you plan to download data from Aurora to your on-premises databases, there are some settings to make on your AWS account.</p>
+<ol>
+<li>Open <a href="https://console.aws.amazon.com/iam/home#/users">IAM console.</a></li>
+<li>Click <strong>Add user</strong> blue button on top left corner.</li>
+<li>User name: <code>outFromS3</code></li>
+<li>Access type: <strong>Programmatic access</strong></li>
+<li>
+<p>Click <strong>Next: Permissions</strong> blue button lower right corner.</p>
+<p><img alt="Screenshot" src="../img/IAM-out-security.png" /></p>
+</li>
+<li>
+<p>Select <strong>Attach existing policies directly</strong></p>
+</li>
+<li>On the search box type <strong>S3</strong> and select <strong>AmazonS3FullAccess</strong></li>
+<li>
+<p>Click <strong>Next: Review</strong> blue button lower right corner.</p>
+<p><img alt="Screenshot" src="../img/IAM-out-security2.png" /></p>
+</li>
+<li>
+<p>Click <strong>Download .csv</strong>.</p>
+</li>
+<li>
+<p>Email the CSV to <a href="mailto:jaime@factorbi.com">jaime@factorbi.com</a> so we can setup the downloading process.</p>
+<p><img alt="Screenshot" src="../img/IAM-out-security3.png" /></p>
+</li>
+</ol>
+<hr />
 <h2 id="console-access-to-bucket">Console Access to Bucket<a class="headerlink" href="#console-access-to-bucket" title="Permanent link">&para;</a></h2>
-<p>Bipost synchronization uses S3 to upload the data that is extracted from the on-premises database. The bucket is located within Factor BI AWS account so we can efficiently handle API calls, patches and new releases. </p>
+<p>Bipost synchronization uses S3 to upload the data that is extracted from the on-premises database. The bucket is located within Factor BI AWS account so we can efficiently handle API calls, patches and new releases.</p>
 <p>Remember, we create a unique S3 bucket for each one of our customers, so nothing gets mixed up.</p>
 <p>Sometimes you may want to access this bucket and review files and folders.</p>
 <p>To accomplish this we provide an <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/console_controlling-access.html">AWS Console access</a> with a user, password and a direct link to your bucket.</p>

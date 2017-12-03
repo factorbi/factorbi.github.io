@@ -79,6 +79,8 @@
         
             <li><a class="toctree-l3" href="#customdatajson">customData.json</a></li>
         
+            <li><a class="toctree-l3" href="#download-data">Download Data</a></li>
+        
             <li><a class="toctree-l3" href="#schedule">Schedule</a></li>
         
             <li><a class="toctree-l3" href="#check-for-updates">Check for Updates</a></li>
@@ -160,7 +162,7 @@
               
                 <h1 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">&para;</a></h1>
 <p><strong>IMPORTANT NOTICE: Many configuration settings including Service No, Activation No and Specific Bucket are linked exclusively to your account. Treat configuration settings as sensitive information.</strong></p>
-<p>From this point on you need your <strong>Service No.</strong> and <strong>Activation No.</strong> that we provided over email. </p>
+<p>From this point on you need your <strong>Service No.</strong> and <strong>Activation No.</strong> that we provided over email.</p>
 <p>If you haven't emailed us with your Instance Connection Details, please follow <a href="../setupaws/#send-instance-connection-details-to-factor-bi">these steps.</a></p>
 <p><img alt="Screenshot" src="../img/bipost1.png" /></p>
 <p>Click <strong>Configuration</strong> and set:</p>
@@ -169,15 +171,15 @@
 <li><strong>Activation No.:</strong> 24 digit hex number, it may look like this: <code>5990ab12c3de45f6a78bc90d</code></li>
 <li><strong>Engine:</strong> Select <code>Firebird</code> or <code>SQL</code> (Microsoft SQL Server).</li>
 <li>
-<p><strong>System:</strong> Select <code>Custom...</code> </p>
-<p>If you use <a href="http://intelisis.com/">Intelisis ERP</a>, <a href="../microsip/">Microsip ERP</a> or <a href="../aspel/">Aspel SAE</a> then select the System according. </p>
+<p><strong>System:</strong> Select <code>Custom...</code></p>
+<p>If you use <a href="http://intelisis.com/">Intelisis ERP</a>, <a href="../microsip/">Microsip ERP</a> or <a href="../aspel/">Aspel SAE</a> then select the System according.</p>
 </li>
 </ul>
 <hr />
 <h2 id="firebird-connection">Firebird Connection<a class="headerlink" href="#firebird-connection" title="Permanent link">&para;</a></h2>
 <ul>
 <li>
-<p><strong>Remote Connection:</strong> Enable when you are using biPost.exe over a LAN network, this is, biPost.exe is not running on the same server as the Firebird server.</p>
+<p><strong>Remote Connection:</strong> Only enable when biPost.exe is not running on the same server as the Firebird server.</p>
 </li>
 <li>
 <p><strong>Server:</strong> IP or name of the server on your LAN network.</p>
@@ -219,9 +221,12 @@
 <li>
 <p><strong>Include Catalogs:</strong> For use only with <strong>Intelisis ERP</strong> system, see <a href="../intelisis/">details here.</a></p>
 </li>
+<li>
+<p><a href="../bipostexe/#download-data"><strong>Download Data</strong></a></p>
+</li>
 </ul>
 <h3 id="recursive-sync">Recursive Sync<a class="headerlink" href="#recursive-sync" title="Permanent link">&para;</a></h3>
-<p>Currently supported only for SQL Server, when enabled it optimizes upload by extracting and uploading one day at a time for the given date range. </p>
+<p>Currently supported only for SQL Server, when enabled it optimizes upload by extracting and uploading one day at a time for the given date range.</p>
 <p>It is very useful to upload historic data.</p>
 <p>It is used in combination with <strong>customData.json</strong> so you can configure the date field to use for each table.</p>
 <p>When <strong>turned off</strong> it automatically sets start and end date to yesterday.</p>
@@ -235,16 +240,16 @@
     "active": "true",
     "table": "Venta",
     "fields": "Venta.ID, Venta.Empresa, Venta.Mov, Venta.MovID, Venta.FechaEmision, Venta.Concepto, Venta.Moneda, Venta.TipoCambio, Venta.Estatus, Venta.Cliente, Venta.Almacen, Venta.Agente, Venta.Condicion, Venta.Vencimiento, Venta.DescuentoLineal, Venta.Sucursal, Venta.SubModulo, Venta.Importe, Venta.Impuestos, Venta.CostoTotal, Venta.FechaRegistro, Venta.DescuentoGlobal, Venta.Proyecto",
-    "join": "MovTipo WITH (NOLOCK) ON Venta.Mov = MovTipo.Mov AND MovTipo.Modulo = 'VTAS' ",
-    "filter": "Venta.Estatus NOT IN ('SINAFECTAR','BORRADOR') AND MovTipo.Clave IN ('VTAS.F','VTAS.D','VTAS.N','VTAS.FM','VTAS.FC') ",
+    "join": "MovTipo WITH (NOLOCK) ON Venta.Mov = MovTipo.Mov AND MovTipo.Modulo = 'VTAS'",
+    "filter": "Venta.Estatus NOT IN ('SINAFECTAR','BORRADOR') AND MovTipo.Clave IN ('VTAS.F','VTAS.D','VTAS.N','VTAS.FM','VTAS.FC')",
     "recursiveDateField": "Venta.FechaEmision"
   },
   {
     "active": "true",
     "table": "VentaD",
-    "fields": "VentaD.ID, VentaD.Renglon, VentaD.RenglonSub, VentaD.Articulo, VentaD.Cantidad, VentaD.Almacen, VentaD.Precio, VentaD.DescuentoLinea, VentaD.DescuentoImporte, VentaD.Impuesto1, VentaD.Costo, VentaD.ContUso, VentaD.Unidad, VentaD.Factor, VentaD.Agente ",
-    "join": "Venta WITH (NOLOCK) ON Venta.ID = VentaD.ID JOIN MovTipo WITH (NOLOCK) ON Venta.Mov = MovTipo.Mov AND MovTipo.Modulo = 'VTAS' ",
-    "filter": "Venta.Estatus NOT IN ('SINAFECTAR','BORRADOR') AND MovTipo.Clave IN ('VTAS.F','VTAS.D','VTAS.N','VTAS.FM','VTAS.FC') ",
+    "fields": "VentaD.ID, VentaD.Renglon, VentaD.RenglonSub, VentaD.Articulo, VentaD.Cantidad, VentaD.Almacen, VentaD.Precio, VentaD.DescuentoLinea, VentaD.DescuentoImporte, VentaD.Impuesto1, VentaD.Costo, VentaD.ContUso, VentaD.Unidad, VentaD.Factor, VentaD.Agente",
+    "join": "Venta WITH (NOLOCK) ON Venta.ID = VentaD.ID JOIN MovTipo WITH (NOLOCK) ON Venta.Mov = MovTipo.Mov AND MovTipo.Modulo = 'VTAS'",
+    "filter": "Venta.Estatus NOT IN ('SINAFECTAR','BORRADOR') AND MovTipo.Clave IN ('VTAS.F','VTAS.D','VTAS.N','VTAS.FM','VTAS.FC')",
     "recursiveDateField": "Venta.FechaEmision"
   }
 ]
@@ -254,7 +259,7 @@
   {
     "active": "true",
     "table": "MovTipo",
-    "fields": "Modulo, Mov, Clave ",
+    "fields": "Modulo, Mov, Clave",
     "join": "",
     "filter": "",
     "recursiveDateField": ""
@@ -262,7 +267,7 @@
   {
     "active": "true",
     "table": "Cta",
-    "fields": "Cuenta, Rama, Descripcion, Tipo, EsAcreedora, EsAcumulativa, CentrosCostos, Estatus, ClaveSAT ",
+    "fields": "Cuenta, Rama, Descripcion, Tipo, EsAcreedora, EsAcumulativa, CentrosCostos, Estatus, ClaveSAT",
     "join": "",
     "filter": "",
     "recursiveDateField": ""
@@ -270,7 +275,7 @@
   {
     "active": "true",
     "table": "CentroCostos",
-    "fields": "CentroCostos, Rama, Descripcion, EsAcumulativo, Grupo, SubGrupo, SubSubGrupo, Estatus ",
+    "fields": "CentroCostos, Rama, Descripcion, EsAcumulativo, Grupo, SubGrupo, SubSubGrupo, Estatus",
     "join": "",
     "filter": "",
     "recursiveDateField": ""
@@ -287,29 +292,29 @@
 </code></pre>
 <blockquote>
 <p>The above statements will send all data for the specified tables, as <code>join</code> and <code>filter</code> are not in use.</p>
-<p>Note that you can use <code>"active": "",</code></p>
+<p>Note that you can leave <code>"active": "",</code></p>
 </blockquote>
 <p><strong>Example 3, using special filter when no datetime is available:</strong></p>
 <pre><code>[
   {
     "active": "true",
     "table": "bibliaAlmacen",
-    "fields": "id, empresa, articulo, almacen, y, m, venta, devolucion, compra, devolucionCompra, trasladoRecepcion, trasladoSalida, otraEntrada, otraSalida, invInicial, inventario, valor, valorUSD, costo, costoUSD, costoVenta, costoVentaUSD, total1, peso, acum, abc, idym ",
+    "fields": "id, empresa, articulo, almacen, y, m, venta, devolucion, compra, devolucionCompra, trasladoRecepcion, trasladoSalida, otraEntrada, otraSalida, invInicial, inventario, valor, valorUSD, costo, costoUSD, costoVenta, costoVentaUSD, total1, peso, acum, abc, idym",
     "join": "",
-    "filter": "y = datepart(yy,DATEADD(s,-1,DATEADD(mm, DATEDIFF(m,0,GETDATE()),0))) AND m = datepart(m,DATEADD(s,-1,DATEADD(mm, DATEDIFF(m,0,GETDATE()),0))) ",
+    "filter": "y = datepart(yy,DATEADD(s,-1,DATEADD(mm, DATEDIFF(m,0,GETDATE()),0))) AND m = datepart(m,DATEADD(s,-1,DATEADD(mm, DATEDIFF(m,0,GETDATE()),0)))",
     "recursiveDateField": ""
   }
 ]
 </code></pre>
 <blockquote>
-<p><code>join</code> and <code>filter</code> can use any syntax supported on SQL Server.</p>
+<p><code>join</code> and <code>filter</code> can use any syntax supported on SQL Server/Firebird SQL.</p>
 </blockquote>
 <p><strong>Example 4 with Microsip ERP:</strong></p>
 <pre><code>[
   {
     "active": "true",
     "table": "ATRIBUTOS",
-    "fields": "ATRIBUTO_ID, NOMBRE, NOMBRE_COLUMNA, CLAVE_OBJETO, POSICION, TIPO, LONGITUD, ESCALA, VALOR_MINIMO, VALOR_MAXIMO, VALOR_DEFAULT_NUMERICO, VALOR_DEFAULT_CARACTER, DESCRIPCION ",
+    "fields": "*",
     "join": "",
     "filter": "",
     "recursiveDateField": ""
@@ -317,7 +322,7 @@
   {
     "active": "true",
     "table": "IMPUESTOS_ARTICULOS",
-    "fields": "IMPUESTO_ART_ID, ARTICULO_ID, IMPUESTO_ID, UNIDADES_IMPUESTO ",
+    "fields": "*",
     "join": "",
     "filter": "",
     "recursiveDateField": ""
@@ -325,7 +330,7 @@
   {
     "active": "true",
     "table": "IMPUESTOS_DOCTOS_CM",
-    "fields": "DOCTO_CM_ID, IMPUESTO_ID, COMPRA_NETA, OTROS_IMPUESTOS, PCTJE_IMPUESTO, IMPORTE_IMPUESTO, UNIDADES_IMPUESTO, IMPORTE_UNITARIO_IMPUESTO ",
+    "fields": "*",
     "join": "",
     "filter": "",
     "recursiveDateField": ""
@@ -333,7 +338,7 @@
   {
     "active": "true",
     "table": "IMPORTES_DOCTOS_CC_IMPTOS",
-    "fields": "IMPTE_DOCTO_CC_IMPTO_ID, IMPTE_DOCTO_CC_ID, IMPUESTO_ID, IMPORTE, PCTJE_IMPUESTO, IMPUESTO ",
+    "fields": "*",
     "join": "",
     "filter": "",
     "recursiveDateField": ""
@@ -341,7 +346,15 @@
   {
     "active": "true",
     "table": "IMPORTES_DOCTOS_CP_IMPTOS",
-    "fields": "IMPTE_DOCTO_CP_IMPTO_ID, IMPTE_DOCTO_CP_ID, IMPUESTO_ID, IMPORTE, PCTJE_IMPUESTO, IMPUESTO ",
+    "fields": "*",
+    "join": "",
+    "filter": "",
+    "recursiveDateField": ""
+  },
+  {
+    "active": "true",
+    "table": "DOCTOS_ENTRE_SIS",
+    "fields": "*",
     "join": "",
     "filter": "",
     "recursiveDateField": ""
@@ -349,13 +362,14 @@
 ]
 </code></pre>
 <blockquote>
-<p>In the above example biPost.exe is using <strong>System: Microsip</strong> and on every sync it sends all the factory embedded tables plus the tables set in customData.json </p>
+<p>In the above example biPost.exe is using <strong>System: Microsip</strong> and on every sync it sends all the factory embedded tables plus the tables set in customData.json</p>
 </blockquote>
 <h3 id="tables-primary-keys">Tables &amp; Primary Keys<a class="headerlink" href="#tables-primary-keys" title="Permanent link">&para;</a></h3>
 <p>Take note of the following:</p>
 <ul>
 <li>Every table specified in <strong>customData.json</strong> must have a <strong>Primary Key</strong> and these must be listed on <code>"fields"</code></li>
-<li>You can only setup customData.json with <strong>base tables.</strong> If you use views it may work but it is not supported.</li>
+<li>You can only setup customData.json with <strong>base tables.</strong></li>
+<li>Use <code>*</code> on <code>fields</code> to retrieve all table columns.</li>
 <li><code>"fields"</code> parameter must only include fields that exist on <code>"table":</code>.</li>
 </ul>
 <h3 id="recursivedatefield">recursiveDateField<a class="headerlink" href="#recursivedatefield" title="Permanent link">&para;</a></h3>
@@ -375,7 +389,7 @@
 <p><strong>Use Cases:</strong></p>
 <ol>
 <li>
-<p>Some tables may be uploaded once since its data is rarely changed, e.g. config &amp; company tables.</p>
+<p>Some tables may be uploaded once since that data is rarely changed, e.g. config &amp; company tables.</p>
 </li>
 <li>
 <p>Historic data may be uploaded once, e.g. transactions from previous years.</p>
@@ -388,6 +402,145 @@
 </li>
 </ol>
 <p>For all the reasons above, it may be very useful to create two or more folders and copy entire biPost files and just change <strong>customData.json.</strong> Moreover you may want to have different sync schedules, which are explained next.</p>
+<hr />
+<h2 id="download-data">Download Data<a class="headerlink" href="#download-data" title="Permanent link">&para;</a></h2>
+<p><img alt="Screenshot" src="../img/bipost12.png" /></p>
+<ul>
+<li>
+<p>With this option you are able to download data from Aurora to your on-premises Windows.</p>
+</li>
+<li>
+<p>Data to retrieve from Aurora is specified on <a href="../bipostexe/#outdatajson">outData.json</a></p>
+</li>
+<li>
+<p>Process Data is used to insert retuned data to SQL Server or Firebird SQL.</p>
+</li>
+</ul>
+<p><strong>IMPORTANT: Follow <a href="../setupaws/#security-for-downloading-data">this security steps</a> to enable the downloading process.</strong></p>
+<h3 id="outdatajson">outData.json<a class="headerlink" href="#outdatajson" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p>With this file you are able to specify the tables, fields and filter criteria to retrieve data from Aurora.</p>
+</li>
+<li>
+<p>Tables are case-sensitive on Aurora MySQL, so this is important on <code>"table":</code> parameter.</p>
+</li>
+<li>
+<p>Downloaded data will be available on <code>%localappdata%/biPost/out_</code> Windows folder.</p>
+</li>
+<li>
+<p>Except for <code>recursiveDateField</code> all parameters are supported.</p>
+</li>
+</ul>
+<p><strong>Example 1, using outData.json</strong></p>
+<pre><code>{
+    "out": [
+    {
+        "active": "true",
+        "table": "export_doctos_ve",
+        "fields": "*",
+        "filter": "",
+        "recursiveDateField": ""
+    },
+    {
+        "active": "true",
+        "table": "export_doctos_ve_det",
+        "fields": "*",
+        "filter": "",
+        "recursiveDateField": ""
+    },
+    {
+        "active": "true",
+        "table": "export_doctos_cm",
+        "fields": "*",
+        "filter": "",
+        "recursiveDateField": ""
+    },
+    {
+        "active": "true",
+        "table": "export_doctos_cm_det",
+        "fields": "*",
+        "filter": "",
+        "recursiveDateField": ""
+    }
+    ],
+    "initialQuery": "",
+    "finalQuery": ""
+}
+</code></pre>
+<p><strong>Example 2, using outData.json</strong></p>
+<pre><code>{
+    "out": [
+    {
+        "active": "true",
+        "table": "biArticulos",
+        "fields": "*",
+        "filter": "linea = 'TVs'",
+        "recursiveDateField": ""
+    },
+    {
+        "active": "",
+        "table": "",
+        "fields": "",
+        "filter": "",
+        "recursiveDateField": ""
+    }
+    ],
+    "initialQuery": "",
+    "finalQuery": ""
+}
+</code></pre>
+<blockquote>
+<p>Note that you can leave <code>"active": "",</code></p>
+</blockquote>
+<p>Example downloaded data on <code>%localappdata%/bipost</code> folder:</p>
+<p><img alt="Screenshot" src="../img/example-download-data.png" /></p>
+<h3 id="process-data">Process Data<a class="headerlink" href="#process-data" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p>When this option is on, table schema's are created/altered and data uploaded to your SQL Server or Firebird SQL.</p>
+</li>
+<li>
+<p>Same names of output tables on Aurora are going to be created on SQL Server/Firebird.</p>
+</li>
+<li>
+<p>We highly recommend to create specific output tables on Aurora and give them a name that is not in use on your SQL Server or Firebird SQL source database.</p>
+</li>
+<li>
+<p>Primary keys on Aurora are used on SQL Server/Firebird to avoid duplicates.</p>
+</li>
+<li>
+<p>You are able to query views from Aurora as output, in which case tables on SQL Server/Firebird are always deleted before any new data load.</p>
+</li>
+<li>
+<p>Schema changes on Aurora are applied to SQL Server/Firebird, except for deleting and renaming columns.</p>
+</li>
+<li>
+<p>You're able to run queries before and after data is loaded to SQL Server/Firebird, more instructions below.</p>
+</li>
+<li>
+<p><a href="../troubleshooting/#firebird-column-name-starts-with-underscore">Firebird SQL does not naturally support creating a column name starting with underscore,</a> so avoid that on Aurora if your source DB is Firebird.</p>
+</li>
+</ul>
+<p>Example of processed data: tables were created and data loaded:</p>
+<p><img alt="Screenshot" src="../img/example-process-data.png" /></p>
+<h4 id="initial-and-final-query">Initial and Final Query<a class="headerlink" href="#initial-and-final-query" title="Permanent link">&para;</a></h4>
+<p>Before and after data is loaded to SQL Server/Firebird you're able to run queries, example:</p>
+<pre><code>{
+      "out": [
+    {
+        "active": "true",
+        "table": "biArticulos",
+        "fields": "*",
+        "filter": "linea = 'TVs'",
+        "recursiveDateField": ""
+    }
+    ],
+      "initialQuery": "execute procedure spInitial;",
+      "finalQuery": "execute procedure spFinal;"
+}
+</code></pre>
+<p><code>initialQuery</code> and <code>finalQuery</code> are used to transform your data in any way you want.</p>
 <hr />
 <h2 id="schedule">Schedule<a class="headerlink" href="#schedule" title="Permanent link">&para;</a></h2>
 <p><img alt="Screenshot" src="../img/bipost9.png" /></p>

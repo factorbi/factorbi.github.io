@@ -105,6 +105,8 @@
         
             <li><a class="toctree-l3" href="#mysql-schemas-are-created-but-no-data-is-loaded">MySQL schemas are created but no data is loaded</a></li>
         
+            <li><a class="toctree-l3" href="#firebird-column-name-starts-with-underscore">Firebird column name starts with underscore</a></li>
+        
         </ul>
     
 
@@ -232,7 +234,7 @@ For example:</p>
 <p><img alt="Screenshot" src="../img/NameResolutionFailure.png" /></p>
 <hr />
 <h2 id="firewall-restrictions">Firewall Restrictions<a class="headerlink" href="#firewall-restrictions" title="Permanent link">&para;</a></h2>
-<p>If your internet connection has a firewall, it may show different errors like: </p>
+<p>If your internet connection has a firewall, it may show different errors like:</p>
 <ul>
 <li>The remote name could not be resolved.</li>
 <li>A WebException with status SendFailure was thrown.</li>
@@ -240,14 +242,14 @@ For example:</p>
 <li>Error making request with Error Code ExpectationFailed and Http Status Code ExpectationFailed.</li>
 </ul>
 <p><img alt="Screenshot" src="../img/Error_Code_ExpectationFailed.png" /></p>
-<h3 id="grant-firewall-to-reach-amazon-s3">Grant Firewall to reach Amazon S3:<a class="headerlink" href="#grant-firewall-to-reach-amazon-s3" title="Permanent link">&para;</a></h3>
+<h3 id="grant-firewall-to-reach-amazon-s3">Grant Firewall to reach Amazon S3<a class="headerlink" href="#grant-firewall-to-reach-amazon-s3" title="Permanent link">&para;</a></h3>
 <p>Create a policy to Allow to:</p>
 <ul>
 <li><code>54.230.0.0/15</code></li>
 <li><code>52.192.0.0/11</code></li>
 </ul>
 <p><img alt="Screenshot" src="../img/FirewallAllowTo.png" /></p>
-<p>AWS can have multiple IP addresses for S3 service, so in case the above IP's don't work check the <a href="https://aws.amazon.com/blogs/aws/aws-ip-ranges-json/">AWS Public IP Address Ranges documentation</a> and look for </p>
+<p>AWS can have multiple IP addresses for S3 service, so in case the above IP's don't work check the <a href="https://aws.amazon.com/blogs/aws/aws-ip-ranges-json/">AWS Public IP Address Ranges documentation</a> and look for</p>
 <pre><code>  "region": "GLOBAL",
   "service": "AMAZON"
 </code></pre>
@@ -270,7 +272,7 @@ System.IO.IOException: The process cannot access the file '012a3b4c-56d7-8ef9-01
 <p>When we look at our CloudWatch logs, we see <code>Unable to initialize S3Stream</code>, so do the following:</p>
 <ul>
 <li>
-<p>Check if your <a href="../setupaws/#create-iam-policy-to-grant-access-to-s3">IAM Policy to Grant Access to S3</a> is correctly using the S3 bucket ARN we provided. Also double check the policy document (JSON).</p>
+<p>Check if your <a href="../setupaws/#create-iam-policy-to-grant-access-to-s3">IAM Policy to Grant Access to S3</a> is set correctly using the S3 bucket ARN we provided. Also double check the policy document (JSON).</p>
 </li>
 <li>
 <p>Check that <a href="../setupaws/#create-iam-role-to-allow-rds-access-to-s3">IAM Role</a> has attached the former IAM Policy. Copy ARN Role to a notepad for next steps.</p>
@@ -281,24 +283,28 @@ System.IO.IOException: The process cannot access the file '012a3b4c-56d7-8ef9-01
 <li>
 <p>Go to <a href="../setupaws/#set-iam-role-to-aurora-cluster">RDS Clusters</a> and check if <strong>IAM Role</strong> is listed and active for your cluster.</p>
 </li>
+<li>
+<p>Double check IAM roles attached to your instance querying <code>show global variables like '%role%'</code></p>
+</li>
 </ul>
-<p>If after this you still experience this error, check out <a href="../troubleshooting/#manually-debugging-s3stream">Manually debugging S3Stream.</a></p>
+<p><img alt="Screenshot" src="../img/show-global-variables.png" /></p>
+<p>After this, if you still experience this error, check out <a href="../troubleshooting/#manually-debugging-s3stream">Manually debugging S3Stream.</a></p>
 <h6 id="2-name-of-your-destination-database-must-be-all-lower-case">2. Name of your destination database must be all lower case.<a class="headerlink" href="#2-name-of-your-destination-database-must-be-all-lower-case" title="Permanent link">&para;</a></h6>
 <p>When we look at our CloudWatch logs, we see:</p>
 <p><code>SequelizeConnectionError: ER_BAD_DB_ERROR: Unknown database</code></p>
 <p>Double check that your DB name is all lower case.</p>
 <h3 id="manually-debugging-s3stream">Manually debugging S3Stream<a class="headerlink" href="#manually-debugging-s3stream" title="Permanent link">&para;</a></h3>
 <p>In this section we will use the syntax and some parameters that are explained by <a href="http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Aurora.LoadFromS3.html">AWS Documentation for LOAD DATA FROM S3</a>.</p>
-<p>The goals is to see whether an error is shown while directly importing data from S3 to MySQL-Aurora.</p>
+<p>The goals is to see whether an error is shown while directly importing data from S3 to Aurora-MySQL.</p>
 <p>Using MySQL Workbench (or any client of your preference), open a connection to your MySQL instance preferably using <code>root</code> account.</p>
 <p><strong>Syntax</strong></p>
-<pre><code>LOAD DATA FROM S3 's3://{my-bucket-name}/{my-36-digit-service-number}/process_{my-36-digit-service-number}{YYYY_M_D-of-yesterday}_post/{my-example-table}.csv'
+<pre><code>LOAD DATA FROM S3 's3-us-east-1://{my-bucket-name}/{my-36-digit-service-number}/process_{my-36-digit-service-number}{YYYY_M_D-of-yesterday}_post/{my-example-table}.csv'
 REPLACE INTO TABLE `{my-database-name}`.`{my-example-table}`
-CHARACTER SET 'utf8' 
+CHARACTER SET 'utf8'
 FIELDS TERMINATED BY '|'
 ENCLOSED BY '\"'
 LINES TERMINATED BY '\r\n'
-IGNORE 1 LINES 
+IGNORE 1 LINES
 ({column_1},{column_2},...,{column_n});
 </code></pre>
 <p>Replace curly brackets with your data.</p>
@@ -312,13 +318,13 @@ IGNORE 1 LINES
 <li><strong>{column_1},{column_2},...,{column_n}</strong>: List all the columns in the same order as they appear in the .CSV file created on <a href="../troubleshooting/#appdatalocal-folder">AppData\Local folder</a>.</li>
 </ul>
 <p><strong>Example</strong></p>
-<pre><code>LOAD DATA FROM S3 's3://bipostdata-f0123abc4567/a1bcd23e-4fa5-67b8-cd9e-f0123abc4567/process_a1bcd23e-4fa5-67b8-cd9e-f0123abc45672017_9_13_post/CLIE.csv'
+<pre><code>LOAD DATA FROM S3 's3-us-east-1://bipostdata-f0123abc4567/a1bcd23e-4fa5-67b8-cd9e-f0123abc4567/process_a1bcd23e-4fa5-67b8-cd9e-f0123abc45672017_9_13_post/CLIE.csv'
 REPLACE INTO TABLE `mytestdb`.`clie`
-CHARACTER SET 'utf8' 
+CHARACTER SET 'utf8'
 FIELDS TERMINATED BY '|'
 ENCLOSED BY '\"'
 LINES TERMINATED BY '\r\n'
-IGNORE 1 LINES 
+IGNORE 1 LINES
 (CLAVE,STATUS,NOMBRE,RFC,CALLE,NUMINT,NUMEXT,CRUZAMIENTOS,CRUZAMIENTOS2,COLONIA,CODIGO,LOCALIDAD,MUNICIPIO,ESTADO,NACIONALIDAD,REFERDIR,TELEFONO,CLASIFIC,FAX,PAG_WEB,CURP,CVE_ZONA,IMPRIR,MAIL,NIVELSEC,ENVIOSILEN,EMAILPRED,DIAREV,DIAPAGO,CON_CREDITO,DIASCRED,LIMCRED,SALDO,LISTA_PREC,CVE_BITA,ULT_PAGOD,ULT_PAGOM,ULT_PAGOF,DESCUENTO,ULT_VENTAD,ULT_COMPM,FCH_ULTCOM,VENTAS,CVE_VEND,CVE_OBS,TIPO_EMPRESA,MATRIZ,PROSPECTO,CALLE_ENVIO,NUMINT_ENVIO,NUMEXT_ENVIO,CRUZAMIENTOS_ENVIO,CRUZAMIENTOS_ENVIO2,COLONIA_ENVIO,LOCALIDAD_ENVIO,MUNICIPIO_ENVIO,ESTADO_ENVIO,PAIS_ENVIO,CODIGO_ENVIO,CVE_ZONA_ENVIO,REFERENCIA_ENVIO,CUENTA_CONTABLE,ADDENDAF,ADDENDAD,NAMESPACE,METODODEPAGO,NUMCTAPAGO,MODELO,DES_IMPU1,DES_IMPU2,DES_IMPU3,DES_IMPU4,DES_PER,LAT_GENERAL,LON_GENERAL,LAT_ENVIO,LON_ENVIO,UUID,VERSION_SINC,USO_CFDI,CVE_PAIS_SAT,NUMIDREGFISCAL,FORMADEPAGOSAT);
 </code></pre>
 <p><img alt="Screenshot" src="../img/Unable-to-initialize-S3Stream.png" /></p>
@@ -331,6 +337,11 @@ IGNORE 1 LINES
 <p>The only way to see this error is executing <strong>LOAD FROM S3</strong> <a href="../troubleshooting/#manually-debugging-s3stream">manually.</a></p>
 <p>If your MySQL user already has this privilege and you see the following error, try <a href="../troubleshooting/#1-rds-instance-cannot-reach-s3-bucket">these steps.</a></p>
 <p><code>Access denied for user 'your-user-name'@'xx.xx.xxx.xxx' (using password: YES)</code></p>
+<hr />
+<h2 id="firebird-column-name-starts-with-underscore">Firebird column name starts with underscore<a class="headerlink" href="#firebird-column-name-starts-with-underscore" title="Permanent link">&para;</a></h2>
+<p>Firebird SQL does not naturally support creating a column starting with underscore, so avoid that on Aurora if your source DB is Firebird.</p>
+<p><code>Token unknown - line 1</code></p>
+<p><img alt="Screenshot" src="../img/underscore_error_Firebird.png" /></p>
               
             </div>
           </div>

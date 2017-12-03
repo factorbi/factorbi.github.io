@@ -172,7 +172,7 @@ It has 4 main stages which are described next.</p>
 </ul>
 </li>
 <li>
-<p>Tables are created with the full set of fields found on source db. </p>
+<p>Tables are created with the full set of fields found on source db.</p>
 </li>
 <li>
 <p>Alter tables to match source schemas. Columns are never deleted.</p>
@@ -186,7 +186,7 @@ It has 4 main stages which are described next.</p>
 </ul>
 <hr />
 <h2 id="initial-statement">Initial Statement<a class="headerlink" href="#initial-statement" title="Permanent link">&para;</a></h2>
-<p>After the schemas are created (or checked if they exist) and <strong>before</strong> new data is loaded, you can specify to run a query on your database.</p>
+<p>After schemas are created/altered and <strong>before</strong> new data is loaded, you can specify to run a query on your database.</p>
 <p>This is very useful if you need to delete, truncate or make any changes before data is loaded.</p>
 <p>Currently you need to include all desired statements in a stored procedure with the name <code>spPostInitial</code> and must not have parameters.</p>
 <p>Please let us know over email to activate this stored procedure for a given <strong>Service No.</strong></p>
@@ -202,11 +202,11 @@ END$$
 </code></pre>
 <hr />
 <h2 id="load-data">Load Data<a class="headerlink" href="#load-data" title="Permanent link">&para;</a></h2>
-<p>Data loading is performed by Aurora using <a href="http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Aurora.LoadFromS3.html"><code>LOAD DATA FROM S3</code></a> statement with <code>REPLACE</code> parameter. This technique ensures that all data is loaded with great performance.</p>
+<p>Data loading is performed by Aurora using <a href="http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Aurora.LoadFromS3.html"><code>LOAD DATA FROM S3</code></a> statement with <code>REPLACE</code> parameter. This technique ensures that all data is loaded with great performance &amp; reliability.</p>
 <p>You can verify which tables where loaded by querying the <code>aurora_s3_load_history</code> table like this:</p>
 <pre><code>select * from mysql.aurora_s3_load_history where file_name regexp 'mytablename';
 </code></pre>
-<p>Optionally convert <code>load_timestamp</code> to your local time: <code>CONVERT_TZ(load_timestamp,'UTC','America/Mexico_City')</code></p>
+<p>Optionally convert <code>load_timestamp</code> to your local time, e.g.: <code>CONVERT_TZ(load_timestamp,'UTC','America/Mexico_City')</code></p>
 <p>After data is loaded, it always checks to create and populate these objects:</p>
 <table>
 <thead>
@@ -217,27 +217,7 @@ END$$
 </thead>
 <tbody>
 <tr>
-<td>T</td>
-<td>Table</td>
-</tr>
-<tr>
-<td>time</td>
-<td>Table</td>
-</tr>
-<tr>
-<td>ym</td>
-<td>Table</td>
-</tr>
-<tr>
-<td>dowhile</td>
-<td>Stored Procedure</td>
-</tr>
-<tr>
-<td>spCreateTime</td>
-<td>Stored Procedure</td>
-</tr>
-<tr>
-<td>spCreateYM</td>
+<td>sp_AlterTable</td>
 <td>Stored Procedure</td>
 </tr>
 <tr>
@@ -250,7 +230,7 @@ END$$
 <h2 id="final-statement">Final Statement<a class="headerlink" href="#final-statement" title="Permanent link">&para;</a></h2>
 <p>After new data is loaded to your database, you can specify to run a query.</p>
 <p>This is very handy if you need to execute several routines and, for example, populate new tables.</p>
-<p>Currently you need to include all desired statements in a stored procedure with the name <code>spPostFinal</code> and must not have parameters. </p>
+<p>Currently you need to include all desired statements in a stored procedure with the name <code>spPostFinal</code> and must not have parameters.</p>
 <p>Please let us know over email to activate this stored procedure for a given <strong>Service No.</strong></p>
 <p>Example:</p>
 <pre><code>DELIMITER $$
