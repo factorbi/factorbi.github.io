@@ -100,6 +100,8 @@
         
             <li><a class="toctree-l3" href="#anadir-tablas-a-la-sincronizacion">Añadir tablas a la Sincronización</a></li>
         
+            <li><a class="toctree-l3" href="#sincroniza-aws-aurora-hacia-microsip">Sincroniza AWS Aurora hacia Microsip</a></li>
+        
             <li><a class="toctree-l3" href="#tablas-bi">Tablas B.I.</a></li>
         
         </ul>
@@ -319,6 +321,169 @@ order by rdb$relation_name;
 </code></pre>
 <p>Los parámetros <code>join</code> y <code>recursiveDateField</code> no están soportados hasta el momento para Firebird SQL.</p>
 <p>Para más información sobre la configuración de customData.json ver <a href="../bipostexe/#customdatajson">aquí.</a></p>
+<hr />
+<h2 id="sincroniza-aws-aurora-hacia-microsip">Sincroniza AWS Aurora hacia Microsip<a class="headerlink" href="#sincroniza-aws-aurora-hacia-microsip" title="Permanent link">&para;</a></h2>
+<ul>
+<li>
+<p>La sincronización con <a href="../bipostexe/#download-data">Download Data</a> permite traer datos desde AWS Aurora hacia tu base de Microsip. </p>
+</li>
+<li>
+<p>Cuando activas la opción <a href="../bipostexe/#process-data">Process Data</a> se insertan tus datos en Firebird.</p>
+</li>
+<li>
+<p>Usando la opción <a href="../bipostexe/#initial-and-final-query">Final Query</a> puedes correr cualquier stored procedure para que termines de calcular y procesar hacia otras tablas. </p>
+</li>
+</ul>
+<p>Por ejemplo, después que se han recibido e insertado los datos en Firebird, queremos correr el store <code>spFinal</code> así que usamos el parámetro <code>"finalQuery": "execute procedure spFinal;"</code> dentro de <strong>outData.json</strong>. Aquí ejemplo del contenido de <strong>spFinal</strong>:</p>
+<pre><code>    SET TERM ^ ;
+
+    RECREATE PROCEDURE SPFINAL
+    AS
+    DECLARE VARIABLE id            VARCHAR(50);
+    DECLARE VARIABLE idd           VARCHAR(50);
+    DECLARE VARIABLE tipod         VARCHAR(8);
+    DECLARE VARIABLE docto_id      BIGINT;
+    DECLARE VARIABLE new_docto_id  BIGINT;
+    DECLARE VARIABLE new_doctod_id BIGINT;
+    DECLARE VARIABLE estatus       VARCHAR(1);
+    DECLARE VARIABLE new_posicion  INT;
+    DECLARE VARIABLE posicion      INT;
+    BEGIN
+      -- DOCTOS_VE
+      FOR SELECT id FROM EXPORT_DOCTOS_VE INTO :id 
+      DO
+      BEGIN
+        docto_id = NULL;
+
+        SELECT ESTATUS     FROM EXPORT_DOCTOS_VE WHERE ID = :id INTO :estatus;
+        SELECT DOCTO_VE_ID FROM DOCTOS_VE WHERE WEBID = :id INTO :docto_id;
+
+        IF (docto_id IS NULL) THEN
+        BEGIN
+          new_docto_id = GEN_ID(ID_DOCTOS,1);
+
+          INSERT INTO DOCTOS_VE(
+                   DOCTO_VE_ID,   TIPO_DOCTO, SUBTIPO_DOCTO, FOLIO, FECHA, CLAVE_CLIENTE, CLIENTE_ID, DIR_CLI_ID, DIR_CONSIG_ID, ALMACEN_ID, MONEDA_ID, TIPO_CAMBIO, TIPO_DSCTO, DSCTO_PCTJE, DSCTO_IMPORTE, ESTATUS, APLICADO, FECHA_VIGENCIA_ENTREGA, ORDEN_COMPRA, FECHA_ORDEN_COMPRA, FOLIO_RECIBO_MERCANCIA, FECHA_RECIBO_MERCANCIA, DESCRIPCION, IMPORTE_NETO, FLETES, OTROS_CARGOS, TOTAL_IMPUESTOS, TOTAL_RETENCIONES, TOTAL_ANTICIPOS, PESO_EMBARQUE, FORMA_EMITIDA, CONTABILIZADO, ACREDITAR_CXC, SISTEMA_ORIGEN, COND_PAGO_ID, FECHA_DSCTO_PPAG, PCTJE_DSCTO_PPAG, VENDEDOR_ID, PCTJE_COMIS, VIA_EMBARQUE_ID, IMPORTE_COBRO, IMPUESTO_SUSTITUIDO_ID, IMPUESTO_SUSTITUTO_ID, USUARIO_CREADOR, ES_CFD, ENVIADO, FECHA_HORA_ENVIO, CFD_ENVIO_ESPECIAL, CFDI_CERTIFICADO, FECHA_HORA_CREACION, FECHA_HORA_ULT_MODIF, CARGAR_SUN, FECHA_HORA_CANCELACION, WEBID)
+            SELECT :new_docto_id, TIPO_DOCTO, SUBTIPO_DOCTO, FOLIO, FECHA, CLAVE_CLIENTE, CLIENTE_ID, DIR_CLI_ID, DIR_CLI_ID,    ALMACEN_ID, MONEDA_ID, TIPO_CAMBIO, TIPO_DSCTO, DSCTO_PCTJE, DSCTO_IMPORTE, ESTATUS, APLICADO, FECHA_VIGENCIA_ENTREGA, ORDEN_COMPRA, FECHA_ORDEN_COMPRA, FOLIO_RECIBO_MERCANCIA, FECHA_RECIBO_MERCANCIA, DESCRIPCION, IMPORTE_NETO, FLETES, OTROS_CARGOS, TOTAL_IMPUESTOS, TOTAL_RETENCIONES, TOTAL_ANTICIPOS, PESO_EMBARQUE, FORMA_EMITIDA, CONTABILIZADO, ACREDITAR_CXC, SISTEMA_ORIGEN, COND_PAGO_ID, FECHA_DSCTO_PPAG, PCTJE_DSCTO_PPAG, VENDEDOR_ID, PCTJE_COMIS, VIA_EMBARQUE_ID, IMPORTE_COBRO, IMPUESTO_SUSTITUIDO_ID, IMPUESTO_SUSTITUTO_ID, USUARIO_CREADOR, ES_CFD, ENVIADO, FECHA_HORA_ENVIO, CFD_ENVIO_ESPECIAL, CFDI_CERTIFICADO, FECHA_HORA_CREACION, FECHA_HORA_ULT_MODIF, CARGAR_SUN, FECHA_HORA_CANCELACION, ID
+              FROM EXPORT_DOCTOS_VE
+             WHERE ID = :id;
+
+          new_posicion = 1;
+          FOR SELECT id, tipo, posicion FROM EXPORT_DOCTOS_VE_DET WHERE ID = :id INTO :idd, :tipod, :posicion
+          DO
+          BEGIN
+            new_doctod_id = NULL;
+            new_doctod_id = GEN_ID(ID_DOCTOS,1);
+
+            INSERT INTO DOCTOS_VE_DET(
+                     DOCTO_VE_DET_ID, DOCTO_VE_ID,   CLAVE_ARTICULO, ARTICULO_ID, UNIDADES, UNIDADES_COMPROM, UNIDADES_SURT_DEV, UNIDADES_A_SURTIR, PRECIO_UNITARIO, PCTJE_DSCTO, DSCTO_ART, PCTJE_DSCTO_CLI, PCTJE_DSCTO_VOL, PCTJE_DSCTO_PROMO, PRECIO_TOTAL_NETO, PCTJE_COMIS, ROL, NOTAS, POSICION)
+              SELECT :new_doctod_id,  :new_docto_id, CLAVE_ARTICULO, ARTICULO_ID, UNIDADES, UNIDADES_COMPROM, UNIDADES_SURT_DEV, UNIDADES_A_SURTIR, PRECIO_UNITARIO, PCTJE_DSCTO, DSCTO_ART, PCTJE_DSCTO_CLI, PCTJE_DSCTO_VOL, PCTJE_DSCTO_PROMO, PRECIO_TOTAL_NETO, PCTJE_COMIS, ROL, NOTAS, :new_posicion
+                FROM EXPORT_DOCTOS_VE_DET
+               WHERE ID = :idd
+                 AND tipo = :tipod
+                 AND posicion = :posicion;
+
+            new_posicion = new_posicion + 1;
+          END
+        END
+        ELSE
+        BEGIN
+          UPDATE DOCTOS_VE SET ESTATUS = :estatus WHERE DOCTO_VE_ID = :docto_id;
+        END
+      END
+
+
+      -- DOCTOS_CM
+      FOR SELECT id FROM EXPORT_DOCTOS_CM INTO :id 
+      DO
+      BEGIN
+        docto_id = NULL;
+
+        SELECT ESTATUS     FROM EXPORT_DOCTOS_CM WHERE ID = :id INTO :estatus;
+        SELECT DOCTO_CM_ID FROM DOCTOS_CM WHERE WEBID = :id INTO :docto_id;
+
+        IF (docto_id IS NULL) THEN
+        BEGIN
+          new_docto_id = GEN_ID(ID_DOCTOS,1);
+
+          INSERT INTO DOCTOS_CM(
+                   DOCTO_CM_ID,   TIPO_DOCTO, SUBTIPO_DOCTO, FOLIO, FECHA, CLAVE_PROV, PROVEEDOR_ID, FOLIO_PROV, FACTURA_DEV, CONSIG_CM_ID, ALMACEN_ID, PEDIMENTO_ID, MONEDA_ID, TIPO_CAMBIO, TIPO_DSCTO, DSCTO_PCTJE, DSCTO_IMPORTE, ESTATUS, APLICADO, FECHA_ENTREGA, DESCRIPCION, IMPORTE_NETO, FLETES, OTROS_CARGOS, TOTAL_IMPUESTOS, TOTAL_RETENCIONES, GASTOS_ADUANALES, OTROS_GASTOS, FORMA_EMITIDA, CONTABILIZADO, ACREDITAR_CXP, SISTEMA_ORIGEN, COND_PAGO_ID, FECHA_DSCTO_PPAG, PCTJE_DSCTO_PPAG, VIA_EMBARQUE_ID, IMPUESTO_SUSTITUIDO_ID, IMPUESTO_SUSTITUTO_ID, CARGAR_SUN, ENVIADO, FECHA_HORA_ENVIO, EMAIL_ENVIO, TIENE_CFD, USUARIO_CREADOR, FECHA_HORA_CREACION, USUARIO_AUT_CREACION, USUARIO_ULT_MODIF, FECHA_HORA_ULT_MODIF, USUARIO_AUT_MODIF, USUARIO_CANCELACION, FECHA_HORA_CANCELACION, USUARIO_AUT_CANCELACION , WEBID)
+            SELECT :new_docto_id, TIPO_DOCTO, SUBTIPO_DOCTO, FOLIO, FECHA, CLAVE_PROV, PROVEEDOR_ID, FOLIO_PROV, FACTURA_DEV, CONSIG_CM_ID, ALMACEN_ID, PEDIMENTO_ID, MONEDA_ID, TIPO_CAMBIO, TIPO_DSCTO, DSCTO_PCTJE, DSCTO_IMPORTE, ESTATUS, APLICADO, FECHA_ENTREGA, DESCRIPCION, IMPORTE_NETO, FLETES, OTROS_CARGOS, TOTAL_IMPUESTOS, TOTAL_RETENCIONES, GASTOS_ADUANALES, OTROS_GASTOS, FORMA_EMITIDA, CONTABILIZADO, ACREDITAR_CXP, SISTEMA_ORIGEN, COND_PAGO_ID, FECHA_DSCTO_PPAG, PCTJE_DSCTO_PPAG, VIA_EMBARQUE_ID, IMPUESTO_SUSTITUIDO_ID, IMPUESTO_SUSTITUTO_ID, CARGAR_SUN, ENVIADO, FECHA_HORA_ENVIO, EMAIL_ENVIO, TIENE_CFD, USUARIO_CREADOR, FECHA_HORA_CREACION, USUARIO_AUT_CREACION, USUARIO_ULT_MODIF, FECHA_HORA_ULT_MODIF, USUARIO_AUT_MODIF, USUARIO_CANCELACION, FECHA_HORA_CANCELACION, USUARIO_AUT_CANCELACION , ID
+              FROM EXPORT_DOCTOS_CM
+             WHERE ID = :id;
+
+          new_posicion = 1;
+          FOR SELECT id, tipo, posicion FROM EXPORT_DOCTOS_CM_DET WHERE ID = :id INTO :idd, :tipod, :posicion
+          DO
+          BEGIN
+            new_doctod_id = NULL;
+            new_doctod_id = GEN_ID(ID_DOCTOS,1);
+
+            INSERT INTO DOCTOS_CM_DET(
+                     DOCTO_CM_DET_ID, DOCTO_CM_ID,   CLAVE_ARTICULO, ARTICULO_ID, UNIDADES, UNIDADES_REC_DEV, UNIDADES_A_REC, UMED, CONTENIDO_UMED, PRECIO_UNITARIO, PCTJE_DSCTO, PCTJE_DSCTO_PRO, PCTJE_DSCTO_VOL, PCTJE_DSCTO_PROMO, PRECIO_TOTAL_NETO, PCTJE_ARANCEL, NOTAS, POSICION)
+              SELECT :new_doctod_id,  :new_docto_id, CLAVE_ARTICULO, ARTICULO_ID, UNIDADES, UNIDADES_REC_DEV, UNIDADES_A_REC, UMED, CONTENIDO_UMED, PRECIO_UNITARIO, PCTJE_DSCTO, PCTJE_DSCTO_PRO, PCTJE_DSCTO_VOL, PCTJE_DSCTO_PROMO, PRECIO_TOTAL_NETO, PCTJE_ARANCEL, NOTAS, :new_posicion
+                FROM EXPORT_DOCTOS_CM_DET
+               WHERE ID = :idd
+                 AND tipo = :tipod
+                 AND posicion = :posicion;
+
+            new_posicion = new_posicion + 1;
+          END
+        END
+        ELSE
+        BEGIN
+          UPDATE DOCTOS_CM SET ESTATUS = :estatus WHERE DOCTO_CM_ID = :docto_id;
+        END
+      END
+
+
+      -- DOCTOS_IN
+      FOR SELECT id FROM EXPORT_DOCTOS_IN INTO :id 
+      DO
+      BEGIN
+        docto_id = NULL;
+
+        SELECT CANCELADO   FROM EXPORT_DOCTOS_IN WHERE ID = :id INTO :estatus;
+        SELECT DOCTO_IN_ID FROM DOCTOS_IN WHERE WEBID = :id INTO :docto_id;
+
+        IF (docto_id IS NULL) THEN
+        BEGIN
+          new_docto_id = GEN_ID(ID_DOCTOS,1);
+
+          INSERT INTO DOCTOS_IN(
+                   DOCTO_IN_ID,   ALMACEN_ID, CONCEPTO_IN_ID, FOLIO, NATURALEZA_CONCEPTO, FECHA, ALMACEN_DESTINO_ID, CENTRO_COSTO_ID, CANCELADO, APLICADO, DESCRIPCION, CUENTA_CONCEPTO, FORMA_EMITIDA, CONTABILIZADO, SISTEMA_ORIGEN, USUARIO_CREADOR, FECHA_HORA_CREACION, USUARIO_AUT_CREACION, USUARIO_ULT_MODIF, FECHA_HORA_ULT_MODIF, USUARIO_AUT_MODIF, USUARIO_CANCELACION, FECHA_HORA_CANCELACION, USUARIO_AUT_CANCELACION, WEBID)
+            SELECT :new_docto_id, ALMACEN_ID, CONCEPTO_IN_ID, FOLIO, NATURALEZA_CONCEPTO, FECHA, ALMACEN_DESTINO_ID, CENTRO_COSTO_ID, CANCELADO, APLICADO, DESCRIPCION, CUENTA_CONCEPTO, FORMA_EMITIDA, CONTABILIZADO, SISTEMA_ORIGEN, USUARIO_CREADOR, FECHA_HORA_CREACION, USUARIO_AUT_CREACION, USUARIO_ULT_MODIF, FECHA_HORA_ULT_MODIF, USUARIO_AUT_MODIF, USUARIO_CANCELACION, FECHA_HORA_CANCELACION, USUARIO_AUT_CANCELACION, ID
+              FROM EXPORT_DOCTOS_IN
+             WHERE ID = :id;
+
+          new_posicion = 1;
+          FOR SELECT id, tipo, posicion FROM EXPORT_DOCTOS_IN_DET WHERE ID = :id INTO :idd, :tipod, :posicion
+          DO
+          BEGIN
+            new_doctod_id = NULL;
+            new_doctod_id = GEN_ID(ID_DOCTOS,1);
+
+            INSERT INTO DOCTOS_IN_DET(
+                     DOCTO_IN_DET_ID, DOCTO_IN_ID,   ALMACEN_ID, CONCEPTO_IN_ID, CLAVE_ARTICULO, ARTICULO_ID, TIPO_MOVTO, UNIDADES, COSTO_UNITARIO, COSTO_TOTAL, METODO_COSTEO, CANCELADO, APLICADO, COSTEO_PEND, PEDIMENTO_PEND, ROL, FECHA, CENTRO_COSTO_ID)
+              SELECT :new_doctod_id,  :new_docto_id, ALMACEN_ID, CONCEPTO_IN_ID, CLAVE_ARTICULO, ARTICULO_ID, TIPO_MOVTO, UNIDADES, COSTO_UNITARIO, COSTO_TOTAL, METODO_COSTEO, CANCELADO, APLICADO, COSTEO_PEND, PEDIMENTO_PEND, ROL, FECHA, CENTRO_COSTO_ID
+                FROM EXPORT_DOCTOS_IN_DET
+               WHERE ID = :idd
+                 AND tipo = :tipod
+                 AND posicion = :posicion;
+
+            new_posicion = new_posicion + 1;
+          END
+        END
+        ELSE
+        BEGIN
+          UPDATE DOCTOS_IN SET CANCELADO = :estatus WHERE DOCTO_IN_ID = :docto_id;
+        END
+      END    
+      SUSPEND;
+    END^
+
+    SET TERM ; ^
+</code></pre>
 <hr />
 <h2 id="tablas-bi">Tablas B.I.<a class="headerlink" href="#tablas-bi" title="Permanent link">&para;</a></h2>
 <p>Al correr los scripts del <a href="https://github.com/factorbi/bi-microsip">repositorio de GitHub,</a> se crean las siguientes tablas.</p>
