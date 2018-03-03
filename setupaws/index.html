@@ -62,6 +62,11 @@
     <a class="" href="..">Home</a>
 	    </li>
           
+            <li class="toctree-l1">
+		
+    <a class="" href="../registration/">Registration</a>
+	    </li>
+          
             <li class="toctree-l1 current">
 		
     <a class="current" href="./">Link your AWS Account</a>
@@ -69,45 +74,79 @@
             
     <li class="toctree-l2"><a href="#link-your-aws-account">Link your AWS Account</a></li>
     
+
+    <li class="toctree-l2"><a href="#dont-have-an-aws-account">Don't have an AWS account?</a></li>
+    
+
+    <li class="toctree-l2"><a href="#check-closest-aws-region-to-you-location">Check closest AWS Region to you location</a></li>
+    
+
+    <li class="toctree-l2"><a href="#get-canonical-user-id-from-your-iam-home">Get Canonical User ID from your IAM Home</a></li>
+    
+
+    <li class="toctree-l2"><a href="#create-aurora-instance">Create Aurora Instance</a></li>
+    
         <ul>
         
-            <li><a class="toctree-l3" href="#dont-have-an-aws-account">Don't have an AWS account?</a></li>
+            <li><a class="toctree-l3" href="#aurora-db-details">Aurora DB Details</a></li>
         
-            <li><a class="toctree-l3" href="#check-closest-aws-region-to-you-location">Check closest AWS Region to you location</a></li>
+            <li><a class="toctree-l3" href="#aurora-network-security">Aurora Network &amp; Security</a></li>
         
-            <li><a class="toctree-l3" href="#get-canonical-user-id-from-your-iam-home">Get Canonical User ID from your IAM Home</a></li>
+            <li><a class="toctree-l3" href="#aurora-database-options">Aurora Database Options</a></li>
         
-            <li><a class="toctree-l3" href="#create-aurora-instance">Create Aurora Instance</a></li>
+            <li><a class="toctree-l3" href="#aurora-failover">Aurora Failover</a></li>
         
-            <li><a class="toctree-l3" href="#rds-instance-security-group">RDS Instance Security Group</a></li>
+            <li><a class="toctree-l3" href="#aurora-backup">Aurora Backup</a></li>
         
-            <li><a class="toctree-l3" href="#create-iam-policy-to-grant-access-to-s3">Create IAM Policy to Grant Access to S3</a></li>
+            <li><a class="toctree-l3" href="#aurora-monitoring">Aurora Monitoring</a></li>
         
-            <li><a class="toctree-l3" href="#create-iam-role-to-allow-rds-access-to-s3">Create IAM Role to Allow RDS Access to S3</a></li>
+            <li><a class="toctree-l3" href="#aurora-maintenance">Aurora Maintenance</a></li>
         
-            <li><a class="toctree-l3" href="#set-iam-role-to-aurora-cluster">Set IAM Role to Aurora Cluster</a></li>
-        
-            <li><a class="toctree-l3" href="#create-cluster-parameter-group">Create Cluster Parameter Group</a></li>
-        
-            <li><a class="toctree-l3" href="#create-db-parameter-group">Create DB Parameter Group</a></li>
-        
-            <li><a class="toctree-l3" href="#set-cluster-parameter-group">Set Cluster Parameter Group</a></li>
-        
-            <li><a class="toctree-l3" href="#set-instance-parameter-group">Set Instance Parameter Group</a></li>
-        
-            <li><a class="toctree-l3" href="#verify-instance-configuration">Verify Instance Configuration</a></li>
-        
-            <li><a class="toctree-l3" href="#test-connection-to-your-rds-aurora">Test connection to your RDS Aurora</a></li>
-        
-            <li><a class="toctree-l3" href="#send-instance-connection-details-to-factor-bi">Send Instance Connection Details to Factor BI</a></li>
-        
-            <li><a class="toctree-l3" href="#security-of-your-rds-instance-for-production">Security of your RDS Instance for Production</a></li>
-        
-            <li><a class="toctree-l3" href="#security-for-downloading-data">Security for Downloading Data</a></li>
-        
-            <li><a class="toctree-l3" href="#console-access-to-bucket">Console Access to Bucket</a></li>
+            <li><a class="toctree-l3" href="#launch-db-instance">Launch DB Instance</a></li>
         
         </ul>
+    
+
+    <li class="toctree-l2"><a href="#rds-instance-security-group">RDS Instance Security Group</a></li>
+    
+
+    <li class="toctree-l2"><a href="#create-iam-policy-to-grant-access-to-s3">Create IAM Policy to Grant Access to S3</a></li>
+    
+
+    <li class="toctree-l2"><a href="#create-iam-role-to-allow-rds-access-to-s3">Create IAM Role to Allow RDS Access to S3</a></li>
+    
+
+    <li class="toctree-l2"><a href="#set-iam-role-to-aurora-cluster">Set IAM Role to Aurora Cluster</a></li>
+    
+
+    <li class="toctree-l2"><a href="#create-cluster-parameter-group">Create Cluster Parameter Group</a></li>
+    
+
+    <li class="toctree-l2"><a href="#create-db-parameter-group">Create DB Parameter Group</a></li>
+    
+
+    <li class="toctree-l2"><a href="#set-cluster-parameter-group">Set Cluster Parameter Group</a></li>
+    
+
+    <li class="toctree-l2"><a href="#set-instance-parameter-group">Set Instance Parameter Group</a></li>
+    
+
+    <li class="toctree-l2"><a href="#verify-instance-configuration">Verify Instance Configuration</a></li>
+    
+
+    <li class="toctree-l2"><a href="#test-connection-to-your-rds-aurora">Test connection to your RDS Aurora</a></li>
+    
+
+    <li class="toctree-l2"><a href="#configure-instance-connection-details-on-factor-bi-console">Configure Instance Connection Details on Factor BI Console</a></li>
+    
+
+    <li class="toctree-l2"><a href="#security-of-your-rds-instance-for-production">Security of your RDS Instance for Production</a></li>
+    
+
+    <li class="toctree-l2"><a href="#security-for-downloading-data">Security for Downloading Data</a></li>
+    
+
+    <li class="toctree-l2"><a href="#console-access-to-bucket">Console Access to Bucket</a></li>
     
 
     </ul>
@@ -115,12 +154,17 @@
           
             <li class="toctree-l1">
 		
-    <a class="" href="../installation/">Download & Install</a>
+    <a class="" href="../installation/">Download and Install</a>
 	    </li>
           
             <li class="toctree-l1">
 		
-    <a class="" href="../bipostexe/">Bipost.exe</a>
+    <a class="" href="../bipostexe/">Sync to AWS</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../synctowindows/">Sync back to Windows</a>
 	    </li>
           
             <li class="toctree-l1">
@@ -190,7 +234,7 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="link-your-aws-account">Link your AWS Account<a class="headerlink" href="#link-your-aws-account" title="Permanent link">&para;</a></h1>
+                <h2 id="link-your-aws-account">Link your AWS Account<a class="headerlink" href="#link-your-aws-account" title="Permanent link">&para;</a></h2>
 <p>Follow these instructions to link your AWS Account and RDS Aurora instance to Bipost API.</p>
 <p><strong>IMPORTANT NOTICE: Many settings suggested here are for testing purposes. If you are to use the following AWS services for production you may want to follow your company policies and understand how to use AWS security according to your needs.</strong></p>
 <hr />
@@ -224,14 +268,11 @@
 <li>Click <em>Continue to Security Credentials</em> if dialog appears.</li>
 <li>Account Identifiers.</li>
 <li>
-<p>Copy AWS Account ID and Canonical User ID.</p>
-<blockquote>
-<p>Copy the entire string that starts with <em>AWS Account ID</em> up to the very end of a long hex string of 64 characters.</p>
-</blockquote>
+<p>Copy AWS Account ID (12-digit) and Canonical User ID (64-digit).</p>
 <p><img alt="Screenshot" src="../img/Your_Security_Credentials.png" /></p>
 </li>
 <li>
-<p>Email the above to <a href="mailto:jaime@factorbi.com">jaime@factorbi.com</a> so we can configure a dedicated bucket for your API calls.</p>
+<p>Paste these numbers on Factor BI Console, RDS Instances section, following --&gt; <a href="../registration/#have-an-aws-account">these steps.</a></p>
 </li>
 </ol>
 <p><em>Q: Is it secure to provide these numbers?</em></p>
@@ -338,7 +379,7 @@
 <hr />
 <h2 id="create-iam-policy-to-grant-access-to-s3">Create IAM Policy to Grant Access to S3<a class="headerlink" href="#create-iam-policy-to-grant-access-to-s3" title="Permanent link">&para;</a></h2>
 <p>From this point on you need the newly S3 bucket ARN that we provided over email.</p>
-<p>If you haven't emailed us with your Canonical User ID, please follow <a href="../setupaws/#get-canonical-user-id-from-your-iam-home">these steps.</a></p>
+<p>If you haven't received your bucket information, please follow <a href="../registration/#have-an-aws-account">these steps.</a></p>
 <ol>
 <li>Open <a href="https://console.aws.amazon.com/iam/home?#home">IAM Console.</a></li>
 <li>In the left navigation pane choose <strong>Policies.</strong></li>
@@ -622,8 +663,12 @@ For Windows you may use "MySQL Workbench" or "HeidiSQL"
 </li>
 </ol>
 <hr />
-<h2 id="send-instance-connection-details-to-factor-bi">Send Instance Connection Details to Factor BI<a class="headerlink" href="#send-instance-connection-details-to-factor-bi" title="Permanent link">&para;</a></h2>
-<p>Email all the information you used to <a href="../setupaws/#test-connection-to-your-rds-aurora">Test connection to your RDS Aurora</a> to <a href="mailto:jaime@factorbi.com">jaime@factorbi.com</a> so we can connect your instance to Bipost API.</p>
+<h2 id="configure-instance-connection-details-on-factor-bi-console">Configure Instance Connection Details on Factor BI Console<a class="headerlink" href="#configure-instance-connection-details-on-factor-bi-console" title="Permanent link">&para;</a></h2>
+<ol>
+<li>Log in to <a href="https://s3.amazonaws.com/biforms-prod/index.html" target="_blank">Factor BI Console.</a></li>
+<li>Go to RDS Instances and then click under Hostname.</li>
+<li>Complete all fields on the form with instance connection information.</li>
+</ol>
 <hr />
 <h2 id="security-of-your-rds-instance-for-production">Security of your RDS Instance for Production<a class="headerlink" href="#security-of-your-rds-instance-for-production" title="Permanent link">&para;</a></h2>
 <p>If your are ready to use Bipost API for production, we highly recommend the following:</p>
@@ -660,7 +705,7 @@ For Windows you may use "MySQL Workbench" or "HeidiSQL"
 <p>Click <strong>Download .csv</strong>.</p>
 </li>
 <li>
-<p>Email the CSV to <a href="mailto:jaime@factorbi.com">jaime@factorbi.com</a> so we can setup the downloading process.</p>
+<p>Email the CSV to <a href="mailto:info@factorbi.com">info@factorbi.com</a> so we can setup the downloading process.</p>
 <p><img alt="Screenshot" src="../img/IAM-out-security3.png" /></p>
 </li>
 </ol>
@@ -677,10 +722,10 @@ For Windows you may use "MySQL Workbench" or "HeidiSQL"
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../installation/" class="btn btn-neutral float-right" title="Download & Install">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../installation/" class="btn btn-neutral float-right" title="Download and Install">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href=".." class="btn btn-neutral" title="Home"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../registration/" class="btn btn-neutral" title="Registration"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -708,7 +753,7 @@ For Windows you may use "MySQL Workbench" or "HeidiSQL"
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
-        <span><a href=".." style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../registration/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
         <span style="margin-left: 15px"><a href="../installation/" style="color: #fcfcfc">Next &raquo;</a></span>

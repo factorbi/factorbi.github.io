@@ -18,7 +18,7 @@
   
   <meta name="author" content="Factor BI Team">
   <link rel="shortcut icon" href="../img/favicon.ico">
-  <title>Business Intelligence - Bipost Documentation</title>
+  <title>Registration - Bipost Documentation</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../css/theme.css" type="text/css" />
@@ -27,9 +27,9 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Business Intelligence";
-    var mkdocs_page_input_path = "businessintelligence.md";
-    var mkdocs_page_url = "/businessintelligence/";
+    var mkdocs_page_name = "Registration";
+    var mkdocs_page_input_path = "registration.md";
+    var mkdocs_page_url = "/registration/";
   </script>
   
   <script src="../js/jquery-2.1.1.min.js"></script>
@@ -62,9 +62,24 @@
     <a class="" href="..">Home</a>
 	    </li>
           
-            <li class="toctree-l1">
+            <li class="toctree-l1 current">
 		
-    <a class="" href="../registration/">Registration</a>
+    <a class="current" href="./">Registration</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l2"><a href="#create-your-account">Create your Account</a></li>
+    
+
+    <li class="toctree-l2"><a href="#configure-your-first-service">Configure your first service</a></li>
+    
+
+    <li class="toctree-l2"><a href="#have-an-aws-account">Have an AWS Account?</a></li>
+    
+
+    <li class="toctree-l2"><a href="#your-dedicated-bucket">Your dedicated bucket</a></li>
+    
+
+    </ul>
 	    </li>
           
             <li class="toctree-l1">
@@ -97,15 +112,9 @@
     <a class="" href="../troubleshooting/">Troubleshooting</a>
 	    </li>
           
-            <li class="toctree-l1 current">
+            <li class="toctree-l1">
 		
-    <a class="current" href="./">Business Intelligence</a>
-    <ul class="subnav">
-            
-    <li class="toctree-l2"><a href="#use-case">Use Case</a></li>
-    
-
-    </ul>
+    <a class="" href="../businessintelligence/">Business Intelligence</a>
 	    </li>
           
             <li class="toctree-l1">
@@ -150,7 +159,7 @@
     
       
     
-    <li>Business Intelligence</li>
+    <li>Registration</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -160,14 +169,34 @@
           <div role="main">
             <div class="section">
               
-                <h2 id="use-case">Use Case<a class="headerlink" href="#use-case" title="Permanent link">&para;</a></h2>
-<p>At <a href="https://www.factorbi.com" target="_blank">Factor BI</a> we use Bipost Sync to power small and medium companies with Dashboards using <a href="https://www.google.com/analytics/data-studio/" target="_blank">Google Data Studio</a> and <a href="https://aws.amazon.com/quicksight/" target="_blank">AWS QuickSight</a></p>
-<p>Want to see a demo? Go to --&gt; <a href="https://datastudio.google.com/open/0B3vtRQpnOLReNkxqOWwxYjRJQk0" target="_blank">Google Data Studio Demo.</a></p>
-<p>Here is an example of the architected solution.</p>
-<p><img alt="Screenshot" src="../img/Business_Intelligece_Use_Case.png" /></p>
-<p>In this example some dashboards are built with AWS QuickSight because it has an iPhone App so it is used by high level executives on the go.</p>
-<p><a href="https://itunes.apple.com/us/app/amazon-quicksight/id1148226615"><img alt="Screenshot" src="../img/Download_AppStore.png" /></a></p>
-<p>Google Data Studio is used for desktop users and detailed analytical situations, because it has great date &amp; string filters, excellent UX, and dashboards are shared using <a href="https://support.google.com/datastudio/answer/6283323?hl=en&amp;ref_topic=6267740#what-you-need-to-use-data-studio">Google accounts,</a> which is a great way to avoid managing user accounts. </p>
+                <h2 id="create-your-account">Create your Account<a class="headerlink" href="#create-your-account" title="Permanent link">&para;</a></h2>
+<p>Create your <strong><a href="https://s3.amazonaws.com/biforms-prod/index.html" target="_blank">Account here.</a></strong> </p>
+<p>Click <em>Create Your Account</em> and follow steps.</p>
+<p><img alt="Screenshot" src="../img/Factor_BI_Console.png" /></p>
+<hr />
+<h2 id="configure-your-first-service">Configure your first service<a class="headerlink" href="#configure-your-first-service" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Log in to the <a href="https://s3.amazonaws.com/biforms-prod/index.html" target="_blank">console.</a></li>
+<li>On the left pane, go to <em>Service Numbers</em>, click <em>Edit</em> then <em>New</em>.</li>
+<li>Edit database name and click <em>Edit</em> to save.</li>
+<li>Go to <em>RDS Instances</em> and click under <em>Hostname</em>.</li>
+</ul>
+<p>Don't have an AWS Account? please <a href="../setupaws">start here.</a></p>
+<hr />
+<h2 id="have-an-aws-account">Have an AWS Account?<a class="headerlink" href="#have-an-aws-account" title="Permanent link">&para;</a></h2>
+<p>If you already have an AWS Account, please follow:</p>
+<ul>
+<li>Take note of your Account ID and Canonical User ID following --&gt; <a href="../setupaws/#get-canonical-user-id-from-your-iam-home">these steps.</a></li>
+<li>Log in to <a href="https://s3.amazonaws.com/biforms-prod/index.html" target="_blank">Factor BI Console.</a></li>
+<li>Go to RDS Instances and then click under Hostname.</li>
+<li>Go to the bottom of the form and fill in your AWS Account ID and Canonical. Click Save.</li>
+</ul>
+<p>Email to <a href="mailto:info@factorbi.com">info@factorbi.com</a> letting us know you completed the above steps so far, so we can create and configure a dedicated bucket for your API calls. </p>
+<p><strong>Be sure to email us from same email address as your registration.</strong></p>
+<hr />
+<h2 id="your-dedicated-bucket">Your dedicated bucket<a class="headerlink" href="#your-dedicated-bucket" title="Permanent link">&para;</a></h2>
+<p>When you receive from us your dedicated bucket, please proceed creating the <a href="../setupaws/#create-aurora-instance">rest of necessary AWS services here.</a></p>
+<p>After you complete this guide you're done!, now <a href="../installation/">download and setup</a> Bipost Sync on your Windows.</p>
               
             </div>
           </div>
@@ -175,10 +204,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../intelisis/" class="btn btn-neutral float-right" title="Intelisis">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../setupaws/" class="btn btn-neutral float-right" title="Link your AWS Account">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../troubleshooting/" class="btn btn-neutral" title="Troubleshooting"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href=".." class="btn btn-neutral" title="Home"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -206,10 +235,10 @@
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
-        <span><a href="../troubleshooting/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href=".." style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../intelisis/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../setupaws/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>

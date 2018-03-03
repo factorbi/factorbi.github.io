@@ -18,7 +18,7 @@
   
   <meta name="author" content="Factor BI Team">
   <link rel="shortcut icon" href="../img/favicon.ico">
-  <title>Bipost.exe - Bipost Documentation</title>
+  <title>Sync to AWS - Bipost Documentation</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../css/theme.css" type="text/css" />
@@ -27,7 +27,7 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Bipost.exe";
+    var mkdocs_page_name = "Sync to AWS";
     var mkdocs_page_input_path = "bipostexe.md";
     var mkdocs_page_url = "/bipostexe/";
   </script>
@@ -64,20 +64,25 @@
           
             <li class="toctree-l1">
 		
+    <a class="" href="../registration/">Registration</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
     <a class="" href="../setupaws/">Link your AWS Account</a>
 	    </li>
           
             <li class="toctree-l1">
 		
-    <a class="" href="../installation/">Download & Install</a>
+    <a class="" href="../installation/">Download and Install</a>
 	    </li>
           
             <li class="toctree-l1 current">
 		
-    <a class="current" href="./">Bipost.exe</a>
+    <a class="current" href="./">Sync to AWS</a>
     <ul class="subnav">
             
-    <li class="toctree-l2"><a href="#configuration">Configuration</a></li>
+    <li class="toctree-l2"><a href="#bipost-sync-settings">Bipost Sync Settings</a></li>
     
         <ul>
         
@@ -89,18 +94,21 @@
         
             <li><a class="toctree-l3" href="#customdatajson">customData.json</a></li>
         
-            <li><a class="toctree-l3" href="#download-data">Download Data</a></li>
-        
             <li><a class="toctree-l3" href="#schedule">Schedule</a></li>
         
             <li><a class="toctree-l3" href="#check-for-updates">Check for Updates</a></li>
         
-            <li><a class="toctree-l3" href="#handling-different-settings-with-folders">Handling Different Settings with Folders</a></li>
+            <li><a class="toctree-l3" href="#sync-several-databases">Sync several databases</a></li>
         
         </ul>
     
 
     </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../synctowindows/">Sync back to Windows</a>
 	    </li>
           
             <li class="toctree-l1">
@@ -160,7 +168,7 @@
     
       
     
-    <li>Bipost.exe</li>
+    <li>Sync to AWS</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -170,10 +178,9 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">&para;</a></h1>
-<p><strong>IMPORTANT NOTICE: Many configuration settings including Service No, Activation No and Specific Bucket are linked exclusively to your account. Treat configuration settings as sensitive information.</strong></p>
-<p>From this point on you need your <strong>Service No.</strong> and <strong>Activation No.</strong> that we provided over email.</p>
-<p>If you haven't emailed us with your Instance Connection Details, please follow <a href="../setupaws/#send-instance-connection-details-to-factor-bi">these steps.</a></p>
+                <h1 id="bipost-sync-settings">Bipost Sync Settings<a class="headerlink" href="#bipost-sync-settings" title="Permanent link">&para;</a></h1>
+<p><strong>IMPORTANT NOTICE: Many configuration settings including Service No, Activation No and Specific Bucket are linked exclusively to your account. Treat these as sensitive information.</strong></p>
+<p>From this point on you need your <strong>Service No.</strong> and <strong>Activation No.</strong> available on your <a href="https://s3.amazonaws.com/biforms-prod/index.html" target="_blank">Factor BI Console.</a></p>
 <p><img alt="Screenshot" src="../img/bipost1.png" /></p>
 <p>Click <strong>Configuration</strong> and set:</p>
 <ul>
@@ -182,24 +189,19 @@
 <li><strong>Engine:</strong> Select <code>Firebird</code> or <code>SQL</code> (Microsoft SQL Server).</li>
 <li>
 <p><strong>System:</strong> Select <code>Custom...</code></p>
-<p>If you use <a href="http://intelisis.com/">Intelisis ERP</a>, <a href="../microsip/">Microsip ERP</a> or <a href="../aspel/">Aspel SAE</a> then select the System according.</p>
+<p>If you use <a href="../microsip/">Microsip ERP</a> or <a href="../aspel/">Aspel SAE</a> then select the System according.</p>
 </li>
 </ul>
 <hr />
 <h2 id="firebird-connection">Firebird Connection<a class="headerlink" href="#firebird-connection" title="Permanent link">&para;</a></h2>
 <ul>
-<li>
-<p><strong>Remote Connection:</strong> Only enable when biPost.exe is not running on the same server as the Firebird server.</p>
-</li>
-<li>
-<p><strong>Server:</strong> IP or name of the server on your LAN network.</p>
-</li>
-<li>
-<p><strong>Password:</strong> Set your Firebird password, sometimes <code>masterkey</code></p>
-</li>
-<li>
-<p><strong>Database:</strong> Location of your <strong>.FDB</strong> file.</p>
-</li>
+<li><strong>Database:</strong> Location of your <strong>.FDB</strong> file.</li>
+<li><strong>Password:</strong> Set your Firebird password, sometimes <code>masterkey</code></li>
+</ul>
+<p>Use the following only when Bipost Sync is not located on the same server as the Firebird server.</p>
+<ul>
+<li><strong>Remote Connection:</strong> Enable when biPost.exe is on a remote location on your LAN.</li>
+<li><strong>Server:</strong> IP or name of the server on your LAN network.</li>
 </ul>
 <hr />
 <h2 id="sql-connection">SQL Connection<a class="headerlink" href="#sql-connection" title="Permanent link">&para;</a></h2>
@@ -229,21 +231,17 @@
 </blockquote>
 </li>
 <li>
-<p><strong>Include Catalogs:</strong> For use only with <strong>Intelisis ERP</strong> system, see <a href="../intelisis/">details here.</a></p>
-</li>
-<li>
-<p><a href="../bipostexe/#download-data"><strong>Download Data</strong></a></p>
+<p><a href="../synctowindows"><strong>Download Data:</strong></a> Enable to download data from AWS Aurora-MySQL to your on-premises.</p>
 </li>
 </ul>
 <h3 id="recursive-sync">Recursive Sync<a class="headerlink" href="#recursive-sync" title="Permanent link">&para;</a></h3>
-<p>Currently supported only for SQL Server, when enabled it optimizes upload by extracting and uploading one day at a time for the given date range.</p>
-<p>It is very useful to upload historic data.</p>
-<p>It is used in combination with <strong>customData.json</strong> so you can configure the date field to use for each table.</p>
-<p>When <strong>turned off</strong> it automatically sets start and end date to yesterday.</p>
+<p>When enabled it optimizes upload by extracting and uploading one day at a time for the given date range.</p>
+<p><strong>Very useful to upload historic data or big data sets.</strong></p>
+<p>It is always used in combination with <strong>customData.json</strong> so you can configure the date field to use for each table.</p>
+<p>When <strong>turned off</strong> it automatically sets <em>today</em> as start and end date, using your system clock.</p>
 <hr />
 <h2 id="customdatajson">customData.json<a class="headerlink" href="#customdatajson" title="Permanent link">&para;</a></h2>
-<p>This file allows you to specify the tables, fields and filter criteria to apply on the select statement that extracts data.</p>
-<p>All parameters are supported for SQL Server. For Firebird SQL please review supported parameters <a href="../bipostexe/#customdatajson-supported-parameters-for-firebird-sql">here.</a></p>
+<p>This file allows you to specify the tables, fields and filter criteria to apply on the select statement that extracts data sets from your on-prem DB.</p>
 <p><strong>Example 1, using recursiveDateField:</strong></p>
 <pre><code>[
   {
@@ -301,7 +299,7 @@
 ]
 </code></pre>
 <blockquote>
-<p>The above statements will send all data for the specified tables, as <code>join</code> and <code>filter</code> are not in use.</p>
+<p>The above JSON will send all data for the specified tables, as <code>join</code> and <code>filter</code> are not in use.</p>
 <p>Note that you can leave <code>"active": "",</code></p>
 </blockquote>
 <p><strong>Example 3, using special filter when no datetime is available:</strong></p>
@@ -372,7 +370,7 @@
 ]
 </code></pre>
 <blockquote>
-<p>In the above example biPost.exe is using <strong>System: Microsip</strong> and on every sync it sends all the factory embedded tables plus the tables set in customData.json</p>
+<p>In the above example Bipost Sync is using <strong>System: Microsip</strong> and on every sync it sends all the factory embedded tables plus the tables set in customData.json</p>
 </blockquote>
 <h3 id="tables-primary-keys">Tables &amp; Primary Keys<a class="headerlink" href="#tables-primary-keys" title="Permanent link">&para;</a></h3>
 <p>Take note of the following:</p>
@@ -380,20 +378,12 @@
 <li>Every table specified in <strong>customData.json</strong> must have a <strong>Primary Key</strong> and these must be listed on <code>"fields"</code></li>
 <li>You can only setup customData.json with <strong>base tables.</strong></li>
 <li>Use <code>*</code> on <code>fields</code> to retrieve all table columns.</li>
-<li><code>"fields"</code> parameter must only include fields that exist on <code>"table":</code>.</li>
+<li><code>"fields"</code> parameter must only include fields that exist on <code>"table":</code></li>
 </ul>
 <h3 id="recursivedatefield">recursiveDateField<a class="headerlink" href="#recursivedatefield" title="Permanent link">&para;</a></h3>
 <p>This parameter is used when <a href="../bipostexe/#recursive-sync">Recursive Sync</a> check box is enabled.</p>
 <p>It only supports date fields without hour.</p>
 <p>On SQL Server using <code>datetime</code> data type, it only supports dates ending in <code>00:00:00.000</code></p>
-<h3 id="customdatajson-supported-parameters-for-firebird-sql">customData.json supported parameters for Firebird SQL.<a class="headerlink" href="#customdatajson-supported-parameters-for-firebird-sql" title="Permanent link">&para;</a></h3>
-<ul>
-<li><code>active</code></li>
-<li><code>table</code></li>
-<li><code>fields</code></li>
-<li><code>filter</code></li>
-</ul>
-<p>Rest of the parameters will be supported on a future release.</p>
 <h3 id="handle-several-customdatajson-settings">Handle several customData.json settings<a class="headerlink" href="#handle-several-customdatajson-settings" title="Permanent link">&para;</a></h3>
 <p>It is very common to make changes to customData.json to upload different sets of data.</p>
 <p><strong>Use Cases:</strong></p>
@@ -411,150 +401,11 @@
 <p>Recently created and updated catalogs may be uploaded monthly or daily, e.g. customers, items, vendors, etc.</p>
 </li>
 </ol>
-<p>For all the reasons above, it may be very useful to create two or more folders and copy entire biPost files and just change <strong>customData.json.</strong> Moreover you may want to have different sync schedules, which are explained next.</p>
-<hr />
-<h2 id="download-data">Download Data<a class="headerlink" href="#download-data" title="Permanent link">&para;</a></h2>
-<p><img alt="Screenshot" src="../img/bipost12.png" /></p>
-<ul>
-<li>
-<p>With this option you are able to download data from Aurora to your on-premises Windows.</p>
-</li>
-<li>
-<p>Data to retrieve from Aurora is specified on <a href="../bipostexe/#outdatajson">outData.json</a></p>
-</li>
-<li>
-<p>Process Data is used to insert retuned data to SQL Server or Firebird SQL.</p>
-</li>
-</ul>
-<p><strong>IMPORTANT: Follow <a href="../setupaws/#security-for-downloading-data">this security steps</a> to enable the downloading process.</strong></p>
-<h3 id="outdatajson">outData.json<a class="headerlink" href="#outdatajson" title="Permanent link">&para;</a></h3>
-<ul>
-<li>
-<p>With this file you are able to specify the tables, fields and filter criteria to retrieve data from Aurora.</p>
-</li>
-<li>
-<p>Tables are case-sensitive on Aurora MySQL, so this is important on <code>"table":</code> parameter.</p>
-</li>
-<li>
-<p>Downloaded data will be available on <code>%localappdata%/biPost/out_</code> Windows folder.</p>
-</li>
-<li>
-<p>Except for <code>recursiveDateField</code> all parameters are supported.</p>
-</li>
-</ul>
-<p><strong>Example 1, using outData.json</strong></p>
-<pre><code>{
-    "out": [
-    {
-        "active": "true",
-        "table": "export_doctos_ve",
-        "fields": "*",
-        "filter": "",
-        "recursiveDateField": ""
-    },
-    {
-        "active": "true",
-        "table": "export_doctos_ve_det",
-        "fields": "*",
-        "filter": "",
-        "recursiveDateField": ""
-    },
-    {
-        "active": "true",
-        "table": "export_doctos_cm",
-        "fields": "*",
-        "filter": "",
-        "recursiveDateField": ""
-    },
-    {
-        "active": "true",
-        "table": "export_doctos_cm_det",
-        "fields": "*",
-        "filter": "",
-        "recursiveDateField": ""
-    }
-    ],
-    "initialQuery": "",
-    "finalQuery": ""
-}
-</code></pre>
-<p><strong>Example 2, using outData.json</strong></p>
-<pre><code>{
-    "out": [
-    {
-        "active": "true",
-        "table": "biArticulos",
-        "fields": "*",
-        "filter": "linea = 'TVs'",
-        "recursiveDateField": ""
-    },
-    {
-        "active": "",
-        "table": "",
-        "fields": "",
-        "filter": "",
-        "recursiveDateField": ""
-    }
-    ],
-    "initialQuery": "",
-    "finalQuery": ""
-}
-</code></pre>
-<blockquote>
-<p>Note that you can leave <code>"active": "",</code></p>
-</blockquote>
-<p>Example downloaded data on <code>%localappdata%/bipost</code> folder:</p>
-<p><img alt="Screenshot" src="../img/example-download-data.png" /></p>
-<h3 id="process-data">Process Data<a class="headerlink" href="#process-data" title="Permanent link">&para;</a></h3>
-<ul>
-<li>
-<p>When this option is on, table schema's are created/altered and data uploaded to your SQL Server or Firebird SQL.</p>
-</li>
-<li>
-<p>Same names of output tables on Aurora are going to be created on SQL Server/Firebird.</p>
-</li>
-<li>
-<p>We highly recommend to create specific output tables on Aurora and give them a name that is not in use on your SQL Server or Firebird SQL source database.</p>
-</li>
-<li>
-<p>Primary keys on Aurora are used on SQL Server/Firebird to avoid duplicates.</p>
-</li>
-<li>
-<p>You are able to query views from Aurora as output, in which case tables on SQL Server/Firebird are always deleted before any new data load.</p>
-</li>
-<li>
-<p>Schema changes on Aurora are applied to SQL Server/Firebird, except for deleting and renaming columns.</p>
-</li>
-<li>
-<p>You're able to run queries before and after data is loaded to SQL Server/Firebird, more instructions below.</p>
-</li>
-<li>
-<p><a href="../troubleshooting/#firebird-column-name-starts-with-underscore">Firebird SQL does not naturally support creating a column name starting with underscore,</a> so avoid that on Aurora if your source DB is Firebird.</p>
-</li>
-</ul>
-<p>Example of processed data: tables were created and data loaded:</p>
-<p><img alt="Screenshot" src="../img/example-process-data.png" /></p>
-<h4 id="initial-and-final-query">Initial and Final Query<a class="headerlink" href="#initial-and-final-query" title="Permanent link">&para;</a></h4>
-<p>Before and after data is loaded to SQL Server/Firebird you're able to run queries, example:</p>
-<pre><code>{
-      "out": [
-    {
-        "active": "true",
-        "table": "biArticulos",
-        "fields": "*",
-        "filter": "linea = 'TVs'",
-        "recursiveDateField": ""
-    }
-    ],
-      "initialQuery": "execute procedure spInitial;",
-      "finalQuery": "execute procedure spFinal;"
-}
-</code></pre>
-<p><code>initialQuery</code> and <code>finalQuery</code> are used to transform your data in any way you want.</p>
+<p>For all these reasons it may be very useful to make copies of Bipost Sync folder and just change <strong>customData.json.</strong> Moreover you may want to have different sync schedules, which are explained next.</p>
 <hr />
 <h2 id="schedule">Schedule<a class="headerlink" href="#schedule" title="Permanent link">&para;</a></h2>
 <p><img alt="Screenshot" src="../img/bipost9.png" /></p>
-<p>If you want automated execution of biPost.exe, then set the <strong>Hour</strong> desired and click <strong>Schedule</strong>.</p>
+<p>If you want automated execution of Bipost Sync, then set the <strong>Hour</strong> desired and click <strong>Schedule</strong>.</p>
 <p>This will create a Windows Task that will run daily. If you want a different schedule, then open <strong>Windows Task Scheduler</strong> as follows.</p>
 <p>Control Panel \ Administrative Tools:</p>
 <p><img alt="Screenshot" src="../img/Windows_Administrative_Tools.png" /></p>
@@ -563,13 +414,12 @@
 <p><img alt="Screenshot" src="../img/Task_Scheduler_biPost_Arguments.png" /></p>
 <hr />
 <h2 id="check-for-updates">Check for Updates<a class="headerlink" href="#check-for-updates" title="Permanent link">&para;</a></h2>
-<p>New versions of biPost can be checked using <strong>Help \ Check for Updates.</strong></p>
+<p>New versions of Bipost Sync can be checked using <strong>Help \ Check for Updates.</strong></p>
 <p><img alt="Screenshot" src="../img/bipost10.png" /></p>
 <p><img alt="Screenshot" src="../img/new_version_available.png" /></p>
 <hr />
-<h2 id="handling-different-settings-with-folders">Handling Different Settings with Folders<a class="headerlink" href="#handling-different-settings-with-folders" title="Permanent link">&para;</a></h2>
-<p>We already explained why creating two or more folders is a good workaround for <a href="../bipostexe/#handle-several-customdatajson-settings">handling different customData.json settings.</a></p>
-<p>It is also possible that you may want to sync more than one database. For this matter proceed creating several folders so each one has it's own settings.</p>
+<h2 id="sync-several-databases">Sync several databases<a class="headerlink" href="#sync-several-databases" title="Permanent link">&para;</a></h2>
+<p>If you are going to synchronize two or more databases, create a separate Bipost Sync folder on Windows for each one. Then customize each database with the desired data set as explained <a href="../bipostexe/#handle-several-customdatajson-settings">here.</a></p>
               
             </div>
           </div>
@@ -577,10 +427,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../bipostapi/" class="btn btn-neutral float-right" title="Bipost API">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../synctowindows/" class="btn btn-neutral float-right" title="Sync back to Windows">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../installation/" class="btn btn-neutral" title="Download & Install"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../installation/" class="btn btn-neutral" title="Download and Install"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -611,7 +461,7 @@
         <span><a href="../installation/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../bipostapi/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../synctowindows/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>

@@ -64,17 +64,27 @@
           
             <li class="toctree-l1">
 		
+    <a class="" href="../registration/">Registration</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
     <a class="" href="../setupaws/">Link your AWS Account</a>
 	    </li>
           
             <li class="toctree-l1">
 		
-    <a class="" href="../installation/">Download & Install</a>
+    <a class="" href="../installation/">Download and Install</a>
 	    </li>
           
             <li class="toctree-l1">
 		
-    <a class="" href="../bipostexe/">Bipost.exe</a>
+    <a class="" href="../bipostexe/">Sync to AWS</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../synctowindows/">Sync back to Windows</a>
 	    </li>
           
             <li class="toctree-l1">
@@ -91,15 +101,15 @@
     
         <ul>
         
-            <li><a class="toctree-l3" href="#check-log">Check Log</a></li>
+            <li><a class="toctree-l3" href="#syntax-error">Syntax error</a></li>
         
-            <li><a class="toctree-l3" href="#customdatajson-syntax-error">customData.json syntax error</a></li>
+            <li><a class="toctree-l3" href="#no-internet-connection">No Internet Connection</a></li>
         
-            <li><a class="toctree-l3" href="#date-format-inside-postjson">Date format inside post.json</a></li>
+            <li><a class="toctree-l3" href="#firewall-restrictions">Firewall Restrictions</a></li>
         
             <li><a class="toctree-l3" href="#no-information-to-sync">No information to Sync</a></li>
         
-            <li><a class="toctree-l3" href="#elapsed-time-to-sync-and-load-to-aurora">Elapsed time to sync and load to Aurora</a></li>
+            <li><a class="toctree-l3" href="#waiting-time">Waiting time</a></li>
         
             <li><a class="toctree-l3" href="#upload-limit">Upload Limit</a></li>
         
@@ -107,15 +117,13 @@
         
             <li><a class="toctree-l3" href="#schema-limitations">Schema Limitations</a></li>
         
-            <li><a class="toctree-l3" href="#no-internet-connection">No Internet Connection</a></li>
-        
-            <li><a class="toctree-l3" href="#firewall-restrictions">Firewall Restrictions</a></li>
-        
             <li><a class="toctree-l3" href="#appdatalocal-folder">AppData\Local folder</a></li>
         
             <li><a class="toctree-l3" href="#mysql-schemas-are-created-but-no-data-is-loaded">MySQL schemas are created but no data is loaded</a></li>
         
             <li><a class="toctree-l3" href="#firebird-column-name-starts-with-underscore">Firebird column name starts with underscore</a></li>
+        
+            <li><a class="toctree-l3" href="#need-more-help">Need more help?</a></li>
         
         </ul>
     
@@ -185,62 +193,12 @@
 <p><img alt="Screenshot" src="../img/sync_completed.png" /></p>
 <p>If you face any errors, try looking here.</p>
 <hr />
-<h2 id="check-log">Check Log<a class="headerlink" href="#check-log" title="Permanent link">&para;</a></h2>
-<p>After you make a sync, you are able to check on you PC the compressed file uploaded.</p>
-<ol>
-<li>
-<p>Open a new Windows Explorer window and enter <code>%LocalAppData%\biPost</code></p>
-</li>
-<li>
-<p>Open corresponding ZIP file and review contents.</p>
-</li>
-</ol>
-<p>It might me also useful to check after a <strong>Sync Completed</strong> process, and <strong>before</strong> you press <strong>OK</strong>, open <code>%LocalAppData%\biPost</code> and check the files that were just created.</p>
-<p>If you need to check which files where loaded to Aurora, check <a href="../bipostapi/#load-data">aurora_s3_load_history.</a></p>
-<hr />
-<h2 id="customdatajson-syntax-error">customData.json syntax error<a class="headerlink" href="#customdatajson-syntax-error" title="Permanent link">&para;</a></h2>
+<h2 id="syntax-error">Syntax error<a class="headerlink" href="#syntax-error" title="Permanent link">&para;</a></h2>
 <p>Misspelled fields or tables on customData.json may appear as:</p>
 <p><img alt="Screenshot" src="../img/customDataSyntaxError.png" /></p>
 <hr />
-<h2 id="date-format-inside-postjson">Date format inside post.json<a class="headerlink" href="#date-format-inside-postjson" title="Permanent link">&para;</a></h2>
-<p>If immediately after launching biPost.exe this error appears <code>String was not recognized as valid DateTime</code>, try the following:</p>
-<p>Open <code>post.json</code> file and delete all datetime strings found inside <code>" "</code>. Do not delete the double quotation marks.</p>
-<p><img alt="Screenshot" src="../img/String_was_not_recognized_as_valid_DateTime.png" /></p>
-<hr />
-<h2 id="no-information-to-sync">No information to Sync<a class="headerlink" href="#no-information-to-sync" title="Permanent link">&para;</a></h2>
-<p>If <code>No information to Sync</code> message appears, verify that customData.json is set to send at least one table.</p>
-<hr />
-<h2 id="elapsed-time-to-sync-and-load-to-aurora">Elapsed time to sync and load to Aurora<a class="headerlink" href="#elapsed-time-to-sync-and-load-to-aurora" title="Permanent link">&para;</a></h2>
-<p>When a new Sync is initiated on biPost.exe, it may take a few seconds to a few minutes to extract, compress and upload to S3. While this is happening, no messages/icons will show that biPost.exe is working and maybe you will see <code>(Not responding)</code> on the top of the window, this is normal.</p>
-<p>If you launch Windows Task Manager probably you'll see that <code>biPost.exe *32</code> is running and consuming a considerable amount of CPU.</p>
-<p>Once the compressed package is uploaded to S3, it may take 1 to 3 minutes to process and load your data to MySQL.</p>
-<p>If you need to check which tables where loaded, check <a href="../bipostapi/#load-data">aurora_s3_load_history.</a></p>
-<hr />
-<h2 id="upload-limit">Upload Limit<a class="headerlink" href="#upload-limit" title="Permanent link">&para;</a></h2>
-<p>Depending on the number of columns on each table and the amount of data of each row, it is possible that a large amount of data sent on a single sync may not load on your Aurora DB.</p>
-<p>We have tested different scenarios and a 100,000 row limit for a single sync works fine.</p>
-<p>We recommend using <a href="../bipostexe/#recursive-sync">Recursive Sync</a> for large tables that have a datetime field available.</p>
-<hr />
-<h2 id="special-characters">Special Characters<a class="headerlink" href="#special-characters" title="Permanent link">&para;</a></h2>
-<p>Some special characters on <code>char</code> and <code>varchar</code> fields are not supported and thus removed by biPost.exe
-For example:</p>
-<ul>
-<li>Enter</li>
-<li>()</li>
-</ul>
-<p>On <strong>SQL Server</strong>, all special characters on strings of 100 length or more are removed, leaving only letters and numbers.</p>
-<hr />
-<h2 id="schema-limitations">Schema Limitations<a class="headerlink" href="#schema-limitations" title="Permanent link">&para;</a></h2>
-<ul>
-<li><code>NULL</code> values on char and varchar are converted to <code>''</code> on MySQL.</li>
-<li><code>NULL</code> values on float, money and int datatypes are converted to value <code>0</code> (zero) on MySQL.</li>
-<li><code>NULL</code> values on datetime are converted to <code>0000-00-00 00:00:00</code> on MySQL.</li>
-<li><code>bit</code> datatype is converted to <code>VARCHAR(1)</code> on MySQL.</li>
-<li>Tables without a <code>PRIMARY KEY</code> will not load data on Aurora.</li>
-</ul>
-<hr />
 <h2 id="no-internet-connection">No Internet Connection<a class="headerlink" href="#no-internet-connection" title="Permanent link">&para;</a></h2>
-<p>If there is no internet connection available, biPost will show the following message:</p>
+<p>When no internet connection available, the following message appears:</p>
 <p><img alt="Screenshot" src="../img/NameResolutionFailure.png" /></p>
 <hr />
 <h2 id="firewall-restrictions">Firewall Restrictions<a class="headerlink" href="#firewall-restrictions" title="Permanent link">&para;</a></h2>
@@ -269,16 +227,48 @@ For example:</p>
 </code></pre>
 <p><a href="https://ip-ranges.amazonaws.com/ip-ranges.json">https://ip-ranges.amazonaws.com/ip-ranges.json</a></p>
 <hr />
+<h2 id="no-information-to-sync">No information to Sync<a class="headerlink" href="#no-information-to-sync" title="Permanent link">&para;</a></h2>
+<p>If <code>No information to Sync</code> message appears, verify that customData.json is set to send at least one table.</p>
+<hr />
+<h2 id="waiting-time">Waiting time<a class="headerlink" href="#waiting-time" title="Permanent link">&para;</a></h2>
+<p>Bipost Sync may take from a few seconds to several minutes to extract from on-prem DB and upload to AWS. While this is happening no messages/icons will show that biPost.exe is working and maybe you'll see <code>(Not responding)</code> on the top of the window, this is normal.</p>
+<p>If you launch Windows Task Manager probably you'll see that <code>biPost.exe *32</code> is running and consuming a considerable amount of CPU.</p>
+<p>Once the information is uploaded to AWS, it usually is available on Aurora-MySQL very fast. If a big data set was uploaded it may take up to 5 minutes to be available on Aurora.</p>
+<p>If you need to check which tables where loaded, check <a href="../bipostapi/#3-load-data">aurora_s3_load_history.</a></p>
+<hr />
+<h2 id="upload-limit">Upload Limit<a class="headerlink" href="#upload-limit" title="Permanent link">&para;</a></h2>
+<p>Depending on the number of rows and columns on each table, it is possible that a large amount of data sent on a single sync may not load to Aurora-MySQL.</p>
+<p>We have tested up to 1.5 million rows on a single sync and works fine.</p>
+<p>We recommend using <a href="../bipostexe/#recursive-sync">Recursive Sync</a> for big tables that have a datetime field available.</p>
+<hr />
+<h2 id="special-characters">Special Characters<a class="headerlink" href="#special-characters" title="Permanent link">&para;</a></h2>
+<p>Some special characters on <code>char</code> and <code>varchar</code> fields are not supported and thus removed by biPost.exe
+For example:</p>
+<ul>
+<li>Enter</li>
+<li>()</li>
+</ul>
+<p>On <strong>SQL Server</strong>, all special characters on strings of 100 length or more are removed, leaving only letters and numbers.</p>
+<hr />
+<h2 id="schema-limitations">Schema Limitations<a class="headerlink" href="#schema-limitations" title="Permanent link">&para;</a></h2>
+<ul>
+<li><code>NULL</code> values on char and varchar are converted to <code>''</code> on MySQL.</li>
+<li><code>NULL</code> values on float, money and int datatypes are converted to value <code>0</code> (zero) on MySQL.</li>
+<li><code>NULL</code> values on datetime are converted to <code>0000-00-00 00:00:00</code> on MySQL.</li>
+<li><code>bit</code> datatype is converted to <code>VARCHAR(1)</code> on MySQL.</li>
+<li>Tables without a <code>PRIMARY KEY</code> will display an error message.</li>
+</ul>
+<hr />
 <h2 id="appdatalocal-folder">AppData\Local folder<a class="headerlink" href="#appdatalocal-folder" title="Permanent link">&para;</a></h2>
 <p>Sometimes it is necessary to manually delete the content of <code>\AppData\Local\biPost</code> folder.</p>
-<p>Open a new Windows Explorer window and enter <code>%LocalAppData%\biPost</code>. Select all and delete.</p>
+<p>Open a new Windows Explorer and enter <code>%localappdata%\bipost</code>. Select all and delete.</p>
 <pre><code>************** Exception Text **************
 System.IO.IOException: The process cannot access the file '012a3b4c-56d7-8ef9-0123-456789a012bc_post.zip' because it is being used by another process.
 </code></pre>
 <hr />
 <h2 id="mysql-schemas-are-created-but-no-data-is-loaded">MySQL schemas are created but no data is loaded<a class="headerlink" href="#mysql-schemas-are-created-but-no-data-is-loaded" title="Permanent link">&para;</a></h2>
 <p>Two things might be causing this problem:</p>
-<h6 id="1-rds-instance-cannot-reach-s3-bucket">1. RDS instance cannot reach S3 bucket.<a class="headerlink" href="#1-rds-instance-cannot-reach-s3-bucket" title="Permanent link">&para;</a></h6>
+<h4 id="1-rds-instance-cannot-reach-s3-bucket">1. RDS instance cannot reach S3 bucket.<a class="headerlink" href="#1-rds-instance-cannot-reach-s3-bucket" title="Permanent link">&para;</a></h4>
 <p>When we look at our CloudWatch logs, we see <code>Unable to initialize S3Stream</code>, so do the following:</p>
 <ul>
 <li>
@@ -299,13 +289,12 @@ System.IO.IOException: The process cannot access the file '012a3b4c-56d7-8ef9-01
 </ul>
 <p><img alt="Screenshot" src="../img/show-global-variables.png" /></p>
 <p>After this, if you still experience this error, check out <a href="../troubleshooting/#manually-debugging-s3stream">Manually debugging S3Stream.</a></p>
-<h6 id="2-name-of-your-destination-database-must-be-all-lower-case">2. Name of your destination database must be all lower case.<a class="headerlink" href="#2-name-of-your-destination-database-must-be-all-lower-case" title="Permanent link">&para;</a></h6>
+<h4 id="2-name-of-your-destination-database-must-be-all-lower-case">2. Name of your destination database must be all lower case.<a class="headerlink" href="#2-name-of-your-destination-database-must-be-all-lower-case" title="Permanent link">&para;</a></h4>
 <p>When we look at our CloudWatch logs, we see:</p>
 <p><code>SequelizeConnectionError: ER_BAD_DB_ERROR: Unknown database</code></p>
 <p>Double check that your DB name is all lower case.</p>
 <h3 id="manually-debugging-s3stream">Manually debugging S3Stream<a class="headerlink" href="#manually-debugging-s3stream" title="Permanent link">&para;</a></h3>
-<p>In this section we will use the syntax and some parameters that are explained by <a href="http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Aurora.LoadFromS3.html">AWS Documentation for LOAD DATA FROM S3</a>.</p>
-<p>The goals is to see whether an error is shown while directly importing data from S3 to Aurora-MySQL.</p>
+<p>In this section we will manually upload data to Aurora-MySQL. The goal here is to see whether an error is shown while directly importing data from S3 to Aurora-MySQL.</p>
 <p>Using MySQL Workbench (or any client of your preference), open a connection to your MySQL instance preferably using <code>root</code> account.</p>
 <p><strong>Syntax</strong></p>
 <pre><code>LOAD DATA FROM S3 's3-us-east-1://{my-bucket-name}/{my-36-digit-service-number}/process_{my-36-digit-service-number}{YYYY_M_D-of-yesterday}_post/{my-example-table}.csv'
@@ -352,6 +341,9 @@ IGNORE 1 LINES
 <p>Firebird SQL does not naturally support creating a column starting with underscore, so avoid that on Aurora if your source DB is Firebird.</p>
 <p><code>Token unknown - line 1</code></p>
 <p><img alt="Screenshot" src="../img/underscore_error_Firebird.png" /></p>
+<hr />
+<h2 id="need-more-help">Need more help?<a class="headerlink" href="#need-more-help" title="Permanent link">&para;</a></h2>
+<p>Please send us an email to: <a href="mailto:info@factorbi.com">info@factorbi.com</a></p>
               
             </div>
           </div>

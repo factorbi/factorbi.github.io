@@ -64,17 +64,27 @@
           
             <li class="toctree-l1">
 		
+    <a class="" href="../registration/">Registration</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
     <a class="" href="../setupaws/">Link your AWS Account</a>
 	    </li>
           
             <li class="toctree-l1">
 		
-    <a class="" href="../installation/">Download & Install</a>
+    <a class="" href="../installation/">Download and Install</a>
 	    </li>
           
             <li class="toctree-l1">
 		
-    <a class="" href="../bipostexe/">Bipost.exe</a>
+    <a class="" href="../bipostexe/">Sync to AWS</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../synctowindows/">Sync back to Windows</a>
 	    </li>
           
             <li class="toctree-l1">
@@ -101,9 +111,11 @@
     
         <ul>
         
-            <li><a class="toctree-l3" href="#tablas-intelisis">Tablas Intelisis</a></li>
+            <li><a class="toctree-l3" href="#ejemplos-de-configuracion">Ejemplos de configuración</a></li>
         
             <li><a class="toctree-l3" href="#recomendaciones">Recomendaciones</a></li>
+        
+            <li><a class="toctree-l3" href="#contacto">Contacto</a></li>
         
         </ul>
     
@@ -160,68 +172,85 @@
               
                 <h1 id="intelisis-erp">Intelisis ERP<a class="headerlink" href="#intelisis-erp" title="Permanent link">&para;</a></h1>
 <p>Intelisis es un ERP que fabrica la empresa <a href="http://www.intelisis.com/"><em>Intelisis Software, S.A. de C.V.</em></a></p>
-<p>Al ser éste un sistema grande, las soluciones de Business Intelligence se desarrollan a la medida de cada necesidad.</p>
-<p>En nuestro <a href="https://github.com/factorbi/">repositorio de GitHub</a> existen proyectos de B.I. para otros sistemas y se pueden usar como guía de referencia y adaptarse. Estos objetos se proveen bajo la licencia <strong>GNU GPLv3</strong> GNU GENERAL PUBLIC LICENSE Versión 3, 29 de Junio 2007.</p>
+<p>Es un sistema grande y las soluciones de Business Intelligence se desarrollan a la medida de cada necesidad.</p>
+<p>En nuestro <a href="https://github.com/factorbi/bi-intelisis">repositorio de GitHub</a> podrás encontrar varios objetos de ejemplo para realizar la sincronización de la base de SQL hacia MySQL-Aurora. Estos objetos se publican bajo la licencia <strong>GNU GPLv3</strong> GNU GENERAL PUBLIC LICENSE Versión 3, 29 de Junio 2007.</p>
 <hr />
-<h2 id="tablas-intelisis">Tablas Intelisis<a class="headerlink" href="#tablas-intelisis" title="Permanent link">&para;</a></h2>
-<p>Al configurar biPost.exe con <code>System: Intelisis</code>, de fábrica se incluye la tabla <code>Venta</code> en la sincronización.</p>
-<p><img alt="Screenshot" src="../img/bipost4.png" /></p>
-<p>Cuando se incluye el check <a href="../bipostexe/#general-settings">Include Catalogs,</a> de fábrica se incluen las siguientes tablas:</p>
-<pre><code>Agente
-Alm
-Art
-Condicion
-Cta
-Cte
-Empresa
-EmpresaCfg
-EmpresaCfg2
-EmpresaGral
-Mon
-MonHist
-Prov
-Sucursal
-UEN
-Version
+<h2 id="ejemplos-de-configuracion">Ejemplos de configuración<a class="headerlink" href="#ejemplos-de-configuracion" title="Permanent link">&para;</a></h2>
+<p>Ejemplos de información a sincronizar usando <code>customData.json</code></p>
+<pre><code>    [
+      {
+        "active": "true",
+        "table": "Venta",
+        "fields": "Venta.ID, Venta.Empresa, Venta.Mov, Venta.MovID, Venta.FechaEmision, Venta.Concepto, Venta.Moneda, Venta.TipoCambio, Venta.Estatus, Venta.Cliente, Venta.Almacen, Venta.Agente, Venta.Condicion, Venta.Vencimiento, Venta.DescuentoLineal, Venta.Sucursal, Venta.SubModulo, Venta.Importe, Venta.Impuestos, Venta.CostoTotal, Venta.FechaRegistro, Venta.DescuentoGlobal, Venta.Proyecto",
+        "join": "MovTipo WITH (NOLOCK) ON Venta.Mov = MovTipo.Mov AND MovTipo.Modulo = 'VTAS' ",
+        "filter": "Venta.Estatus IN ('PENDIENTE','CONCLUIDO','PROCESAR') AND MovTipo.Clave IN ('VTAS.F','VTAS.D','VTAS.N','VTAS.FM','VTAS.FC') ",
+        "recursiveDateField": "Venta.FechaEmision"
+      },
+      {
+        "active": "true",
+        "table": "VentaD",
+        "fields": "VentaD.ID, VentaD.Renglon, VentaD.RenglonSub, VentaD.Articulo, VentaD.Cantidad, VentaD.Almacen, VentaD.Precio, VentaD.DescuentoLinea, VentaD.DescuentoImporte, VentaD.Impuesto1, VentaD.Costo, VentaD.ContUso, VentaD.Unidad, VentaD.Factor, VentaD.Agente ",
+        "join": "Venta WITH (NOLOCK) ON Venta.ID = VentaD.ID JOIN MovTipo WITH (NOLOCK) ON Venta.Mov = MovTipo.Mov AND MovTipo.Modulo = 'VTAS' ",
+        "filter": "Venta.Estatus IN ('PENDIENTE','CONCLUIDO','PROCESAR') AND MovTipo.Clave IN ('VTAS.F','VTAS.D','VTAS.N','VTAS.FM','VTAS.FC') ",
+        "recursiveDateField": "Venta.FechaEmision"
+      }
+    ]
 </code></pre>
+<p>Más ejemplos en nuestro <a href="https://github.com/factorbi/bi-intelisis">repositorio de GitHub.</a></p>
 <hr />
 <h2 id="recomendaciones">Recomendaciones<a class="headerlink" href="#recomendaciones" title="Permanent link">&para;</a></h2>
 <h4 id="crear-dos-carpetas">Crear dos carpetas<a class="headerlink" href="#crear-dos-carpetas" title="Permanent link">&para;</a></h4>
-<p>Crea siempre dos carpetas de Bipost, esto te permitirá sincronizar catálogos y movimientos en forma independiente.</p>
+<p>Crea al menos dos carpetas para Bipost Sync, esto te permitirá sincronizar catálogos y movimientos en forma independiente.</p>
 <h4 id="carpeta-catalogos">Carpeta Catálogos<a class="headerlink" href="#carpeta-catalogos" title="Permanent link">&para;</a></h4>
-<p>Tu primer carpeta donde está Bipost la puedes nombrar <code>biPost_catalogos</code> y utilizarás <strong>customData.json</strong> para enviar únicamente catálogos. Este archivo puede verse de la siguiente forma:</p>
+<p>Tu primer carpeta donde está Bipost Sync la puedes nombrar <code>Bipost_catalogos</code> y utilizarás <strong>customData.json</strong> para enviar únicamente catálogos. Ejemplo:</p>
 <pre><code>[
-  {
-    "active": "true",
-    "table": "MovTipo",
-    "fields": "Modulo, Mov, Clave ",
-    "join": "",
-    "filter": "",
-    "recursiveDateField": ""
-  },
-  {
-    "active": "true",
-    "table": "Cta",
-    "fields": "Cuenta, Rama, Descripcion, Tipo, EsAcreedora, EsAcumulativa, CentrosCostos, Estatus, ClaveSAT ",
-    "join": "",
-    "filter": "",
-    "recursiveDateField": ""
-  },
-  {
-    "active": "true",
-    "table": "CentroCostos",
-    "fields": "CentroCostos, Rama, Descripcion, EsAcumulativo, Grupo, SubGrupo, SubSubGrupo, Estatus ",
-    "join": "",
-    "filter": "",
-    "recursiveDateField": ""
-  }
+    {
+        "active": "true",
+        "table": "Sucursal",
+        "fields": "Sucursal, Nombre, Categoria, Estatus",
+        "join": "",
+        "filter": "",
+        "recursiveDateField": ""
+    },
+    {
+        "active": "true",
+        "table": "Agente",
+        "fields": "Agente, Nombre, Categoria, Estatus",
+        "join": "",
+        "filter": "",
+        "recursiveDateField": ""
+    },
+    {
+      "active": "true",
+      "table": "MovTipo",
+      "fields": "Modulo, Mov, Clave",
+      "join": "",
+      "filter": "",
+      "recursiveDateField": ""
+    },
+    {
+      "active": "true",
+      "table": "Cta",
+      "fields": "Cuenta, Rama, Descripcion, Tipo, EsAcreedora, EsAcumulativa, CentrosCostos, Estatus, ClaveSAT",
+      "join": "",
+      "filter": "",
+      "recursiveDateField": ""
+    },
+    {
+      "active": "true",
+      "table": "CentroCostos",
+      "fields": "CentroCostos, Rama, Descripcion, EsAcumulativo, Grupo, SubGrupo, SubSubGrupo, Estatus",
+      "join": "",
+      "filter": "",
+      "recursiveDateField": ""
+    }
 ]
 </code></pre>
 <p>Abre biPost.exe y asegúrate de quitar el check <a href="../bipostexe/#recursive-sync">Recursive Sync</a>.</p>
-<p>Usando el JSON del ejemplo anterior, se enviará en cada sincronización <strong>todos los renglones</strong> de las tablas <code>MovTipo</code>, <code>Cta</code> y <code>CentroCostos</code>. Debido a que Bipost API utiliza una <a href="../bipostapi/#load-data">sentencia <code>REPLACE</code></a> en la base destino de MySQL, los registros se reemplazan utilizando la llave primaria de la tabla origen.</p>
+<p>Usando el JSON del ejemplo anterior, se enviará en cada sincronización <strong>todos los renglones</strong> de las tablas <code>Sucursal</code>, <code>Agente</code>, <code>MovTipo</code>, <code>Cta</code> y <code>CentroCostos</code>. Debido a que Bipost API utiliza una <a href="../bipostapi/#3-load-data">sentencia <code>REPLACE</code></a> en la base destino de MySQL, los registros se reemplazan utilizando la llave primaria de la tabla origen.</p>
 <p><strong>NOTA:</strong> Si la tabla que vas a enviar tiene más de un millón de registros, es recomendable que filtres el query utilizando la opción <code>"filter":</code>.</p>
 <h4 id="carpeta-recursivo">Carpeta Recursivo<a class="headerlink" href="#carpeta-recursivo" title="Permanent link">&para;</a></h4>
-<p>Genera una copia de la carpeta <code>biPost_catalogos</code>, puedes nombrarla <code>biPost_recursivo</code>. Abre el archivo <strong>customData.json</strong> y especifica las tablas de movimientos que vas a enviar, por ejemplo:</p>
+<p>La otra carpeta de Bipost Sync puedes nombrarla <code>Bipost_diario</code>. Abre el archivo <strong>customData.json</strong> y especifica las tablas de movimientos que vas a enviar, por ejemplo:</p>
 <pre><code>[
   {
     "active": "true",
@@ -241,15 +270,20 @@ Version
   }
 ]
 </code></pre>
-<p>Es importante que incluyas el parámetro <code>"recursiveDateField":</code> ya que lo utiliza Bipost para optimizar la extracción y subida de información, por ejemplo: Supongamos que la tabla ContD tiene millones de registros, por tanto al momento de configurar <code>"recursiveDateField":</code> lo utilizarás en conjunto con el check <code>Recursive Sync</code>, ubicado en la pestaña <a href="../bipostexe/#general-settings"><em>General Settings</em></a> de biPost.exe:</p>
+<p>Es importante que incluyas el parámetro <code>"recursiveDateField":</code> ya que lo utiliza Bipost Sync para optimizar la extracción y subida de información, por ejemplo: Supongamos que la tabla ContD tiene millones de registros, por tanto al momento de configurar <code>"recursiveDateField":</code> lo utilizarás en conjunto con el check <code>Recursive Sync</code>, ubicado en la pestaña <a href="../bipostexe/#general-settings"><em>General Settings</em></a> de biPost.exe:</p>
 <p><img alt="Screenshot" src="../img/bipost7.png" /></p>
-<p>El rango de fechas que especifiques en <em>General Settings</em> se utilizará para generar una extracción y subida individual al bucket de S3 por cada, reduciendo el tamaño de los datos y el tiempo de carga hacia MySQL.</p>
+<p>El rango de fechas que especifiques en <em>General Settings</em> se utilizará para generar una extracción y subida individual hacia AWS, reduciendo el tamaño de los datos y el tiempo de carga hacia Aurora-MySQL.</p>
 <p>Mediante esta opción se pueden cargar históricos de varios años.</p>
+<p><strong>NOTA: Al apagar el check <em>Recursive Sync</em> automáticamente la fecha de inicio y fin se fija en el día de hoy utilizando la fecha de la máquina Windows.</strong></p>
 <h4 id="uso-del-filter">Uso del Filter<a class="headerlink" href="#uso-del-filter" title="Permanent link">&para;</a></h4>
 <p>En el ejemplo customData.json anterior, se utilizó el siguiente filtro para la tabla <strong>ContD</strong>:</p>
 <p><code>"filter": "Cont.Estatus &lt;&gt; 'SINAFECTAR'</code></p>
-<p>Si un registro del módulo Contabilidad se cancela, cambia su estatus a <code>CANCELADO</code> por tanto el query a la base de datos incluye los estatus <code>CANCELADO</code> para que estos cambios se vean reflejados en la base de MySQL.</p>
+<p>Si un registro del módulo Contabilidad se cancela, cambia su estatus a <code>CANCELADO</code> por tanto el query a la base de datos incluye los estatus <code>CANCELADO</code> para que estos cambios se vean reflejados en la base de Aurora-MySQL.</p>
 <p>Si por el contrario se utiliza el filtro <code>"Cont.Estatus = 'CONCLUIDO'</code> entonces el query omite los estatus <code>CANCELADO</code> y al cambiar un ID a estatus <code>CANCELADO</code> no se reflejará el cambio en la base de MySQL, causando inconsistencias.</p>
+<hr />
+<h2 id="contacto">Contacto<a class="headerlink" href="#contacto" title="Permanent link">&para;</a></h2>
+<p>¿Necesitas ayuda? ¿Buscas una solución a la medida?</p>
+<p>Escríbemos! <a href="mailto:info@factorbi.com">info@factorbi.com</a></p>
               
             </div>
           </div>

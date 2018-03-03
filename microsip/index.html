@@ -64,17 +64,27 @@
           
             <li class="toctree-l1">
 		
+    <a class="" href="../registration/">Registration</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
     <a class="" href="../setupaws/">Link your AWS Account</a>
 	    </li>
           
             <li class="toctree-l1">
 		
-    <a class="" href="../installation/">Download & Install</a>
+    <a class="" href="../installation/">Download and Install</a>
 	    </li>
           
             <li class="toctree-l1">
 		
-    <a class="" href="../bipostexe/">Bipost.exe</a>
+    <a class="" href="../bipostexe/">Sync to AWS</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../synctowindows/">Sync back to Windows</a>
 	    </li>
           
             <li class="toctree-l1">
@@ -110,9 +120,11 @@
         
             <li><a class="toctree-l3" href="#anadir-tablas-a-la-sincronizacion">Añadir tablas a la Sincronización</a></li>
         
-            <li><a class="toctree-l3" href="#sincroniza-aws-aurora-hacia-microsip">Sincroniza AWS Aurora hacia Microsip</a></li>
+            <li><a class="toctree-l3" href="#sincroniza-desde-aws-hacia-microsip">Sincroniza desde AWS hacia Microsip</a></li>
         
             <li><a class="toctree-l3" href="#tablas-bi">Tablas B.I.</a></li>
+        
+            <li><a class="toctree-l3" href="#contacto">Contacto</a></li>
         
         </ul>
     
@@ -169,7 +181,7 @@
 <hr />
 <h2 id="tablas-microsip">Tablas Microsip<a class="headerlink" href="#tablas-microsip" title="Permanent link">&para;</a></h2>
 <p><img alt="Screenshot" src="../img/bipost4.png" /></p>
-<p>Al configurar biPost.exe con <code>System: Microsip</code>, de fábrica se incluye un listado de tablas en la sincronización, las cuales son:</p>
+<p>Al configurar Bipost Sync con <code>System: Microsip</code>, de fábrica se incluye un listado de tablas en la sincronización, las cuales son:</p>
 <pre><code>agentes
 almacenes
 anticipos_cc
@@ -269,12 +281,36 @@ order by rdb$relation_name;
 </code></pre>
 <hr />
 <h2 id="anadir-tablas-a-la-sincronizacion">Añadir tablas a la Sincronización<a class="headerlink" href="#anadir-tablas-a-la-sincronizacion" title="Permanent link">&para;</a></h2>
-<p>Para incluir tablas adicionales en la sincronización, se utiliza el archivo <code>customData.json</code>, por ejemplo:</p>
+<p>Para incluir tablas adicionales en la sincronización se utiliza el archivo <code>customData.json</code>, ejemplo:</p>
 <pre><code>    [
       {
         "active": "true",
-        "table": "ATRIBUTOS",
+        "table": "DOCTOS_CO",
         "fields": "*",
+        "join": "",
+        "filter": "",
+        "recursiveDateField": ""
+      },
+      {
+        "active": "true",
+        "table": "DOCTOS_CO_DET",
+        "fields": "*",
+        "join": "",
+        "filter": "",
+        "recursiveDateField": ""
+      },
+      {
+        "active": "true",
+        "table": "DOCTOS_CO_CFDI",
+        "fields": "*",
+        "join": "",
+        "filter": "",
+        "recursiveDateField": ""
+      },          
+      {
+        "active": "true",
+        "table": "USOS_FOLIOS_FISCALES",
+        "fields": "USO_FOLIO_ID, FOLIOS_FISCALES_ID, FOLIO, FECHA, SISTEMA, DOCTO_ID, PROV_CERT, FECHA_HORA_TIMBRADO, UUID, CFDI_ID ",
         "join": "",
         "filter": "",
         "recursiveDateField": ""
@@ -313,35 +349,50 @@ order by rdb$relation_name;
       },
       {
         "active": "true",
-        "table": "DOCTOS_ENTRE_SIS",
+        "table": "DOCTOS_PV",
         "fields": "*",
         "join": "",
         "filter": "",
-        "recursiveDateField": ""
+        "recursiveDateField": "FECHA"
       },
       {
         "active": "true",
-        "table": "UNIDADES_VENTA",
-        "fields": "*",
-        "join": "",
+        "table": "DOCTOS_PV_DET",
+        "fields": "DOCTOS_PV_DET.DOCTO_PV_DET_ID, DOCTOS_PV_DET.DOCTO_PV_ID, DOCTOS_PV_DET.CLAVE_ARTICULO, DOCTOS_PV_DET.ARTICULO_ID, DOCTOS_PV_DET.UNIDADES, DOCTOS_PV_DET.UNIDADES_DEV, DOCTOS_PV_DET.TIPO_CONTAB_UNID, DOCTOS_PV_DET.PRECIO_UNITARIO, DOCTOS_PV_DET.PRECIO_UNITARIO_IMPTO, DOCTOS_PV_DET.IMPUESTO_POR_UNIDAD, DOCTOS_PV_DET.PCTJE_DSCTO, DOCTOS_PV_DET.PRECIO_TOTAL_NETO, DOCTOS_PV_DET.PRECIO_MODIFICADO, DOCTOS_PV_DET.VENDEDOR_ID, DOCTOS_PV_DET.PCTJE_COMIS, DOCTOS_PV_DET.ROL, DOCTOS_PV_DET.ES_TRAN_ELECT, DOCTOS_PV_DET.ESTATUS_TRAN_ELECT, DOCTOS_PV_DET.POSICION, DOCTOS_PV_DET.DSCTO_ART, DOCTOS_PV_DET.DSCTO_EXTRA",
+        "join": "DOCTOS_PV ON DOCTOS_PV_DET.DOCTO_PV_ID = DOCTOS_PV.DOCTO_PV_ID",
         "filter": "",
-        "recursiveDateField": ""
+        "recursiveDateField": "DOCTOS_PV.FECHA"
+      },
+      {
+        "active": "true",
+        "table": "IMPUESTOS_DOCTOS_PV",
+        "fields": "IMPUESTOS_DOCTOS_PV.DOCTO_PV_ID, IMPUESTOS_DOCTOS_PV.IMPUESTO_ID, IMPUESTOS_DOCTOS_PV.VENTA_NETA, IMPUESTOS_DOCTOS_PV.VENTA_BRUTA, IMPUESTOS_DOCTOS_PV.OTROS_IMPUESTOS, IMPUESTOS_DOCTOS_PV.PCTJE_IMPUESTO, IMPUESTOS_DOCTOS_PV.IMPORTE_IMPUESTO, IMPUESTOS_DOCTOS_PV.UNIDADES_IMPUESTO, IMPUESTOS_DOCTOS_PV.IMPORTE_UNITARIO_IMPUESTO ",
+        "join": "DOCTOS_PV ON IMPUESTOS_DOCTOS_PV.DOCTO_PV_ID = DOCTOS_PV.DOCTO_PV_ID",
+        "filter": "",
+        "recursiveDateField": "DOCTOS_PV.FECHA"
+      },
+      {
+        "active": "true",
+        "table": "DOCTOS_PV_LIGAS",
+        "fields": "DOCTOS_PV_LIGAS.DOCTO_PV_LIGA_ID, DOCTOS_PV_LIGAS.DOCTO_PV_FTE_ID, DOCTOS_PV_LIGAS.DOCTO_PV_DEST_ID",
+        "join": "DOCTOS_PV ON DOCTOS_PV_LIGAS.DOCTO_PV_DEST_ID = DOCTOS_PV.DOCTO_PV_ID",
+        "filter": "",
+        "recursiveDateField": "DOCTOS_PV.FECHA"
       }
     ]
 </code></pre>
-<p>Los parámetros <code>join</code> y <code>recursiveDateField</code> no están soportados hasta el momento para Firebird SQL.</p>
 <p>Para más información sobre la configuración de customData.json ver <a href="../bipostexe/#customdatajson">aquí.</a></p>
 <hr />
-<h2 id="sincroniza-aws-aurora-hacia-microsip">Sincroniza AWS Aurora hacia Microsip<a class="headerlink" href="#sincroniza-aws-aurora-hacia-microsip" title="Permanent link">&para;</a></h2>
+<h2 id="sincroniza-desde-aws-hacia-microsip">Sincroniza desde AWS hacia Microsip<a class="headerlink" href="#sincroniza-desde-aws-hacia-microsip" title="Permanent link">&para;</a></h2>
 <ul>
 <li>
-<p>La sincronización con <a href="../bipostexe/#download-data">Download Data</a> permite traer datos desde AWS Aurora hacia tu base de Microsip. </p>
+<p>Al usar la sincronización con <a href="../synctowindows">Download Data</a> es posible traer datos desde AWS Aurora-MySQL hacia tu base de Microsip. </p>
 </li>
 <li>
-<p>Cuando activas la opción <a href="../bipostexe/#process-data">Process Data</a> se insertan tus datos en Firebird.</p>
+<p>Cuando activas la opción <a href="../synctowindows/#process-data">Process Data</a> se insertan tus datos en Firebird.</p>
 </li>
 <li>
-<p>Usando la opción <a href="../bipostexe/#initial-and-final-query">Final Query</a> puedes correr cualquier stored procedure para que termines de calcular y procesar hacia otras tablas. </p>
+<p>Usando la opción <a href="../synctowindows/#initial-and-final-query">Final Query</a> puedes correr cualquier stored procedure para que termines de calcular y procesar hacia otras tablas. </p>
 </li>
 </ul>
 <p>Por ejemplo, después que se han recibido e insertado los datos en Firebird, queremos correr el store <code>spFinal</code> así que usamos el parámetro <code>"finalQuery": "execute procedure spFinal;"</code> dentro de <strong>outData.json</strong>. Aquí ejemplo del contenido de <strong>spFinal</strong>:</p>
@@ -575,6 +626,10 @@ order by rdb$relation_name;
 </tr>
 </tbody>
 </table>
+<hr />
+<h2 id="contacto">Contacto<a class="headerlink" href="#contacto" title="Permanent link">&para;</a></h2>
+<p>¿Necesitas ayuda? ¿Buscas una solución a la medida?</p>
+<p>Escríbemos! <a href="mailto:info@factorbi.com">info@factorbi.com</a></p>
               
             </div>
           </div>
