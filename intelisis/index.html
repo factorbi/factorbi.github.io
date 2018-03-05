@@ -177,24 +177,24 @@
 <hr />
 <h2 id="ejemplos-de-configuracion">Ejemplos de configuración<a class="headerlink" href="#ejemplos-de-configuracion" title="Permanent link">&para;</a></h2>
 <p>Ejemplos de información a sincronizar usando <code>customData.json</code></p>
-<pre><code>    [
-      {
+<pre><code>[
+    {
         "active": "true",
         "table": "Venta",
         "fields": "Venta.ID, Venta.Empresa, Venta.Mov, Venta.MovID, Venta.FechaEmision, Venta.Concepto, Venta.Moneda, Venta.TipoCambio, Venta.Estatus, Venta.Cliente, Venta.Almacen, Venta.Agente, Venta.Condicion, Venta.Vencimiento, Venta.DescuentoLineal, Venta.Sucursal, Venta.SubModulo, Venta.Importe, Venta.Impuestos, Venta.CostoTotal, Venta.FechaRegistro, Venta.DescuentoGlobal, Venta.Proyecto",
         "join": "MovTipo WITH (NOLOCK) ON Venta.Mov = MovTipo.Mov AND MovTipo.Modulo = 'VTAS' ",
         "filter": "Venta.Estatus IN ('PENDIENTE','CONCLUIDO','PROCESAR') AND MovTipo.Clave IN ('VTAS.F','VTAS.D','VTAS.N','VTAS.FM','VTAS.FC') ",
         "recursiveDateField": "Venta.FechaEmision"
-      },
-      {
+    },
+    {
         "active": "true",
         "table": "VentaD",
         "fields": "VentaD.ID, VentaD.Renglon, VentaD.RenglonSub, VentaD.Articulo, VentaD.Cantidad, VentaD.Almacen, VentaD.Precio, VentaD.DescuentoLinea, VentaD.DescuentoImporte, VentaD.Impuesto1, VentaD.Costo, VentaD.ContUso, VentaD.Unidad, VentaD.Factor, VentaD.Agente ",
         "join": "Venta WITH (NOLOCK) ON Venta.ID = VentaD.ID JOIN MovTipo WITH (NOLOCK) ON Venta.Mov = MovTipo.Mov AND MovTipo.Modulo = 'VTAS' ",
         "filter": "Venta.Estatus IN ('PENDIENTE','CONCLUIDO','PROCESAR') AND MovTipo.Clave IN ('VTAS.F','VTAS.D','VTAS.N','VTAS.FM','VTAS.FC') ",
         "recursiveDateField": "Venta.FechaEmision"
-      }
-    ]
+    }
+]
 </code></pre>
 <p>Más ejemplos en nuestro <a href="https://github.com/factorbi/bi-intelisis">repositorio de GitHub.</a></p>
 <hr />
