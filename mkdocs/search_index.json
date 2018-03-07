@@ -78,7 +78,7 @@
         {
             "location": "/registration/", 
             "text": "Create your Account\n\n\nCreate your \nAccount here.\n \n\n\nClick \nCreate Your Account\n and follow steps.\n\n\n\n\n\n\nConfigure your first service\n\n\n\n\nLog in to the \nconsole.\n\n\nOn the left pane, go to \nService Numbers\n, click \nEdit\n then \nNew\n.\n\n\nEdit database name and click \nEdit\n to save.\n\n\nGo to \nRDS Instances\n and click under \nHostname\n.\n\n\n\n\nDon't have an AWS Account? please \nstart here.\n\n\n\n\nHave an AWS Account?\n\n\nIf you already have an AWS Account, please follow:\n\n\n\n\nTake note of your Account ID and Canonical User ID following --\n \nthese steps.\n\n\nLog in to \nFactor BI Console.\n\n\nGo to RDS Instances and then click under Hostname.\n\n\nGo to the bottom of the form and fill in your AWS Account ID and Canonical. Click Save.\n\n\n\n\nEmail to \ninfo@factorbi.com\n letting us know you completed the above steps so far, so we can create and configure a dedicated bucket for your API calls. \n\n\nBe sure to email us from same email address as your registration.\n\n\n\n\nYour dedicated bucket\n\n\nWhen you receive from us your dedicated bucket, please proceed creating the \nrest of necessary AWS services here.\n\n\nAfter you complete this guide you're done!, now \ndownload and setup\n Bipost Sync on your Windows.", 
-            "title": "Registration"
+            "title": "Register"
         }, 
         {
             "location": "/registration/#create-your-account", 

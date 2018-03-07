@@ -15,7 +15,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
+
   <meta name="author" content="Factor BI Team">
   <link rel="shortcut icon" href="../img/favicon.ico">
   <title>Link your AWS Account - Bipost Documentation</title>
@@ -24,25 +24,25 @@
   <link rel="stylesheet" href="../css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
   <link rel="stylesheet" href="../css/highlight.css">
-  
+
   <script>
     // Current page data
     var mkdocs_page_name = "Link your AWS Account";
     var mkdocs_page_input_path = "setupaws.md";
     var mkdocs_page_url = "/setupaws/";
   </script>
-  
+
   <script src="../js/jquery-2.1.1.min.js"></script>
   <script src="../js/modernizr-2.8.3.min.js"></script>
-  <script type="text/javascript" src="../js/highlight.pack.js"></script> 
-  
+  <script type="text/javascript" src="../js/highlight.pack.js"></script>
+
 </head>
 
 <body class="wy-body-for-nav" role="document">
 
   <div class="wy-grid-for-nav">
 
-    
+
     <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
       <div class="wy-side-nav-search">
         <a href=".." class="icon icon-home"> Bipost Documentation</a>
@@ -55,153 +55,153 @@
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
 	<ul class="current">
-	  
-          
+
+
             <li class="toctree-l1">
-		
+
     <a class="" href="..">Home</a>
 	    </li>
-          
+
             <li class="toctree-l1">
-		
-    <a class="" href="../registration/">Registration</a>
+
+    <a class="" href="../registration/">Register</a>
 	    </li>
-          
+
             <li class="toctree-l1 current">
-		
+
     <a class="current" href="./">Link your AWS Account</a>
     <ul class="subnav">
-            
+
     <li class="toctree-l2"><a href="#link-your-aws-account">Link your AWS Account</a></li>
-    
+
 
     <li class="toctree-l2"><a href="#dont-have-an-aws-account">Don't have an AWS account?</a></li>
-    
+
 
     <li class="toctree-l2"><a href="#check-closest-aws-region-to-you-location">Check closest AWS Region to you location</a></li>
-    
+
 
     <li class="toctree-l2"><a href="#get-canonical-user-id-from-your-iam-home">Get Canonical User ID from your IAM Home</a></li>
-    
+
 
     <li class="toctree-l2"><a href="#create-aurora-instance">Create Aurora Instance</a></li>
-    
+
         <ul>
-        
+
             <li><a class="toctree-l3" href="#aurora-db-details">Aurora DB Details</a></li>
-        
+
             <li><a class="toctree-l3" href="#aurora-network-security">Aurora Network &amp; Security</a></li>
-        
+
             <li><a class="toctree-l3" href="#aurora-database-options">Aurora Database Options</a></li>
-        
+
             <li><a class="toctree-l3" href="#aurora-failover">Aurora Failover</a></li>
-        
+
             <li><a class="toctree-l3" href="#aurora-backup">Aurora Backup</a></li>
-        
+
             <li><a class="toctree-l3" href="#aurora-monitoring">Aurora Monitoring</a></li>
-        
+
             <li><a class="toctree-l3" href="#aurora-maintenance">Aurora Maintenance</a></li>
-        
+
             <li><a class="toctree-l3" href="#launch-db-instance">Launch DB Instance</a></li>
-        
+
         </ul>
-    
+
 
     <li class="toctree-l2"><a href="#rds-instance-security-group">RDS Instance Security Group</a></li>
-    
+
 
     <li class="toctree-l2"><a href="#create-iam-policy-to-grant-access-to-s3">Create IAM Policy to Grant Access to S3</a></li>
-    
+
 
     <li class="toctree-l2"><a href="#create-iam-role-to-allow-rds-access-to-s3">Create IAM Role to Allow RDS Access to S3</a></li>
-    
+
 
     <li class="toctree-l2"><a href="#set-iam-role-to-aurora-cluster">Set IAM Role to Aurora Cluster</a></li>
-    
+
 
     <li class="toctree-l2"><a href="#create-cluster-parameter-group">Create Cluster Parameter Group</a></li>
-    
+
 
     <li class="toctree-l2"><a href="#create-db-parameter-group">Create DB Parameter Group</a></li>
-    
+
 
     <li class="toctree-l2"><a href="#set-cluster-parameter-group">Set Cluster Parameter Group</a></li>
-    
+
 
     <li class="toctree-l2"><a href="#set-instance-parameter-group">Set Instance Parameter Group</a></li>
-    
+
 
     <li class="toctree-l2"><a href="#verify-instance-configuration">Verify Instance Configuration</a></li>
-    
+
 
     <li class="toctree-l2"><a href="#test-connection-to-your-rds-aurora">Test connection to your RDS Aurora</a></li>
-    
+
 
     <li class="toctree-l2"><a href="#configure-instance-connection-details-on-factor-bi-console">Configure Instance Connection Details on Factor BI Console</a></li>
-    
+
 
     <li class="toctree-l2"><a href="#security-of-your-rds-instance-for-production">Security of your RDS Instance for Production</a></li>
-    
+
 
     <li class="toctree-l2"><a href="#security-for-downloading-data">Security for Downloading Data</a></li>
-    
+
 
     <li class="toctree-l2"><a href="#console-access-to-bucket">Console Access to Bucket</a></li>
-    
+
 
     </ul>
 	    </li>
-          
+
             <li class="toctree-l1">
-		
+
     <a class="" href="../installation/">Download and Install</a>
 	    </li>
-          
+
             <li class="toctree-l1">
-		
+
     <a class="" href="../bipostexe/">Sync to AWS</a>
 	    </li>
-          
+
             <li class="toctree-l1">
-		
+
     <a class="" href="../synctowindows/">Sync back to Windows</a>
 	    </li>
-          
+
             <li class="toctree-l1">
-		
+
     <a class="" href="../bipostapi/">Bipost API</a>
 	    </li>
-          
+
             <li class="toctree-l1">
-		
+
     <a class="" href="../troubleshooting/">Troubleshooting</a>
 	    </li>
-          
+
             <li class="toctree-l1">
-		
+
     <a class="" href="../businessintelligence/">Business Intelligence</a>
 	    </li>
-          
+
             <li class="toctree-l1">
-		
+
     <a class="" href="../intelisis/">Intelisis</a>
 	    </li>
-          
+
             <li class="toctree-l1">
-		
+
     <a class="" href="../microsip/">Microsip</a>
 	    </li>
-          
+
             <li class="toctree-l1">
-		
+
     <a class="" href="../aspel/">Aspel</a>
 	    </li>
-          
+
             <li class="toctree-l1">
-		
+
     <a class="" href="../about/">About</a>
 	    </li>
-          
+
         </ul>
       </div>
       &nbsp;
@@ -209,31 +209,31 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
-      
+
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
         <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
         <a href="..">Bipost Documentation</a>
       </nav>
 
-      
+
       <div class="wy-nav-content">
         <div class="rst-content">
           <div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="..">Docs</a> &raquo;</li>
-    
-      
-    
+
+
+
     <li>Link your AWS Account</li>
     <li class="wy-breadcrumbs-aside">
-      
+
     </li>
   </ul>
   <hr/>
 </div>
           <div role="main">
             <div class="section">
-              
+
                 <h2 id="link-your-aws-account">Link your AWS Account<a class="headerlink" href="#link-your-aws-account" title="Permanent link">&para;</a></h2>
 <p>Follow these instructions to link your AWS Account and RDS Aurora instance to Bipost API.</p>
 <p><strong>IMPORTANT NOTICE: Many settings suggested here are for testing purposes. If you are to use the following AWS services for production you may want to follow your company policies and understand how to use AWS security according to your needs.</strong></p>
@@ -716,49 +716,49 @@ For Windows you may use "MySQL Workbench" or "HeidiSQL"
 <p>Remember, we create a unique S3 bucket for each one of our customers, so nothing gets mixed up.</p>
 <p>Sometimes you may want to access this bucket and review files and folders.</p>
 <p>To accomplish this we provide an <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/console_controlling-access.html">AWS Console access</a> with a user, password and a direct link to your bucket.</p>
-              
+
             </div>
           </div>
           <footer>
-  
+
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
+
         <a href="../installation/" class="btn btn-neutral float-right" title="Download and Install">Next <span class="icon icon-circle-arrow-right"></span></a>
-      
-      
-        <a href="../registration/" class="btn btn-neutral" title="Registration"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-      
+
+
+        <a href="../registration/" class="btn btn-neutral" title="Register"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+
     </div>
-  
+
 
   <hr/>
 
   <div role="contentinfo">
     <!-- Copyright etc -->
-    
+
       <p>© 2016 - 2018, <a href="https://www.factorbi.com">Factor BI, S.A. de C.V.</a> All rights reserved.</p>
-    
+
   </div>
 
   Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
 </footer>
-	  
+
         </div>
       </div>
 
     </section>
-    
+
   </div>
 
   <div class="rst-versions" role="note" style="cursor: pointer">
     <span class="rst-current-version" data-toggle="rst-current-version">
-      
-      
+
+
         <span><a href="../registration/" style="color: #fcfcfc;">&laquo; Previous</a></span>
-      
-      
+
+
         <span style="margin-left: 15px"><a href="../installation/" style="color: #fcfcfc">Next &raquo;</a></span>
-      
+
     </span>
 </div>
     <script src="../js/theme.js"></script>
