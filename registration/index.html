@@ -17,7 +17,7 @@
 
   <meta name="author" content="Factor BI Team">
   <link rel="shortcut icon" href="../img/favicon.ico">
-  <title>Register - Bipost Documentation</title>
+  <title>Factor BI Console - Bipost Documentation</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../css/theme.css" type="text/css" />
@@ -26,7 +26,7 @@
 
   <script>
     // Current page data
-    var mkdocs_page_name = "Register";
+    var mkdocs_page_name = "Factor BI Console";
     var mkdocs_page_input_path = "registration.md";
     var mkdocs_page_url = "/registration/";
   </script>
@@ -63,18 +63,15 @@
 
             <li class="toctree-l1">
 
-    <a class="" href="../setupaws/">Link your AWS Account</a>
+    <a class="" href="../easyawssetup/">Link your AWS Account</a>
 	    </li>
 
             <li class="toctree-l1 current">
 
-    <a class="current" href="./">Register</a>
+    <a class="current" href="./">Factor BI Console</a>
     <ul class="subnav">
 
     <li class="toctree-l2"><a href="#create-your-account">Create your Account</a></li>
-
-
-    <li class="toctree-l2"><a href="#is-your-aws-account-ready">Is your AWS Account Ready?</a></li>
 
 
     <li class="toctree-l2"><a href="#configure-your-first-service">Configure your first service</a></li>
@@ -88,22 +85,7 @@
 
             <li class="toctree-l1">
 
-    <a class="" href="../installation/">Download and Install</a>
-	    </li>
-
-            <li class="toctree-l1">
-
-    <a class="" href="../aspel/">Aspel</a>
-	    </li>
-
-            <li class="toctree-l1">
-
-    <a class="" href="../microsip/">Microsip</a>
-	    </li>
-
-            <li class="toctree-l1">
-
-    <a class="" href="../intelisis/">Intelisis</a>
+    <a class="" href="../installation/">Download Bipost</a>
 	    </li>
 
             <li class="toctree-l1">
@@ -123,7 +105,27 @@
 
             <li class="toctree-l1">
 
+    <a class="" href="../aspel/">Aspel</a>
+	    </li>
+
+            <li class="toctree-l1">
+
+    <a class="" href="../microsip/">Microsip</a>
+	    </li>
+
+            <li class="toctree-l1">
+
+    <a class="" href="../intelisis/">Intelisis</a>
+	    </li>
+
+            <li class="toctree-l1">
+
     <a class="" href="../businessintelligence/">Business Intelligence</a>
+	    </li>
+
+            <li class="toctree-l1">
+
+    <a class="" href="../setupaws/">Advanced AWS Setup</a>
 	    </li>
 
             <li class="toctree-l1">
@@ -158,7 +160,7 @@
 
 
 
-    <li>Register</li>
+    <li>Factor BI Console</li>
     <li class="wy-breadcrumbs-aside">
 
     </li>
@@ -171,13 +173,8 @@
                 <h2 id="create-your-account">Create your Account<a class="headerlink" href="#create-your-account" title="Permanent link">&para;</a></h2>
 <p>Open <strong><a href="https://s3.amazonaws.com/biforms-prod/index.html" target="_blank">Factor BI Console.</a></strong> </p>
 <p>Click <strong>Create Your Account</strong> and follow steps.</p>
+<p>Password must be at least 8 characters containing uppercase and lowercase letters, numbers and symbols.</p>
 <p><img alt="Screenshot" src="../img/Factor_BI_Console.png" /></p>
-<hr />
-<h2 id="is-your-aws-account-ready">Is your AWS Account Ready?<a class="headerlink" href="#is-your-aws-account-ready" title="Permanent link">&para;</a></h2>
-<p>If you haven't created the necessary services on your AWS Account please follow these steps before your first synchronization.</p>
-<p><a href="../setupaws/">&gt;&gt; Link my AWS Account.</a></p>
-<p>Not familiar with AWS or just want to skip creating AWS related services? </p>
-<p><a href="mailto:info@factorbi.com">&gt;&gt; Write us</a>, we can help you.</p>
 <hr />
 <h2 id="configure-your-first-service">Configure your first service<a class="headerlink" href="#configure-your-first-service" title="Permanent link">&para;</a></h2>
 <ol>
@@ -185,12 +182,12 @@
 <li>On the left pane, go to <strong>Service Numbers</strong>, click <strong>Edit</strong> then <strong>New</strong>.</li>
 <li>
 <p>Edit <strong>Database</strong> and <strong>Description</strong>, then click <strong>Edit</strong> again to save.</p>
-<p>Database must be all lowercase and don't use any special characters.</p>
+<p><code>Database must be all lowercase. Can't contain special characters.</code></p>
 <p><img alt="Screenshot" src="../img/Factor_BI_Service_Numbers.png" /></p>
 </li>
 <li>
 <p>Go to left pane <strong>RDS Instances</strong> and click under <strong>Hostname</strong>.</p>
-<p>Fill the following fields with the information you got from testing your connection to Aurora-MySQL: </p>
+<p>Fill the following fields with the information you have on <strong>Outputs</strong> tab, <a href="../easyawssetup/#45-resources-created">Step 4.5</a>: </p>
 <ul>
 <li>Hostname or Endpoint</li>
 <li>Username</li>
@@ -211,10 +208,10 @@
 
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
 
-        <a href="../installation/" class="btn btn-neutral float-right" title="Download and Install">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../installation/" class="btn btn-neutral float-right" title="Download Bipost">Next <span class="icon icon-circle-arrow-right"></span></a>
 
 
-        <a href="../setupaws/" class="btn btn-neutral" title="Link your AWS Account"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../easyawssetup/" class="btn btn-neutral" title="Link your AWS Account"><span class="icon icon-circle-arrow-left"></span> Previous</a>
 
     </div>
 
@@ -242,7 +239,7 @@
     <span class="rst-current-version" data-toggle="rst-current-version">
 
 
-        <span><a href="../setupaws/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../easyawssetup/" style="color: #fcfcfc;">&laquo; Previous</a></span>
 
 
         <span style="margin-left: 15px"><a href="../installation/" style="color: #fcfcfc">Next &raquo;</a></span>

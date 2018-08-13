@@ -4,15 +4,15 @@
     
     <url>
      <loc>/</loc>
-     <lastmod>2018-08-12</lastmod>
+     <lastmod>2018-08-13</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
 
     
     <url>
-     <loc>/setupaws/</loc>
-     <lastmod>2018-08-12</lastmod>
+     <loc>/easyawssetup/</loc>
+     <lastmod>2018-08-13</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -20,7 +20,7 @@
     
     <url>
      <loc>/registration/</loc>
-     <lastmod>2018-08-12</lastmod>
+     <lastmod>2018-08-13</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -28,31 +28,7 @@
     
     <url>
      <loc>/installation/</loc>
-     <lastmod>2018-08-12</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-    
-
-    
-    <url>
-     <loc>/aspel/</loc>
-     <lastmod>2018-08-12</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-    
-
-    
-    <url>
-     <loc>/microsip/</loc>
-     <lastmod>2018-08-12</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-    
-
-    
-    <url>
-     <loc>/intelisis/</loc>
-     <lastmod>2018-08-12</lastmod>
+     <lastmod>2018-08-13</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -60,7 +36,7 @@
     
     <url>
      <loc>/bipostexe/</loc>
-     <lastmod>2018-08-12</lastmod>
+     <lastmod>2018-08-13</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -68,7 +44,7 @@
     
     <url>
      <loc>/synctowindows/</loc>
-     <lastmod>2018-08-12</lastmod>
+     <lastmod>2018-08-13</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -76,7 +52,31 @@
     
     <url>
      <loc>/bipostapi/</loc>
-     <lastmod>2018-08-12</lastmod>
+     <lastmod>2018-08-13</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>/aspel/</loc>
+     <lastmod>2018-08-13</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>/microsip/</loc>
+     <lastmod>2018-08-13</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>/intelisis/</loc>
+     <lastmod>2018-08-13</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -84,7 +84,15 @@
     
     <url>
      <loc>/businessintelligence/</loc>
-     <lastmod>2018-08-12</lastmod>
+     <lastmod>2018-08-13</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>/setupaws/</loc>
+     <lastmod>2018-08-13</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -92,7 +100,7 @@
     
     <url>
      <loc>/troubleshooting/</loc>
-     <lastmod>2018-08-12</lastmod>
+     <lastmod>2018-08-13</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -100,7 +108,7 @@
     
     <url>
      <loc>/about/</loc>
-     <lastmod>2018-08-12</lastmod>
+     <lastmod>2018-08-13</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
