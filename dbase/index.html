@@ -17,7 +17,7 @@
 
   <meta name="author" content="Factor BI">
   <link rel="shortcut icon" href="../img/favicon.ico">
-  <title>Factor BI Console - Bipost Sync</title>
+  <title>dBase III to MySQL - Bipost Sync</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../css/theme.css" type="text/css" />
@@ -26,9 +26,9 @@
 
   <script>
     // Current page data
-    var mkdocs_page_name = "Factor BI Console";
-    var mkdocs_page_input_path = "registration.md";
-    var mkdocs_page_url = "/registration/";
+    var mkdocs_page_name = "dBase III to MySQL";
+    var mkdocs_page_input_path = "dbase.md";
+    var mkdocs_page_url = "/dbase/";
   </script>
 
   <script src="../js/jquery-2.1.1.min.js"></script>
@@ -66,21 +66,9 @@
     <a class="" href="../easyawssetup/">Link your AWS Account</a>
 	    </li>
 
-            <li class="toctree-l1 current">
+            <li class="toctree-l1">
 
-    <a class="current" href="./">Factor BI Console</a>
-    <ul class="subnav">
-
-    <li class="toctree-l2"><a href="#create-your-account">Create your Account</a></li>
-
-
-    <li class="toctree-l2"><a href="#configure-your-first-service">Configure your first service</a></li>
-
-
-    <li class="toctree-l2"><a href="#download-bipost-sync">Download Bipost Sync</a></li>
-
-
-    </ul>
+    <a class="" href="../registration/">Factor BI Console</a>
 	    </li>
 
             <li class="toctree-l1">
@@ -103,9 +91,15 @@
     <a class="" href="../bipostapi/">Bipost API</a>
 	    </li>
 
-            <li class="toctree-l1">
+            <li class="toctree-l1 current">
 
-    <a class="" href="../dbase/">dBase III to MySQL</a>
+    <a class="current" href="./">dBase III to MySQL</a>
+    <ul class="subnav">
+
+    <li class="toctree-l2"><a href="#positouch-use-case">POSitouch Use Case</a></li>
+
+
+    </ul>
 	    </li>
 
             <li class="toctree-l1">
@@ -165,7 +159,7 @@
 
 
 
-    <li>Factor BI Console</li>
+    <li>dBase III to MySQL</li>
     <li class="wy-breadcrumbs-aside">
 
     </li>
@@ -175,36 +169,13 @@
           <div role="main">
             <div class="section">
 
-                <h2 id="create-your-account">Create your Account<a class="headerlink" href="#create-your-account" title="Permanent link">&para;</a></h2>
-<p>Open <strong><a href="https://s3.amazonaws.com/biforms-prod/index.html" target="_blank">Factor BI Console.</a></strong> </p>
-<p>Click <strong>Create Your Account</strong> and follow steps.</p>
-<p>Password must be at least 8 characters containing uppercase and lowercase letters, numbers and symbols.</p>
-<p><img alt="Screenshot" src="../img/Factor_BI_Console.png" /></p>
-<hr />
-<h2 id="configure-your-first-service">Configure your first service<a class="headerlink" href="#configure-your-first-service" title="Permanent link">&para;</a></h2>
-<ol>
-<li>Log in to the <a href="https://s3.amazonaws.com/biforms-prod/index.html" target="_blank">Console.</a></li>
-<li>On the left pane, go to <strong>Service Numbers</strong>, click <strong>Edit</strong> then <strong>New</strong>.</li>
-<li>
-<p>Edit <strong>Database</strong> and <strong>Description</strong>, then click <strong>Edit</strong> again to save.</p>
-<p><code>Database must be all lowercase. Can't contain special characters.</code></p>
-<p><img alt="Screenshot" src="../img/Factor_BI_Service_Numbers.png" /></p>
-</li>
-<li>
-<p>Go to left pane <strong>RDS Instances</strong> and click under <strong>Hostname</strong>.</p>
-<p>Fill the following fields with the information you have on <strong>Outputs</strong> tab, <a href="../easyawssetup/#45-resources-created">Step 4.5</a>: </p>
-<ul>
-<li>Hostname or Endpoint</li>
-<li>Username</li>
-<li>Password</li>
-<li>Port</li>
-</ul>
-<p><img alt="Screenshot" src="../img/Factor_BI_RDS_Instances.png" /></p>
-</li>
-</ol>
-<hr />
-<h2 id="download-bipost-sync">Download Bipost Sync<a class="headerlink" href="#download-bipost-sync" title="Permanent link">&para;</a></h2>
-<p><a href="../installation/">Download Bipost Sync for Windows.</a></p>
+                <h2 id="positouch-use-case">POSitouch Use Case<a class="headerlink" href="#positouch-use-case" title="Permanent link">&para;</a></h2>
+<p>You can export DBF to MySQL on AWS using Bipost continuous synchronization.</p>
+<p>A popular use case is <a href="https://positouch.com/" target="_blank">POSitouch</a> Point of Sale system that works with .DBF files. You may extract DBF data from several POSitouch restaurants and consolidate them on AWS at scale.</p>
+<p><img alt="POSitouch logo" src="../img/POSitouch-logo.png" /></p>
+<p><a href="http://bit.ly/positouch-documentation" target="_blank">POSitouch DBF database documentation download.</a></p>
+<p>Make POSitouch reporting simple. Create KPI's, Dashboards and Business Intelligence analytics using <a href="https://www.google.com/analytics/data-studio/" target="_blank">Google Data Studio</a> or <a href="https://aws.amazon.com/quicksight/" target="_blank">AWS QuickSight</a> with a seamless connection to Aurora-MySQL.</p>
+<p><img alt="POSitouch Data Consolidation" src="../img/POSitouch-data-consolidation.png" /></p>
 
             </div>
           </div>
@@ -212,10 +183,10 @@
 
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
 
-        <a href="../installation/" class="btn btn-neutral float-right" title="Download Bipost">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../aspel/" class="btn btn-neutral float-right" title="Aspel">Next <span class="icon icon-circle-arrow-right"></span></a>
 
 
-        <a href="../easyawssetup/" class="btn btn-neutral" title="Link your AWS Account"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../bipostapi/" class="btn btn-neutral" title="Bipost API"><span class="icon icon-circle-arrow-left"></span> Previous</a>
 
     </div>
 
@@ -243,10 +214,10 @@
     <span class="rst-current-version" data-toggle="rst-current-version">
 
 
-        <span><a href="../easyawssetup/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../bipostapi/" style="color: #fcfcfc;">&laquo; Previous</a></span>
 
 
-        <span style="margin-left: 15px"><a href="../installation/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../aspel/" style="color: #fcfcfc">Next &raquo;</a></span>
 
     </span>
 </div>

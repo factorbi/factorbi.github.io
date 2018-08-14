@@ -15,9 +15,9 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <meta name="author" content="Factor BI Team">
+  <meta name="author" content="Factor BI">
   <link rel="shortcut icon" href="../img/favicon.ico">
-  <title>Aspel - Bipost Documentation</title>
+  <title>Aspel - Bipost Sync</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../css/theme.css" type="text/css" />
@@ -44,7 +44,7 @@
 
     <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
       <div class="wy-side-nav-search">
-        <a href=".." class="icon icon-home"> Bipost Documentation</a>
+        <a href=".." class="icon icon-home"> Bipost Sync</a>
         <div role="search">
   <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -91,6 +91,11 @@
     <a class="" href="../bipostapi/">Bipost API</a>
 	    </li>
 
+            <li class="toctree-l1">
+
+    <a class="" href="../dbase/">dBase III to MySQL</a>
+	    </li>
+
             <li class="toctree-l1 current">
 
     <a class="current" href="./">Aspel</a>
@@ -103,6 +108,8 @@
             <li><a class="toctree-l3" href="#casos-de-uso">Casos de Uso</a></li>
 
             <li><a class="toctree-l3" href="#tablas-aspel">Tablas Aspel</a></li>
+
+            <li><a class="toctree-l3" href="#excel-tablas-aspel-sae">Excel Tablas Aspel SAE</a></li>
 
             <li><a class="toctree-l3" href="#anadir-tablas-a-la-sincronizacion">Añadir tablas a la Sincronización</a></li>
 
@@ -156,7 +163,7 @@
 
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
         <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="..">Bipost Documentation</a>
+        <a href="..">Bipost Sync</a>
       </nav>
 
 
@@ -179,7 +186,7 @@
             <div class="section">
 
                 <h1 id="aspel-sae">Aspel SAE<a class="headerlink" href="#aspel-sae" title="Permanent link">&para;</a></h1>
-<p>Aspel SAE es un sistema administrativo que fabrica la empresa <a href="http://www.aspel.com.mx/"><em>Aspel de México, S.A. de C.V.</em></a></p>
+<p>Aspel SAE es un sistema administrativo que fabrica la empresa <a href="http://www.aspel.com.mx/" target="_blank"><em>Aspel de México, S.A. de C.V.</em></a></p>
 <p>Bipost Sync ofrece una conexión simple a <a href="https://datastudio.google.com/">Google Data Studio</a> para crear tus tableros de mando, dashboards e indicadores de gestión.</p>
 <hr />
 <h2 id="casos-de-uso">Casos de Uso<a class="headerlink" href="#casos-de-uso" title="Permanent link">&para;</a></h2>
@@ -222,8 +229,9 @@ vend
 </code></pre>
 <p>En la base de datos del sistema Aspel SAE cada tabla tiene un sufijo <code>01</code>, <code>02</code>, etc., de acuerdo a la empresa que se ha creado. Por ejemplo la tabla de las facturas podrías encontrarla como <code>factf01</code> y para otra razón social como <code>factf02</code>.</p>
 <p>Bipost Sync automáticamente elimina estos sufijos por lo que las tablas en Aurora-MySQL serán creadas sin el sufijo. Esta funcionalidad aplica incluso cuando se añaden tablas con <code>customData.json</code>.</p>
-<p>En el siguiente link está el listado de tablas de Aspel SAE.</p>
-<p><a href="http://bit.ly/tablas_aspel">Excel tablas Aspel SAE</a></p>
+<hr />
+<h2 id="excel-tablas-aspel-sae">Excel Tablas Aspel SAE<a class="headerlink" href="#excel-tablas-aspel-sae" title="Permanent link">&para;</a></h2>
+<p>Abre aquí <a href="http://bit.ly/tablas_aspel" target="_blank"><strong>Excel tablas Aspel SAE.</strong></a></p>
 <p><strong>NOTA:</strong> La lista del link anterior puede no estar completa.</p>
 <p>Para obtener el listado completo de tablas de acuerdo a tu base de datos, puedes usar el siguiente query en Firebird:</p>
 <pre><code>select rdb$relation_name
@@ -262,7 +270,7 @@ order by rdb$relation_name;
 <p>Para más información sobre la configuración de customData.json ver <a href="../bipostexe/#customdatajson">aquí.</a></p>
 <hr />
 <h2 id="aspel-sae-en-github">Aspel SAE en GitHub<a class="headerlink" href="#aspel-sae-en-github" title="Permanent link">&para;</a></h2>
-<p><a href="https://github.com/factorbi/bi-aspel">Repositorio de GitHub Aspel SAE</a> para crear estructuras del Business Intelligence.</p>
+<p><a href="https://github.com/factorbi/bi-aspel" target="_blank">Repositorio de GitHub Aspel SAE</a> para crear estructuras del Business Intelligence.</p>
 <hr />
 <h2 id="contacto">Contacto<a class="headerlink" href="#contacto" title="Permanent link">&para;</a></h2>
 <p>¿Necesitas ayuda? ¿Buscas una solución a la medida?</p>
@@ -277,7 +285,7 @@ order by rdb$relation_name;
         <a href="../microsip/" class="btn btn-neutral float-right" title="Microsip">Next <span class="icon icon-circle-arrow-right"></span></a>
 
 
-        <a href="../bipostapi/" class="btn btn-neutral" title="Bipost API"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../dbase/" class="btn btn-neutral" title="dBase III to MySQL"><span class="icon icon-circle-arrow-left"></span> Previous</a>
 
     </div>
 
@@ -305,7 +313,7 @@ order by rdb$relation_name;
     <span class="rst-current-version" data-toggle="rst-current-version">
 
 
-        <span><a href="../bipostapi/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../dbase/" style="color: #fcfcfc;">&laquo; Previous</a></span>
 
 
         <span style="margin-left: 15px"><a href="../microsip/" style="color: #fcfcfc">Next &raquo;</a></span>

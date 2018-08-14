@@ -15,9 +15,9 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <meta name="author" content="Factor BI Team">
+  <meta name="author" content="Factor BI">
   <link rel="shortcut icon" href="../img/favicon.ico">
-  <title>Microsip - Bipost Documentation</title>
+  <title>Microsip - Bipost Sync</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../css/theme.css" type="text/css" />
@@ -44,7 +44,7 @@
 
     <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
       <div class="wy-side-nav-search">
-        <a href=".." class="icon icon-home"> Bipost Documentation</a>
+        <a href=".." class="icon icon-home"> Bipost Sync</a>
         <div role="search">
   <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -93,6 +93,11 @@
 
             <li class="toctree-l1">
 
+    <a class="" href="../dbase/">dBase III to MySQL</a>
+	    </li>
+
+            <li class="toctree-l1">
+
     <a class="" href="../aspel/">Aspel</a>
 	    </li>
 
@@ -109,9 +114,11 @@
 
             <li><a class="toctree-l3" href="#tablas-microsip">Tablas Microsip</a></li>
 
+            <li><a class="toctree-l3" href="#excel-tablas-microsip">Excel Tablas Microsip</a></li>
+
             <li><a class="toctree-l3" href="#anadir-tablas-a-la-sincronizacion">Añadir tablas a la Sincronización</a></li>
 
-            <li><a class="toctree-l3" href="#sincroniza-de-aws-hacia-microsip">Sincroniza de AWS hacia Microsip</a></li>
+            <li><a class="toctree-l3" href="#sincronizacion-doble-via">Sincronización Doble Vía</a></li>
 
             <li><a class="toctree-l3" href="#microsip-en-github">Microsip en GitHub</a></li>
 
@@ -158,7 +165,7 @@
 
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
         <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="..">Bipost Documentation</a>
+        <a href="..">Bipost Sync</a>
       </nav>
 
 
@@ -181,8 +188,8 @@
             <div class="section">
 
                 <h1 id="microsip-erp">Microsip ERP<a class="headerlink" href="#microsip-erp" title="Permanent link">&para;</a></h1>
-<p>Microsip es un sistema administrativo ERP que fabrica la empresa <a href="http://www.microsip.com/"><em>Aplicaciones y Proyectos Computacionales S.A. de C.V.</em></a></p>
-<p>Bipost Sync ofrece una conexión simple a <a href="https://datastudio.google.com/">Google Data Studio</a> para crear tus tableros de mando, dashboards e indicadores de gestión.</p>
+<p>Microsip es un sistema administrativo ERP que fabrica la empresa <a href="http://www.microsip.com/" target="_blank"><em>Aplicaciones y Proyectos Computacionales S.A. de C.V.</em></a></p>
+<p>Bipost Sync ofrece una conexión simple a <a href="https://datastudio.google.com/" target="_blank">Google Data Studio</a> para crear tus tableros de mando, dashboards e indicadores de gestión.</p>
 <hr />
 <h2 id="casos-de-uso">Casos de Uso<a class="headerlink" href="#casos-de-uso" title="Permanent link">&para;</a></h2>
 <p>Folleto Casos de Uso: <a href="http://bit.ly/factorbi-casos-uso">Tableros de Mando</a></p>
@@ -280,8 +287,9 @@ vendedores
 vias_embarque
 zonas_clientes
 </code></pre>
-<p>En el siguiente link está el listado de tablas de Microsip.</p>
-<p><a href="http://bit.ly/tablas_microsip">Excel tablas Microsip</a></p>
+<hr />
+<h2 id="excel-tablas-microsip">Excel Tablas Microsip<a class="headerlink" href="#excel-tablas-microsip" title="Permanent link">&para;</a></h2>
+<p>Abre aquí <a href="http://bit.ly/tablas_microsip" target="_blank">Excel tablas Microsip.</a></p>
 <p><strong>NOTA:</strong> La lista del link anterior puede no estar completa.</p>
 <p>Para obtener el listado completo de tablas de acuerdo a tu base de datos, puedes usar el siguiente query en Firebird:</p>
 <pre><code>select rdb$relation_name
@@ -388,7 +396,7 @@ order by rdb$relation_name;
 </code></pre>
 <p>Para más información sobre la configuración de customData.json ver <a href="../bipostexe/#customdatajson">aquí.</a></p>
 <hr />
-<h2 id="sincroniza-de-aws-hacia-microsip">Sincroniza de AWS hacia Microsip<a class="headerlink" href="#sincroniza-de-aws-hacia-microsip" title="Permanent link">&para;</a></h2>
+<h2 id="sincronizacion-doble-via">Sincronización Doble Vía<a class="headerlink" href="#sincronizacion-doble-via" title="Permanent link">&para;</a></h2>
 <ul>
 <li>
 <p>Al usar la sincronización con <a href="../synctowindows">Download Data</a> es posible traer datos desde AWS Aurora-MySQL hacia tu base de Microsip. </p>
@@ -552,7 +560,7 @@ order by rdb$relation_name;
 </code></pre>
 <hr />
 <h2 id="microsip-en-github">Microsip en GitHub<a class="headerlink" href="#microsip-en-github" title="Permanent link">&para;</a></h2>
-<p><a href="https://github.com/factorbi/bi-microsip">Repositorio de GitHub Microsip</a> para crear estructuras del Business Intelligence.</p>
+<p><a href="https://github.com/factorbi/bi-microsip" target="_blank">Repositorio de GitHub Microsip</a> para crear estructuras del Business Intelligence.</p>
 <hr />
 <h2 id="contacto">Contacto<a class="headerlink" href="#contacto" title="Permanent link">&para;</a></h2>
 <p>¿Necesitas ayuda? ¿Buscas una solución a la medida?</p>
