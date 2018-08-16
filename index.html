@@ -99,27 +99,37 @@
 
             <li class="toctree-l1">
 
-    <a class="" href="installation/">Download Bipost</a>
+    <a class="" href="installation/">Download Program</a>
 	    </li>
 
             <li class="toctree-l1">
 
-    <a class="" href="bipostexe/">Sync to AWS</a>
+    <a class="" href="sqlserver/">SQL Server to MySQL Aurora</a>
 	    </li>
 
             <li class="toctree-l1">
 
-    <a class="" href="synctowindows/">Sync back to Windows</a>
+    <a class="" href="firebird/">Firebird to MySQL Aurora</a>
 	    </li>
 
             <li class="toctree-l1">
 
-    <a class="" href="bipostapi/">Bipost API</a>
+    <a class="" href="dbase/">dBase III to MySQL Aurora</a>
 	    </li>
 
             <li class="toctree-l1">
 
-    <a class="" href="dbase/">dBase III to MySQL</a>
+    <a class="" href="customdatajson/">Pick Tables & Data to Sync</a>
+	    </li>
+
+            <li class="toctree-l1">
+
+    <a class="" href="bipostapi/">Loading and Transformation</a>
+	    </li>
+
+            <li class="toctree-l1">
+
+    <a class="" href="synctowindows/">Two-way Synchronization</a>
 	    </li>
 
             <li class="toctree-l1">
@@ -140,6 +150,11 @@
             <li class="toctree-l1">
 
     <a class="" href="businessintelligence/">Business Intelligence</a>
+	    </li>
+
+            <li class="toctree-l1">
+
+    <a class="" href="csvtomysql/">CSV to MySQL Aurora</a>
 	    </li>
 
             <li class="toctree-l1">
@@ -213,18 +228,18 @@
 <h2 id="how-it-works">How it works<a class="headerlink" href="#how-it-works" title="Permanent link">&para;</a></h2>
 <ul>
 <li>On every sync Bipost Sync reads table schema's and data and uploads it to AWS.</li>
-<li>Fully customize data sets to upload using <a href="./bipostexe/#customdatajson">customData.json</a></li>
+<li>Fully customize data sets to upload using <a href="./customdatajson">customData.json</a></li>
 <li>Database and tables are created/altered if they don't exist, and data is loaded to Aurora-MySQL.</li>
 <li>Before and after data is loaded to Aurora-MySQL you can transform data with stored procedures.</li>
 <li>Upload the same data multiple times and avoid duplicates. Data is replaced using primary keys.</li>
-<li>Run manually or automatically with a <a href="./bipostexe/#schedule">Windows Task schedule.</a></li>
-<li>Upload big datasets using <a href="./bipostexe/#recursive-sync">Recursive Sync.</a></li>
+<li>Run manually or automatically with a Windows Task schedule.</li>
+<li>Upload big datasets using Recursive Sync.</li>
 </ul>
 <p><strong>Data is also available as CSV files on S3 so you can use other AWS services like <a href="https://aws.amazon.com/athena/" target="_blank">Athena</a> and <a href="https://aws.amazon.com/glue/" target="_blank">Glue</a> to build your data lake.</strong></p>
 <h3 id="two-way-synchronization">Two-way synchronization<a class="headerlink" href="#two-way-synchronization" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Synchronize from Aurora-MySQL to on-premises SQL Server or Firebird SQL.</li>
-<li>Specify data to download using <a href="./bipostexe/#outdatajson">outData.json</a></li>
+<li>Specify data to download using <a href="./synctowindows/#outdatajson">outData.json</a></li>
 <li>Insert/update the returned data to your on-prem DB or just save the CSV files on Windows.</li>
 <li>Tables schemas are created/altered on your on-prem DB if they don't exist.</li>
 <li>Primary keys set on Aurora-MySQL are used against on-prem DB to avoid duplicates.</li>
@@ -282,7 +297,7 @@
 <ul>
 <li>Data upload is now done through secure HTTPS.</li>
 <li>JOIN parameter now supported for Firebird SQL.</li>
-<li><a href="./bipostexe/#recursive-sync">Recursive sync</a> now supported for Firebird SQL.</li>
+<li>Recursive sync now supported for Firebird SQL.</li>
 <li>Connection information is now encrypted.</li>
 <li>Bug fixes.</li>
 </ul>
@@ -304,7 +319,7 @@
 <h4 id="040-beta-2017-08-20">0.4.0 (Beta) 2017-08-20<a class="headerlink" href="#040-beta-2017-08-20" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Custom connections added.</li>
-<li><a href="./bipostapi/#initial-statement">Initial statement</a> added to API.</li>
+<li>Initial statement added to API.</li>
 <li>Special characters are deleted on string columns of 100 characters length or up.</li>
 </ul>
 <hr />
@@ -359,5 +374,5 @@
 
 <!--
 MkDocs version : 0.16.3
-Build Date UTC : 2018-08-14 03:33:57
+Build Date UTC : 2018-08-16 21:02:05
 -->

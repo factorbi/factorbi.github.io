@@ -73,27 +73,37 @@
 
             <li class="toctree-l1">
 
-    <a class="" href="../installation/">Download Bipost</a>
+    <a class="" href="../installation/">Download Program</a>
 	    </li>
 
             <li class="toctree-l1">
 
-    <a class="" href="../bipostexe/">Sync to AWS</a>
+    <a class="" href="../sqlserver/">SQL Server to MySQL Aurora</a>
 	    </li>
 
             <li class="toctree-l1">
 
-    <a class="" href="../synctowindows/">Sync back to Windows</a>
+    <a class="" href="../firebird/">Firebird to MySQL Aurora</a>
 	    </li>
 
             <li class="toctree-l1">
 
-    <a class="" href="../bipostapi/">Bipost API</a>
+    <a class="" href="../dbase/">dBase III to MySQL Aurora</a>
 	    </li>
 
             <li class="toctree-l1">
 
-    <a class="" href="../dbase/">dBase III to MySQL</a>
+    <a class="" href="../customdatajson/">Pick Tables & Data to Sync</a>
+	    </li>
+
+            <li class="toctree-l1">
+
+    <a class="" href="../bipostapi/">Loading and Transformation</a>
+	    </li>
+
+            <li class="toctree-l1">
+
+    <a class="" href="../synctowindows/">Two-way Synchronization</a>
 	    </li>
 
             <li class="toctree-l1">
@@ -114,6 +124,11 @@
             <li class="toctree-l1">
 
     <a class="" href="../businessintelligence/">Business Intelligence</a>
+	    </li>
+
+            <li class="toctree-l1">
+
+    <a class="" href="../csvtomysql/">CSV to MySQL Aurora</a>
 	    </li>
 
             <li class="toctree-l1">
@@ -248,7 +263,7 @@
 <h2 id="upload-limit">Upload Limit<a class="headerlink" href="#upload-limit" title="Permanent link">&para;</a></h2>
 <p>Depending on the number of rows and columns on each table, it is possible that a large amount of data sent on a single sync may not load to Aurora-MySQL.</p>
 <p>We have tested up to 1.5 million rows on a single sync and works fine.</p>
-<p>We recommend using <a href="../bipostexe/#recursive-sync">Recursive Sync</a> for big tables that have a datetime field available.</p>
+<p>We recommend using <a href="../customdatajson">Recursive Sync</a> for big tables that have a datetime field available.</p>
 <hr />
 <h2 id="special-characters">Special Characters<a class="headerlink" href="#special-characters" title="Permanent link">&para;</a></h2>
 <p>Some special characters on <code>char</code> and <code>varchar</code> fields are not supported and thus removed by biPost.exe
@@ -343,7 +358,7 @@ IGNORE 1 LINES
 <p><code>Access denied for user 'your-user-name'@'xx.xx.xxx.xxx' (using password: YES)</code></p>
 <hr />
 <h2 id="firebird-column-name-starts-with-underscore">Firebird column name starts with underscore<a class="headerlink" href="#firebird-column-name-starts-with-underscore" title="Permanent link">&para;</a></h2>
-<p>Firebird SQL does not naturally support creating a column starting with underscore, so avoid that on Aurora if your source DB is Firebird.</p>
+<p>Firebird SQL does not naturally support creating colums names starting with underscore, so avoid that on Aurora if your on-prem DB is Firebird.</p>
 <p><code>Token unknown - line 1</code></p>
 <p><img alt="Screenshot" src="../img/underscore_error_Firebird.png" /></p>
 <hr />

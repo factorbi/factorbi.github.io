@@ -73,27 +73,37 @@
 
             <li class="toctree-l1">
 
-    <a class="" href="../installation/">Download Bipost</a>
+    <a class="" href="../installation/">Download Program</a>
 	    </li>
 
             <li class="toctree-l1">
 
-    <a class="" href="../bipostexe/">Sync to AWS</a>
+    <a class="" href="../sqlserver/">SQL Server to MySQL Aurora</a>
 	    </li>
 
             <li class="toctree-l1">
 
-    <a class="" href="../synctowindows/">Sync back to Windows</a>
+    <a class="" href="../firebird/">Firebird to MySQL Aurora</a>
 	    </li>
 
             <li class="toctree-l1">
 
-    <a class="" href="../bipostapi/">Bipost API</a>
+    <a class="" href="../dbase/">dBase III to MySQL Aurora</a>
 	    </li>
 
             <li class="toctree-l1">
 
-    <a class="" href="../dbase/">dBase III to MySQL</a>
+    <a class="" href="../customdatajson/">Pick Tables & Data to Sync</a>
+	    </li>
+
+            <li class="toctree-l1">
+
+    <a class="" href="../bipostapi/">Loading and Transformation</a>
+	    </li>
+
+            <li class="toctree-l1">
+
+    <a class="" href="../synctowindows/">Two-way Synchronization</a>
 	    </li>
 
             <li class="toctree-l1 current">
@@ -136,6 +146,11 @@
             <li class="toctree-l1">
 
     <a class="" href="../businessintelligence/">Business Intelligence</a>
+	    </li>
+
+            <li class="toctree-l1">
+
+    <a class="" href="../csvtomysql/">CSV to MySQL Aurora</a>
 	    </li>
 
             <li class="toctree-l1">
@@ -194,7 +209,7 @@
 <p><img alt="Tablero de Mando Aspel" src="../img/Dashboard_Demo_1-torn.png" /></p>
 <hr />
 <h2 id="tablas-aspel">Tablas Aspel<a class="headerlink" href="#tablas-aspel" title="Permanent link">&para;</a></h2>
-<p><img alt="Screenshot" src="../img/bipost4.png" /></p>
+<p><img alt="Bipost Aspel" src="../img/bipost4.png" /></p>
 <p>Al configurar Bipost Sync con <code>System: SAE</code>, de fábrica se incluye un listado de tablas en la sincronización, las cuales son:</p>
 <pre><code>almacenes
 clie
@@ -267,7 +282,7 @@ order by rdb$relation_name;
 ]
 </code></pre>
 <p>Notar que no se incluye el sufijo <code>01</code>, <code>02</code>, etc. de las tablas.</p>
-<p>Para más información sobre la configuración de customData.json ver <a href="../bipostexe/#customdatajson">aquí.</a></p>
+<p>Para más información sobre la configuración de customData.json ver <a href="../customdatajson">aquí.</a></p>
 <hr />
 <h2 id="aspel-sae-en-github">Aspel SAE en GitHub<a class="headerlink" href="#aspel-sae-en-github" title="Permanent link">&para;</a></h2>
 <p><a href="https://github.com/factorbi/bi-aspel" target="_blank">Repositorio de GitHub Aspel SAE</a> para crear estructuras del Business Intelligence.</p>
@@ -285,7 +300,7 @@ order by rdb$relation_name;
         <a href="../microsip/" class="btn btn-neutral float-right" title="Microsip">Next <span class="icon icon-circle-arrow-right"></span></a>
 
 
-        <a href="../dbase/" class="btn btn-neutral" title="dBase III to MySQL"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../synctowindows/" class="btn btn-neutral" title="Two-way Synchronization"><span class="icon icon-circle-arrow-left"></span> Previous</a>
 
     </div>
 
@@ -313,7 +328,7 @@ order by rdb$relation_name;
     <span class="rst-current-version" data-toggle="rst-current-version">
 
 
-        <span><a href="../dbase/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../synctowindows/" style="color: #fcfcfc;">&laquo; Previous</a></span>
 
 
         <span style="margin-left: 15px"><a href="../microsip/" style="color: #fcfcfc">Next &raquo;</a></span>

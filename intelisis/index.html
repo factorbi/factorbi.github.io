@@ -73,27 +73,37 @@
 
             <li class="toctree-l1">
 
-    <a class="" href="../installation/">Download Bipost</a>
+    <a class="" href="../installation/">Download Program</a>
 	    </li>
 
             <li class="toctree-l1">
 
-    <a class="" href="../bipostexe/">Sync to AWS</a>
+    <a class="" href="../sqlserver/">SQL Server to MySQL Aurora</a>
 	    </li>
 
             <li class="toctree-l1">
 
-    <a class="" href="../synctowindows/">Sync back to Windows</a>
+    <a class="" href="../firebird/">Firebird to MySQL Aurora</a>
 	    </li>
 
             <li class="toctree-l1">
 
-    <a class="" href="../bipostapi/">Bipost API</a>
+    <a class="" href="../dbase/">dBase III to MySQL Aurora</a>
 	    </li>
 
             <li class="toctree-l1">
 
-    <a class="" href="../dbase/">dBase III to MySQL</a>
+    <a class="" href="../customdatajson/">Pick Tables & Data to Sync</a>
+	    </li>
+
+            <li class="toctree-l1">
+
+    <a class="" href="../bipostapi/">Loading and Transformation</a>
+	    </li>
+
+            <li class="toctree-l1">
+
+    <a class="" href="../synctowindows/">Two-way Synchronization</a>
 	    </li>
 
             <li class="toctree-l1">
@@ -134,6 +144,11 @@
             <li class="toctree-l1">
 
     <a class="" href="../businessintelligence/">Business Intelligence</a>
+	    </li>
+
+            <li class="toctree-l1">
+
+    <a class="" href="../csvtomysql/">CSV to MySQL Aurora</a>
 	    </li>
 
             <li class="toctree-l1">
@@ -275,7 +290,7 @@
     }
 ]
 </code></pre>
-<p>Abre biPost.exe y asegúrate de quitar el check <a href="../bipostexe/#recursive-sync">Recursive Sync</a>.</p>
+<p>Abre biPost.exe y asegúrate de quitar el check <a href="../sqlserver/#download-data">Recursive Sync</a>.</p>
 <p>Usando el JSON del ejemplo anterior, se enviará en cada sincronización <strong>todos los renglones</strong> de las tablas <code>Sucursal</code>, <code>Agente</code>, <code>MovTipo</code>, <code>Cta</code> y <code>CentroCostos</code>.</p>
 <p><strong>NOTA:</strong> Si la tabla que vas a enviar tiene más de un millón de registros, es recomendable que filtres el query utilizando la opción <code>"filter":</code>.</p>
 <h4 id="carpeta-recursivo">Carpeta Recursivo<a class="headerlink" href="#carpeta-recursivo" title="Permanent link">&para;</a></h4>

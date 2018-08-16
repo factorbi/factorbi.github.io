@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-83822501-2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-83822501-2');
+  </script>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta name="author" content="Factor BI">
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Pick Tables & Data to Sync - Bipost Sync</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../css/highlight.css">
+
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Pick Tables & Data to Sync";
+    var mkdocs_page_input_path = "customdatajson.md";
+    var mkdocs_page_url = "/customdatajson/";
+  </script>
+
+  <script src="../js/jquery-2.1.1.min.js"></script>
+  <script src="../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../js/highlight.pack.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> Bipost Sync</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+
+
+            <li class="toctree-l1">
+
+    <a class="" href="..">Home</a>
+	    </li>
+
+            <li class="toctree-l1">
+
+    <a class="" href="../easyawssetup/">Link your AWS Account</a>
+	    </li>
+
+            <li class="toctree-l1">
+
+    <a class="" href="../registration/">Factor BI Console</a>
+	    </li>
+
+            <li class="toctree-l1">
+
+    <a class="" href="../installation/">Download Program</a>
+	    </li>
+
+            <li class="toctree-l1">
+
+    <a class="" href="../sqlserver/">SQL Server to MySQL Aurora</a>
+	    </li>
+
+            <li class="toctree-l1">
+
+    <a class="" href="../firebird/">Firebird to MySQL Aurora</a>
+	    </li>
+
+            <li class="toctree-l1">
+
+    <a class="" href="../dbase/">dBase III to MySQL Aurora</a>
+	    </li>
+
+            <li class="toctree-l1 current">
+
+    <a class="current" href="./">Pick Tables & Data to Sync</a>
+    <ul class="subnav">
+
+    <li class="toctree-l2"><a href="#customdatajson">customData.json</a></li>
+
+        <ul>
+
+            <li><a class="toctree-l3" href="#tables-primary-keys">Tables &amp; Primary Keys</a></li>
+
+            <li><a class="toctree-l3" href="#recursivedatefield">recursiveDateField</a></li>
+
+            <li><a class="toctree-l3" href="#sync-for-multiple-scenarios">Sync for multiple scenarios</a></li>
+
+        </ul>
+
+
+    </ul>
+	    </li>
+
+            <li class="toctree-l1">
+
+    <a class="" href="../bipostapi/">Loading and Transformation</a>
+	    </li>
+
+            <li class="toctree-l1">
+
+    <a class="" href="../synctowindows/">Two-way Synchronization</a>
+	    </li>
+
+            <li class="toctree-l1">
+
+    <a class="" href="../aspel/">Aspel</a>
+	    </li>
+
+            <li class="toctree-l1">
+
+    <a class="" href="../microsip/">Microsip</a>
+	    </li>
+
+            <li class="toctree-l1">
+
+    <a class="" href="../intelisis/">Intelisis</a>
+	    </li>
+
+            <li class="toctree-l1">
+
+    <a class="" href="../businessintelligence/">Business Intelligence</a>
+	    </li>
+
+            <li class="toctree-l1">
+
+    <a class="" href="../csvtomysql/">CSV to MySQL Aurora</a>
+	    </li>
+
+            <li class="toctree-l1">
+
+    <a class="" href="../setupaws/">Advanced AWS Setup</a>
+	    </li>
+
+            <li class="toctree-l1">
+
+    <a class="" href="../troubleshooting/">Troubleshooting</a>
+	    </li>
+
+            <li class="toctree-l1">
+
+    <a class="" href="../about/">About</a>
+	    </li>
+
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">Bipost Sync</a>
+      </nav>
+
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+
+
+
+    <li>Pick Tables & Data to Sync</li>
+    <li class="wy-breadcrumbs-aside">
+
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+
+                <h1 id="customdatajson">customData.json<a class="headerlink" href="#customdatajson" title="Permanent link">&para;</a></h1>
+<p>This file allows you to specify the tables, fields and filter criteria to be used on the extraction process against the on-prem database.</p>
+<p><strong>Example 1, using recursiveDateField to optimize upload:</strong></p>
+<pre><code>[
+  {
+    "active": "true",
+    "table": "Venta",
+    "fields": "Venta.ID, Venta.Empresa, Venta.Mov, Venta.MovID, Venta.FechaEmision, Venta.Concepto, Venta.Moneda, Venta.TipoCambio, Venta.Estatus, Venta.Cliente, Venta.Almacen, Venta.Agente, Venta.Condicion, Venta.Vencimiento, Venta.DescuentoLineal, Venta.Sucursal, Venta.SubModulo, Venta.Importe, Venta.Impuestos, Venta.CostoTotal, Venta.FechaRegistro, Venta.DescuentoGlobal, Venta.Proyecto",
+    "join": "MovTipo WITH (NOLOCK) ON Venta.Mov = MovTipo.Mov AND MovTipo.Modulo = 'VTAS'",
+    "filter": "Venta.Estatus NOT IN ('SINAFECTAR','BORRADOR') AND MovTipo.Clave IN ('VTAS.F','VTAS.D','VTAS.N','VTAS.FM','VTAS.FC')",
+    "recursiveDateField": "Venta.FechaEmision",
+    "order": "",
+    "limit": ""
+  },
+  {
+    "active": "true",
+    "table": "VentaD",
+    "fields": "VentaD.ID, VentaD.Renglon, VentaD.RenglonSub, VentaD.Articulo, VentaD.Cantidad, VentaD.Almacen, VentaD.Precio, VentaD.DescuentoLinea, VentaD.DescuentoImporte, VentaD.Impuesto1, VentaD.Costo, VentaD.ContUso, VentaD.Unidad, VentaD.Factor, VentaD.Agente",
+    "join": "Venta WITH (NOLOCK) ON Venta.ID = VentaD.ID JOIN MovTipo WITH (NOLOCK) ON Venta.Mov = MovTipo.Mov AND MovTipo.Modulo = 'VTAS'",
+    "filter": "Venta.Estatus NOT IN ('SINAFECTAR','BORRADOR') AND MovTipo.Clave IN ('VTAS.F','VTAS.D','VTAS.N','VTAS.FM','VTAS.FC')",
+    "recursiveDateField": "Venta.FechaEmision",
+    "order": "",
+    "limit": ""
+  }
+]
+</code></pre>
+<p><strong>Example 2, for tables with 50,000 rows or less:</strong></p>
+<pre><code>[
+  {
+    "active": "true",
+    "table": "MovTipo",
+    "fields": "Modulo, Mov, Clave",
+    "join": "",
+    "filter": "",
+    "recursiveDateField": "",
+    "order": "",
+    "limit": ""
+  },
+  {
+    "active": "true",
+    "table": "Cta",
+    "fields": "Cuenta, Rama, Descripcion, Tipo, EsAcreedora, EsAcumulativa, CentrosCostos, Estatus, ClaveSAT",
+    "join": "",
+    "filter": "",
+    "recursiveDateField": "",
+    "order": "",
+    "limit": ""
+  },
+  {
+    "active": "true",
+    "table": "CentroCostos",
+    "fields": "CentroCostos, Rama, Descripcion, EsAcumulativo, Grupo, SubGrupo, SubSubGrupo, Estatus",
+    "join": "",
+    "filter": "",
+    "recursiveDateField": "",
+    "order": "",
+    "limit": ""
+  },
+  {
+    "active": "",
+    "table": "",
+    "fields": "",
+    "join": "",
+    "filter": "",
+    "recursiveDateField": "",
+    "order": "",
+    "limit": ""
+  }
+]
+</code></pre>
+<blockquote>
+<p>The above JSON will send all data for the specified tables, as <code>join</code> and <code>filter</code> are not in use.</p>
+<p>You can leave <code>"active": "",</code> empty.</p>
+</blockquote>
+<p><strong>Example 3, using special filter when no datetime is available:</strong></p>
+<pre><code>[
+  {
+    "active": "true",
+    "table": "bibliaAlmacen",
+    "fields": "id, empresa, articulo, almacen, y, m, venta, devolucion, compra, devolucionCompra, trasladoRecepcion, trasladoSalida, otraEntrada, otraSalida, invInicial, inventario, valor, valorUSD, costo, costoUSD, costoVenta, costoVentaUSD, total1, peso, acum, abc, idym",
+    "join": "",
+    "filter": "y = datepart(yy,DATEADD(s,-1,DATEADD(mm, DATEDIFF(m,0,GETDATE()),0))) AND m = datepart(m,DATEADD(s,-1,DATEADD(mm, DATEDIFF(m,0,GETDATE()),0)))",
+    "recursiveDateField": "",
+    "order": "",
+    "limit": ""
+  }
+]
+</code></pre>
+<blockquote>
+<p><code>join</code> and <code>filter</code> can use any syntax supported on SQL Server/Firebird SQL.</p>
+</blockquote>
+<p><strong>Example 4, using order and limit:</strong></p>
+<pre><code>[
+  {
+    "active": "true",
+    "table": "DOCTOS_ENTRE_SIS",
+    "fields": "*",
+    "join": "",
+    "filter": "",
+    "recursiveDateField": "",
+    "order": "DOCTO_DEST_ID DESC",
+    "limit": "12500"
+  }
+]
+</code></pre>
+<hr />
+<h2 id="tables-primary-keys">Tables &amp; Primary Keys<a class="headerlink" href="#tables-primary-keys" title="Permanent link">&para;</a></h2>
+<p>Take note of the following:</p>
+<ul>
+<li>Every table specified in <strong>customData.json</strong> must have a <strong>Primary Key</strong> and these must be listed on <code>"fields"</code></li>
+<li>You can only setup customData.json with <strong>base tables.</strong></li>
+<li><code>"fields"</code> parameter must only include fields that exist on <code>"table":</code></li>
+</ul>
+<h2 id="recursivedatefield">recursiveDateField<a class="headerlink" href="#recursivedatefield" title="Permanent link">&para;</a></h2>
+<p>This parameter is used when <strong>Recursive Sync</strong> check box is enabled.</p>
+<p><img alt="Screenshot" src="../img/bipost7.png" /></p>
+<p>Remove time from the specified column with datetime functions.</p>
+<h2 id="sync-for-multiple-scenarios">Sync for multiple scenarios<a class="headerlink" href="#sync-for-multiple-scenarios" title="Permanent link">&para;</a></h2>
+<p>It is very common to make changes to customData.json to upload different sets of data.</p>
+<p><strong>Use Cases:</strong></p>
+<ol>
+<li>
+<p>Some tables may be uploaded once since that data is rarely changed, e.g. config &amp; company tables.</p>
+</li>
+<li>
+<p>Historic data may be uploaded once, e.g. transactions from previous years.</p>
+</li>
+<li>
+<p>Recently created/changed data may be uploaded daily, e.g. invoices, quotes, purchase orders, customers, items, vendors, etc.</p>
+</li>
+</ol>
+<p>For all these reasons it may be useful to make copies of Bipost Sync folder and just change <strong>customData.json.</strong> Moreover you may want to have different sync schedules.</p>
+
+            </div>
+          </div>
+          <footer>
+
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+
+        <a href="../bipostapi/" class="btn btn-neutral float-right" title="Loading and Transformation">Next <span class="icon icon-circle-arrow-right"></span></a>
+
+
+        <a href="../dbase/" class="btn btn-neutral" title="dBase III to MySQL Aurora"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+
+    </div>
+
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+
+      <p>© 2016 - 2018, <a href="https://www.factorbi.com">Factor BI, S.A. de C.V.</a> All rights reserved.</p>
+
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+
+
+        <span><a href="../dbase/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+
+
+        <span style="margin-left: 15px"><a href="../bipostapi/" style="color: #fcfcfc">Next &raquo;</a></span>
+
+    </span>
+</div>
+    <script src="../js/theme.js"></script>
+
+</body>
+</html>
