@@ -245,9 +245,9 @@ END$$
 </code></pre>
 <hr />
 <h2 id="3-load-data">3. Load Data<a class="headerlink" href="#3-load-data" title="Permanent link">&para;</a></h2>
-<p>Data loading is performed by Aurora with a <code>REPLACE</code> parameter. Rows with the same primary key are updated and the rest inserted.</p>
+<p>Data loading is performed by Aurora. Rows with the same primary key are updated and the rest are inserted.</p>
 <p>You can verify which tables where loaded by querying <code>aurora_s3_load_history</code> table like this:</p>
-<pre><code>select * from mysql.aurora_s3_load_history where file_name regexp 'mytablename';
+<pre><code>SELECT * FROM mysql.aurora_s3_load_history WHERE file_name REGEXP 'mytablename' ORDER BY load_timestamp desc;
 </code></pre>
 <p>Optionally convert <code>load_timestamp</code> to your local time, e.g.: <code>CONVERT_TZ(load_timestamp,'UTC','America/Mexico_City')</code></p>
 <hr />

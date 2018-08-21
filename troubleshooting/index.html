@@ -161,9 +161,11 @@
 
             <li><a class="toctree-l3" href="#schema-limitations">Schema Limitations</a></li>
 
-            <li><a class="toctree-l3" href="#appdatalocal-folder">AppData\Local folder</a></li>
-
             <li><a class="toctree-l3" href="#mysql-schemas-are-created-but-no-data-is-loaded">MySQL schemas are created but no data is loaded</a></li>
+
+            <li><a class="toctree-l3" href="#debugging-s3stream">Debugging S3Stream</a></li>
+
+            <li><a class="toctree-l3" href="#load-from-s3-privileges">LOAD FROM S3 privileges</a></li>
 
             <li><a class="toctree-l3" href="#firebird-column-name-starts-with-underscore">Firebird column name starts with underscore</a></li>
 
@@ -213,17 +215,17 @@
             <div class="section">
 
                 <h1 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h1>
-<p>When you use manual sync and it is completed successfully, the following dialog appears.</p>
-<p><img alt="Screenshot" src="../img/sync_completed.png" /></p>
+<p>When make a successful synchronization the following dialog appears.</p>
+<p><img alt="Bipost successful sync" src="../img/sync_completed.png" /></p>
 <p>If you face any errors, try looking here.</p>
 <hr />
 <h2 id="syntax-error">Syntax error<a class="headerlink" href="#syntax-error" title="Permanent link">&para;</a></h2>
 <p>Misspelled fields or tables on customData.json may appear as:</p>
-<p><img alt="Screenshot" src="../img/customDataSyntaxError.png" /></p>
+<p><img alt="customData syntax error" src="../img/customDataSyntaxError.png" /></p>
 <hr />
 <h2 id="no-internet-connection">No Internet Connection<a class="headerlink" href="#no-internet-connection" title="Permanent link">&para;</a></h2>
 <p>When no internet connection available, the following message appears:</p>
-<p><img alt="Screenshot" src="../img/NameResolutionFailure.png" /></p>
+<p><img alt="S3 NameResolutionFailure" src="../img/NameResolutionFailure.png" /></p>
 <hr />
 <h2 id="firewall-restrictions">Firewall Restrictions<a class="headerlink" href="#firewall-restrictions" title="Permanent link">&para;</a></h2>
 <p>If your internet connection has a firewall, it may show different errors like:</p>
@@ -233,15 +235,15 @@
 <li>A WebException with status NameResolutionFailure was thrown.</li>
 <li>Error making request with Error Code ExpectationFailed and Http Status Code ExpectationFailed.</li>
 </ul>
-<p><img alt="Screenshot" src="../img/Error_Code_ExpectationFailed.png" /></p>
+<p><img alt="Firewall Restrictions to S3" src="../img/Error_Code_ExpectationFailed.png" /></p>
 <h3 id="grant-firewall-to-reach-amazon-s3">Grant Firewall to reach Amazon S3<a class="headerlink" href="#grant-firewall-to-reach-amazon-s3" title="Permanent link">&para;</a></h3>
 <p>Create a policy to Allow to:</p>
 <ul>
 <li><code>54.230.0.0/15</code></li>
 <li><code>52.192.0.0/11</code></li>
 </ul>
-<p><img alt="Screenshot" src="../img/FirewallAllowTo.png" /></p>
-<p>AWS can have multiple IP addresses for S3 service, so in case the above IP's don't work check the <a href="https://aws.amazon.com/blogs/aws/aws-ip-ranges-json/">AWS Public IP Address Ranges documentation</a> and look for</p>
+<p><img alt="Firewall policy to reach AWS S3" src="../img/FirewallAllowTo.png" /></p>
+<p>AWS can have multiple IP addresses for S3 service, so in case the above IP's don't work check the <a href="https://aws.amazon.com/blogs/aws/aws-ip-ranges-json/" target="_blank">AWS Public IP Address Ranges documentation</a> <a href=""></a> and look for</p>
 <pre><code>  "region": "GLOBAL",
   "service": "AMAZON"
 </code></pre>
@@ -249,7 +251,7 @@
 <pre><code>  "region": "us-east-1",
   "service": "AMAZON"
 </code></pre>
-<p><a href="https://ip-ranges.amazonaws.com/ip-ranges.json">https://ip-ranges.amazonaws.com/ip-ranges.json</a></p>
+<p><a href="https://ip-ranges.amazonaws.com/ip-ranges.json" target="_blank">https://ip-ranges.amazonaws.com/ip-ranges.json</a></p>
 <hr />
 <h2 id="no-information-to-sync">No information to Sync<a class="headerlink" href="#no-information-to-sync" title="Permanent link">&para;</a></h2>
 <p>If <code>No information to Sync</code> message appears, verify that customData.json is set to send at least one table.</p>
@@ -257,110 +259,114 @@
 <h2 id="waiting-time">Waiting time<a class="headerlink" href="#waiting-time" title="Permanent link">&para;</a></h2>
 <p>Bipost Sync may take from a few seconds to several minutes to extract from on-prem DB and upload to AWS. While this is happening no messages/icons will show that biPost.exe is working and maybe you'll see <code>(Not responding)</code> on the top of the window, this is normal.</p>
 <p>If you launch Windows Task Manager probably you'll see that <code>biPost.exe *32</code> is running and consuming a considerable amount of CPU.</p>
-<p>Once the information is uploaded to AWS, it usually is available on Aurora-MySQL very fast. If a big data set was uploaded it may take up to 5 minutes to be available on Aurora.</p>
-<p>If you need to check which tables where loaded, check <a href="../bipostapi/#3-load-data">aurora_s3_load_history.</a></p>
+<p>Once the information is uploaded to AWS, it is usually available on Aurora-MySQL very fast. If a big data set was uploaded it may take up to 5 minutes to be available on Aurora.</p>
+<p>Verify which tables where loaded by querying <code>aurora_s3_load_history</code> table like this:</p>
+<pre><code>SELECT * FROM mysql.aurora_s3_load_history WHERE file_name REGEXP 'mytablename' ORDER BY load_timestamp desc;
+</code></pre>
+<p>Optionally convert <code>load_timestamp</code> to your local time, e.g.: <code>CONVERT_TZ(load_timestamp,'UTC','America/Mexico_City')</code></p>
 <hr />
 <h2 id="upload-limit">Upload Limit<a class="headerlink" href="#upload-limit" title="Permanent link">&para;</a></h2>
 <p>Depending on the number of rows and columns on each table, it is possible that a large amount of data sent on a single sync may not load to Aurora-MySQL.</p>
-<p>We have tested up to 1.5 million rows on a single sync and works fine.</p>
-<p>We recommend using <a href="../customdatajson">Recursive Sync</a> for big tables that have a datetime field available.</p>
+<p>We have tested up to 1.5 million rows on a single sync or 280 MB uncompressed files.</p>
+<p>We recommend using <a href="../customdatajson">Recursive Sync</a> for big tables that have a date field available.</p>
 <hr />
 <h2 id="special-characters">Special Characters<a class="headerlink" href="#special-characters" title="Permanent link">&para;</a></h2>
-<p>Some special characters on <code>char</code> and <code>varchar</code> fields are not supported and thus removed by biPost.exe
-For example:</p>
-<ul>
-<li>Enter</li>
-<li>()</li>
-</ul>
-<p>On <strong>SQL Server</strong>, all special characters on strings of 100 length or more are removed, leaving only letters and numbers.</p>
+<p>Line breaks are not supported and thus removed.</p>
 <hr />
 <h2 id="schema-limitations">Schema Limitations<a class="headerlink" href="#schema-limitations" title="Permanent link">&para;</a></h2>
-<ul>
-<li>Tables without a <code>PRIMARY KEY</code> on SQL Server and Firebird will display an error message.</li>
-</ul>
-<hr />
-<h2 id="appdatalocal-folder">AppData\Local folder<a class="headerlink" href="#appdatalocal-folder" title="Permanent link">&para;</a></h2>
-<p>Sometimes it is necessary to manually delete the content of <code>\AppData\Local\biPost</code> folder.</p>
-<p>Open a new Windows Explorer and enter <code>%localappdata%\bipost</code>. Select all and delete.</p>
-<pre><code>************** Exception Text **************
-System.IO.IOException: The process cannot access the file '012a3b4c-56d7-8ef9-0123-456789a012bc_post.zip' because it is being used by another process.
-</code></pre>
+<p>Only tables with a <code>PRIMARY KEY</code> are available to synchronize. If a table does not have a PRIMARY KEY an error message will appear.</p>
 <hr />
 <h2 id="mysql-schemas-are-created-but-no-data-is-loaded">MySQL schemas are created but no data is loaded<a class="headerlink" href="#mysql-schemas-are-created-but-no-data-is-loaded" title="Permanent link">&para;</a></h2>
 <p>Two things might be causing this problem:</p>
 <h4 id="1-rds-instance-cannot-reach-s3-bucket">1. RDS instance cannot reach S3 bucket.<a class="headerlink" href="#1-rds-instance-cannot-reach-s3-bucket" title="Permanent link">&para;</a></h4>
 <p>When we look at our CloudWatch logs, we see <code>Unable to initialize S3Stream</code>, so do the following:</p>
 <ul>
+<li>Go to <a href="../easyawssetup/#step-5-add-role-to-cluster">RDS Clusters</a> and check if <strong>IAM Role</strong> is listed and active for your cluster.</li>
+</ul>
+<p>If you <strong>manually</strong> created AWS Services then:</p>
+<ul>
 <li>
-<p>Check if your <a href="../setupaws/#create-iam-policy-to-grant-access-to-s3">IAM Policy to Grant Access to S3</a> is set correctly using the S3 bucket ARN we provided. Also double check the policy document (JSON).</p>
+<p>Check if your <a href="../setupaws/#iam-policy-to-grant-access-to-s3">IAM Policy to Grant Access to S3</a> is set correctly using the S3 bucket ARN we provided. Also double check the policy document (JSON).</p>
 </li>
 <li>
-<p>Check that <a href="../setupaws/#create-iam-role-to-allow-rds-access-to-s3">IAM Role</a> has attached the former IAM Policy. Copy ARN Role to a notepad for next steps.</p>
+<p>Check that <a href="../setupaws/#iam-role-to-load-data-from-s3">IAM Role</a> has attached the former IAM Policy. Copy ARN Role to a notepad for next steps.</p>
 </li>
 <li>
 <p>Go to <a href="../setupaws/#create-cluster-parameter-group">RDS Parameter Groups</a>, select the cluster group and click <strong>Compare Parameters</strong>, it should show the IAM ARN Role (the one you just copied on a notepad) on the parameters shown <a href="../setupaws/#create-cluster-parameter-group">here.</a></p>
 </li>
 <li>
-<p>Go to <a href="../setupaws/#add-iam-role-to-aurora-cluster">RDS Clusters</a> and check if <strong>IAM Role</strong> is listed and active for your cluster.</p>
-</li>
-<li>
 <p>Double check IAM roles attached to your instance querying <code>show global variables like '%role%'</code></p>
 </li>
 </ul>
-<p><img alt="Screenshot" src="../img/show-global-variables.png" /></p>
-<p>After this, if you still experience this error, check out <a href="../troubleshooting/#manually-debugging-s3stream">Manually debugging S3Stream.</a></p>
-<h4 id="2-name-of-your-destination-database-must-be-all-lower-case">2. Name of your destination database must be all lower case.<a class="headerlink" href="#2-name-of-your-destination-database-must-be-all-lower-case" title="Permanent link">&para;</a></h4>
+<p><img alt="Aurora MySQL SHOW GLOBAL VARIABLES" src="../img/show-global-variables.png" /></p>
+<p>After this, if you still experience this error, check out <a href="../troubleshooting/#debugging-s3stream">Manually debugging S3Stream.</a></p>
+<h4 id="2-name-of-your-mysql-database-must-be-all-lower-case">2. Name of your MySQL database must be all lower case.<a class="headerlink" href="#2-name-of-your-mysql-database-must-be-all-lower-case" title="Permanent link">&para;</a></h4>
 <p>When we look at our CloudWatch logs, we see:</p>
 <p><code>SequelizeConnectionError: ER_BAD_DB_ERROR: Unknown database</code></p>
 <p>Double check that your DB name is all lower case.</p>
-<h3 id="manually-debugging-s3stream">Manually debugging S3Stream<a class="headerlink" href="#manually-debugging-s3stream" title="Permanent link">&para;</a></h3>
+<hr />
+<h2 id="debugging-s3stream">Debugging S3Stream<a class="headerlink" href="#debugging-s3stream" title="Permanent link">&para;</a></h2>
 <p>In this section we will manually upload data to Aurora-MySQL. The goal here is to see whether an error is shown while directly importing data from S3 to Aurora-MySQL.</p>
-<p>Using MySQL Workbench (or any client of your preference), open a connection to your MySQL instance preferably using <code>root</code> account.</p>
-<p><strong>Syntax</strong></p>
-<pre><code>LOAD DATA FROM S3 's3-us-east-1://{my-bucket-name}/{my-36-digit-service-number}/process_{my-36-digit-service-number}{YYYY_M_D-of-yesterday}_post/{my-example-table}.csv'
-REPLACE INTO TABLE `{my-database-name}`.`{my-example-table}`
-CHARACTER SET 'utf8'
-FIELDS TERMINATED BY '|'
-ENCLOSED BY '\"'
-LINES TERMINATED BY '\r\n'
-IGNORE 1 LINES
-({column_1},{column_2},...,{column_n});
+<h4 id="create-dummy-table">Create Dummy Table<a class="headerlink" href="#create-dummy-table" title="Permanent link">&para;</a></h4>
+<p>Using MySQL Workbench open a connection to your MySQL instance using <code>root</code> account.</p>
+<p>Let's create a dummy table:</p>
+<pre><code>CREATE TABLE `dummytable` (
+  `CIUDAD_ID` int(4) NOT NULL,
+  `NOMBRE` varchar(50) COLLATE latin1_spanish_ci NOT NULL,
+  `CLAVE_FISCAL` varchar(3) COLLATE latin1_spanish_ci DEFAULT NULL,
+  `ES_PREDET` char(1) COLLATE latin1_spanish_ci DEFAULT NULL,
+  `ESTADO_ID` int(4) NOT NULL,
+  `USUARIO_CREADOR` varchar(31) COLLATE latin1_spanish_ci DEFAULT NULL,
+  `FECHA_HORA_CREACION` datetime DEFAULT NULL,
+  `USUARIO_AUT_CREACION` varchar(31) COLLATE latin1_spanish_ci DEFAULT NULL,
+  `USUARIO_ULT_MODIF` varchar(31) COLLATE latin1_spanish_ci DEFAULT NULL,
+  `FECHA_HORA_ULT_MODIF` datetime DEFAULT NULL,
+  `USUARIO_AUT_MODIF` varchar(31) COLLATE latin1_spanish_ci DEFAULT NULL,
+  PRIMARY KEY (`CIUDAD_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
 </code></pre>
-<p>Replace curly brackets with your data.</p>
-<p><strong>Parameters</strong></p>
+<h4 id="load-data-from-s3">LOAD DATA FROM S3<a class="headerlink" href="#load-data-from-s3" title="Permanent link">&para;</a></h4>
+<p>Replace curly brackets with your parameters:</p>
 <ul>
-<li><strong>my-bucket-name</strong>: Name of your dedicated bucket, assigned by Factor BI.</li>
-<li><strong>my-36-digit-service-number</strong>: Number assigned to your service.</li>
-<li><strong>YYYY_M_D-of-yesterday</strong>: Date for yesterday on GMT America/Mexico_City.</li>
-<li><strong>my-example-table</strong>: Pick any of the tables that you are synchronizing.</li>
-<li><strong>my-database-name</strong>: Name of your destination DB on MySQL.</li>
-<li><strong>{column_1},{column_2},...,{column_n}</strong>: List all the columns in the same order as they appear in the .CSV file created on <a href="../troubleshooting/#appdatalocal-folder">AppData\Local folder</a>.</li>
+<li><strong>my-bucket-name</strong>: Name of your dedicated bucket.</li>
+<li><strong>my-database-name</strong>: Name of your database on MySQL.</li>
 </ul>
-<p><strong>Example</strong></p>
-<pre><code>LOAD DATA FROM S3 's3-us-east-1://bipostdata-f0123abc4567/a1bcd23e-4fa5-67b8-cd9e-f0123abc4567/process_a1bcd23e-4fa5-67b8-cd9e-f0123abc45672017_9_13_post/CLIE.csv'
-REPLACE INTO TABLE `mytestdb`.`clie`
+<p>Now run on Workbench:</p>
+<pre><code>LOAD DATA FROM S3 's3-us-east-1://{my-bucket-name}/DUMMYTABLE.csv'
+REPLACE INTO TABLE `{my-database-name}`.`dummytable`
 CHARACTER SET 'utf8'
 FIELDS TERMINATED BY '|'
 ENCLOSED BY '\"'
 LINES TERMINATED BY '\r\n'
 IGNORE 1 LINES
-(CLAVE,STATUS,NOMBRE,RFC,CALLE,NUMINT,NUMEXT,CRUZAMIENTOS,CRUZAMIENTOS2,COLONIA,CODIGO,LOCALIDAD,MUNICIPIO,ESTADO,NACIONALIDAD,REFERDIR,TELEFONO,CLASIFIC,FAX,PAG_WEB,CURP,CVE_ZONA,IMPRIR,MAIL,NIVELSEC,ENVIOSILEN,EMAILPRED,DIAREV,DIAPAGO,CON_CREDITO,DIASCRED,LIMCRED,SALDO,LISTA_PREC,CVE_BITA,ULT_PAGOD,ULT_PAGOM,ULT_PAGOF,DESCUENTO,ULT_VENTAD,ULT_COMPM,FCH_ULTCOM,VENTAS,CVE_VEND,CVE_OBS,TIPO_EMPRESA,MATRIZ,PROSPECTO,CALLE_ENVIO,NUMINT_ENVIO,NUMEXT_ENVIO,CRUZAMIENTOS_ENVIO,CRUZAMIENTOS_ENVIO2,COLONIA_ENVIO,LOCALIDAD_ENVIO,MUNICIPIO_ENVIO,ESTADO_ENVIO,PAIS_ENVIO,CODIGO_ENVIO,CVE_ZONA_ENVIO,REFERENCIA_ENVIO,CUENTA_CONTABLE,ADDENDAF,ADDENDAD,NAMESPACE,METODODEPAGO,NUMCTAPAGO,MODELO,DES_IMPU1,DES_IMPU2,DES_IMPU3,DES_IMPU4,DES_PER,LAT_GENERAL,LON_GENERAL,LAT_ENVIO,LON_ENVIO,UUID,VERSION_SINC,USO_CFDI,CVE_PAIS_SAT,NUMIDREGFISCAL,FORMADEPAGOSAT);
+(CIUDAD_ID,NOMBRE,CLAVE_FISCAL,ES_PREDET,ESTADO_ID,USUARIO_CREADOR,FECHA_HORA_CREACION,USUARIO_AUT_CREACION,USUARIO_ULT_MODIF,FECHA_HORA_ULT_MODIF,USUARIO_AUT_MODIF);
 </code></pre>
-<p><img alt="Screenshot" src="../img/Unable-to-initialize-S3Stream.png" /></p>
-<h3 id="load-from-s3-privileges">LOAD FROM S3 privileges<a class="headerlink" href="#load-from-s3-privileges" title="Permanent link">&para;</a></h3>
+<p><strong>Example</strong></p>
+<pre><code>LOAD DATA FROM S3 's3-us-east-1://bipostdata-123456789012/DUMMYTABLE.csv'
+REPLACE INTO TABLE `mytestdb`.`dummytable`
+CHARACTER SET 'utf8'
+FIELDS TERMINATED BY '|'
+ENCLOSED BY '\"'
+LINES TERMINATED BY '\r\n'
+IGNORE 1 LINES
+(CIUDAD_ID,NOMBRE,CLAVE_FISCAL,ES_PREDET,ESTADO_ID,USUARIO_CREADOR,FECHA_HORA_CREACION,USUARIO_AUT_CREACION,USUARIO_ULT_MODIF,FECHA_HORA_ULT_MODIF,USUARIO_AUT_MODIF);
+</code></pre>
+<p><img alt="Unable to initialize S3Stream" src="../img/Unable-to-initialize-S3Stream.png" /></p>
+<hr />
+<h2 id="load-from-s3-privileges">LOAD FROM S3 privileges<a class="headerlink" href="#load-from-s3-privileges" title="Permanent link">&para;</a></h2>
 <p>The Aurora user that executes <strong>LOAD DATA FROM S3</strong> requires the following privilege:</p>
 <p><code>GRANT LOAD FROM S3 ON *.* TO 'your-user-name';</code></p>
-<p>By default this privilege is set to your <strong>Master Username</strong> when you <a href="../setupaws/#create-aurora-instance">created your Aurora instance.</a></p>
+<p>By default this privilege is set to your <strong>Master Username</strong> when you <a href="../setupaws/#aurora-instance">created your Aurora instance.</a></p>
 <p>If you are using a different user and the privilege is not set, the following error appears:</p>
 <p><code>Access denied; you need (at least one of) the LOAD FROM S3 privilege(s) for this operation</code></p>
-<p>The only way to see this error is executing <strong>LOAD FROM S3</strong> <a href="../troubleshooting/#manually-debugging-s3stream">manually.</a></p>
+<p>The only way to see this error is executing <strong>LOAD FROM S3</strong> <a href="../troubleshooting/#debugging-s3stream">manually.</a></p>
 <p>If your MySQL user already has this privilege and you see the following error, try <a href="../troubleshooting/#1-rds-instance-cannot-reach-s3-bucket">these steps.</a></p>
 <p><code>Access denied for user 'your-user-name'@'xx.xx.xxx.xxx' (using password: YES)</code></p>
 <hr />
 <h2 id="firebird-column-name-starts-with-underscore">Firebird column name starts with underscore<a class="headerlink" href="#firebird-column-name-starts-with-underscore" title="Permanent link">&para;</a></h2>
 <p>Firebird SQL does not naturally support creating colums names starting with underscore, so avoid that on Aurora if your on-prem DB is Firebird.</p>
 <p><code>Token unknown - line 1</code></p>
-<p><img alt="Screenshot" src="../img/underscore_error_Firebird.png" /></p>
+<p><img alt="Firebird column name starts with underscore" src="../img/underscore_error_Firebird.png" /></p>
 <hr />
 <h2 id="need-more-help">Need more help?<a class="headerlink" href="#need-more-help" title="Permanent link">&para;</a></h2>
 <p>Please send us an email to: <a href="mailto:info@factorbi.com">info@factorbi.com</a></p>
