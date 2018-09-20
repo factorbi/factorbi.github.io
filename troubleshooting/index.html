@@ -275,6 +275,7 @@
 <hr />
 <h2 id="schema-limitations">Schema Limitations<a class="headerlink" href="#schema-limitations" title="Permanent link">&para;</a></h2>
 <p>Only tables with a <code>PRIMARY KEY</code> are available to synchronize. If a table does not have a PRIMARY KEY an error message will appear.</p>
+<p>As a workaround, you can manually create the tables with a PRIMARY KEY on Aurora-MySQL and then synchronize. On-prem schema changes (e.g. adding columns) will not synchronize unless on-prem tables use primary keys.</p>
 <hr />
 <h2 id="mysql-schemas-are-created-but-no-data-is-loaded">MySQL schemas are created but no data is loaded<a class="headerlink" href="#mysql-schemas-are-created-but-no-data-is-loaded" title="Permanent link">&para;</a></h2>
 <p>Two things might be causing this problem:</p>
