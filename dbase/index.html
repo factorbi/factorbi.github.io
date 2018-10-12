@@ -17,7 +17,7 @@
 
   <meta name="author" content="Factor BI">
   <link rel="shortcut icon" href="../img/favicon.ico">
-  <title>dBase III to MySQL Aurora - Bipost Sync</title>
+  <title>dBase to MySQL Aurora - Database Synchronization & ETL to AWS Cloud | Factor BI</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../css/theme.css" type="text/css" />
@@ -26,7 +26,7 @@
 
   <script>
     // Current page data
-    var mkdocs_page_name = "dBase III to MySQL Aurora";
+    var mkdocs_page_name = "dBase to MySQL Aurora";
     var mkdocs_page_input_path = "dbase.md";
     var mkdocs_page_url = "/dbase/";
   </script>
@@ -44,7 +44,7 @@
 
     <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
       <div class="wy-side-nav-search">
-        <a href=".." class="icon icon-home"> Bipost Sync</a>
+        <a href=".." class="icon icon-home"> Database Synchronization & ETL to AWS Cloud | Factor BI</a>
         <div role="search">
   <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -88,10 +88,10 @@
 
             <li class="toctree-l1 current">
 
-    <a class="current" href="./">dBase III to MySQL Aurora</a>
+    <a class="current" href="./">dBase to MySQL Aurora</a>
     <ul class="subnav">
 
-    <li class="toctree-l2"><a href="#synchronize-dbf-to-mysql-aurora">Synchronize DBF to MySQL Aurora</a></li>
+    <li class="toctree-l2"><a href="#synchronize-dbase-to-mysql-aurora">Synchronize dBase to MySQL Aurora</a></li>
 
         <ul>
 
@@ -183,7 +183,7 @@
 
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
         <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="..">Bipost Sync</a>
+        <a href="..">Database Synchronization & ETL to AWS Cloud | Factor BI</a>
       </nav>
 
 
@@ -195,7 +195,7 @@
 
 
 
-    <li>dBase III to MySQL Aurora</li>
+    <li>dBase to MySQL Aurora</li>
     <li class="wy-breadcrumbs-aside">
 
     </li>
@@ -205,8 +205,8 @@
           <div role="main">
             <div class="section">
 
-                <h1 id="synchronize-dbf-to-mysql-aurora">Synchronize DBF to MySQL Aurora<a class="headerlink" href="#synchronize-dbf-to-mysql-aurora" title="Permanent link">&para;</a></h1>
-<p>Continually export dBase III data to Aurora MySQL on AWS.</p>
+                <h1 id="synchronize-dbase-to-mysql-aurora">Synchronize dBase to MySQL Aurora<a class="headerlink" href="#synchronize-dbase-to-mysql-aurora" title="Permanent link">&para;</a></h1>
+<p>Continually export dBase data to Aurora MySQL on AWS.</p>
 <ul>
 <li>To make synchronizations from DBF to Aurora you need your <strong>Service</strong> and <strong>Activation No.</strong> </li>
 <li>Get them from your <a href="https://s3.amazonaws.com/biforms-prod/index.html" target="_blank">Factor BI Console.</a></li>
@@ -215,9 +215,9 @@
 <ul>
 <li><strong>Service No.:</strong> 36 digit number, it may look like this: <code>a1bcd23e-4fa5-67b8-cd9e-f0123abc4567</code></li>
 <li><strong>Activation No.:</strong> 24 digit number, it may look like this: <code>5990ab12c3de45f6a78bc90d</code></li>
-<li><strong>Engine:</strong> <code>DBF</code></li>
-<li><strong>System:</strong> <code>Custom...</code></li>
-<li><strong>SQL Connection:</strong> Directory containing <strong>.dbf</strong> files.</li>
+<li><strong>Engine:</strong> DBF</li>
+<li><strong>System:</strong> Custom...</li>
+<li><strong>DBF Connection:</strong> Directory containing <strong>.dbf</strong> files.</li>
 </ul>
 <hr />
 <h2 id="general-settings">General Settings<a class="headerlink" href="#general-settings" title="Permanent link">&para;</a></h2>
@@ -236,32 +236,15 @@
 </blockquote>
 <h3 id="download-data">Download Data<a class="headerlink" href="#download-data" title="Permanent link">&para;</a></h3>
 <ul>
-<li>
-<p>Enable to download data from AWS Aurora to on-premises.</p>
-</li>
-<li>
-<p>Downloaded data will be available on <code>%localappdata%/biPost/out_</code> Windows folder.</p>
-</li>
-<li>
-<p>It is not supported to update/insert data on DBF files.</p>
-</li>
-<li>
-<p>More about downloading data check here <a href="../synctowindows">--&gt; Sync back to Windows</a></p>
-</li>
+<li>Leave <strong>unchecked</strong>.</li>
 </ul>
 <h3 id="recursive-sync">Recursive Sync<a class="headerlink" href="#recursive-sync" title="Permanent link">&para;</a></h3>
 <ul>
 <li>
-<p>Optimize upload by extracting and uploading one day at a time for a given date range.</p>
+<p>Leave <strong>unchecked</strong>.</p>
 </li>
 <li>
-<p>Very useful to upload historic data and big data sets.</p>
-</li>
-<li>
-<p>Always use along with <a href="../customdatajson/">customData.json</a> so you can configure the date field to use for each table.</p>
-</li>
-<li>
-<p>When <strong>turned off</strong> it automatically sets <em>today</em> as start and end date using your system clock.</p>
+<p>More info about this feature click here <a href="../customdatajson/#recursive-synchronization">--&gt; Recursive Synchronization</a></p>
 </li>
 </ul>
 <hr />
@@ -284,7 +267,7 @@
 <p>If you are going to synchronize two or more databases from the same Windows host, create separate Bipost Sync folders for each database. Then customize each folder with the desired data set as explained <a href="../customdatajson">here.</a></p>
 <hr />
 <h1 id="positouch-use-case">POSitouch Use Case<a class="headerlink" href="#positouch-use-case" title="Permanent link">&para;</a></h1>
-<p><a href="https://positouch.com/" target="_blank">POSitouch</a> Point of Sale system works with .DBF files. You can daily/hourly extract DBF data from several POSitouch restaurants and consolidate them on AWS at scale.</p>
+<p><a href="https://positouch.com/" target="_blank">POSitouch</a> Point of Sale system works with .DBF files. You can daily extract DBF data from several POSitouch restaurants and consolidate them on AWS at scale.</p>
 <p>Make POSitouch reporting simple. Create KPI's, Dashboards and Business Intelligence analytics using <a href="https://www.google.com/analytics/data-studio/" target="_blank">Google Data Studio</a> or <a href="https://aws.amazon.com/quicksight/" target="_blank">AWS QuickSight</a> with a seamless connection to Aurora-MySQL.</p>
 <p><img alt="POSitouch Data Consolidation" src="../img/POSitouch-data-consolidation.png" /></p>
 <p><a href="http://bit.ly/positouch-documentation" target="_blank">POSitouch DBF database structure &amp; documentation download.</a></p>
