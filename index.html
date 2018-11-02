@@ -211,6 +211,7 @@
 <ul>
 <li><a href="https://www.microsoft.com/en-us/sql-server" target="_blank">Microsoft SQL Server</a></li>
 <li><a href="https://firebirdsql.org/" target="_blank">Firebird SQL</a></li>
+<li><a href="https://www.mysql.com/" target="_blank">MySQL</a></li>
 <li><a href="http://www.independent-software.com/dbase-dbf-dbt-file-format.html" target="_blank">DBF dBase</a></li>
 <li><a href="https://docs.microsoft.com/en-us/previous-versions/visualstudio/foxpro" target="_blank">Visual FoxPro (VFP)</a></li>
 </ul>
@@ -228,11 +229,11 @@
 <hr />
 <h2 id="use-cases">Use Cases<a class="headerlink" href="#use-cases" title="Permanent link">&para;</a></h2>
 <ul>
-<li>Consolidate/merge information on AWS from across multiple locations and database engines, e.g. merge sales and inventory information from different branches.</li>
-<li>Build Analytics and Business Intelligence dashboards using <a href="https://marketingplatform.google.com/about/data-studio/" target="_blank">Google Data Studio</a> or <a href="https://aws.amazon.com/quicksight/" target="_blank">AWS QuickSight</a>, with native connection to Aurora-MySQL.</li>
+<li>Consolidate/merge information on AWS across multiple locations and database engines, e.g. merge sales and inventory information from different branches.</li>
+<li>Build a Data Warehouse and make Analytics and Business Intelligence dashboards using <a href="https://marketingplatform.google.com/about/data-studio/" target="_blank">Google Data Studio</a> or <a href="https://aws.amazon.com/quicksight/" target="_blank">AWS QuickSight</a>, with native connection to Aurora-MySQL.</li>
 <li>Make statistical analysis and forecasts with AWS services.</li>
 <li>Extend your on-prem ERP to AWS cloud and build web applications &amp; back-end services with API Gateway and Lambda.</li>
-<li>Define centralized data on AWS and deliver it to every store / on-prem system.</li>
+<li>Define centralized data on AWS and push it to every on-prem system store.</li>
 </ul>
 <hr />
 <h2 id="how-it-works">How it works<a class="headerlink" href="#how-it-works" title="Permanent link">&para;</a></h2>
@@ -241,7 +242,7 @@
 <li>Fully customize data sets to upload using <a href="./customdatajson">customData.json</a></li>
 <li>Database and tables are created/altered if they don't exist, and data is loaded to Aurora-MySQL.</li>
 <li>Before and after data is loaded to Aurora-MySQL you can transform data with stored procedures.</li>
-<li>Upload the same data multiple times and avoid duplicates. Data is replaced using primary keys.</li>
+<li>Don't worry about uploading the same data multiple times. Data is replaced using primary keys, avoiding duplicates.</li>
 <li>Run manually or automatically with a Windows Task schedule.</li>
 <li>Upload big datasets using Recursive Sync.</li>
 </ul>
@@ -255,6 +256,7 @@
 <li>Primary keys set on Aurora-MySQL are used against on-prem DB to avoid duplicates.</li>
 <li>Before and after data is loaded to on-prem DB you can transform data with stored procedures.</li>
 <li>Not available for DBF dBase &amp; VFP on-prem.</li>
+<li>MySQL support will be added soon.</li>
 <li>Learn more <a href="./synctowindows">here.</a></li>
 </ul>
 <hr />
@@ -295,6 +297,11 @@
 </blockquote>
 <hr />
 <h2 id="release-notes">Release Notes<a class="headerlink" href="#release-notes" title="Permanent link">&para;</a></h2>
+<h4 id="122-ga-2018-10-31">1.2.2 (GA) 2018-10-31<a class="headerlink" href="#122-ga-2018-10-31" title="Permanent link">&para;</a></h4>
+<ul>
+<li>MySQL on-prem connection added. Actually this feature was added to export data from MySQL on RDS to S3 and continually push datasets from one company to another, i.e. vendor --&gt; customer.</li>
+<li>Bug fixes.</li>
+</ul>
 <h4 id="115-ga-2018-10-07">1.1.5 (GA) 2018-10-07<a class="headerlink" href="#115-ga-2018-10-07" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Visual FoxPro on-prem connection added.</li>
@@ -393,5 +400,5 @@
 
 <!--
 MkDocs version : 0.16.3
-Build Date UTC : 2018-10-12 19:15:15
+Build Date UTC : 2018-11-02 04:31:00
 -->
