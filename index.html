@@ -14,7 +14,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Cloud Synchronization & ETL for Microsoft SQL Server, Firebird & DBF to AWS">
+  <meta name="description" content="Cloud Synchronization & ETL for Microsoft SQL Server, Firebird, DBF & MySQL to AWS">
   <meta name="author" content="Factor BI">
   <link rel="shortcut icon" href="./img/favicon.ico">
   <title>Home - Database Synchronization & ETL to AWS Cloud | Factor BI</title>
@@ -104,12 +104,12 @@
 
             <li class="toctree-l1">
 
-    <a class="" href="sqlserver/">SQL Server to MySQL Aurora</a>
+    <a class="" href="firebird/">Firebird to MySQL Aurora</a>
 	    </li>
 
             <li class="toctree-l1">
 
-    <a class="" href="firebird/">Firebird to MySQL Aurora</a>
+    <a class="" href="sqlserver/">SQL Server to MySQL Aurora</a>
 	    </li>
 
             <li class="toctree-l1">
@@ -119,7 +119,12 @@
 
             <li class="toctree-l1">
 
-    <a class="" href="customdatajson/">Pick Tables & Data to Sync</a>
+    <a class="" href="visualfoxpro/">Visual FoxPro to MySQL Aurora</a>
+	    </li>
+
+            <li class="toctree-l1">
+
+    <a class="" href="customdatajson/">Tables & Data to Sync</a>
 	    </li>
 
             <li class="toctree-l1">
@@ -209,10 +214,10 @@
 <p>Created to keep your Windows databases on-premises while providing a way to extract, load &amp; transform specific sets of data to AWS Aurora. Two-way synchronization lets you sync from AWS back to on-prem database.</p>
 <p><strong>Sources:</strong></p>
 <ul>
-<li><a href="https://www.microsoft.com/en-us/sql-server" target="_blank">Microsoft SQL Server</a></li>
 <li><a href="https://firebirdsql.org/" target="_blank">Firebird SQL</a></li>
+<li><a href="https://www.microsoft.com/en-us/sql-server" target="_blank">Microsoft SQL Server</a></li>
 <li><a href="https://www.mysql.com/" target="_blank">MySQL</a></li>
-<li><a href="http://www.independent-software.com/dbase-dbf-dbt-file-format.html" target="_blank">DBF dBase</a></li>
+<li><a href="http://www.independent-software.com/dbase-dbf-dbt-file-format.html" target="_blank">dBase</a></li>
 <li><a href="https://docs.microsoft.com/en-us/previous-versions/visualstudio/foxpro" target="_blank">Visual FoxPro (VFP)</a></li>
 </ul>
 <p><strong>Destination:</strong></p>
@@ -246,7 +251,9 @@
 <li>Run manually or automatically with a Windows Task schedule.</li>
 <li>Upload big datasets using Recursive Sync.</li>
 </ul>
-<p><strong>Data is also available as CSV files on S3 so you can use other AWS services like <a href="https://aws.amazon.com/athena/" target="_blank">Athena</a> and <a href="https://aws.amazon.com/glue/" target="_blank">Glue</a> to build your data lake.</strong></p>
+<blockquote>
+<p>Data is also available as CSV files on S3 so you can use other AWS services like <a href="https://aws.amazon.com/athena/" target="_blank">Amazon Athena</a> and <a href="https://aws.amazon.com/glue/" target="_blank">AWS Glue</a> to build your data lake.</p>
+</blockquote>
 <h3 id="two-way-synchronization">Two-way synchronization<a class="headerlink" href="#two-way-synchronization" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Synchronize from Aurora-MySQL to on-premises SQL Server or Firebird SQL.</li>
@@ -255,8 +262,7 @@
 <li>Tables schemas are created/altered on your on-prem DB if they don't exist.</li>
 <li>Primary keys set on Aurora-MySQL are used against on-prem DB to avoid duplicates.</li>
 <li>Before and after data is loaded to on-prem DB you can transform data with stored procedures.</li>
-<li>Not available for DBF dBase &amp; VFP on-prem.</li>
-<li>MySQL support will be added soon.</li>
+<li>Only available for SQL Server and Firebird.</li>
 <li>Learn more <a href="./synctowindows">here.</a></li>
 </ul>
 <hr />
@@ -297,9 +303,16 @@
 </blockquote>
 <hr />
 <h2 id="release-notes">Release Notes<a class="headerlink" href="#release-notes" title="Permanent link">&para;</a></h2>
+<h4 id="130-ga-2019-01-29">1.3.0 (GA) 2019-01-29<a class="headerlink" href="#130-ga-2019-01-29" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Tenant: Sync several on-premise databases to a single MySQL database and differentiate them with tenant_id. Great for consolidation. Learn more <a href="./firebird/#tenant">here.</a></li>
+<li>Synchronize views and tables without a primary key using <a href="./customdatajson/#customschemajson">customSchema.json</a></li>
+<li>Greater support for SQL Server data types.</li>
+<li>Bug fixes.</li>
+</ul>
 <h4 id="122-ga-2018-10-31">1.2.2 (GA) 2018-10-31<a class="headerlink" href="#122-ga-2018-10-31" title="Permanent link">&para;</a></h4>
 <ul>
-<li>MySQL on-prem connection added. Actually this feature was added to export data from MySQL on RDS to S3 and continually push datasets from one company to another, i.e. vendor --&gt; customer.</li>
+<li>MySQL on-prem connection added.</li>
 <li>Bug fixes.</li>
 </ul>
 <h4 id="115-ga-2018-10-07">1.1.5 (GA) 2018-10-07<a class="headerlink" href="#115-ga-2018-10-07" title="Permanent link">&para;</a></h4>
@@ -313,7 +326,7 @@
 <h4 id="110-ga-2018-08-12">1.1.0 (GA) 2018-08-12<a class="headerlink" href="#110-ga-2018-08-12" title="Permanent link">&para;</a></h4>
 <ul>
 <li>DBF dBase III on-prem connection added.</li>
-<li>Run unlimited time stored procedures after data is uploaded to Aurora (previously limited to 5 minutes).</li>
+<li>Run unlimited time stored procedures after data is uploaded to Aurora.</li>
 <li>Improved security for two-way synchronization.</li>
 <li>Improved support for special characters, e.g. now able to sync XML documents inside BLOB (Firebird) and TEXT (SQL Server) fields.</li>
 <li>First time customers: Automated creation of AWS services via <a href="./easyawssetup/#step-4-cloudformation">CloudFormation template.</a></li>
@@ -324,29 +337,27 @@
 <li>Data upload is now done through secure HTTPS.</li>
 <li>JOIN parameter now supported for Firebird SQL.</li>
 <li>Recursive sync now supported for Firebird SQL.</li>
-<li>Connection information is now encrypted.</li>
+<li>Connection information now encrypted.</li>
 <li>Bug fixes.</li>
 </ul>
 <h4 id="056-beta-2017-12-02">0.5.6 (Beta) 2017-12-02<a class="headerlink" href="#056-beta-2017-12-02" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Bidirectional syncing is here!</li>
 <li>Synchronize to any AWS Region.</li>
-<li>Performance improvements to API, now able to load nearly 1.5 million rows (or 280 MB uncompressed files) on a single call. Future releases will support much more since <a href="https://aws.amazon.com/about-aws/whats-new/2017/11/aws-lambda-doubles-maximum-memory-capacity-for-lambda-functions/" target="_blank">AWS Lambda recently doubled maximum memory capacity to 3 GB.</a></li>
+<li>Performance improvements to API, now able to load nearly 1.5 million rows (or 280 MB uncompressed files) on a single call. </li>
 <li>Firebird transaction READ UNCOMMITTED to prevent Bipost Sync from being stopped while other transactions are still not committed.</li>
-<li>Initial and final statements on Aurora MySQL are disabled on recursive sync. This prevents excessive workload on your RDS instance.</li>
-<li>Bug fixes to API and Bipost Sync.</li>
+<li>Initial and final statements on Aurora are disabled on recursive sync.</li>
+<li>Bug fixes.</li>
 </ul>
 <h4 id="042-beta-2017-09-16">0.4.2 (Beta) 2017-09-16<a class="headerlink" href="#042-beta-2017-09-16" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Table schemas are now synchronized against source definition on every sync, details <a href="./bipostapi/#create-alter-schemas">here.</a></li>
-<li>Bipost Sync bug fixes.</li>
-<li>Bipost API bug fixes.</li>
+<li>Bug fixes.</li>
 </ul>
 <h4 id="040-beta-2017-08-20">0.4.0 (Beta) 2017-08-20<a class="headerlink" href="#040-beta-2017-08-20" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Custom connections added.</li>
 <li>Initial statement added to API.</li>
-<li>Special characters are deleted on string columns of 100 characters length or up.</li>
 </ul>
 <hr />
 <h2 id="contact">Contact<a class="headerlink" href="#contact" title="Permanent link">&para;</a></h2>
@@ -370,7 +381,7 @@
   <div role="contentinfo">
     <!-- Copyright etc -->
 
-      <p>© 2016 - 2018, <a href="https://www.factorbi.com">Factor BI, S.A. de C.V.</a> All rights reserved.</p>
+      <p>© 2016 - 2019, <a href="https://www.factorbi.com">Factor BI, S.A. de C.V.</a> All rights reserved.</p>
 
   </div>
 
@@ -400,5 +411,5 @@
 
 <!--
 MkDocs version : 0.16.3
-Build Date UTC : 2018-11-02 04:31:00
+Build Date UTC : 2019-02-02 05:11:49
 -->

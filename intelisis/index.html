@@ -78,12 +78,12 @@
 
             <li class="toctree-l1">
 
-    <a class="" href="../sqlserver/">SQL Server to MySQL Aurora</a>
+    <a class="" href="../firebird/">Firebird to MySQL Aurora</a>
 	    </li>
 
             <li class="toctree-l1">
 
-    <a class="" href="../firebird/">Firebird to MySQL Aurora</a>
+    <a class="" href="../sqlserver/">SQL Server to MySQL Aurora</a>
 	    </li>
 
             <li class="toctree-l1">
@@ -93,7 +93,12 @@
 
             <li class="toctree-l1">
 
-    <a class="" href="../customdatajson/">Pick Tables & Data to Sync</a>
+    <a class="" href="../visualfoxpro/">Visual FoxPro to MySQL Aurora</a>
+	    </li>
+
+            <li class="toctree-l1">
+
+    <a class="" href="../customdatajson/">Tables & Data to Sync</a>
 	    </li>
 
             <li class="toctree-l1">
@@ -125,7 +130,7 @@
 
         <ul>
 
-            <li><a class="toctree-l3" href="#casos-de-uso">Casos de Uso</a></li>
+            <li><a class="toctree-l3" href="#demo">Demo</a></li>
 
             <li><a class="toctree-l3" href="#ejemplos-de-configuracion">Ejemplos de configuración</a></li>
 
@@ -199,12 +204,14 @@
             <div class="section">
 
                 <h1 id="intelisis-erp">Intelisis ERP<a class="headerlink" href="#intelisis-erp" title="Permanent link">&para;</a></h1>
-<p>Intelisis es un ERP que fabrica la empresa <a href="http://www.intelisis.com/" target="_blank"><em>Intelisis Software, S.A. de C.V.</em></a></p>
-<p>Bipost Sync ofrece una conexión simple a <a href="https://datastudio.google.com/" target="_blank"><em>Google Data Studio</em></a> para crear tus tableros de mando, dashboards e indicadores de gestión.</p>
+<p>Creamos tableros de mando, indicadores de gestión y seguimiento diario para tu negocio con las soluciones de Business Intelligence de Factor BI.</p>
+<p>Excelente alternativa a Qlik View, Reporting Services y Cognos BI !</p>
+<p>Escríbemos y te ayudamos en lo que necesitas! <a href="mailto:info@factorbi.com">info@factorbi.com</a></p>
+<p>Consulta nuestra página web: <a href="https://www.factorbi.com/intelisis?lang=es" target="_blank">www.factorbi.com/intelisis</a></p>
 <hr />
-<h2 id="casos-de-uso">Casos de Uso<a class="headerlink" href="#casos-de-uso" title="Permanent link">&para;</a></h2>
-<p>Folleto Casos de Uso: <a href="http://bit.ly/factorbi-casos-intelisis">Tableros de Mando</a></p>
-<p><img alt="Tablero de Mando Intelisis" src="../img/Dashboard_Demo_1-torn.png" /></p>
+<h2 id="demo">Demo<a class="headerlink" href="#demo" title="Permanent link">&para;</a></h2>
+<p><a href="https://datastudio.google.com/u/0/reporting/1Wc_z1fHWvXSxS5hd5VO4MkfbVilUsKMZ">Tablero de Tablero de Mando Ventas Intelisis</a></p>
+<p><a href="https://datastudio.google.com/u/0/reporting/1Wc_z1fHWvXSxS5hd5VO4MkfbVilUsKMZ" target="_blank"><img alt="Tablero de Mando Intelisis" src="../img/Dashboard_Demo_1-torn.png" /></a></p>
 <hr />
 <h2 id="ejemplos-de-configuracion">Ejemplos de configuración<a class="headerlink" href="#ejemplos-de-configuracion" title="Permanent link">&para;</a></h2>
 <p>Ejemplos de información a sincronizar usando <code>customData.json</code></p>
@@ -217,7 +224,9 @@
         "filter": "Venta.Estatus IN ('PENDIENTE','CONCLUIDO','PROCESAR') AND MovTipo.Clave IN ('VTAS.F','VTAS.D','VTAS.N','VTAS.FM','VTAS.FC') ",
         "recursiveDateField": "Venta.FechaEmision",
         "order": "",
-        "limit": ""
+        "limit": "",
+        "comment1": "",
+        "comment2": ""
     },
     {
         "active": "true",
@@ -227,7 +236,9 @@
         "filter": "Venta.Estatus IN ('PENDIENTE','CONCLUIDO','PROCESAR') AND MovTipo.Clave IN ('VTAS.F','VTAS.D','VTAS.N','VTAS.FM','VTAS.FC') ",
         "recursiveDateField": "Venta.FechaEmision",
         "order": "",
-        "limit": ""
+        "limit": "",
+        "comment1": "",
+        "comment2": ""
     }
 ]
 </code></pre>
@@ -246,7 +257,9 @@
         "filter": "",
         "recursiveDateField": "",
         "order": "",
-        "limit": ""
+        "limit": "",
+        "comment1": "",
+        "comment2": ""
     },
     {
         "active": "true",
@@ -256,7 +269,9 @@
         "filter": "",
         "recursiveDateField": "",
         "order": "",
-        "limit": ""
+        "limit": "",
+        "comment1": "",
+        "comment2": ""
     },
     {
         "active": "true",
@@ -266,7 +281,9 @@
         "filter": "",
         "recursiveDateField": "",
         "order": "",
-        "limit": ""
+        "limit": "",
+        "comment1": "",
+        "comment2": ""
     },
     {
         "active": "true",
@@ -276,7 +293,9 @@
         "filter": "",
         "recursiveDateField": "",
         "order": "",
-        "limit": ""
+        "limit": "",
+        "comment1": "",
+        "comment2": ""
     },
     {
         "active": "true",
@@ -286,7 +305,9 @@
         "filter": "",
         "recursiveDateField": "",
         "order": "",
-        "limit": ""
+        "limit": "",
+        "comment1": "",
+        "comment2": ""
     }
 ]
 </code></pre>
@@ -296,7 +317,7 @@
 <h4 id="carpeta-recursivo">Carpeta Recursivo<a class="headerlink" href="#carpeta-recursivo" title="Permanent link">&para;</a></h4>
 <p>La otra carpeta de Bipost Sync puedes nombrarla <code>Bipost_diario</code>. Abre el archivo <strong>customData.json</strong> y especifica las tablas de movimientos que vas a enviar, por ejemplo:</p>
 <pre><code>[
-  {
+    {
         "active": "true",
         "table": "Cont",
         "fields": "Cont.ID, Cont.Empresa, Cont.Mov, Cont.MovID, Cont.FechaEmision, Cont.FechaContable, Cont.Proyecto, Cont.Moneda, Cont.TipoCambio, Cont.Estatus, Cont.Ejercicio, Cont.Periodo, Cont.Moneda2, Cont.TipoCambio2",
@@ -304,9 +325,11 @@
         "filter": "Cont.Estatus &lt;&gt; 'SINAFECTAR' AND MovTipo.clave IN ('CONT.P','CONT.C') ",
         "recursiveDateField": "Cont.FechaEmision",
         "order": "",
-        "limit": ""
-  },
-  {
+        "limit": "",
+        "comment1": "",
+        "comment2": ""
+    },
+    {
         "active": "true",
         "table": "ContD",
         "fields": "ContD.ID, ContD.Renglon, ContD.RenglonSub, ContD.Cuenta, ContD.SubCuenta, ContD.SubCuenta2, ContD.SubCuenta3, ContD.Debe, ContD.Debe2, ContD.Haber, ContD.Haber2, ContD.Sucursal, ContD.SucursalContable ",
@@ -314,14 +337,16 @@
         "filter": "Cont.Estatus &lt;&gt; 'SINAFECTAR' AND MovTipo.clave IN ('CONT.P','CONT.C') ",
         "recursiveDateField": "Cont.FechaEmision",
         "order": "",
-        "limit": ""
-  }
+        "limit": "",
+        "comment1": "",
+        "comment2": ""
+    }
 ]
 </code></pre>
 <p>Es importante incluir el parámetro <code>"recursiveDateField":</code> para optimizar la subida de información.</p>
 <p><img alt="Bipost General Settings" src="../img/bipost7.png" /></p>
 <p>Mediante esta opción se pueden cargar históricos de varios años.</p>
-<p><strong>NOTA: Al apagar el check <em>Recursive Sync</em> automáticamente la fecha de inicio y fin se fija en el día de hoy utilizando la fecha de la máquina Windows.</strong></p>
+<p>NOTA: Al apagar el check <em>Recursive Sync</em> automáticamente la fecha de inicio y fin se fija en el día de hoy utilizando la fecha de la máquina Windows.</p>
 <h4 id="uso-del-filter">Uso del Filter<a class="headerlink" href="#uso-del-filter" title="Permanent link">&para;</a></h4>
 <p>En el ejemplo customData.json anterior, se utilizó el siguiente filtro para la tabla <strong>ContD</strong>:</p>
 <p><code>"filter": "Cont.Estatus &lt;&gt; 'SINAFECTAR'</code></p>
@@ -353,7 +378,7 @@
   <div role="contentinfo">
     <!-- Copyright etc -->
 
-      <p>© 2016 - 2018, <a href="https://www.factorbi.com">Factor BI, S.A. de C.V.</a> All rights reserved.</p>
+      <p>© 2016 - 2019, <a href="https://www.factorbi.com">Factor BI, S.A. de C.V.</a> All rights reserved.</p>
 
   </div>
 

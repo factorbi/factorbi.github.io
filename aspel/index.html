@@ -78,12 +78,12 @@
 
             <li class="toctree-l1">
 
-    <a class="" href="../sqlserver/">SQL Server to MySQL Aurora</a>
+    <a class="" href="../firebird/">Firebird to MySQL Aurora</a>
 	    </li>
 
             <li class="toctree-l1">
 
-    <a class="" href="../firebird/">Firebird to MySQL Aurora</a>
+    <a class="" href="../sqlserver/">SQL Server to MySQL Aurora</a>
 	    </li>
 
             <li class="toctree-l1">
@@ -93,7 +93,12 @@
 
             <li class="toctree-l1">
 
-    <a class="" href="../customdatajson/">Pick Tables & Data to Sync</a>
+    <a class="" href="../visualfoxpro/">Visual FoxPro to MySQL Aurora</a>
+	    </li>
+
+            <li class="toctree-l1">
+
+    <a class="" href="../customdatajson/">Tables & Data to Sync</a>
 	    </li>
 
             <li class="toctree-l1">
@@ -115,7 +120,7 @@
 
         <ul>
 
-            <li><a class="toctree-l3" href="#casos-de-uso">Casos de Uso</a></li>
+            <li><a class="toctree-l3" href="#demo">Demo</a></li>
 
             <li><a class="toctree-l3" href="#tablas-aspel">Tablas Aspel</a></li>
 
@@ -201,13 +206,13 @@
             <div class="section">
 
                 <h1 id="aspel-sae">Aspel SAE<a class="headerlink" href="#aspel-sae" title="Permanent link">&para;</a></h1>
-<p>Crea tableros de mando, indicadores de gestión y seguimiento diario para tu negocio con las soluciones de Business Intelligence de Factor BI.</p>
+<p>Creamos tableros de mando, indicadores de gestión y seguimiento diario para tu negocio con las soluciones de Business Intelligence de Factor BI.</p>
 <p>Escríbemos y te ayudamos en lo que necesitas! <a href="mailto:info@factorbi.com">info@factorbi.com</a></p>
-<p>Llama al <strong>(55) 7656 4690</strong> o consulta nuestra página web: <a href="https://www.factorbi.com/" target="_blank">www.factorbi.com</a></p>
+<p>Consulta nuestra página web: <a href="https://www.factorbi.com/?lang=es" target="_blank">www.factorbi.com</a></p>
 <hr />
-<h2 id="casos-de-uso">Casos de Uso<a class="headerlink" href="#casos-de-uso" title="Permanent link">&para;</a></h2>
-<p>Folleto Casos de Uso: <a href="http://bit.ly/factorbi-casos-aspel">Tableros de Mando</a></p>
-<p><img alt="Tablero de Mando Aspel" src="../img/Dashboard_Demo_1-torn.png" /></p>
+<h2 id="demo">Demo<a class="headerlink" href="#demo" title="Permanent link">&para;</a></h2>
+<p><a href="https://datastudio.google.com/open/1rLJVp6XI-JnVkBVOnkdooT3IAVzl_GKW">Tablero de Mando Aspel SAE</a></p>
+<p><a href="https://datastudio.google.com/open/1rLJVp6XI-JnVkBVOnkdooT3IAVzl_GKW" target="_blank"><img alt="Tablero de Mando Aspel SAE" src="../img/Dashboard_Demo_1-torn.png" /></a></p>
 <hr />
 <h2 id="tablas-aspel">Tablas Aspel<a class="headerlink" href="#tablas-aspel" title="Permanent link">&para;</a></h2>
 <p><img alt="Bipost Firebird Aspel" src="../img/bipost4.png" /></p>
@@ -244,7 +249,7 @@ talla
 vend
 </code></pre>
 <p>En la base de datos del sistema Aspel SAE cada tabla tiene un sufijo <code>01</code>, <code>02</code>, etc., de acuerdo a la empresa que se ha creado. Por ejemplo la tabla de las facturas podrías encontrarla como <code>factf01</code> y para otra razón social como <code>factf02</code>.</p>
-<p>Bipost Sync automáticamente elimina estos sufijos por lo que las tablas en Aurora-MySQL serán creadas sin el sufijo. Esta funcionalidad aplica incluso cuando se añaden tablas con <code>customData.json</code>.</p>
+<p>Bipost Sync automáticamente elimina estos sufijos por lo que las tablas en Aurora-MySQL serán creadas sin el sufijo. Esta funcionalidad aplica también cuando se añaden tablas con <code>customData.json</code>.</p>
 <hr />
 <h2 id="excel-tablas-aspel-sae">Excel Tablas Aspel SAE<a class="headerlink" href="#excel-tablas-aspel-sae" title="Permanent link">&para;</a></h2>
 <p>Abre aquí <a href="http://bit.ly/tablas_aspel" target="_blank"><strong>Excel tablas Aspel SAE.</strong></a></p>
@@ -260,26 +265,30 @@ order by rdb$relation_name;
 <h2 id="anadir-tablas-a-la-sincronizacion">Añadir tablas a la Sincronización<a class="headerlink" href="#anadir-tablas-a-la-sincronizacion" title="Permanent link">&para;</a></h2>
 <p>Para incluir tablas adicionales en la sincronización, se utiliza el archivo <code>customData.json</code>, por ejemplo:</p>
 <pre><code>[
-  {
-    "active": "true",
-    "table": "CLIE_CLIB",
-    "fields": "CVE_CLIE, CAMPLIB1, CAMPLIB2, CAMPLIB3, CAMPLIB4, CAMPLIB5, CAMPLIB6",
-    "join": "",
-    "filter": "",
-    "recursiveDateField": "",
-    "order": "",
-    "limit": ""
-  },
-  {
-    "active": "true",
-    "table": "AFACT",
-    "fields": "* ",
-    "join": "",
-    "filter": "",
-    "recursiveDateField": "",
-    "order": "",
-    "limit": ""
-  }
+    {
+        "active": "true",
+        "table": "CLIE_CLIB",
+        "fields": "CVE_CLIE, CAMPLIB1, CAMPLIB2, CAMPLIB3, CAMPLIB4, CAMPLIB5, CAMPLIB6",
+        "join": "",
+        "filter": "",
+        "recursiveDateField": "",
+        "order": "",
+        "limit": "",
+        "comment1": "",
+        "comment2": ""
+    },
+    {
+        "active": "true",
+        "table": "AFACT",
+        "fields": "* ",
+        "join": "",
+        "filter": "",
+        "recursiveDateField": "",
+        "order": "",
+        "limit": "",
+        "comment1": "",
+        "comment2": ""
+    }
 ]
 </code></pre>
 <p>Notar que no se incluye el sufijo <code>01</code>, <code>02</code>, etc. de las tablas.</p>
@@ -310,7 +319,7 @@ order by rdb$relation_name;
   <div role="contentinfo">
     <!-- Copyright etc -->
 
-      <p>© 2016 - 2018, <a href="https://www.factorbi.com">Factor BI, S.A. de C.V.</a> All rights reserved.</p>
+      <p>© 2016 - 2019, <a href="https://www.factorbi.com">Factor BI, S.A. de C.V.</a> All rights reserved.</p>
 
   </div>
 

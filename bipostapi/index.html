@@ -78,12 +78,12 @@
 
             <li class="toctree-l1">
 
-    <a class="" href="../sqlserver/">SQL Server to MySQL Aurora</a>
+    <a class="" href="../firebird/">Firebird to MySQL Aurora</a>
 	    </li>
 
             <li class="toctree-l1">
 
-    <a class="" href="../firebird/">Firebird to MySQL Aurora</a>
+    <a class="" href="../sqlserver/">SQL Server to MySQL Aurora</a>
 	    </li>
 
             <li class="toctree-l1">
@@ -93,7 +93,12 @@
 
             <li class="toctree-l1">
 
-    <a class="" href="../customdatajson/">Pick Tables & Data to Sync</a>
+    <a class="" href="../visualfoxpro/">Visual FoxPro to MySQL Aurora</a>
+	    </li>
+
+            <li class="toctree-l1">
+
+    <a class="" href="../customdatajson/">Tables & Data to Sync</a>
 	    </li>
 
             <li class="toctree-l1 current">
@@ -112,6 +117,8 @@
             <li><a class="toctree-l3" href="#3-load-data">3. Load Data</a></li>
 
             <li><a class="toctree-l3" href="#4-transform-data-after-loading">4. Transform Data After Loading</a></li>
+
+            <li><a class="toctree-l3" href="#execution-information">Execution information</a></li>
 
         </ul>
 
@@ -226,53 +233,238 @@
 </ul>
 <hr />
 <h2 id="2-prepare-database-before-loading">2. Prepare Database Before Loading<a class="headerlink" href="#2-prepare-database-before-loading" title="Permanent link">&para;</a></h2>
-<p>After schemas are created/altered and <strong>before</strong> new data is loaded, you can specify to run a query against your database.</p>
+<p>After schemas are created/altered and <strong>before</strong> new data is loaded, you can run a stored procedure.</p>
 <p>This is very useful if you need to delete, truncate or make any changes before data is loaded.</p>
-<p>Currently you need to include all desired statements in a stored procedure with the name <code>spPostInitial</code> and must not have parameters.</p>
+<p>Include all desired statements in a stored procedure named <code>spPostInitial</code>.</p>
+<blockquote>
+<p><code>_serviceID</code> and <code>_syncID</code> variables are automatically delivered from the API.</p>
+</blockquote>
 <p>Example:</p>
 <pre><code>DELIMITER $$
 DROP PROCEDURE IF EXISTS `spPostInitial`$$
-CREATE PROCEDURE `spPostInitial`()
+CREATE PROCEDURE `spPostInitial`(
+  _serviceID varchar(36),
+  _syncID int
+  )
 postinitial:BEGIN
 
-  INSERT INTO logPostInitial (message) VALUES ('auto');
+  DECLARE _SQL  longtext;
+  DECLARE _store varchar(10);
+  DECLARE _timestamp datetime;
+  DECLARE _syncDate date;
+  DECLARE _timezone varchar(64);
+  DECLARE _rid, _prevId, _count_bipost_sync_info, _count_table int;
+  DECLARE _numDays decimal(10,0);
+  DECLARE _tableName, _comment1, _comment2 varchar(255);
 
-  TRUNCATE TABLE `mytesttable`;
-  TRUNCATE TABLE `bipostlog`;
-  TRUNCATE TABLE `movtipo`;
+  SET lc_time_names = 'en_US';
+  SET group_concat_max_len = 4294967295;
+  SET _count_bipost_sync_info = 0;
+
+  SELECT COUNT(*) INTO _count_bipost_sync_info FROM `bipost_system`.bipost_sync_info WHERE id = _syncID AND serviceID = _serviceID;
+
+  IF IFNULL(_count_bipost_sync_info,0) = 0 THEN
+    INSERT INTO logPostInitial (message, serviceID, syncID) VALUES ('execution parameters do not match', _serviceID, _syncID);
+    SELECT 'execution parameters do not match' AS message;
+    LEAVE postinitial;
+  END IF;
+
+  SELECT NULLIF(TRIM(timezone),'') INTO _timezone FROM syncInfoStores WHERE serviceID = _serviceID;
+  IF _timezone IS NULL THEN
+    SELECT IFNULL(NULLIF(TRIM(timezone),''),'US/Eastern') INTO _timezone FROM syncInfo WHERE serviceID = _serviceID;
+  END IF;
+  SELECT CONVERT_TZ(syncDate, 'UTC', _timezone) INTO _timestamp FROM `bipost_system`.bipost_sync_info WHERE id = _syncID;
+  SELECT IFNULL(CAST(_timestamp AS date),'0000-00-00 00:00:00.0000') INTO _syncDate;
+
+  IF _syncDate &lt;&gt; '0000-00-00 00:00:00.0000' THEN
+
+    INSERT INTO logPostInitial (message, serviceID, syncID) VALUES ('ok', _serviceID, _syncID);
+
+    SET _prevId = 0, _count_table = 0;
+
+    table_id: WHILE(1=1) DO
+      SELECT MIN(rid)
+        INTO _rid
+        FROM `bipost_system`.bipost_sync_table
+        WHERE rid &gt; _prevId AND id = _syncID AND comment1 = '-1';
+
+      IF _rid IS NULL THEN
+        LEAVE table_id;
+      END IF;
+
+      SELECT tableName, comment1
+        INTO _tableName, _comment1
+        FROM `bipost_system`.bipost_sync_table
+        WHERE rid = _rid;
+
+      SELECT COUNT(*) INTO _count_table FROM information_schema.tables WHERE table_type = 'BASE TABLE' AND table_name = _tableName AND table_schema = schema();
+      IF _count_table &gt; 0 THEN
+        SET _SQL = CONCAT(
+          'TRUNCATE TABLE `', _tableName, '`;');
+        SET @SQL = _SQL; PREPARE stmt3 FROM @SQL; EXECUTE stmt3; DEALLOCATE PREPARE stmt3; SET _SQL = NULL;
+      END IF;
+
+      SET _prevId = _rid, _count_table = 0;
+    END WHILE;
+
+  #***************** Delete child tables first *****************
+
+    SET _numDays = 0, _count_table = 0, _tableName = 'claves_articulos';
+    SELECT CAST(comment1 AS decimal(10,0))*(-1) INTO _numDays FROM `bipost_system`.bipost_sync_table WHERE id = _syncID AND tableName = _tableName;
+    SELECT COUNT(*) INTO _count_table FROM information_schema.tables WHERE table_type = 'BASE TABLE' AND table_name = _tableName AND table_schema = schema();
+    IF _numDays &lt; 0 AND _count_table &gt; 0 THEN
+      DELETE claves_articulos
+        FROM claves_articulos
+        JOIN articulos ON claves_articulos.ARTICULO_ID = articulos.ARTICULO_ID
+        WHERE ((CAST(articulos.FECHA_HORA_CREACION AS date) BETWEEN date_add(_syncDate, INTERVAL _numDays day) AND _syncDate) OR (CAST(articulos.FECHA_HORA_ULT_MODIF AS date) BETWEEN date_add(_syncDate, INTERVAL _numDays day) AND _syncDate));
+    END IF;
+
+    SET _numDays = 0, _count_table = 0, _tableName = 'dirs_clientes';
+    SELECT CAST(comment1 AS decimal(10,0))*(-1) INTO _numDays FROM `bipost_system`.bipost_sync_table WHERE id = _syncID AND tableName = _tableName;
+    SELECT COUNT(*) INTO _count_table FROM information_schema.tables WHERE table_type = 'BASE TABLE' AND table_name = _tableName AND table_schema = schema();
+    IF _numDays &lt; 0 AND _count_table &gt; 0 THEN
+      DELETE dirs_clientes
+        FROM dirs_clientes
+        JOIN clientes ON dirs_clientes.CLIENTE_ID = clientes.CLIENTE_ID
+        WHERE ((CAST(clientes.FECHA_HORA_CREACION AS date) BETWEEN date_add(_syncDate, INTERVAL _numDays day) AND _syncDate) OR (CAST(clientes.FECHA_HORA_ULT_MODIF AS date) BETWEEN date_add(_syncDate, INTERVAL _numDays day) AND _syncDate));
+    END IF;
+
+  #***************** Delete header/parent tables *****************
+
+    SET _numDays = 0, _count_table = 0, _tableName = 'articulos';
+    SELECT CAST(comment1 AS decimal(10,0))*(-1) INTO _numDays FROM `bipost_system`.bipost_sync_table WHERE id = _syncID AND tableName = _tableName;
+    SELECT COUNT(*) INTO _count_table FROM information_schema.tables WHERE table_type = 'BASE TABLE' AND table_name = _tableName AND table_schema = schema();
+    IF _numDays &lt; 0 AND _count_table &gt; 0 THEN
+      DELETE FROM articulos
+        WHERE ((CAST(FECHA_HORA_CREACION AS date) BETWEEN date_add(_syncDate, INTERVAL _numDays day) AND _syncDate) OR (CAST(FECHA_HORA_ULT_MODIF AS date) BETWEEN date_add(_syncDate, INTERVAL _numDays day) AND _syncDate));
+    END IF;
+
+    SET _numDays = 0, _count_table = 0, _tableName = 'clientes';
+    SELECT CAST(comment1 AS decimal(10,0))*(-1) INTO _numDays FROM `bipost_system`.bipost_sync_table WHERE id = _syncID AND tableName = _tableName;
+    SELECT COUNT(*) INTO _count_table FROM information_schema.tables WHERE table_type = 'BASE TABLE' AND table_name = _tableName AND table_schema = schema();
+    IF _numDays &lt; 0 AND _count_table &gt; 0 THEN
+      DELETE FROM clientes
+        WHERE ((CAST(FECHA_HORA_CREACION AS date) BETWEEN date_add(_syncDate, INTERVAL _numDays day) AND _syncDate) OR (CAST(FECHA_HORA_ULT_MODIF AS date) BETWEEN date_add(_syncDate, INTERVAL _numDays day) AND _syncDate));
+    END IF;
+
+  #***************** Tables with special comments *****************
+    SET _numDays = 0, _count_table = 0, _tableName = 'saldos_co';
+    SELECT comment2 INTO _comment2 FROM `bipost_system`.bipost_sync_table WHERE id = _syncID AND tableName = _tableName;
+    SELECT COUNT(*) INTO _count_table FROM information_schema.tables WHERE table_type = 'BASE TABLE' AND table_name = _tableName AND table_schema = schema();
+    IF _comment2 = 'last year + ytd' AND _count_table &gt; 0 THEN
+      DELETE FROM saldos_co
+        WHERE ANO &gt;= YEAR(_syncDate)-1;
+    END IF;
+
+    SET _numDays = 0, _count_table = 0, _tableName = 'saldos_in';
+    SELECT comment2 INTO _comment2 FROM `bipost_system`.bipost_sync_table WHERE id = _syncID AND tableName = _tableName;
+    SELECT COUNT(*) INTO _count_table FROM information_schema.tables WHERE table_type = 'BASE TABLE' AND table_name = _tableName AND table_schema = schema();
+    IF _comment2 = 'last month + mtd' AND _count_table &gt; 0 THEN
+      DELETE FROM saldos_in
+        WHERE ANO = YEAR(_syncDate) AND MES IN (MONTH(_syncDate)-1, MONTH(_syncDate));
+    END IF;
+
+  END IF;
 
 END$$
+DELIMITER ;
 </code></pre>
 <hr />
 <h2 id="3-load-data">3. Load Data<a class="headerlink" href="#3-load-data" title="Permanent link">&para;</a></h2>
-<p>Data loading is performed by Aurora. Rows with the same primary key are updated and the rest are inserted.</p>
+<p>Data loading is performed by Aurora. Matching primary keys rows are updated and the rest are inserted.</p>
 <p>You can verify which tables where loaded by querying <code>aurora_s3_load_history</code> table like this:</p>
-<pre><code>SELECT * FROM mysql.aurora_s3_load_history WHERE file_name REGEXP 'mytablename' ORDER BY load_timestamp desc;
+<pre><code>SELECT
+  LOWER(REPLACE(RIGHT(e.file_name,LOCATE('/',REVERSE(e.file_name))-1),'.csv','')) AS "table",
+  CONVERT_TZ(load_timestamp,'UTC','US/Eastern') AS "local_load_timestamp",
+  e.load_timestamp,
+  SUBSTRING(e.load_prefix, LOCATE('bipostdata',e.load_prefix), LOCATE('/',e.load_prefix, LOCATE('bipostdata',e.load_prefix)+1)-LOCATE('bipostdata',e.load_prefix)) as "bucket",
+  LEFT(e.file_name,LOCATE('/', e.file_name)-1) AS "serviceNumber"
+FROM mysql.aurora_s3_load_history AS e
+WHERE
+--  e.file_name REGEXP 'your-service-numer-bc9a-c0123def4567'
+  file_name REGEXP 'mytable.csv'
+--  AND e.load_timestamp&gt;'2019-01-01 09:41:41'
+ORDER BY e.load_timestamp DESC LIMIT 100 ;
 </code></pre>
-<p>Optionally convert <code>load_timestamp</code> to your local time, e.g.: <code>CONVERT_TZ(load_timestamp,'UTC','America/Mexico_City')</code></p>
 <hr />
 <h2 id="4-transform-data-after-loading">4. Transform Data After Loading<a class="headerlink" href="#4-transform-data-after-loading" title="Permanent link">&para;</a></h2>
-<p>After new data is loaded to your Aurora-MySQL database, and <strong>before</strong> it begins the downloading process to your on-prem, you can specify to run a query.</p>
-<p>This is very handy if you need to execute several routines and, for example, populate new tables.</p>
-<p>It is also very useful to prepare tables with data sets for the downloading process back to on-premises.</p>
-<p>Currently you need to include all desired statements in a stored procedure with the name <code>spPostFinal</code> and must not have parameters.</p>
+<p>After new data is loaded to Aurora-MySQL and <strong>before</strong> it begins the downloading process to your on-prem, you can run a stored procedure.</p>
+<p>This is very useful to analyze and populate new tables.</p>
+<p>It is also useful to prepare tables with data sets for the downloading process back to on-premises.</p>
+<p>Include all desired statements in a stored procedure named <code>spPostFinal</code>.</p>
+<blockquote>
+<p><code>_serviceID</code> and <code>_syncID</code> variables are automatically delivered from the API.</p>
+</blockquote>
 <p>Example:</p>
 <pre><code>DELIMITER $$
 DROP PROCEDURE IF EXISTS `spPostFinal`$$
-CREATE PROCEDURE `spPostFinal`()
+CREATE PROCEDURE `spPostFinal`(
+  _serviceID varchar(36),
+  _syncID int
+  )
 postfinal:BEGIN
 
-  REPLACE INTO dateInfo (tag, cDate)
-  SELECT 'yesterday', fnDateInfo('yesterday',fnServiceDate());
+  DECLARE _SQL  longtext;
+  DECLARE _store varchar(10);
+  DECLARE _timestamp datetime;
+  DECLARE _syncDate date;
+  DECLARE _timezone varchar(64);
+  DECLARE _rid, _prevId, _count_bipost_sync_info, _count_table, _count_businessDay int;
+  DECLARE _numDays decimal(10,0);
+  DECLARE _tableName, _comment1, _comment2 varchar(255);
 
-  REPLACE INTO ymInfo (tag, y, m)
-  SELECT 'current', YEAR(fnDateInfo('yesterday',fnServiceDate())), MONTH(fnDateInfo('yesterday',fnServiceDate()));
+  SET lc_time_names = 'en_US';
+  SET group_concat_max_len = 4294967295;
 
-  call spPopulateMyOtherTables;
+  SELECT COUNT(*) INTO _count_bipost_sync_info FROM `bipost_system`.bipost_sync_info WHERE id = _syncID AND serviceID = _serviceID;
 
-  INSERT INTO logPostFinal (message) VALUES ('auto');
+  IF _count_bipost_sync_info = 0 THEN
+    INSERT INTO logPostFinal (message, serviceID, syncID) VALUES ('execution parameters do not match', _serviceID, _syncID);
+    SELECT 'execution parameters do not match' AS message;
+    LEAVE postfinal;
+  END IF;
+
+  SELECT NULLIF(TRIM(timezone),'') INTO _timezone FROM syncInfoStores WHERE serviceID = _serviceID;
+  IF _timezone IS NULL THEN
+    SELECT IFNULL(NULLIF(TRIM(timezone),''),'US/Eastern') INTO _timezone FROM syncInfo WHERE serviceID = _serviceID;
+  END IF;
+  SELECT CONVERT_TZ(syncDate, 'UTC', _timezone) INTO _timestamp FROM `bipost_system`.bipost_sync_info WHERE id = _syncID;
+  SELECT IFNULL(CAST(_timestamp AS date),'0000-00-00 00:00:00.0000') INTO _syncDate;
+
+  UPDATE syncInfo
+    SET syncDate = _syncDate, `timestamp` = _timestamp, lastSyncId = _syncID
+    WHERE serviceID = _serviceID;
+
+  SELECT COUNT(*) INTO _count_businessDay FROM businessDay;
+
+  IF IFNULL(fnServiceDate(),'0000-00-00 00:00:00.0000') &lt;&gt; '0000-00-00 00:00:00.0000' AND _count_businessDay &gt; 0 THEN
+
+    REPLACE INTO dateInfo (tag, cDate)
+    SELECT 'yesterday', fnDateInfo('yesterday',fnServiceDate());
+
+    REPLACE INTO dateInfo (tag, cDate)
+    SELECT 'day before yesterday', fnDateInfo('day before yesterday',fnServiceDate());
+
+    REPLACE INTO ymInfo (tag, y, m)
+    SELECT 'current', YEAR(fnDateInfo('yesterday',fnServiceDate())), MONTH(fnDateInfo('yesterday',fnServiceDate()));
+
+  END IF;
+
+  call spReport1(_serviceID);
+  call spReport2(_serviceID);
+
+  INSERT INTO logPostFinal (message, serviceID, syncID) VALUES ('ok', _serviceID, _syncID);
+  SELECT 'ok' AS message;
 
 END$$
+DELIMITER ;
+</code></pre>
+<hr />
+<h2 id="execution-information">Execution information<a class="headerlink" href="#execution-information" title="Permanent link">&para;</a></h2>
+<p>A database named <strong>bipost_system</strong> is created on Aurora-MySQL and has information about every sync process. <strong>bipost_sync_table</strong> stores comment1 and comment2 for ever table and sync execution.</p>
+<p>Make the following query to know what kind of information is stored:</p>
+<pre><code>SELECT * FROM `bipost_system`.bipost_sync_info ORDER BY id DESC LIMIT 100;
+SELECT * FROM `bipost_system`.bipost_sync_table ORDER BY id DESC, rid LIMIT 100;
 </code></pre>
 
             </div>
@@ -284,7 +476,7 @@ END$$
         <a href="../synctowindows/" class="btn btn-neutral float-right" title="Two-way Synchronization">Next <span class="icon icon-circle-arrow-right"></span></a>
 
 
-        <a href="../customdatajson/" class="btn btn-neutral" title="Pick Tables & Data to Sync"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../customdatajson/" class="btn btn-neutral" title="Tables & Data to Sync"><span class="icon icon-circle-arrow-left"></span> Previous</a>
 
     </div>
 
@@ -294,7 +486,7 @@ END$$
   <div role="contentinfo">
     <!-- Copyright etc -->
 
-      <p>© 2016 - 2018, <a href="https://www.factorbi.com">Factor BI, S.A. de C.V.</a> All rights reserved.</p>
+      <p>© 2016 - 2019, <a href="https://www.factorbi.com">Factor BI, S.A. de C.V.</a> All rights reserved.</p>
 
   </div>
 

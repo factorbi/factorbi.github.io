@@ -17,7 +17,7 @@
 
   <meta name="author" content="Factor BI">
   <link rel="shortcut icon" href="../img/favicon.ico">
-  <title>SQL Server to MySQL Aurora - Database Synchronization & ETL to AWS Cloud | Factor BI</title>
+  <title>Visual FoxPro to MySQL Aurora - Database Synchronization & ETL to AWS Cloud | Factor BI</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../css/theme.css" type="text/css" />
@@ -26,9 +26,9 @@
 
   <script>
     // Current page data
-    var mkdocs_page_name = "SQL Server to MySQL Aurora";
-    var mkdocs_page_input_path = "sqlserver.md";
-    var mkdocs_page_url = "/sqlserver/";
+    var mkdocs_page_name = "Visual FoxPro to MySQL Aurora";
+    var mkdocs_page_input_path = "visualfoxpro.md";
+    var mkdocs_page_url = "/visualfoxpro/";
   </script>
 
   <script src="../js/jquery-2.1.1.min.js"></script>
@@ -81,12 +81,22 @@
     <a class="" href="../firebird/">Firebird to MySQL Aurora</a>
 	    </li>
 
+            <li class="toctree-l1">
+
+    <a class="" href="../sqlserver/">SQL Server to MySQL Aurora</a>
+	    </li>
+
+            <li class="toctree-l1">
+
+    <a class="" href="../dbase/">dBase to MySQL Aurora</a>
+	    </li>
+
             <li class="toctree-l1 current">
 
-    <a class="current" href="./">SQL Server to MySQL Aurora</a>
+    <a class="current" href="./">Visual FoxPro to MySQL Aurora</a>
     <ul class="subnav">
 
-    <li class="toctree-l2"><a href="#synchronize-sql-server-to-aws">Synchronize SQL Server to AWS</a></li>
+    <li class="toctree-l2"><a href="#synchronize-visual-foxpro-to-aws">Synchronize Visual FoxPro to AWS</a></li>
 
         <ul>
 
@@ -102,23 +112,12 @@
 
             <li><a class="toctree-l3" href="#sync-multiple-databases">Sync multiple databases</a></li>
 
+            <li><a class="toctree-l3" href="#contact">Contact</a></li>
+
         </ul>
 
 
-    <li class="toctree-l2"><a href="#use-cases">Use Cases</a></li>
-
-
     </ul>
-	    </li>
-
-            <li class="toctree-l1">
-
-    <a class="" href="../dbase/">dBase to MySQL Aurora</a>
-	    </li>
-
-            <li class="toctree-l1">
-
-    <a class="" href="../visualfoxpro/">Visual FoxPro to MySQL Aurora</a>
 	    </li>
 
             <li class="toctree-l1">
@@ -198,7 +197,7 @@
 
 
 
-    <li>SQL Server to MySQL Aurora</li>
+    <li>Visual FoxPro to MySQL Aurora</li>
     <li class="wy-breadcrumbs-aside">
 
     </li>
@@ -208,45 +207,20 @@
           <div role="main">
             <div class="section">
 
-                <h1 id="synchronize-sql-server-to-aws">Synchronize SQL Server to AWS<a class="headerlink" href="#synchronize-sql-server-to-aws" title="Permanent link">&para;</a></h1>
-<p>Continually export SQL Server data to AWS Aurora MySQL.</p>
+                <h1 id="synchronize-visual-foxpro-to-aws">Synchronize Visual FoxPro to AWS<a class="headerlink" href="#synchronize-visual-foxpro-to-aws" title="Permanent link">&para;</a></h1>
+<p>Continually export Visual FoxPro data to AWS Aurora MySQL.</p>
 <ul>
-<li>To make synchronizations from SQL Server to Aurora you need your <strong>Service</strong> and <strong>Activation No.</strong> </li>
+<li>To make synchronizations from Visual FoxPro to Aurora you need your <strong>Service</strong> and <strong>Activation No.</strong> </li>
 <li>Get them from your <a href="https://s3.amazonaws.com/biforms-prod/index.html" target="_blank">Factor BI Console.</a></li>
 </ul>
-<p><img alt="SQL Server to MySQL Aurora" src="../img/bipost5.png" /></p>
+<p><img alt="DBF to MySQL Aurora" src="../img/bipost3.png" /></p>
 <ul>
 <li><strong>Service No.:</strong> 36 digit number, it may look like this: <code>a1bcd23e-4fa5-67b8-cd9e-f0123abc4567</code></li>
 <li><strong>Activation No.:</strong> 24 digit number, it may look like this: <code>5990ab12c3de45f6a78bc90d</code></li>
-<li><strong>Engine:</strong> <code>SQL</code></li>
+<li><strong>Engine:</strong> <code>DBF</code></li>
 <li><strong>System:</strong> <code>Custom...</code></li>
+<li><strong>DBF Connection:</strong> Directory containing <strong>.dbf</strong> files.</li>
 </ul>
-<table>
-<thead>
-<tr>
-<th>SQL Connection</th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Server</td>
-<td><em>IP or name of SQL Server.</em></td>
-</tr>
-<tr>
-<td>User</td>
-<td><em>Login account to SQL server.</em></td>
-</tr>
-<tr>
-<td>Password</td>
-<td><em>Type login password</em></td>
-</tr>
-<tr>
-<td>Database</td>
-<td><em>Database name</em></td>
-</tr>
-</tbody>
-</table>
 <hr />
 <h2 id="general-settings">General Settings<a class="headerlink" href="#general-settings" title="Permanent link">&para;</a></h2>
 <p><img alt="Bipost General Settings" src="../img/bipost7.png" /></p>
@@ -264,22 +238,8 @@
 </blockquote>
 <h3 id="download-data">Download Data<a class="headerlink" href="#download-data" title="Permanent link">&para;</a></h3>
 <ul>
-<li>
-<p>Enable to download data from AWS Aurora to on-premises.</p>
-</li>
-<li>
-<p>Downloaded data will be available on <code>%localappdata%/biPost/out_</code> Windows folder.</p>
-</li>
-<li>
-<p>Update/insert data to SQL Server by enabling <strong>Process Data</strong> check box.</p>
-</li>
-<li>
-<p>More about downloading data check here <a href="../synctowindows">--&gt; Sync back to Windows</a></p>
-</li>
+<li>Leave <strong>unchecked</strong>.</li>
 </ul>
-<blockquote>
-<p><img alt="MySQL to SQL Server" src="../img/bipost8.png" /></p>
-</blockquote>
 <h3 id="recursive-sync">Recursive Sync<a class="headerlink" href="#recursive-sync" title="Permanent link">&para;</a></h3>
 <ul>
 <li>
@@ -295,7 +255,7 @@
 <p>When <strong>turned off</strong> it automatically sets <em>today</em> as start and end date using your system clock.</p>
 </li>
 <li>
-<p><strong>NOTE:</strong> For daily sync, instead of using Recursive Sync, dynamically parse a date range into customData.json ==&gt; <a href="https://github.com/factorbi/bi-intelisis/blob/master/customData-examples.json" target="_blank">Examples here.</a></p>
+<p><strong>NOTE:</strong> For daily sync, instead of using Recursive Sync, dynamically parse a date range into customData.json ==&gt; <a href="https://github.com/factorbi/sync-examples/blob/master/positouch-json/customData-5days.json" target="_blank">Examples here.</a></p>
 </li>
 <li>
 <p>More info about this feature click here <a href="../customdatajson/#recursive-synchronization">--&gt; Recursive Synchronization</a></p>
@@ -335,10 +295,8 @@
 <h2 id="sync-multiple-databases">Sync multiple databases<a class="headerlink" href="#sync-multiple-databases" title="Permanent link">&para;</a></h2>
 <p>If you are going to synchronize two or more databases from the same Windows host, create separate Bipost Sync folders for each database. Then customize each folder with the desired data set as explained <a href="../customdatajson">here.</a></p>
 <hr />
-<h1 id="use-cases">Use Cases<a class="headerlink" href="#use-cases" title="Permanent link">&para;</a></h1>
-<p>Many legacy and critical mission systems use Microsoft SQL Server.</p>
-<p><a href="http://www.intelisis.com/" target="_blank">Intelisis ERP</a> and <a href="http://www.tauruszone.com.ar/" target="_blank">Ycix TaurusZone</a> are examples of systems built with SQL Server. Independent companies that have tested Bipost Sync now use it every day to enable cloud Business Intelligence with <a href="https://www.google.com/analytics/data-studio/" target="_blank">Google Data Studio.</a></p>
-<p><img alt="SQL Server to MySQL Aurora Business Intelligence Use Case" src="../img/SQL-Server-to-MySQL-Aurora-Use-Case.png" /></p>
+<h2 id="contact">Contact<a class="headerlink" href="#contact" title="Permanent link">&para;</a></h2>
+<p>Questions? Send us an email: <a href="mailto:info@factorbi.com">info@factorbi.com</a></p>
 
             </div>
           </div>
@@ -346,10 +304,10 @@
 
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
 
-        <a href="../dbase/" class="btn btn-neutral float-right" title="dBase to MySQL Aurora">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../customdatajson/" class="btn btn-neutral float-right" title="Tables & Data to Sync">Next <span class="icon icon-circle-arrow-right"></span></a>
 
 
-        <a href="../firebird/" class="btn btn-neutral" title="Firebird to MySQL Aurora"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../dbase/" class="btn btn-neutral" title="dBase to MySQL Aurora"><span class="icon icon-circle-arrow-left"></span> Previous</a>
 
     </div>
 
@@ -377,10 +335,10 @@
     <span class="rst-current-version" data-toggle="rst-current-version">
 
 
-        <span><a href="../firebird/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../dbase/" style="color: #fcfcfc;">&laquo; Previous</a></span>
 
 
-        <span style="margin-left: 15px"><a href="../dbase/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../customdatajson/" style="color: #fcfcfc">Next &raquo;</a></span>
 
     </span>
 </div>

@@ -17,7 +17,7 @@
 
   <meta name="author" content="Factor BI">
   <link rel="shortcut icon" href="../img/favicon.ico">
-  <title>Pick Tables & Data to Sync - Database Synchronization & ETL to AWS Cloud | Factor BI</title>
+  <title>Tables & Data to Sync - Database Synchronization & ETL to AWS Cloud | Factor BI</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../css/theme.css" type="text/css" />
@@ -26,7 +26,7 @@
 
   <script>
     // Current page data
-    var mkdocs_page_name = "Pick Tables & Data to Sync";
+    var mkdocs_page_name = "Tables & Data to Sync";
     var mkdocs_page_input_path = "customdatajson.md";
     var mkdocs_page_url = "/customdatajson/";
   </script>
@@ -78,12 +78,12 @@
 
             <li class="toctree-l1">
 
-    <a class="" href="../sqlserver/">SQL Server to MySQL Aurora</a>
+    <a class="" href="../firebird/">Firebird to MySQL Aurora</a>
 	    </li>
 
             <li class="toctree-l1">
 
-    <a class="" href="../firebird/">Firebird to MySQL Aurora</a>
+    <a class="" href="../sqlserver/">SQL Server to MySQL Aurora</a>
 	    </li>
 
             <li class="toctree-l1">
@@ -91,9 +91,14 @@
     <a class="" href="../dbase/">dBase to MySQL Aurora</a>
 	    </li>
 
+            <li class="toctree-l1">
+
+    <a class="" href="../visualfoxpro/">Visual FoxPro to MySQL Aurora</a>
+	    </li>
+
             <li class="toctree-l1 current">
 
-    <a class="current" href="./">Pick Tables & Data to Sync</a>
+    <a class="current" href="./">Tables & Data to Sync</a>
     <ul class="subnav">
 
     <li class="toctree-l2"><a href="#customdatajson">customData.json</a></li>
@@ -104,9 +109,16 @@
 
             <li><a class="toctree-l3" href="#recursive-synchronization">Recursive Synchronization</a></li>
 
-            <li><a class="toctree-l3" href="#sync-for-multiple-scenarios">Sync for multiple scenarios</a></li>
-
         </ul>
+
+
+    <li class="toctree-l2"><a href="#customschemajson">customSchema.json</a></li>
+
+
+    <li class="toctree-l2"><a href="#comment1-comment2">comment1, comment2</a></li>
+
+
+    <li class="toctree-l2"><a href="#sync-for-multiple-scenarios">Sync for multiple scenarios</a></li>
 
 
     </ul>
@@ -184,7 +196,7 @@
 
 
 
-    <li>Pick Tables & Data to Sync</li>
+    <li>Tables & Data to Sync</li>
     <li class="wy-breadcrumbs-aside">
 
     </li>
@@ -195,157 +207,196 @@
             <div class="section">
 
                 <h1 id="customdatajson">customData.json<a class="headerlink" href="#customdatajson" title="Permanent link">&para;</a></h1>
-<p>This file is where you write SQL query syntax to specify tables, fields and filters that will be executed on the extraction process to the on-prem database.</p>
-<p>Use the same query syntax that is supported by your database engine.</p>
+<p>This file is where you write SQL querys to specify tables, fields and filters that will be executed on the extraction process to the on-prem database.</p>
+<p>Use query syntax according your database engine.</p>
 <p><strong>Example 1, tables with 100,000 rows or less:</strong></p>
 <pre><code>[
-  {
-    "active": "true",
-    "table": "CentroCostos",
-    "fields": "*",
-    "join": "",
-    "filter": "",
-    "recursiveDateField": "",
-    "order": "",
-    "limit": "",
-    "comment1": "",
-    "comment2": ""
-  },
-  {
-    "active": "true",
-    "table": "MovTipo",
-    "fields": "Modulo, Mov, Clave",
-    "join": "",
-    "filter": "",
-    "recursiveDateField": "",
-    "order": "",
-    "limit": "",
-    "comment1": "",
-    "comment2": ""
-  },
-  {
-    "active": "true",
-    "table": "Cta",
-    "fields": "Cuenta, Rama, Descripcion, Tipo, EsAcreedora, EsAcumulativa, CentrosCostos, Estatus, ClaveSAT",
-    "join": "",
-    "filter": "",
-    "recursiveDateField": "",
-    "order": "",
-    "limit": "",
-    "comment1": "",
-    "comment2": ""
-  },
-  {
-    "active": "",
-    "table": "",
-    "fields": "",
-    "join": "",
-    "filter": "",
-    "recursiveDateField": "",
-    "order": "",
-    "limit": "",
-    "comment1": "",
-    "comment2": ""
-  }
+    {
+        "active": "true",
+        "table": "CentroCostos",
+        "fields": "*",
+        "join": "",
+        "filter": "",
+        "recursiveDateField": "",
+        "order": "",
+        "limit": "",
+        "comment1": "",
+        "comment2": ""
+    },
+    {
+        "active": "true",
+        "table": "MovTipo",
+        "fields": "Modulo, Mov, Clave",
+        "join": "",
+        "filter": "",
+        "recursiveDateField": "",
+        "order": "",
+        "limit": "",
+        "comment1": "",
+        "comment2": ""
+    },
+    {
+        "active": "true",
+        "table": "Cta",
+        "fields": "Cuenta, Rama, Descripcion, Tipo, EsAcreedora, EsAcumulativa, CentrosCostos, Estatus, ClaveSAT",
+        "join": "",
+        "filter": "",
+        "recursiveDateField": "",
+        "order": "",
+        "limit": "",
+        "comment1": "",
+        "comment2": ""
+    },
+    {
+        "active": "",
+        "table": "",
+        "fields": "",
+        "join": "",
+        "filter": "",
+        "recursiveDateField": "",
+        "order": "",
+        "limit": "",
+        "comment1": "",
+        "comment2": ""
+    }
 ]
 </code></pre>
 <blockquote>
 <ul>
 <li>The above JSON will send all data for the specified tables, as <code>join</code> and <code>filter</code> are not in use.</li>
-<li>Leaving <code>"active": "",</code> empty would mean <code>false</code>.</li>
+<li>Leaving <code>"active": "",</code> empty means <code>false</code>.</li>
 </ul>
 </blockquote>
-<p><strong>Example 2, dynamically filtering using the current time of your database.</strong></p>
+<p><strong>Example 2, dynamic filter using the current time of your database.</strong></p>
 <pre><code>[
     {
         "active": "true",
         "table": "Cte",
         "fields": "Cte.Cliente, Cte.Nombre, Cte.Tipo, Cte.Categoria, Cte.Estatus, Cte.Estado, Cte.Pais",
         "join": "Venta WITH (NOLOCK) ON Cte.Cliente = Venta.Cliente",
-        "filter": "Venta.Fecha = CONVERT(DATETIME, FLOOR(CONVERT(FLOAT, GETDATE())))",
-        "recursiveDateField": ""
+        "filter": "CONVERT(date,Venta.UltimoCambio) BETWEEN DATEADD(day, -5, CONVERT(date,getdate())) AND CONVERT(date,getdate())",
+        "recursiveDateField": "",
+        "order": "",
+        "limit": "",
+        "comment1": "",
+        "comment2": ""
     }
 ]
 </code></pre>
-<p>Another example using current datetime:</p>
-<pre><code>[
-  {
-    "active": "true",
-    "table": "bibliaAlmacen",
-    "fields": "id, empresa, articulo, almacen, y, m, venta, devolucion, compra, devolucionCompra, trasladoRecepcion, trasladoSalida, otraEntrada, otraSalida, invInicial, inventario, valor, valorUSD, costo, costoUSD, costoVenta, costoVentaUSD, total1, peso, acum, abc, idym",
-    "join": "",
-    "filter": "y = datepart(yy,DATEADD(s,-1,DATEADD(mm, DATEDIFF(m,0,GETDATE()),0))) AND m = datepart(m,DATEADD(s,-1,DATEADD(mm, DATEDIFF(m,0,GETDATE()),0)))",
-    "recursiveDateField": "",
-    "order": "",
-    "limit": "",
-    "comment1": "",
-    "comment2": ""
-  }
-]
-</code></pre>
 <blockquote>
-<p><code>join</code> and <code>filter</code> can use any syntax supported on your database engine.</p>
+<p><code>join</code>, <code>filter</code> and <code>order</code> can use any syntax supported by your database engine.</p>
 </blockquote>
 <p><strong>Example 3, using order and limit:</strong></p>
 <pre><code>[
-  {
-    "active": "true",
-    "table": "DOCTOS_ENTRE_SIS",
-    "fields": "*",
-    "join": "",
-    "filter": "",
-    "recursiveDateField": "",
-    "order": "DOCTO_DEST_ID DESC",
-    "limit": "12500",
-    "comment1": "",
-    "comment2": ""
-  }
+    {
+        "active": "true",
+        "table": "DOCTOS_ENTRE_SIS",
+        "fields": "*",
+        "join": "",
+        "filter": "",
+        "recursiveDateField": "",
+        "order": "DOCTO_DEST_ID DESC",
+        "limit": "50000",
+        "comment1": "",
+        "comment2": ""
+    }
 ]
 </code></pre>
 <hr />
 <h2 id="tables-primary-keys">Tables &amp; Primary Keys<a class="headerlink" href="#tables-primary-keys" title="Permanent link">&para;</a></h2>
 <p>Take note of the following:</p>
 <ul>
-<li>Every table specified in <strong>customData.json</strong> must have a <strong>Primary Key</strong> and these must be listed on <code>"fields"</code></li>
-<li>You can only setup customData.json with <strong>base tables.</strong></li>
-<li><code>"fields"</code> parameter must only include fields that exist on <code>"table":</code></li>
+<li>You can synchronize tables or views.</li>
+<li>Tables must have a <strong>Primary Key</strong> and these must be listed on <code>"fields"</code></li>
+<li>If a table does not have a Primary Key then use <a href="../customdatajson/#customschemajson"><strong>customSchema.json</strong></a> to simulate one.</li>
+<li>The above also applies to Views.</li>
+<li><code>"fields"</code> parameter must <strong>only</strong> include fields that exist on <code>"table":</code></li>
 </ul>
 <hr />
 <h2 id="recursive-synchronization">Recursive Synchronization<a class="headerlink" href="#recursive-synchronization" title="Permanent link">&para;</a></h2>
 <p>When this parameter is enabled the execution will extract one day at a time on a cycle, so it will make one upload to AWS for every day in the specified date range.</p>
-<p>This feature is very useful to optimize the uploading process to Aurora-MySQL, as it is not recommended to upload more than 1 million rows on a single execution.</p>
+<p>This feature is very useful to optimize the uploading process to Aurora-MySQL, as it is not recommended to upload more than 1.5 million rows on a single execution.</p>
 <p><img alt="Recursive Sync" src="../img/bipost7.png" /></p>
 <p>Given <strong>From Date:</strong> <em>July 01, 2018</em>   and   <strong>To Date:</strong> <em>July 31, 2018</em>, the execution will make 31 uploads to AWS. On customData.json <code>Venta.FechaEmision</code> is used to parse these dates, example:</p>
 <pre><code>[
-  {
-    "active": "true",
-    "table": "Venta",
-    "fields": "Venta.ID, Venta.Empresa, Venta.Mov, Venta.MovID, Venta.FechaEmision, Venta.Concepto, Venta.Moneda, Venta.TipoCambio, Venta.Estatus, Venta.Cliente, Venta.Almacen, Venta.Agente, Venta.Condicion, Venta.Vencimiento, Venta.DescuentoLineal, Venta.Sucursal, Venta.SubModulo, Venta.Importe, Venta.Impuestos, Venta.CostoTotal, Venta.FechaRegistro, Venta.DescuentoGlobal, Venta.Proyecto",
-    "join": "MovTipo WITH (NOLOCK) ON Venta.Mov = MovTipo.Mov AND MovTipo.Modulo = 'VTAS'",
-    "filter": "Venta.Estatus NOT IN ('SINAFECTAR','BORRADOR') AND MovTipo.Clave IN ('VTAS.F','VTAS.D','VTAS.N','VTAS.FM','VTAS.FC')",
-    "recursiveDateField": "Venta.FechaEmision",
-    "order": "",
-    "limit": "",
-    "comment1": "",
-    "comment2": ""
-  },
-  {
-    "active": "true",
-    "table": "VentaD",
-    "fields": "VentaD.ID, VentaD.Renglon, VentaD.RenglonSub, VentaD.Articulo, VentaD.Cantidad, VentaD.Almacen, VentaD.Precio, VentaD.DescuentoLinea, VentaD.DescuentoImporte, VentaD.Impuesto1, VentaD.Costo, VentaD.ContUso, VentaD.Unidad, VentaD.Factor, VentaD.Agente",
-    "join": "Venta WITH (NOLOCK) ON Venta.ID = VentaD.ID JOIN MovTipo WITH (NOLOCK) ON Venta.Mov = MovTipo.Mov AND MovTipo.Modulo = 'VTAS'",
-    "filter": "Venta.Estatus NOT IN ('SINAFECTAR','BORRADOR') AND MovTipo.Clave IN ('VTAS.F','VTAS.D','VTAS.N','VTAS.FM','VTAS.FC')",
-    "recursiveDateField": "Venta.FechaEmision",
-    "order": "",
-    "limit": "",
-    "comment1": "",
-    "comment2": ""
-  }
+    {
+        "active": "true",
+        "table": "Venta",
+        "fields": "Venta.ID, Venta.Empresa, Venta.Mov, Venta.MovID, Venta.FechaEmision, Venta.Concepto, Venta.Moneda, Venta.TipoCambio, Venta.Estatus, Venta.Cliente, Venta.Almacen, Venta.Agente, Venta.Condicion, Venta.Vencimiento, Venta.DescuentoLineal, Venta.Sucursal, Venta.SubModulo, Venta.Importe, Venta.Impuestos, Venta.CostoTotal, Venta.FechaRegistro, Venta.DescuentoGlobal, Venta.Proyecto",
+        "join": "MovTipo WITH (NOLOCK) ON Venta.Mov = MovTipo.Mov AND MovTipo.Modulo = 'VTAS'",
+        "filter": "Venta.Estatus NOT IN ('SINAFECTAR','BORRADOR') AND MovTipo.Clave IN ('VTAS.F','VTAS.D','VTAS.N','VTAS.FM','VTAS.FC')",
+        "recursiveDateField": "Venta.FechaEmision",
+        "order": "",
+        "limit": "",
+        "comment1": "",
+        "comment2": ""
+    },
+    {
+        "active": "true",
+        "table": "VentaD",
+        "fields": "VentaD.ID, VentaD.Renglon, VentaD.RenglonSub, VentaD.Articulo, VentaD.Cantidad, VentaD.Almacen, VentaD.Precio, VentaD.DescuentoLinea, VentaD.DescuentoImporte, VentaD.Impuesto1, VentaD.Costo, VentaD.ContUso, VentaD.Unidad, VentaD.Factor, VentaD.Agente",
+        "join": "Venta WITH (NOLOCK) ON Venta.ID = VentaD.ID JOIN MovTipo WITH (NOLOCK) ON Venta.Mov = MovTipo.Mov AND MovTipo.Modulo = 'VTAS'",
+        "filter": "Venta.Estatus NOT IN ('SINAFECTAR','BORRADOR') AND MovTipo.Clave IN ('VTAS.F','VTAS.D','VTAS.N','VTAS.FM','VTAS.FC')",
+        "recursiveDateField": "Venta.FechaEmision",
+        "order": "",
+        "limit": "",
+        "comment1": "",
+        "comment2": ""
+    }
 ]
 </code></pre>
 <p>It is suitable to remove time part from the field used inside <code>"recursiveDateField":</code>.</p>
 <hr />
-<h2 id="sync-for-multiple-scenarios">Sync for multiple scenarios<a class="headerlink" href="#sync-for-multiple-scenarios" title="Permanent link">&para;</a></h2>
+<h1 id="customschemajson">customSchema.json<a class="headerlink" href="#customschemajson" title="Permanent link">&para;</a></h1>
+<p>Use this file when tables does not have PRIMARY KEY or when syncing views.</p>
+<p>Example:</p>
+<pre><code>[
+    {
+        "table": "CASHOUT",
+        "primaryKey": ["store", "date", "shift", "sh_start", "sh_end", "co_type", "co_number", "drawer", "cost_centr"]
+    },
+    {
+        "table": "CASHOUT2",
+        "primaryKey": ["store", "date", "shift", "sh_start", "sh_end", "co_type", "co_number", "drawer", "cost_centr"],
+        "notes": "code comment"
+    },
+    {
+        "table": "CATSALES",
+        "primaryKey": ["store", "inv_number"]
+    },
+    {
+        "table": "CHKHDR",
+        "primaryKey": ["store", "date", "check_num", "disc_num"]
+    },
+    {
+        "table": "CHKITEMS",
+        "primaryKey": ["store", "date", "check_num", "seq_main", "option", "item_num"]
+    },
+    {
+        "table": "CONTROL",
+        "primaryKey": ["fiscl_year"]
+    },
+    {
+        "table": "FCOSTN",
+        "primaryKey": ["store", "inv_number"]
+    },
+    {
+        "table": "",
+        "primaryKey": ["", ""]
+    }
+]
+</code></pre>
+<hr />
+<h1 id="comment1-comment2">comment1, comment2<a class="headerlink" href="#comment1-comment2" title="Permanent link">&para;</a></h1>
+<p>These two parameters can be used as "tag" instructions available before and after data is loaded to Aurora-MySQL.</p>
+<p>A database named <strong>bipost_system</strong> is created on Aurora-MySQL and has information about every sync process. <strong>bipost_sync_table</strong> stores comment1 and comment2 for ever table and sync execution.</p>
+<p>Make the following query to know what kind of information is stored:</p>
+<pre><code>SELECT * FROM `bipost_system`.bipost_sync_info ORDER BY id DESC LIMIT 100;
+SELECT * FROM `bipost_system`.bipost_sync_table ORDER BY id DESC, rid LIMIT 100;
+</code></pre>
+<p>See examples of how to use comment1 and comment2 before data is loaded <a href="../bipostapi/#2-prepare-database-before-loading">==&gt; here.</a></p>
+<hr />
+<h1 id="sync-for-multiple-scenarios">Sync for multiple scenarios<a class="headerlink" href="#sync-for-multiple-scenarios" title="Permanent link">&para;</a></h1>
 <p>It is very common to make changes to customData.json to upload different sets of data.</p>
 <p><strong>Use Cases:</strong></p>
 <ol>
@@ -356,7 +407,7 @@
 <p>Historic data may be uploaded once, e.g. transactions from previous years.</p>
 </li>
 <li>
-<p>Recently created/changed data may be uploaded daily, e.g. invoices, quotes, purchase orders, customers, items, vendors, etc.</p>
+<p>Recently created/modified data may be uploaded daily, e.g. invoices, quotes, purchase orders, customers, items, vendors, etc.</p>
 </li>
 </ol>
 <p>For all these reasons it may be useful to make copies of Bipost Sync folder and just change <strong>customData.json.</strong> Moreover you may want to have different sync schedules.</p>
@@ -370,7 +421,7 @@
         <a href="../bipostapi/" class="btn btn-neutral float-right" title="Loading and Transformation">Next <span class="icon icon-circle-arrow-right"></span></a>
 
 
-        <a href="../dbase/" class="btn btn-neutral" title="dBase to MySQL Aurora"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../visualfoxpro/" class="btn btn-neutral" title="Visual FoxPro to MySQL Aurora"><span class="icon icon-circle-arrow-left"></span> Previous</a>
 
     </div>
 
@@ -380,7 +431,7 @@
   <div role="contentinfo">
     <!-- Copyright etc -->
 
-      <p>© 2016 - 2018, <a href="https://www.factorbi.com">Factor BI, S.A. de C.V.</a> All rights reserved.</p>
+      <p>© 2016 - 2019, <a href="https://www.factorbi.com">Factor BI, S.A. de C.V.</a> All rights reserved.</p>
 
   </div>
 
@@ -398,7 +449,7 @@
     <span class="rst-current-version" data-toggle="rst-current-version">
 
 
-        <span><a href="../dbase/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../visualfoxpro/" style="color: #fcfcfc;">&laquo; Previous</a></span>
 
 
         <span style="margin-left: 15px"><a href="../bipostapi/" style="color: #fcfcfc">Next &raquo;</a></span>
