@@ -264,8 +264,8 @@
             "Effect": "Allow",
             "Action": "s3:*",
             "Resource": [
-                "arn:aws:s3:::bipostdata-123456789012",
-                "arn:aws:s3:::bipostdata-123456789012/*"
+                "arn:aws:s3:::bipostdata-abc123456789012",
+                "arn:aws:s3:::bipostdata-abc123456789012/*"
             ]
         },
         {
@@ -278,7 +278,7 @@
 </code></pre>
 </li>
 <li>
-<p>Replace the text <code>bipostdata-123456789012</code> with the Bucket Name you received from us over email.</p>
+<p>Replace the text <code>bipostdata-abc123456789012</code> with the Bucket Name you received from us over email.</p>
 </li>
 <li>
 <p>Click <strong>Review policy</strong> blue button on the lower right.</p>
@@ -310,7 +310,7 @@
 <li>
 <p>Under <strong>Select your use case</strong> click <strong>RDS - CloudHSM and Directory Service,</strong> click <strong>Next: Permissions</strong> blue button.</p>
 </li>
-<li>Click <strong>Next:Review.</strong></li>
+<li>Click <strong>Next: Tags</strong> and then <strong>Next: Review</strong>.</li>
 <li>Set <strong>Role name:</strong> <code>RDSLoadFromS3</code> and click <strong>Create role.</strong></li>
 <li>
 <p>Now from the navigation details, click the role you just created.</p>
@@ -364,13 +364,13 @@
 </blockquote>
 </li>
 <li>
-<p>Enable check box on <strong>auroraToS3Policy</strong></p>
+<p>Select <strong>auroraToS3Policy</strong></p>
 <blockquote>
 <p><img alt="Attach existing policies directly" src="../img/attach-existing-policies-directly.png" /></p>
 </blockquote>
 </li>
 <li>
-<p>Click <strong>Next: Review</strong> blue button lower right corner.</p>
+<p>Click <strong>Next: Tags</strong> and then <strong>Next: Review</strong>.</p>
 <blockquote>
 <p><img alt="Review add IAM User" src="../img/review-iam-user.png" /></p>
 </blockquote>
@@ -530,7 +530,7 @@
 <h2 id="aurora-instance">Aurora Instance<a class="headerlink" href="#aurora-instance" title="Permanent link">&para;</a></h2>
 <h4 id="create-instance">Create Instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h4>
 <ol>
-<li>Go to <strong>RDS Console</strong> and click Instances.</li>
+<li>Go to <strong>RDS Console</strong> and click Databases.</li>
 <li>Click <strong>Create database</strong>, orange button.</li>
 <li>
 <p>Select Engine: <strong>Amazon Aurora</strong>, scroll down, Edition: <strong>MySQL 5.7-compatible</strong> click <strong>Next</strong> orange button.</p>
@@ -549,6 +549,10 @@
 <tr>
 <td>Capacity type</td>
 <td>Provisioned</td>
+</tr>
+<tr>
+<td>DB engine version</td>
+<td>Aurora (MySQL)-5.7.12</td>
 </tr>
 <tr>
 <td>DB instance class</td>
@@ -641,7 +645,7 @@
 <td>tier-0</td>
 </tr>
 <tr>
-<td>Backup</td>
+<td>Backup retention period</td>
 <td>1 day</td>
 </tr>
 <tr>
@@ -658,7 +662,11 @@
 </tr>
 <tr>
 <td>Maintenance windows</td>
-<td>No preference</td>
+<td><em>leave defaults</em></td>
+</tr>
+<tr>
+<td>Enable deletion protection</td>
+<td>Clear check box</td>
 </tr>
 </tbody>
 </table>
@@ -671,12 +679,12 @@
 <hr />
 <h2 id="rds-instance-security-group">RDS Instance Security Group<a class="headerlink" href="#rds-instance-security-group" title="Permanent link">&para;</a></h2>
 <ol>
-<li>Go to <strong>RDS Console</strong> and click Instances.</li>
-<li>Once the new instance has <strong>Status:</strong> <code>available</code> proceed:</li>
-<li>Click your new instance.</li>
-<li>Scroll down to <strong>Connect</strong> section. </li>
+<li>Go to <strong>RDS Console</strong> and click Databases.</li>
+<li>Once the new instance (Writer Role) has <strong>Status:</strong> <code>Available</code> proceed:</li>
+<li>Click your new instance (Writer Role).</li>
+<li><strong>Connectivity</strong> tab. </li>
 <li>
-<p>Under <strong>Security group rules</strong> click the blue string that looks like this</p>
+<p>Under <strong>Security</strong> click the blue string that looks like this</p>
 <blockquote>
 <p><code>rds-launch-wizard (sg-XXXXXXXX)</code></p>
 <p><img alt="Aurora instance connect details" src="../img/Instance_details.png" /></p>
@@ -702,23 +710,23 @@
 </li>
 <li>Click <strong>Actions \ Edit outbound rules</strong></li>
 <li>Verify if Type: <code>All traffic</code>, Destination: <code>Custom</code> and value: <code>0.0.0.0/0</code> is already set, if not, add the rule.</li>
-<li>Go back to <a href="https://console.aws.amazon.com/rds/" target="_blank">RDS console</a>, select your instance, click <strong>Instance actions \ Reboot</strong>, confirm with orange button on the right.</li>
+<li>Go back to <a href="https://console.aws.amazon.com/rds/" target="_blank">RDS console</a>, select your instance (Writer Role), click <strong>Actions \ Reboot</strong>, confirm with orange button on the right.</li>
 <li>
-<p>Wait until <strong>Status</strong> is <code>available</code> </p>
+<p>Wait until <strong>Status</strong> is <code>Available</code> </p>
 <blockquote>
 <p><img alt="RDS Instance status available" src="../img/Instance_StatusAvailable.png" /></p>
 </blockquote>
 </li>
 <li>
-<p>Click your DB Instance, scroll down to <strong>Details</strong> section and check if <strong>Security groups</strong> are <code>( active )</code></p>
+<p>Click your DB Instance (Writer Role), Connectivity, Security, and check if <strong>VPS security groups</strong> are <code>( active )</code></p>
 </li>
 </ol>
 <hr />
 <h2 id="add-iam-role-to-aurora-cluster">Add IAM Role to Aurora Cluster<a class="headerlink" href="#add-iam-role-to-aurora-cluster" title="Permanent link">&para;</a></h2>
 <ol>
-<li>Go to <strong>RDS Console</strong> and click Clusters.</li>
+<li>Go to <strong>RDS Console</strong> and click Databases.</li>
 <li>
-<p>Click radio button on your new cluster, then click <strong>Actions</strong> then <strong>Manage IAM roles.</strong></p>
+<p>Click radio button on your new cluster (Regional Role), then click <strong>Actions</strong> then <strong>Manage IAM roles</strong>.</p>
 <blockquote>
 <p><img alt="RDS Clusters Actions" src="../img/RDS_ClusterActions.png" /></p>
 </blockquote>
@@ -736,19 +744,26 @@
 <hr />
 <h2 id="verify-instance-configuration">Verify Instance Configuration<a class="headerlink" href="#verify-instance-configuration" title="Permanent link">&para;</a></h2>
 <ol>
-<li>Go to <a href="https://console.aws.amazon.com/rds/" target="_blank">RDS console</a> and click Instances.</li>
-<li>Click your new instance.</li>
+<li>Go to <a href="https://console.aws.amazon.com/rds/" target="_blank">RDS console</a> and click Databases.</li>
+<li>Verify instance (Writer Role) Status is <strong>Available</strong></li>
+<li>Click your instance (Writer Role).</li>
 <li>
-<p>Verify the following:</p>
+<p>Connectivity tab, verify the following:</p>
 <blockquote>
-<p>DB instance status: <strong>available</strong></p>
-<p>Parameter group: <strong>instanceallowawsaccess (in-sync)</strong></p>
-<p>DB cluster parameter group: <strong>clusterallowawsaccess (in-sync)</strong></p>
-<p>Security groups: <strong>rds-launch-wizard (sg-XXXXXXXX) ( active )</strong></p>
-<p>Publicly accessible: <strong>Yes</strong></p>
-<blockquote>
-<p><img alt="RDS Instance Details" src="../img/RDS_instance_details.png" /></p>
+<p>VPC security groups: <strong>rds-launch-wizard (sg-XXXXXXXX) ( active )</strong></p>
+<p>Public accessibility: <strong>Yes</strong></p>
 </blockquote>
+</li>
+<li>
+<p>Configuration tab, verify the following:</p>
+<blockquote>
+<p>Parameter group: <strong>instanceallowawsaccess (in-sync)</strong></p>
+</blockquote>
+</li>
+<li>
+<p>Go back to Databases and click your cluster (Regional Role), verify the following:</p>
+<blockquote>
+<p>DB cluster parameter group: <strong>clusterallowawsaccess (in-sync)</strong></p>
 </blockquote>
 </li>
 </ol>
@@ -762,12 +777,15 @@ For Windows you may use "MySQL Workbench" or "HeidiSQL"
 </code></pre>
 </li>
 <li>
-<p>Go to <a href="https://console.aws.amazon.com/rds/" target="_blank">RDS console</a>, then Clusters, click on your new cluster and copy the <strong>Cluster endpoint</strong> string.</p>
+<p>Go to <a href="https://console.aws.amazon.com/rds/" target="_blank">RDS console</a>, then Databases, click your new cluster (Regional Role).</p>
+</li>
+<li>
+<p>Under Connectivity tab copy the <strong>Writer</strong> endpoint name string.</p>
 </li>
 <li>
 <p>Launch your MySQL client and configure a new connection:</p>
 <blockquote>
-<p><strong>Host:</strong> Paste the Cluster endpoint.</p>
+<p><strong>Host:</strong> Paste the Writer endpoint string.</p>
 <p><strong>Username:</strong> root</p>
 <p><strong>Password:</strong> type the Master Password</p>
 <p><strong>Port:</strong> 3306</p>

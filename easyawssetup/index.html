@@ -349,7 +349,7 @@
 <h4 id="42-specify-details">4.2. Specify Details<a class="headerlink" href="#42-specify-details" title="Permanent link">&para;</a></h4>
 <ul>
 <li><strong>Stack Name:</strong> this will be the prefix of all provisioned services.  Example: <code>mycompany-prod</code></li>
-<li><strong>BucketName:</strong> Paste the S3 bucket name that your received from Factor BI over email. It must look like this: <code>bipostdata-123456789012</code></li>
+<li><strong>BucketName:</strong> Paste the S3 bucket name that your received from Factor BI over email. It must look like this: <code>bipostdata-acb123456789012</code></li>
 <li>
 <p><strong>DBAdminPassword:</strong> Type a complex password. Must be at least 8 characters containing uppercase and lowercase letters, numbers and symbols.</p>
 <blockquote>
@@ -379,25 +379,26 @@
 </ul>
 <p><img alt="Capabilities" src="../img/capabilities.png?raw=true" /></p>
 <ul>
-<li>Click <strong>Create</strong> blue button. This will redirect to CloudFormation console home.</li>
-<li>Click refresh icon, upper right corner.</li>
+<li>Click <strong>Create</strong> blue button. </li>
+<li>Please wait until creation is complete. It will take about an hour.</li>
+<li>If asked to switch to the new <em>CloudFormation console</em> click <strong>Try it now.</strong></li>
 </ul>
-<p><img alt="CloudFormation Console Home" src="../img/cloudFormation-console-home-1.png" /></p>
 <h4 id="45-resources-created">4.5. Resources created<a class="headerlink" href="#45-resources-created" title="Permanent link">&para;</a></h4>
+<p><img alt="CloudFormation Console Home" src="../img/cloudFormation-console-home-2.png" /></p>
 <ul>
-<li>Check Stack Name.</li>
-<li>Review <strong>Events</strong> tab while Status is CREATE_IN_PROGRESS.</li>
-<li>Once Status is CREATE_COMPLETE review <strong>Outputs</strong> tab.</li>
+<li>Go to CloudFormation Stacks left menu and wait until Status is <strong>CREATE_COMPLETE</strong>.</li>
+<li>Click your newly created Stack name.</li>
+<li>Once Stack status is CREATE_COMPLETE click <strong>Outputs</strong> tab.</li>
 <li>You may want to copy and save on a secure place all Outputs, as you will use them for further configuration.</li>
 </ul>
 <p><strong>Come back any time and open again the Outputs tab.</strong> --&gt; From AWS Console Home, search for CloudFormation.</p>
-<p><img alt="Stack details" src="../img/stack-details.png" /></p>
+<p><img alt="Stack details" src="../img/cloudFormation-stack-outputs.png" /></p>
 <hr />
 <h2 id="step-5-add-role-to-cluster">Step 5: Add Role to Cluster<a class="headerlink" href="#step-5-add-role-to-cluster" title="Permanent link">&para;</a></h2>
 <ol>
 <li>Open <a href="https://console.aws.amazon.com/rds/">RDS console.</a></li>
-<li>Click <strong>Clusters</strong> on left pane.</li>
-<li>Click radio button on your cluster.</li>
+<li>Click <strong>Databases</strong> on left pane.</li>
+<li>Click radio button on DB identifier Role <strong>Regional</strong>.</li>
 <li>
 <p>Click <strong>Actions</strong> then <strong>Manage IAM roles.</strong></p>
 <p><img alt="RDS Clusters" src="../img/RDS_ClusterActions.png" /></p>
