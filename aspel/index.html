@@ -98,6 +98,16 @@
 
             <li class="toctree-l1">
 
+    <a class="" href="../sqlanywhere/">Sybase SQL Anywhere to MySQL Aurora</a>
+	    </li>
+
+            <li class="toctree-l1">
+
+    <a class="" href="../mysql/">MySQL on-prem to AWS Aurora</a>
+	    </li>
+
+            <li class="toctree-l1">
+
     <a class="" href="../customdatajson/">Tables & Data to Sync</a>
 	    </li>
 
@@ -120,15 +130,11 @@
 
         <ul>
 
-            <li><a class="toctree-l3" href="#demo">Demo</a></li>
+            <li><a class="toctree-l3" href="#demo-business-intelligence">Demo Business Intelligence</a></li>
 
-            <li><a class="toctree-l3" href="#tablas-aspel">Tablas Aspel</a></li>
+            <li><a class="toctree-l3" href="#consolidacion">Consolidación</a></li>
 
             <li><a class="toctree-l3" href="#excel-tablas-aspel-sae">Excel Tablas Aspel SAE</a></li>
-
-            <li><a class="toctree-l3" href="#anadir-tablas-a-la-sincronizacion">Añadir tablas a la Sincronización</a></li>
-
-            <li><a class="toctree-l3" href="#aspel-sae-en-github">Aspel SAE en GitHub</a></li>
 
             <li><a class="toctree-l3" href="#contacto">Contacto</a></li>
 
@@ -146,6 +152,16 @@
             <li class="toctree-l1">
 
     <a class="" href="../intelisis/">Intelisis</a>
+	    </li>
+
+            <li class="toctree-l1">
+
+    <a class="" href="../soft-restaurant/">Soft Restaurant</a>
+	    </li>
+
+            <li class="toctree-l1">
+
+    <a class="" href="../positouch/">POSitouch</a>
 	    </li>
 
             <li class="toctree-l1">
@@ -206,53 +222,22 @@
             <div class="section">
 
                 <h1 id="aspel-sae">Aspel SAE<a class="headerlink" href="#aspel-sae" title="Permanent link">&para;</a></h1>
-<p>Creamos tableros de mando, indicadores de gestión y seguimiento diario para tu negocio con las soluciones de Business Intelligence de Factor BI.</p>
-<p>Escríbemos y te ayudamos en lo que necesitas! <a href="mailto:info@factorbi.com">info@factorbi.com</a></p>
-<p>Consulta nuestra página web: <a href="https://www.factorbi.com/?lang=es" target="_blank">www.factorbi.com</a></p>
+<p><img alt="Aspel SAE en Amazon Web Services" src="../img/Aspel-SAE-en-AWS.png" /></p>
+<p>Integramos Aspel con Amazon Web Services para crear tableros de mando con indicadores de gestión y seguimiento diario y desarrollar soluciones a la medida.</p>
+<p>Consolidamos también información de distintas sucursales que utilizan bases de datos separadas de Aspel, de razones sociales distintas y de la misma razón social.</p>
+<p>Buscas un Business Intelligence? Escríbemos! <a href="mailto:info@factorbi.com">info@factorbi.com</a></p>
+<p><a href="https://www.factorbi.com/?lang=es" target="_blank">www.factorbi.com</a></p>
 <hr />
-<h2 id="demo">Demo<a class="headerlink" href="#demo" title="Permanent link">&para;</a></h2>
-<p><a href="https://datastudio.google.com/open/1rLJVp6XI-JnVkBVOnkdooT3IAVzl_GKW">Tablero de Mando Aspel SAE</a></p>
+<h2 id="demo-business-intelligence">Demo Business Intelligence<a class="headerlink" href="#demo-business-intelligence" title="Permanent link">&para;</a></h2>
+<p><a href="https://datastudio.google.com/open/1rLJVp6XI-JnVkBVOnkdooT3IAVzl_GKW" target="_blank">Tablero de Mando Aspel SAE</a></p>
 <p><a href="https://datastudio.google.com/open/1rLJVp6XI-JnVkBVOnkdooT3IAVzl_GKW" target="_blank"><img alt="Tablero de Mando Aspel SAE" src="../img/Dashboard_Demo_1-torn.png" /></a></p>
 <hr />
-<h2 id="tablas-aspel">Tablas Aspel<a class="headerlink" href="#tablas-aspel" title="Permanent link">&para;</a></h2>
-<p><img alt="Bipost Firebird Aspel" src="../img/bipost4.png" /></p>
-<p>Al configurar Bipost Sync con <code>System: SAE</code>, de fábrica se incluye un listado de tablas en la sincronización, las cuales son:</p>
-<pre><code>almacenes
-clie
-clin
-color
-compc
-compd
-compo
-conc
-conm
-conp
-cuen_det
-cuen_m
-factd
-factf
-factp
-inve
-minve
-moned
-paga_det
-paga_m
-par_compc
-par_compd
-par_compo
-par_factd
-par_factf
-par_factp
-prov
-prvprod
-talla
-vend
-</code></pre>
-<p>En la base de datos del sistema Aspel SAE cada tabla tiene un sufijo <code>01</code>, <code>02</code>, etc., de acuerdo a la empresa que se ha creado. Por ejemplo la tabla de las facturas podrías encontrarla como <code>factf01</code> y para otra razón social como <code>factf02</code>.</p>
-<p>Bipost Sync automáticamente elimina estos sufijos por lo que las tablas en Aurora-MySQL serán creadas sin el sufijo. Esta funcionalidad aplica también cuando se añaden tablas con <code>customData.json</code>.</p>
+<h2 id="consolidacion">Consolidación<a class="headerlink" href="#consolidacion" title="Permanent link">&para;</a></h2>
+<p>Consolida información de Aspel de distintas razones sociales y sucursales que utilizan bases de datos independientes. Sube información de Excel como metas de ventas y presupuestos para realizar un análisis completo.</p>
+<p><img alt="Consolidación Aspel ERP" src="../img/Aspel-Consolidacion.png" /></p>
 <hr />
 <h2 id="excel-tablas-aspel-sae">Excel Tablas Aspel SAE<a class="headerlink" href="#excel-tablas-aspel-sae" title="Permanent link">&para;</a></h2>
-<p>Abre aquí <a href="http://bit.ly/tablas_aspel" target="_blank"><strong>Excel tablas Aspel SAE.</strong></a></p>
+<p><a href="http://bit.ly/tablas_aspel" target="_blank"><img alt="Excel tablas Aspel SAE" src="../img/excel-small.png" /></a> Abre aquí <a href="http://bit.ly/tablas_aspel" target="_blank"><strong>Excel tablas Aspel SAE.</strong></a></p>
 <p><strong>NOTA:</strong> La lista del link anterior puede no estar completa.</p>
 <p>Para obtener el listado completo de tablas de acuerdo a tu base de datos, puedes usar el siguiente query en Firebird:</p>
 <pre><code>select rdb$relation_name
@@ -261,41 +246,6 @@ where rdb$view_blr is null
 and (rdb$system_flag is null or rdb$system_flag = 0)
 order by rdb$relation_name;
 </code></pre>
-<hr />
-<h2 id="anadir-tablas-a-la-sincronizacion">Añadir tablas a la Sincronización<a class="headerlink" href="#anadir-tablas-a-la-sincronizacion" title="Permanent link">&para;</a></h2>
-<p>Para incluir tablas adicionales en la sincronización, se utiliza el archivo <code>customData.json</code>, por ejemplo:</p>
-<pre><code>[
-    {
-        "active": "true",
-        "table": "CLIE_CLIB",
-        "fields": "CVE_CLIE, CAMPLIB1, CAMPLIB2, CAMPLIB3, CAMPLIB4, CAMPLIB5, CAMPLIB6",
-        "join": "",
-        "filter": "",
-        "recursiveDateField": "",
-        "order": "",
-        "limit": "",
-        "comment1": "",
-        "comment2": ""
-    },
-    {
-        "active": "true",
-        "table": "AFACT",
-        "fields": "* ",
-        "join": "",
-        "filter": "",
-        "recursiveDateField": "",
-        "order": "",
-        "limit": "",
-        "comment1": "",
-        "comment2": ""
-    }
-]
-</code></pre>
-<p>Notar que no se incluye el sufijo <code>01</code>, <code>02</code>, etc. de las tablas.</p>
-<p>Para más información sobre la configuración de customData.json ver <a href="../customdatajson">aquí.</a></p>
-<hr />
-<h2 id="aspel-sae-en-github">Aspel SAE en GitHub<a class="headerlink" href="#aspel-sae-en-github" title="Permanent link">&para;</a></h2>
-<p><a href="https://github.com/factorbi/bi-aspel" target="_blank">Repositorio de GitHub Aspel SAE</a> para crear estructuras del Business Intelligence.</p>
 <hr />
 <h2 id="contacto">Contacto<a class="headerlink" href="#contacto" title="Permanent link">&para;</a></h2>
 <p>¿Necesitas ayuda? Escríbemos! <a href="mailto:info@factorbi.com">info@factorbi.com</a></p>

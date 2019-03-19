@@ -98,6 +98,16 @@
 
             <li class="toctree-l1">
 
+    <a class="" href="../sqlanywhere/">Sybase SQL Anywhere to MySQL Aurora</a>
+	    </li>
+
+            <li class="toctree-l1">
+
+    <a class="" href="../mysql/">MySQL on-prem to AWS Aurora</a>
+	    </li>
+
+            <li class="toctree-l1">
+
     <a class="" href="../customdatajson/">Tables & Data to Sync</a>
 	    </li>
 
@@ -132,18 +142,22 @@
 
             <li><a class="toctree-l3" href="#demo">Demo</a></li>
 
-            <li><a class="toctree-l3" href="#ejemplos-de-configuracion">Ejemplos de configuración</a></li>
-
-            <li><a class="toctree-l3" href="#recomendaciones">Recomendaciones</a></li>
-
-            <li><a class="toctree-l3" href="#intelisis-en-github">Intelisis en GitHub</a></li>
-
             <li><a class="toctree-l3" href="#contacto">Contacto</a></li>
 
         </ul>
 
 
     </ul>
+	    </li>
+
+            <li class="toctree-l1">
+
+    <a class="" href="../soft-restaurant/">Soft Restaurant</a>
+	    </li>
+
+            <li class="toctree-l1">
+
+    <a class="" href="../positouch/">POSitouch</a>
 	    </li>
 
             <li class="toctree-l1">
@@ -204,160 +218,18 @@
             <div class="section">
 
                 <h1 id="intelisis-erp">Intelisis ERP<a class="headerlink" href="#intelisis-erp" title="Permanent link">&para;</a></h1>
-<p>Creamos tableros de mando, indicadores de gestión y seguimiento diario para tu negocio con las soluciones de Business Intelligence de Factor BI.</p>
-<p>Excelente alternativa a Qlik View, Reporting Services y Cognos BI !</p>
-<p>Escríbemos y te ayudamos en lo que necesitas! <a href="mailto:info@factorbi.com">info@factorbi.com</a></p>
-<p>Consulta nuestra página web: <a href="https://www.factorbi.com/intelisis?lang=es" target="_blank">www.factorbi.com/intelisis</a></p>
+<p><img alt="Intelisis en Amazon Web Services" src="../img/Intelisis-en-AWS.png" /></p>
+<p>Integramos Intelisis con Amazon Web Services para crear tableros de mando, realizar análisis contable y fiscal y desarrollar soluciones Web a la medida.</p>
+<p>Buscas un Business Intelligence sin pagar licencias por usuario? Visitanos! <a href="https://www.factorbi.com/intelisis?lang=es" target="_blank">www.factorbi.com</a></p>
+<p>Google Data Studio es una excelente alternativa vs Qlik View, Power BI y Cognos BI.</p>
+<p>Escríbemos y te ayudamos! <a href="mailto:info@factorbi.com">info@factorbi.com</a></p>
 <hr />
 <h2 id="demo">Demo<a class="headerlink" href="#demo" title="Permanent link">&para;</a></h2>
-<p><a href="https://datastudio.google.com/u/0/reporting/1Wc_z1fHWvXSxS5hd5VO4MkfbVilUsKMZ">Tablero de Tablero de Mando Ventas Intelisis</a></p>
+<p><a href="https://datastudio.google.com/u/0/reporting/1Wc_z1fHWvXSxS5hd5VO4MkfbVilUsKMZ" target="_blank">Tablero de Mando Ventas Intelisis</a></p>
 <p><a href="https://datastudio.google.com/u/0/reporting/1Wc_z1fHWvXSxS5hd5VO4MkfbVilUsKMZ" target="_blank"><img alt="Tablero de Mando Intelisis" src="../img/Dashboard_Demo_1-torn.png" /></a></p>
 <hr />
-<h2 id="ejemplos-de-configuracion">Ejemplos de configuración<a class="headerlink" href="#ejemplos-de-configuracion" title="Permanent link">&para;</a></h2>
-<p>Ejemplos de información a sincronizar usando <code>customData.json</code></p>
-<pre><code>[
-    {
-        "active": "true",
-        "table": "Venta",
-        "fields": "Venta.ID, Venta.Empresa, Venta.Mov, Venta.MovID, Venta.FechaEmision, Venta.Concepto, Venta.Moneda, Venta.TipoCambio, Venta.Estatus, Venta.Cliente, Venta.Almacen, Venta.Agente, Venta.Condicion, Venta.Vencimiento, Venta.DescuentoLineal, Venta.Sucursal, Venta.SubModulo, Venta.Importe, Venta.Impuestos, Venta.CostoTotal, Venta.FechaRegistro, Venta.DescuentoGlobal, Venta.Proyecto",
-        "join": "MovTipo WITH (NOLOCK) ON Venta.Mov = MovTipo.Mov AND MovTipo.Modulo = 'VTAS' ",
-        "filter": "Venta.Estatus IN ('PENDIENTE','CONCLUIDO','PROCESAR') AND MovTipo.Clave IN ('VTAS.F','VTAS.D','VTAS.N','VTAS.FM','VTAS.FC') ",
-        "recursiveDateField": "Venta.FechaEmision",
-        "order": "",
-        "limit": "",
-        "comment1": "",
-        "comment2": ""
-    },
-    {
-        "active": "true",
-        "table": "VentaD",
-        "fields": "VentaD.ID, VentaD.Renglon, VentaD.RenglonSub, VentaD.Articulo, VentaD.Cantidad, VentaD.Almacen, VentaD.Precio, VentaD.DescuentoLinea, VentaD.DescuentoImporte, VentaD.Impuesto1, VentaD.Costo, VentaD.ContUso, VentaD.Unidad, VentaD.Factor, VentaD.Agente ",
-        "join": "Venta WITH (NOLOCK) ON Venta.ID = VentaD.ID JOIN MovTipo WITH (NOLOCK) ON Venta.Mov = MovTipo.Mov AND MovTipo.Modulo = 'VTAS' ",
-        "filter": "Venta.Estatus IN ('PENDIENTE','CONCLUIDO','PROCESAR') AND MovTipo.Clave IN ('VTAS.F','VTAS.D','VTAS.N','VTAS.FM','VTAS.FC') ",
-        "recursiveDateField": "Venta.FechaEmision",
-        "order": "",
-        "limit": "",
-        "comment1": "",
-        "comment2": ""
-    }
-]
-</code></pre>
-<hr />
-<h2 id="recomendaciones">Recomendaciones<a class="headerlink" href="#recomendaciones" title="Permanent link">&para;</a></h2>
-<h4 id="crear-dos-carpetas">Crear dos carpetas<a class="headerlink" href="#crear-dos-carpetas" title="Permanent link">&para;</a></h4>
-<p>Crea al menos dos carpetas para Bipost Sync, esto te permitirá sincronizar catálogos y movimientos en forma independiente.</p>
-<h4 id="carpeta-catalogos">Carpeta Catálogos<a class="headerlink" href="#carpeta-catalogos" title="Permanent link">&para;</a></h4>
-<p>Tu primer carpeta donde está Bipost Sync la puedes nombrar <code>Bipost_catalogos</code> y utilizarás <strong>customData.json</strong> para enviar únicamente catálogos. Ejemplo:</p>
-<pre><code>[
-    {
-        "active": "true",
-        "table": "Sucursal",
-        "fields": "Sucursal, Nombre, Categoria, Estatus",
-        "join": "",
-        "filter": "",
-        "recursiveDateField": "",
-        "order": "",
-        "limit": "",
-        "comment1": "",
-        "comment2": ""
-    },
-    {
-        "active": "true",
-        "table": "Agente",
-        "fields": "Agente, Nombre, Categoria, Estatus",
-        "join": "",
-        "filter": "",
-        "recursiveDateField": "",
-        "order": "",
-        "limit": "",
-        "comment1": "",
-        "comment2": ""
-    },
-    {
-        "active": "true",
-        "table": "MovTipo",
-        "fields": "Modulo, Mov, Clave",
-        "join": "",
-        "filter": "",
-        "recursiveDateField": "",
-        "order": "",
-        "limit": "",
-        "comment1": "",
-        "comment2": ""
-    },
-    {
-        "active": "true",
-        "table": "Cta",
-        "fields": "Cuenta, Rama, Descripcion, Tipo, EsAcreedora, EsAcumulativa, CentrosCostos, Estatus, ClaveSAT",
-        "join": "",
-        "filter": "",
-        "recursiveDateField": "",
-        "order": "",
-        "limit": "",
-        "comment1": "",
-        "comment2": ""
-    },
-    {
-        "active": "true",
-        "table": "CentroCostos",
-        "fields": "CentroCostos, Rama, Descripcion, EsAcumulativo, Grupo, SubGrupo, SubSubGrupo, Estatus",
-        "join": "",
-        "filter": "",
-        "recursiveDateField": "",
-        "order": "",
-        "limit": "",
-        "comment1": "",
-        "comment2": ""
-    }
-]
-</code></pre>
-<p>Abre biPost.exe y asegúrate de quitar el check <a href="../sqlserver/#download-data">Recursive Sync</a>.</p>
-<p>Usando el JSON del ejemplo anterior, se enviará en cada sincronización <strong>todos los renglones</strong> de las tablas <code>Sucursal</code>, <code>Agente</code>, <code>MovTipo</code>, <code>Cta</code> y <code>CentroCostos</code>.</p>
-<p><strong>NOTA:</strong> Si la tabla que vas a enviar tiene más de un millón de registros, es recomendable que filtres el query utilizando la opción <code>"filter":</code>.</p>
-<h4 id="carpeta-recursivo">Carpeta Recursivo<a class="headerlink" href="#carpeta-recursivo" title="Permanent link">&para;</a></h4>
-<p>La otra carpeta de Bipost Sync puedes nombrarla <code>Bipost_diario</code>. Abre el archivo <strong>customData.json</strong> y especifica las tablas de movimientos que vas a enviar, por ejemplo:</p>
-<pre><code>[
-    {
-        "active": "true",
-        "table": "Cont",
-        "fields": "Cont.ID, Cont.Empresa, Cont.Mov, Cont.MovID, Cont.FechaEmision, Cont.FechaContable, Cont.Proyecto, Cont.Moneda, Cont.TipoCambio, Cont.Estatus, Cont.Ejercicio, Cont.Periodo, Cont.Moneda2, Cont.TipoCambio2",
-        "join": "MovTipo WITH (NOLOCK) ON Cont.Mov = MovTipo.Mov AND MovTipo.Modulo = 'CONT' ",
-        "filter": "Cont.Estatus &lt;&gt; 'SINAFECTAR' AND MovTipo.clave IN ('CONT.P','CONT.C') ",
-        "recursiveDateField": "Cont.FechaEmision",
-        "order": "",
-        "limit": "",
-        "comment1": "",
-        "comment2": ""
-    },
-    {
-        "active": "true",
-        "table": "ContD",
-        "fields": "ContD.ID, ContD.Renglon, ContD.RenglonSub, ContD.Cuenta, ContD.SubCuenta, ContD.SubCuenta2, ContD.SubCuenta3, ContD.Debe, ContD.Debe2, ContD.Haber, ContD.Haber2, ContD.Sucursal, ContD.SucursalContable ",
-        "join": "Cont WITH (NOLOCK) ON Cont.ID = ContD.ID JOIN MovTipo WITH (NOLOCK) ON Cont.Mov = MovTipo.Mov AND MovTipo.Modulo = 'CONT' ",
-        "filter": "Cont.Estatus &lt;&gt; 'SINAFECTAR' AND MovTipo.clave IN ('CONT.P','CONT.C') ",
-        "recursiveDateField": "Cont.FechaEmision",
-        "order": "",
-        "limit": "",
-        "comment1": "",
-        "comment2": ""
-    }
-]
-</code></pre>
-<p>Es importante incluir el parámetro <code>"recursiveDateField":</code> para optimizar la subida de información.</p>
-<p><img alt="Bipost General Settings" src="../img/bipost7.png" /></p>
-<p>Mediante esta opción se pueden cargar históricos de varios años.</p>
-<p>NOTA: Al apagar el check <em>Recursive Sync</em> automáticamente la fecha de inicio y fin se fija en el día de hoy utilizando la fecha de la máquina Windows.</p>
-<h4 id="uso-del-filter">Uso del Filter<a class="headerlink" href="#uso-del-filter" title="Permanent link">&para;</a></h4>
-<p>En el ejemplo customData.json anterior, se utilizó el siguiente filtro para la tabla <strong>ContD</strong>:</p>
-<p><code>"filter": "Cont.Estatus &lt;&gt; 'SINAFECTAR'</code></p>
-<p>Si un registro del módulo Contabilidad se cancela, cambia su estatus a <code>CANCELADO</code> por tanto el query a la base de datos incluye los estatus <code>CANCELADO</code> para que estos cambios se vean reflejados en la base de Aurora-MySQL.</p>
-<hr />
-<h2 id="intelisis-en-github">Intelisis en GitHub<a class="headerlink" href="#intelisis-en-github" title="Permanent link">&para;</a></h2>
-<p>Ver más ejemplos en nuestro <a href="https://github.com/factorbi/bi-intelisis" target="_blank">repositorio de GitHub.</a></p>
-<hr />
 <h2 id="contacto">Contacto<a class="headerlink" href="#contacto" title="Permanent link">&para;</a></h2>
-<p>¿Necesitas ayuda? ¿Buscas una solución a la medida?</p>
-<p>Escríbemos! <a href="mailto:info@factorbi.com">info@factorbi.com</a></p>
+<p>¿Necesitas ayuda? Escríbemos! <a href="mailto:info@factorbi.com">info@factorbi.com</a></p>
 
             </div>
           </div>
@@ -365,7 +237,7 @@
 
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
 
-        <a href="../businessintelligence/" class="btn btn-neutral float-right" title="Business Intelligence">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../soft-restaurant/" class="btn btn-neutral float-right" title="Soft Restaurant">Next <span class="icon icon-circle-arrow-right"></span></a>
 
 
         <a href="../microsip/" class="btn btn-neutral" title="Microsip"><span class="icon icon-circle-arrow-left"></span> Previous</a>
@@ -399,7 +271,7 @@
         <span><a href="../microsip/" style="color: #fcfcfc;">&laquo; Previous</a></span>
 
 
-        <span style="margin-left: 15px"><a href="../businessintelligence/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../soft-restaurant/" style="color: #fcfcfc">Next &raquo;</a></span>
 
     </span>
 </div>

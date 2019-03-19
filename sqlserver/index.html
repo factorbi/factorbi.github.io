@@ -90,6 +90,10 @@
 
         <ul>
 
+            <li><a class="toctree-l3" href="#before-you-begin">Before You Begin</a></li>
+
+            <li><a class="toctree-l3" href="#bipost-sync">Bipost Sync</a></li>
+
             <li><a class="toctree-l3" href="#general-settings">General Settings</a></li>
 
             <li><a class="toctree-l3" href="#tenant">Tenant</a></li>
@@ -107,6 +111,12 @@
 
     <li class="toctree-l2"><a href="#use-cases">Use Cases</a></li>
 
+        <ul>
+
+            <li><a class="toctree-l3" href="#contact-us">Contact Us</a></li>
+
+        </ul>
+
 
     </ul>
 	    </li>
@@ -119,6 +129,16 @@
             <li class="toctree-l1">
 
     <a class="" href="../visualfoxpro/">Visual FoxPro to MySQL Aurora</a>
+	    </li>
+
+            <li class="toctree-l1">
+
+    <a class="" href="../sqlanywhere/">Sybase SQL Anywhere to MySQL Aurora</a>
+	    </li>
+
+            <li class="toctree-l1">
+
+    <a class="" href="../mysql/">MySQL on-prem to AWS Aurora</a>
 	    </li>
 
             <li class="toctree-l1">
@@ -149,6 +169,16 @@
             <li class="toctree-l1">
 
     <a class="" href="../intelisis/">Intelisis</a>
+	    </li>
+
+            <li class="toctree-l1">
+
+    <a class="" href="../soft-restaurant/">Soft Restaurant</a>
+	    </li>
+
+            <li class="toctree-l1">
+
+    <a class="" href="../positouch/">POSitouch</a>
 	    </li>
 
             <li class="toctree-l1">
@@ -209,11 +239,23 @@
             <div class="section">
 
                 <h1 id="synchronize-sql-server-to-aws">Synchronize SQL Server to AWS<a class="headerlink" href="#synchronize-sql-server-to-aws" title="Permanent link">&para;</a></h1>
+<p><img alt="SQL Server to AWS" src="../img/SQL-Server-to-AWS.png" /></p>
 <p>Continually export SQL Server data to AWS Aurora MySQL.</p>
 <ul>
-<li>To make synchronizations from SQL Server to Aurora you need your <strong>Service</strong> and <strong>Activation No.</strong> </li>
-<li>Get them from your <a href="https://s3.amazonaws.com/biforms-prod/index.html" target="_blank">Factor BI Console.</a></li>
+<li>Great to consolidate/merge information on the cloud from multiple locations that use SQL Server databases, then build your own Data Warehouse and deliver Business Intelligence.  </li>
+<li>On top of AWS build web applications using data pulled from on-prem SQL Server.</li>
+<li>Send data from AWS back to SQL Server.</li>
 </ul>
+<hr />
+<h2 id="before-you-begin">Before You Begin<a class="headerlink" href="#before-you-begin" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Have your AWS account linked it to our API. Not sure? <a href="../easyawssetup">follow here.</a></li>
+<li>Complete registration on <a href="../registration">Factor BI console</a> </li>
+<li>Create Service and Activation keys and configure service, <a href="../registration/#configure-your-first-service">--&gt; details here.</a></li>
+<li><a href="../installation">Download Bipost Sync</a> program for Windows.</li>
+</ul>
+<hr />
+<h2 id="bipost-sync">Bipost Sync<a class="headerlink" href="#bipost-sync" title="Permanent link">&para;</a></h2>
 <p><img alt="SQL Server to MySQL Aurora" src="../img/bipost5.png" /></p>
 <ul>
 <li><strong>Service No.:</strong> 36 digit number, it may look like this: <code>a1bcd23e-4fa5-67b8-cd9e-f0123abc4567</code></li>
@@ -283,22 +325,16 @@
 <h3 id="recursive-sync">Recursive Sync<a class="headerlink" href="#recursive-sync" title="Permanent link">&para;</a></h3>
 <ul>
 <li>
-<p>Optimize upload by extracting and uploading one day at a time for a given date range.</p>
-</li>
-<li>
-<p>Very useful to upload historic data and big data sets.</p>
+<p>Use only to upload historic data. It optimizes upload by extracting and uploading one day at a time for a given date range.</p>
 </li>
 <li>
 <p>Always use along with <a href="../customdatajson">customData.json</a> so you can configure the date field to use for each table.</p>
 </li>
 <li>
-<p>When <strong>turned off</strong> it automatically sets <em>today</em> as start and end date using your system clock.</p>
-</li>
-<li>
 <p><strong>NOTE:</strong> For daily sync, instead of using Recursive Sync, dynamically parse a date range into customData.json ==&gt; <a href="https://github.com/factorbi/bi-intelisis/blob/master/customData-examples.json" target="_blank">Examples here.</a></p>
 </li>
 <li>
-<p>More info about this feature click here <a href="../customdatajson/#recursive-synchronization">--&gt; Recursive Synchronization</a></p>
+<p>More info about this feature see <a href="../customdatajson/#recursive-synchronization">Recursive Synchronization</a></p>
 </li>
 </ul>
 <h2 id="tenant">Tenant<a class="headerlink" href="#tenant" title="Permanent link">&para;</a></h2>
@@ -315,7 +351,7 @@
 </ul>
 <hr />
 <h2 id="tables-to-sync">Tables to Sync<a class="headerlink" href="#tables-to-sync" title="Permanent link">&para;</a></h2>
-<p>Tables and subsets of data to synchronize are specified in <strong>customData.json</strong> file ==&gt; <a href="../customdatajson">follow here.</a></p>
+<p><strong>IMPORTANT:</strong> Tables and subsets of data to synchronize are specified in <strong>customData.json</strong> file ==&gt; <a href="../customdatajson">follow here.</a></p>
 <hr />
 <h2 id="schedule">Schedule<a class="headerlink" href="#schedule" title="Permanent link">&para;</a></h2>
 <p><img alt="Bipost Schedule" src="../img/bipost9.png" /></p>
@@ -337,8 +373,11 @@
 <hr />
 <h1 id="use-cases">Use Cases<a class="headerlink" href="#use-cases" title="Permanent link">&para;</a></h1>
 <p>Many legacy and critical mission systems use Microsoft SQL Server.</p>
-<p><a href="http://www.intelisis.com/" target="_blank">Intelisis ERP</a> and <a href="http://www.tauruszone.com.ar/" target="_blank">Ycix TaurusZone</a> are examples of systems built with SQL Server. Independent companies that have tested Bipost Sync now use it every day to enable cloud Business Intelligence with <a href="https://www.google.com/analytics/data-studio/" target="_blank">Google Data Studio.</a></p>
+<p><a href="https://softrestaurant.com.mx/" target="_blank">Soft Restaurant</a> and <a href="http://www.intelisis.com/" target="_blank">Intelisis ERP</a> are examples of systems built with SQL Server. We have companies that use Bipost Sync + AWS to achieve sales &amp; financial consolidation and enable cloud Business Intelligence with <a href="https://www.google.com/analytics/data-studio/" target="_blank">Google Data Studio.</a></p>
 <p><img alt="SQL Server to MySQL Aurora Business Intelligence Use Case" src="../img/SQL-Server-to-MySQL-Aurora-Use-Case.png" /></p>
+<hr />
+<h2 id="contact-us">Contact Us<a class="headerlink" href="#contact-us" title="Permanent link">&para;</a></h2>
+<p>Questions? Send us an email: <a href="mailto:info@factorbi.com">info@factorbi.com</a></p>
 
             </div>
           </div>

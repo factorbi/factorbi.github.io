@@ -14,7 +14,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Cloud Synchronization & ETL for Microsoft SQL Server, Firebird, DBF & MySQL to AWS">
+  <meta name="description" content="AWS Cloud Synchronization & ETL for Microsoft SQL Server, Firebird, DBF, MySQL & SQL Anywhere.">
   <meta name="author" content="Factor BI">
   <link rel="shortcut icon" href="./img/favicon.ico">
   <title>Home - Database Synchronization & ETL to AWS Cloud | Factor BI</title>
@@ -79,7 +79,7 @@
 
             <li><a class="toctree-l3" href="#release-notes">Release Notes</a></li>
 
-            <li><a class="toctree-l3" href="#contact">Contact</a></li>
+            <li><a class="toctree-l3" href="#contact-us">Contact Us</a></li>
 
         </ul>
 
@@ -124,6 +124,16 @@
 
             <li class="toctree-l1">
 
+    <a class="" href="sqlanywhere/">Sybase SQL Anywhere to MySQL Aurora</a>
+	    </li>
+
+            <li class="toctree-l1">
+
+    <a class="" href="mysql/">MySQL on-prem to AWS Aurora</a>
+	    </li>
+
+            <li class="toctree-l1">
+
     <a class="" href="customdatajson/">Tables & Data to Sync</a>
 	    </li>
 
@@ -150,6 +160,16 @@
             <li class="toctree-l1">
 
     <a class="" href="intelisis/">Intelisis</a>
+	    </li>
+
+            <li class="toctree-l1">
+
+    <a class="" href="soft-restaurant/">Soft Restaurant</a>
+	    </li>
+
+            <li class="toctree-l1">
+
+    <a class="" href="positouch/">POSitouch</a>
 	    </li>
 
             <li class="toctree-l1">
@@ -211,14 +231,15 @@
 
                 <h1 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h1>
 <p>Bipost is database synchronization &amp; ETL tool for continually moving data from on-premises to AWS Aurora MySQL and back forth.</p>
-<p>Created to keep your Windows databases on-premises while providing a way to extract, load &amp; transform specific sets of data to AWS Aurora. Two-way synchronization lets you sync from AWS back to on-prem database.</p>
+<p>Created to keep your Windows databases on-premises while providing a way to extract, load &amp; transform specific sets of data to AWS Aurora. Two-way synchronization lets you sync from AWS back to on-prem database. It is not intended to work as a replication engine or mirroring an entire database.</p>
 <p><strong>Sources:</strong></p>
 <ul>
-<li><a href="https://firebirdsql.org/" target="_blank">Firebird SQL</a></li>
-<li><a href="https://www.microsoft.com/en-us/sql-server" target="_blank">Microsoft SQL Server</a></li>
-<li><a href="https://www.mysql.com/" target="_blank">MySQL</a></li>
-<li><a href="http://www.independent-software.com/dbase-dbf-dbt-file-format.html" target="_blank">dBase</a></li>
-<li><a href="https://docs.microsoft.com/en-us/previous-versions/visualstudio/foxpro" target="_blank">Visual FoxPro (VFP)</a></li>
+<li><a href="./firebird">Firebird SQL</a></li>
+<li><a href="./sqlserver">Microsoft SQL Server</a></li>
+<li><a href="./mysql">MySQL</a></li>
+<li><a href="./dbase">dBase</a></li>
+<li><a href="./visualfoxpro">Visual FoxPro (VFP)</a></li>
+<li><a href="./sqlanywhere">Sybase SQL Anywhere</a></li>
 </ul>
 <p><strong>Destination:</strong></p>
 <ul>
@@ -229,25 +250,24 @@
 </blockquote>
 </li>
 </ul>
-<p>Fully deployed on AWS with serverless technologies to scale at demand. Delivered as Software as a Service (SaaS).</p>
+<p>Deployed on AWS to scale at demand. Software as a Service (SaaS).</p>
 <p><img alt="Synchronize to AWS" src="./img/BipostSyncDiagram2_med.png" /></p>
 <hr />
 <h2 id="use-cases">Use Cases<a class="headerlink" href="#use-cases" title="Permanent link">&para;</a></h2>
 <ul>
-<li>Consolidate/merge information on AWS across multiple locations and database engines, e.g. merge sales and inventory information from different branches.</li>
+<li>Consolidate/merge information on AWS from across multiple locations and database engines, e.g. consolidate sales, inventory and financial information from several branches.</li>
 <li>Build a Data Warehouse and make Analytics and Business Intelligence dashboards using <a href="https://marketingplatform.google.com/about/data-studio/" target="_blank">Google Data Studio</a> or <a href="https://aws.amazon.com/quicksight/" target="_blank">AWS QuickSight</a>, with native connection to Aurora-MySQL.</li>
-<li>Make statistical analysis and forecasts with AWS services.</li>
-<li>Extend your on-prem ERP to AWS cloud and build web applications &amp; back-end services with API Gateway and Lambda.</li>
-<li>Define centralized data on AWS and push it to every on-prem system store.</li>
+<li>Make forecasts and statistical analysis with AWS services.</li>
+<li>Extend your on-prem ERP &amp; POS to AWS cloud and build web applications &amp; back-end services.</li>
+<li>Push data from AWS to on-prem systems.</li>
 </ul>
 <hr />
 <h2 id="how-it-works">How it works<a class="headerlink" href="#how-it-works" title="Permanent link">&para;</a></h2>
 <ul>
-<li>On every sync Bipost Sync reads table schema's and data and uploads it to AWS.</li>
-<li>Fully customize data sets to upload using <a href="./customdatajson">customData.json</a></li>
+<li>Bipost Sync reads table schema's and data and uploads it to AWS.</li>
 <li>Database and tables are created/altered if they don't exist, and data is loaded to Aurora-MySQL.</li>
 <li>Before and after data is loaded to Aurora-MySQL you can transform data with stored procedures.</li>
-<li>Don't worry about uploading the same data multiple times. Data is replaced using primary keys, avoiding duplicates.</li>
+<li>Don't worry about sending the same data multiple times. Data is replaced using primary keys, avoiding duplicates.</li>
 <li>Run manually or automatically with a Windows Task schedule.</li>
 <li>Upload big datasets using Recursive Sync.</li>
 </ul>
@@ -257,8 +277,8 @@
 <h3 id="two-way-synchronization">Two-way synchronization<a class="headerlink" href="#two-way-synchronization" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Synchronize from Aurora-MySQL to on-premises SQL Server or Firebird SQL.</li>
-<li>Specify data to download using <a href="./synctowindows/#outdatajson">outData.json</a></li>
-<li>Insert/update the returned data to your on-prem DB or just save the CSV files on Windows.</li>
+<li>Customize data to download using <a href="./synctowindows/#outdatajson">outData.json</a></li>
+<li>Insert/update the returned data to your on-prem DB.</li>
 <li>Tables schemas are created/altered on your on-prem DB if they don't exist.</li>
 <li>Primary keys set on Aurora-MySQL are used against on-prem DB to avoid duplicates.</li>
 <li>Before and after data is loaded to on-prem DB you can transform data with stored procedures.</li>
@@ -268,7 +288,7 @@
 <hr />
 <h2 id="private-cloud">Private Cloud<a class="headerlink" href="#private-cloud" title="Permanent link">&para;</a></h2>
 <p>We care deeply about privacy.</p>
-<p>Our API links to your RDS instance on your AWS account, so you have full control of your databases.</p>
+<p>Our API links to your RDS instance on your AWS account, so you have full control and ownership of your databases.</p>
 <p>Each RDS Aurora instance loads data by accessing a dedicated bucket, exclusive to your AWS account.</p>
 <h4 id="architecture">Architecture<a class="headerlink" href="#architecture" title="Permanent link">&para;</a></h4>
 <p><img alt="Synchronization Architecture" src="./img/Bipost_Architecture.png" /></p>
@@ -277,7 +297,7 @@
 <h2 id="start-using">Start Using<a class="headerlink" href="#start-using" title="Permanent link">&para;</a></h2>
 <ul>
 <li>30 days free.</li>
-<li>Unlimited databases and synchronizations.</li>
+<li>Unlimited synchronizations.</li>
 <li>No need to provide credit card information.</li>
 </ul>
 <p><strong><a href="./easyawssetup">--&gt; Start here</a></strong></p>
@@ -303,6 +323,12 @@
 </blockquote>
 <hr />
 <h2 id="release-notes">Release Notes<a class="headerlink" href="#release-notes" title="Permanent link">&para;</a></h2>
+<h4 id="143-ga-2019-03-12">1.4.3 (GA) 2019-03-12<a class="headerlink" href="#143-ga-2019-03-12" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Sybase SQL Anywhere connection (release candidate).</li>
+<li>Firebird 3.0 compatibility.</li>
+<li>Bug fixes.</li>
+</ul>
 <h4 id="130-ga-2019-01-29">1.3.0 (GA) 2019-01-29<a class="headerlink" href="#130-ga-2019-01-29" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Tenant: Sync several on-premise databases to a single MySQL database and differentiate them with tenant_id. Great for consolidation. Learn more <a href="./firebird/#tenant">here.</a></li>
@@ -360,9 +386,20 @@
 <li>Initial statement added to API.</li>
 </ul>
 <hr />
-<h2 id="contact">Contact<a class="headerlink" href="#contact" title="Permanent link">&para;</a></h2>
+<h2 id="contact-us">Contact Us<a class="headerlink" href="#contact-us" title="Permanent link">&para;</a></h2>
 <p>We are always happy to hear about you.</p>
-<p>Please send us an email to: <a href="mailto:info@factorbi.com">info@factorbi.com</a></p>
+<ul>
+<li>
+<p>Email: <a href="mailto:info@factorbi.com">info@factorbi.com</a></p>
+</li>
+<li>
+<p>Company page:</p>
+<blockquote>
+<p>🇺🇸 English: <a href="https://www.factorbi.com/" target="_blank">www.factorbi.com</a></p>
+<p>🇲🇽 Español: <a href="https://www.factorbi.com/?lang=es" target="_blank">www.factorbi.com</a></p>
+</blockquote>
+</li>
+</ul>
 
             </div>
           </div>
@@ -411,5 +448,5 @@
 
 <!--
 MkDocs version : 0.16.3
-Build Date UTC : 2019-02-04 18:55:37
+Build Date UTC : 2019-03-19 01:18:12
 -->
