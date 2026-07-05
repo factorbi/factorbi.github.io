@@ -1,5 +1,5 @@
-# Bipost Synchronization Documentation Page
+# Vansync Synchronization Documentation Page
 
-https://factorbi.github.io
-
-Sincronize SQL Server and Firebird SQL to AWS MySQL Aurora.
+Sincronize Firebird SQL, dBase, Visual FoxPro (VFP), Sybase SQL Anywhere, Microsoft SQL Server to AWS MySQL Aurora.
+Formerly known as Bipost, now rebranded as Vansync.
+info@factorbi.com 
