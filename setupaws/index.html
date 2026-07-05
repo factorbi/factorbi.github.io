@@ -236,7 +236,7 @@
               
                 <h1 id="link-your-aws-account">Link your AWS Account<a class="headerlink" href="#link-your-aws-account" title="Permanent link">&para;</a></h1>
 <p><strong>These instructions are for experienced AWS administrators only.</strong></p>
-<p><strong>Follow these instructions only if you want to manually link your AWS Account to Bipost API. Strong knowledge of AWS is required.</strong> We strongly recommend to use instead the automated <a href="../easyawssetup/#step-4-cloudformation">CloudFormation template</a>.</p>
+<p><strong>Follow these instructions only if you want to manually link your AWS Account to Vansync API. Strong knowledge of AWS is required.</strong> We strongly recommend to use instead the automated <a href="../easyawssetup/#step-4-cloudformation">CloudFormation template</a>.</p>
 <p>IMPORTANT NOTICE: If you are planning to use the following AWS resources for production you may want to follow your company policies and understand how to use AWS security according to your needs.</p>
 <hr />
 <h2 id="canonical-user-id">Canonical User ID<a class="headerlink" href="#canonical-user-id" title="Permanent link">&para;</a></h2>
@@ -275,21 +275,21 @@
             "Effect": "Allow",
             "Action": "s3:*",
             "Resource": [
-                "arn:aws:s3:::bipostdata-abc123456789012", 
-                "arn:aws:s3:::bipostdata-abc123456789012/*"
+                "arn:aws:s3:::vansync-abc123456789012", 
+                "arn:aws:s3:::vansync-abc123456789012/*"
             ]
         },
         {
             "Effect": "Allow",
             "Action": "lambda:InvokeFunction",
-            "Resource": "arn:aws:lambda:us-east-1:951464950892:function:bipost-getOutData"
+            "Resource": "arn:aws:lambda:us-east-1:951464950892:function:vansync-getOutData"
         }                
     ]
 }
 </code></pre>
 </li>
 <li>
-<p>Replace the text <code>bipostdata-abc123456789012</code> with the Bucket Name you received from us over email.</p>
+<p>Replace the text <code>vansync-abc123456789012</code> with the Bucket Name you received from us over email.</p>
 </li>
 <li>
 <p>Click <strong>Review policy</strong> blue button on the lower right.</p>
@@ -427,7 +427,7 @@
 <p>Parameter group family: <code>aurora-mysql5.7</code></p>
 <p>Type: <code>DB Cluster Parameter Group</code></p>
 <p>Group name: <code>ClusterAllowAWSAccess</code></p>
-<p>Description: <code>Bipost Aurora Database Cluster Parameter Group</code></p>
+<p>Description: <code>Vansync Aurora Database Cluster Parameter Group</code></p>
 </blockquote>
 </li>
 <li>
@@ -489,7 +489,7 @@
 <p>Parameter group family: <code>aurora-mysql5.7</code></p>
 <p>Type: <code>DB Parameter Group</code></p>
 <p>Group name: <code>InstanceAllowAWSAccess</code></p>
-<p>Description: <code>Bipost Aurora Parameter Group</code></p>
+<p>Description: <code>Vansync Aurora Parameter Group</code></p>
 </blockquote>
 </li>
 <li>
@@ -823,7 +823,7 @@ For Windows you may use "MySQL Workbench" or "HeidiSQL"
 </ol>
 <hr />
 <h2 id="console-access-to-bucket">Console Access to Bucket<a class="headerlink" href="#console-access-to-bucket" title="Permanent link">&para;</a></h2>
-<p>Bipost synchronization uses S3 to upload the data that is extracted from the on-prem database. The bucket is located within Factor BI AWS account so we can efficiently handle API calls, patches and new releases.</p>
+<p>Vansync synchronization uses S3 to upload the data that is extracted from the on-prem database. The bucket is located within Factor BI AWS account so we can efficiently handle API calls, patches and new releases.</p>
 <p>We create a unique S3 bucket for each customer so nothing gets mixed up.</p>
 <p>Sometimes you may want to access this bucket and review files and folders.</p>
 <p>Write us to provide this access: <a href="mailto:info@factorbi.com">info@factorbi.com</a> </p>

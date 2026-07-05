@@ -230,7 +230,7 @@
             <div class="section">
 
                 <h1 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h1>
-<p>Bipost is database synchronization &amp; ETL tool for continually moving data from on-premises to AWS Aurora MySQL and back forth.</p>
+<p>Vansync is database synchronization &amp; ETL tool for continually moving data from on-premises to AWS Aurora MySQL and back forth.</p>
 <p>Created to keep your Windows databases on-premises while providing a way to extract, load &amp; transform specific sets of data to AWS Aurora. Two-way synchronization lets you sync from AWS back to on-prem database. It is not intended to work as a replication engine or mirroring an entire database.</p>
 <p><strong>Sources:</strong></p>
 <ul>
@@ -264,7 +264,7 @@
 <hr />
 <h2 id="how-it-works">How it works<a class="headerlink" href="#how-it-works" title="Permanent link">&para;</a></h2>
 <ul>
-<li>Bipost Sync reads table schema's and data and uploads it to AWS.</li>
+<li>Vansync reads table schema's and data and uploads it to AWS.</li>
 <li>Database and tables are created/altered if they don't exist, and data is loaded to Aurora-MySQL.</li>
 <li>Before and after data is loaded to Aurora-MySQL you can transform data with stored procedures.</li>
 <li>Don't worry about sending the same data multiple times. Data is replaced using primary keys, avoiding duplicates.</li>
@@ -347,7 +347,7 @@
 <li>Define primary keys for DBF files using <code>customSchema.json</code></li>
 <li>Added <code>bipost_system</code> database on Aurora for detailed sync information.</li>
 <li>Read list of tables and comments from <code>bipost_system</code> before data is loaded to Aurora. Useful for consolidation scenarios where different on-prem databases all point to the same DB on Aurora.</li>
-<li>Bipost Sync now display some error log messages after data is uploaded to AWS.</li>
+<li>Vansync now display some error log messages after data is uploaded to AWS.</li>
 </ul>
 <h4 id="110-ga-2018-08-12">1.1.0 (GA) 2018-08-12<a class="headerlink" href="#110-ga-2018-08-12" title="Permanent link">&para;</a></h4>
 <ul>
@@ -371,7 +371,7 @@
 <li>Bidirectional syncing is here!</li>
 <li>Synchronize to any AWS Region.</li>
 <li>Performance improvements to API, now able to load nearly 1.5 million rows (or 280 MB uncompressed files) on a single call. </li>
-<li>Firebird transaction READ UNCOMMITTED to prevent Bipost Sync from being stopped while other transactions are still not committed.</li>
+<li>Firebird transaction READ UNCOMMITTED to prevent Vansync from being stopped while other transactions are still not committed.</li>
 <li>Initial and final statements on Aurora are disabled on recursive sync.</li>
 <li>Bug fixes.</li>
 </ul>

@@ -107,7 +107,7 @@
 
             <li><a class="toctree-l3" href="#before-you-begin">Before You Begin</a></li>
 
-            <li><a class="toctree-l3" href="#bipost-sync">Bipost Sync</a></li>
+            <li><a class="toctree-l3" href="#vansync">Vansync</a></li>
 
             <li><a class="toctree-l3" href="#general-settings">General Settings</a></li>
 
@@ -251,10 +251,10 @@
 <li>Have your AWS account linked it to our API. Not sure? <a href="../easyawssetup">follow here.</a></li>
 <li>Complete registration on <a href="../registration">Factor BI console</a> </li>
 <li>Create Service and Activation keys and configure service, <a href="../registration/#configure-your-first-service">--&gt; details here.</a></li>
-<li><a href="../installation">Download Bipost Sync</a> program for Windows.</li>
+<li><a href="../installation">Download Vansync</a> program for Windows.</li>
 </ul>
 <hr />
-<h2 id="bipost-sync">Bipost Sync<a class="headerlink" href="#bipost-sync" title="Permanent link">&para;</a></h2>
+<h2 id="vansync">Vansync<a class="headerlink" href="#vansync" title="Permanent link">&para;</a></h2>
 <p><img alt="SQL iAnywhere to MySQL Aurora" src="../img/bipost15.png" /></p>
 <ul>
 <li><strong>Service No.:</strong> 36 digit number, it may look like this: <code>a1bcd23e-4fa5-67b8-cd9e-f0123abc4567</code></li>
@@ -290,7 +290,7 @@
 <h3 id="specific-bucket">Specific Bucket:<a class="headerlink" href="#specific-bucket" title="Permanent link">&para;</a></h3>
 <ul>
 <li>
-<p>Enter your <strong>Bucket Name</strong>. It may look like this: <code>bipostdata-acb123456789012</code></p>
+<p>Enter your <strong>Bucket Name</strong>. It may look like this: <code>vansync-acb123456789012</code></p>
 </li>
 <li>
 <p>It is available on your AWS Account \ CloudFormation Stack.</p>
@@ -336,21 +336,21 @@
 <hr />
 <h2 id="schedule">Schedule<a class="headerlink" href="#schedule" title="Permanent link">&para;</a></h2>
 <p><img alt="Bipost Schedule" src="../img/bipost9.png" /></p>
-<p>If you want automated execution of Bipost Sync, then set the <strong>Hour</strong> desired and click <strong>Schedule</strong>.</p>
+<p>If you want automated execution of Vansync, then set the <strong>Hour</strong> desired and click <strong>Schedule</strong>.</p>
 <p>This will create a Windows Task that will run daily. If you want a different schedule, then open <strong>Windows Task Scheduler</strong> as follows.</p>
 <p>Control Panel \ Administrative Tools:</p>
 <p><img alt="Windows Administrative Tools" src="../img/Windows_Administrative_Tools.png" /></p>
 <p><img alt="Windows Task Scheduler" src="../img/Windows_Task_Scheduler.png" /></p>
-<p>If you manually create a task to run biPost then use <code>argument: post</code></p>
-<p><img alt="Windows Add Argument Task" src="../img/Task_Scheduler_biPost_Arguments.png" /></p>
+<p>If you manually create a task to run Vansync then use <code>argument: post</code></p>
+<p><img alt="Windows Add Argument Task" src="../img/Task_Scheduler_Vansync_Arguments.png" /></p>
 <hr />
 <h2 id="check-for-updates">Check for Updates<a class="headerlink" href="#check-for-updates" title="Permanent link">&para;</a></h2>
-<p>New versions of Bipost Sync can be checked using <strong>Help \ Check for Updates.</strong></p>
+<p>New versions of Vansync can be checked using <strong>Help \ Check for Updates.</strong></p>
 <p><img alt="Bipost Check for Updates Menu" src="../img/bipost10.png" /></p>
-<p><img alt="Bipost new version available" src="../img/new_version_available.png" /></p>
+<p><img alt="Vansync new version available" src="../img/new_version_available.png" /></p>
 <hr />
 <h2 id="sync-multiple-databases">Sync multiple databases<a class="headerlink" href="#sync-multiple-databases" title="Permanent link">&para;</a></h2>
-<p>If you are going to synchronize two or more databases from the same Windows host, create separate Bipost Sync folders for each database. Then customize each folder with the desired data set as explained <a href="../customdatajson">here.</a></p>
+<p>If you are going to synchronize two or more databases from the same Windows host, create separate Vansync folders for each database. Then customize each folder with the desired data set as explained <a href="../customdatajson">here.</a></p>
 <hr />
 <h1 id="oracle-micros-res-3700-pos-business-intelligence-use-case">Oracle Micros RES 3700 POS Business Intelligence Use Case<a class="headerlink" href="#oracle-micros-res-3700-pos-business-intelligence-use-case" title="Permanent link">&para;</a></h1>
 <p><a href="https://en.wikipedia.org/wiki/Micros_Systems" target="_blank">Oracle Hospitality</a> Point of Sale system works with SQL Anywhere database. You can daily export data from several restaurants and consolidate them on AWS at scale.</p>

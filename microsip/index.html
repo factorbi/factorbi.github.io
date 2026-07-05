@@ -280,7 +280,7 @@ order by rdb$relation_name;
 <p><a href="https://s3.amazonaws.com/factorbi/bipost/biPost.zip"><strong>Descarga aquí.</strong></a></p>
 </li>
 <li>
-<p>En tu servidor de Firebird crea una carpeta, por ejemplo <strong> C:\Bipost\ </strong> y copia los archivos.</p>
+<p>En tu servidor de Firebird crea una carpeta, por ejemplo <strong> C:\Vansync\ </strong> y copia los archivos.</p>
 </li>
 </ol>
 <hr />
@@ -289,8 +289,8 @@ order by rdb$relation_name;
 <p>Si eres usuario de Microsip por favor envíanos un correo y nos pondremos en contacto: <a href="mailto:info@factorbi.com">info@factorbi.com</a></p>
 <h4 id="1-llaves-de-sincronizacion">1. Llaves de sincronización<a class="headerlink" href="#1-llaves-de-sincronizacion" title="Permanent link">&para;</a></h4>
 <p>Entra a la <a href="https://s3.amazonaws.com/biforms-prod/index.html" target="_blank">Consola Factor BI</a> y en el menú <strong>Service Numbers</strong> copia <strong>Service No.</strong> y <strong>Activation No.</strong> que correspondan con la base de datos a sincronizar.</p>
-<h4 id="2-configura-bipost">2. Configura biPost<a class="headerlink" href="#2-configura-bipost" title="Permanent link">&para;</a></h4>
-<p>Abre biPost.exe y oprime <strong>Configuration</strong>.</p>
+<h4 id="2-configura-vansync">2. Configura Vansync<a class="headerlink" href="#2-configura-vansync" title="Permanent link">&para;</a></h4>
+<p>Abre Vansync.exe y oprime <strong>Configuration</strong>.</p>
 <p><img alt="Firebird to MySQL Aurora" src="../img/bipost2.png" /></p>
 <ul>
 <li><strong>Service No.:</strong> Pega el texto que obtuviste de la consola.</li>
@@ -310,7 +310,7 @@ order by rdb$relation_name;
 <tr>
 <td>Remote Connection</td>
 <td><em>Apagado</em></td>
-<td><em>Activar SOLAMENTE cuando biPost.exe no está en el servidor de Firebird</em></td>
+<td><em>Activar SOLAMENTE cuando Vansync.exe no está en el servidor de Firebird</em></td>
 </tr>
 <tr>
 <td>Server</td>
@@ -361,7 +361,7 @@ order by rdb$relation_name;
 <p>Descomprime customData-Microsip.zip</p>
 </li>
 <li>
-<p>Reemplaza el archivo <strong>customSchema.json</strong> en tu carpeta Bipost.</p>
+<p>Reemplaza el archivo <strong>customSchema.json</strong> en tu carpeta Vansync.</p>
 <p><img alt="Archivo customSchema.json" src="../img/bipost-folder1.png" /></p>
 </li>
 <li>
@@ -369,7 +369,7 @@ order by rdb$relation_name;
 <p><img alt="Archivo customData.json" src="../img/bipost-folder2.png" /></p>
 </li>
 <li>
-<p>Abre biPost.exe y sincroniza con el botón <strong>Sync Now</strong>. Este proceso puede durar algunos minutos. Recibirás el mensaje <strong>Sync Completed</strong> cuando termine.</p>
+<p>Abre Vansync.exe y sincroniza con el botón <strong>Sync Now</strong>. Este proceso puede durar algunos minutos. Recibirás el mensaje <strong>Sync Completed</strong> cuando termine.</p>
 </li>
 <li>
 <p>Repite los pasos 3 y 4 para los archivos (respetando el orden mostrado): </p>
@@ -391,19 +391,19 @@ order by rdb$relation_name;
 <p><strong>NOTA:</strong> Este proceso se realiza después de sincronizar por primera vez la base de datos.</p>
 <ol>
 <li>
-<p>Abre la carpeta donde colocaste Bipost, usualmente C:\Bipost.</p>
+<p>Abre la carpeta donde colocaste Vansync, usualmente C:\Vansync.</p>
 </li>
 <li>
 <p>Abre el archivo <strong>customData.json</strong> y verifica que el contenido es para sincronizar 30 días. Esto se puede ver rápidamente en alguna tabla como "ARTICULOS", ejemplo:</p>
 <p><img alt="Verificar customData 30 dias" src="../img/verificar-customData-30dias.png" /></p>
 </li>
 <li>
-<p>Abre biPost.exe en la pestaña <strong>Schedule</strong></p>
+<p>Abre Vansync.exe en la pestaña <strong>Schedule</strong></p>
 <p><img alt="Bipost Schedule" src="../img/bipost9.png" /></p>
 <p>Oprime <strong>Configuration</strong>, establece el horario para sincronizar y oprime <strong>Schedule</strong>. Oprime <strong>Save Changes</strong>.</p>
 <p>Se sugiere usar un horario después que la empresa termine sus operaciones, por ejemplo en la madrugada. </p>
 <p>Lo anterior crea una tarea en el <strong>Programador de Tareas</strong> de Windows. Si requieres sincronizar más de una vez al día, ve al menú de Windows y abre "Programador de Tareas".</p>
-<p>Seleccionar la primer carpeta del lado izquierdo y dar doble click a la tarea <strong>biPost</strong>.</p>
+<p>Seleccionar la primer carpeta del lado izquierdo y dar doble click a la tarea <strong>Vansync</strong>.</p>
 <p><img alt="Windows Task Scheduler" src="../img/Windows_Task_Scheduler.png" /></p>
 <p>En la pestaña <strong>Desencadenadores</strong> puedes crear más horarios: Nuevo \ Diariamente \ Inicio: establecer fecha y horario nuevo.</p>
 </li>

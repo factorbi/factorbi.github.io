@@ -226,7 +226,7 @@
             <div class="section">
 
                 <h1 id="working-with-aurora-mysql">Working with Aurora-MySQL<a class="headerlink" href="#working-with-aurora-mysql" title="Permanent link">&para;</a></h1>
-<p>Every time Bipost Sync sends data to AWS it works along with an API that runs 4 steps.</p>
+<p>Every time Vansync sends data to AWS it works along with an API that runs 4 steps.</p>
 <h2 id="1-create-alter-schemas">1. Create-Alter Schemas<a class="headerlink" href="#1-create-alter-schemas" title="Permanent link">&para;</a></h2>
 <ul>
 <li>
@@ -398,7 +398,7 @@ DELIMITER ;
   LOWER(REPLACE(RIGHT(e.file_name,LOCATE('/',REVERSE(e.file_name))-1),'.csv','')) AS "table",
   CONVERT_TZ(load_timestamp,'UTC','US/Eastern') AS "local_load_timestamp",
   e.load_timestamp,
-  SUBSTRING(e.load_prefix, LOCATE('bipostdata',e.load_prefix), LOCATE('/',e.load_prefix, LOCATE('bipostdata',e.load_prefix)+1)-LOCATE('bipostdata',e.load_prefix)) AS "bucket",
+  SUBSTRING(e.load_prefix, LOCATE('vansync',e.load_prefix), LOCATE('/',e.load_prefix, LOCATE('vansync',e.load_prefix)+1)-LOCATE('vansync',e.load_prefix)) AS "bucket",
   LEFT(e.file_name,LOCATE('/', e.file_name)-1) AS "serviceNumber"
 FROM mysql.aurora_s3_load_history AS e
 WHERE
