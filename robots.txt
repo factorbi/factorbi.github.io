@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://factorbi.github.io/sitemap.xml
+Sitemap: https://factorbi.github.io/sitemap-2026.xml
