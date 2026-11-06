@@ -53,6 +53,54 @@
   <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
   <link rel="stylesheet" href="../../css/highlight.css">
 
+  <style>
+    .fbi-guide { line-height: 1.65; }
+    .fbi-guide .fbi-updated { color: #6b7785; font-size: 90%; margin-top: -8px; }
+    .fbi-guide hr { border: 0; border-top: 1px solid #e3e8ee; margin: 44px 0 36px; }
+    .fbi-guide h2 { margin-bottom: 18px; }
+    .fbi-guide h3 { margin-top: 32px; }
+    .fbi-guide h4 { margin-top: 28px; color: #2980B9; }
+    .fbi-guide :not(pre) > code { white-space: normal; background: #f3f6f9; border: 1px solid #e3e8ee; border-radius: 4px; color: #1f5f8b; padding: 1px 5px; font-size: 85%; }
+
+    .fbi-guide .fbi-flow { margin: 28px 0 8px; padding: 0; }
+    .fbi-guide .fbi-flow svg { display: block; width: 100%; height: auto; }
+    .fbi-guide .fbi-flow .fbi-flow-v { display: none; max-width: 420px; margin: 0 auto; }
+    .fbi-guide .fbi-flow-caption { color: #4a5b6b; font-size: 92%; }
+
+    .fbi-guide.section ol.fbi-steps { counter-reset: fbi-step; list-style: none; margin: 0 0 24px; padding: 0; }
+    .fbi-guide.section ol.fbi-steps > li { counter-increment: fbi-step; list-style: none; position: relative; margin: 0 0 12px; padding: 14px 16px 14px 58px; background: #fff; border: 1px solid #e3e8ee; border-radius: 10px; box-shadow: 0 1px 2px rgba(16, 24, 40, 0.05); }
+    .fbi-guide.section ol.fbi-steps > li::before { content: counter(fbi-step); position: absolute; left: 16px; top: 14px; width: 28px; height: 28px; border-radius: 50%; background: #2980B9; color: #fff; font-weight: 700; font-size: 14px; line-height: 28px; text-align: center; }
+    .fbi-guide.section ol.fbi-steps > li > ul { margin: 8px 0 0; }
+
+    .fbi-guide .admonition.note { background: #eef5fb; border-left: 4px solid #2980B9; border-radius: 0 10px 10px 0; padding: 14px 18px; margin: 24px 0; box-shadow: none; }
+    .fbi-guide .admonition.note .admonition-title { display: block; background: transparent; color: #2980B9; margin: 0 0 6px; padding: 0; font-weight: 700; }
+    .fbi-guide .admonition.note .admonition-title::before { content: none; }
+    .fbi-guide .admonition.note p:last-child { margin-bottom: 0; }
+
+    .fbi-guide .fbi-table { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 0 0 24px; border: 1px solid #e3e8ee; border-radius: 10px; box-shadow: 0 1px 2px rgba(16, 24, 40, 0.05); }
+    .fbi-guide .fbi-table table.docutils { width: 100%; margin: 0; border: 0; }
+    .fbi-guide .fbi-table table.docutils thead th { background: #f3f6f9; color: #1f2d3d; border: 0; border-bottom: 1px solid #e3e8ee; white-space: normal; }
+    .fbi-guide .fbi-table table.docutils td, .fbi-guide .fbi-table table.docutils th { min-width: 9em; padding: 10px 14px; vertical-align: top; line-height: 1.5; border-left: 0; }
+    .fbi-guide .fbi-table table.docutils:not(.field-list) tr:nth-child(2n-1) td { background: #fff; }
+    .fbi-guide .fbi-table table.docutils:not(.field-list) tr:nth-child(2n) td { background: #f8fafc; }
+    .fbi-guide .fbi-table table.docutils tr:last-child td { border-bottom: 0; }
+
+    .fbi-guide .fbi-code { position: relative; margin: 0 0 24px; }
+    .fbi-guide .fbi-code pre { margin: 0; padding: 0; background: #f6f8fa; border: 1px solid #e3e8ee; border-radius: 10px; overflow-x: auto; }
+    .fbi-guide .fbi-code pre code { background: transparent; border: 0; color: #24292f; font-size: 13px; line-height: 1.55; padding: 44px 16px 16px; }
+    .fbi-guide .fbi-code .fbi-copy { position: absolute; top: 8px; right: 8px; padding: 4px 12px; font-size: 13px; font-family: inherit; color: #2980B9; background: #fff; border: 1px solid #c9dcec; border-radius: 6px; cursor: pointer; }
+    .fbi-guide .fbi-code .fbi-copy:hover, .fbi-guide .fbi-code .fbi-copy:focus { background: #2980B9; color: #fff; outline: none; }
+
+    .fbi-guide .btn.btn-neutral.fbi-cta, .fbi-guide .btn.btn-neutral.fbi-cta:visited { background-color: #2980B9 !important; color: #fff !important; font-size: 110%; font-weight: 700; padding: 12px 32px; border-radius: 8px; box-shadow: 0 2px 6px rgba(41, 128, 185, 0.3); }
+    .fbi-guide .btn.btn-neutral.fbi-cta:hover { background-color: #1f6391 !important; color: #fff !important; }
+
+    @media (max-width: 600px) {
+      .fbi-guide .fbi-flow .fbi-flow-h { display: none; }
+      .fbi-guide .fbi-flow .fbi-flow-v { display: block; }
+      .fbi-guide.section ol.fbi-steps > li { padding-left: 52px; }
+    }
+  </style>
+
   <script>
     // Current page data
     var mkdocs_page_name = "Power BI con Microsip";
@@ -231,18 +279,78 @@
   <hr/>
 </div>
           <div role="main">
-            <div class="section">
+            <div class="section fbi-guide">
 
                 <h1 id="power-bi-con-microsip">Power BI con Microsip: conexión por ODBC paso a paso<a class="headerlink" href="#power-bi-con-microsip" title="Permanent link">&para;</a></h1>
-<p><em>Actualizado: 6 de noviembre de 2026</em></p>
+<p class="fbi-updated">Actualizado: 6 de noviembre de 2026</p>
 <p>Microsip guarda su información en Firebird, y Power BI no trae un conector nativo para Firebird. La forma de unirlos es un driver ODBC. Funciona, y lo usan muchas empresas, pero tiene tres detalles que casi nadie explica: el driver tiene que coincidir con tu versión de Firebird, tiene que coincidir con los bits de Power BI o de Excel, y el query tiene que saber qué ventas contar y cuáles no. Aquí están los tres.</p>
 <p>Casi todos los tutoriales de Power BI parten de un Excel: bajas reportes de Microsip, los juntas en un archivo maestro y ese archivo lo cargas a Power BI. Así solo te ahorras el último paso, las gráficas. Esta guía conecta Power BI directo a la base de Microsip, para que nadie tenga que bajar reportes a mano.</p>
 <div class="admonition note">
 <p class="admonition-title">Nota</p>
 <p>Microsip 2026 trae Firebird 5.0, pero no lo instala si en la PC ya hay un Firebird 3.0: primero hay que desinstalar el 3.0. Microsip 2027, que se espera para mayo de 2027, solo va a funcionar con Firebird 5.0. Antes de instalar nada, revisa cuál tienes.</p>
 </div>
+<figure class="fbi-flow">
+<svg class="fbi-flow-h" viewBox="0 0 760 158" role="img" aria-labelledby="fbi-flow-h-t fbi-flow-h-d" font-family="Lato, 'Helvetica Neue', Arial, sans-serif">
+<title id="fbi-flow-h-t">Flujo de datos de Microsip a Power BI</title>
+<desc id="fbi-flow-h-d">Microsip, base Firebird .FDB, hacia el usuario de reportes REPORTES_BI con permiso solo de SELECT, hacia el driver ODBC de Firebird con DSN de 64 bits, hacia Power BI Desktop o Excel y, de forma opcional, hacia la puerta de enlace y el servicio de Power BI para la actualización programada.</desc>
+<defs><marker id="fbi-arrow-h" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2980B9"/></marker></defs>
+<rect x="0" y="4" width="136" height="150" rx="10" fill="#f4f8fc" stroke="#2980B9" stroke-width="1.5"/>
+<text x="68.0" y="66" text-anchor="middle" font-size="15" font-weight="700" fill="#1f2d3d">Microsip</text>
+<text x="68.0" y="88" text-anchor="middle" font-size="12" fill="#4a5b6b">Base Firebird</text>
+<text x="68.0" y="104" text-anchor="middle" font-size="12" fill="#4a5b6b">(.FDB)</text>
+<line x1="139" y1="79.0" x2="153" y2="79.0" stroke="#2980B9" stroke-width="2" marker-end="url(#fbi-arrow-h)"/>
+<rect x="156" y="4" width="136" height="150" rx="10" fill="#f4f8fc" stroke="#2980B9" stroke-width="1.5"/>
+<text x="224.0" y="56" text-anchor="middle" font-size="15" font-weight="700" fill="#1f2d3d">Usuario de</text>
+<text x="224.0" y="75" text-anchor="middle" font-size="15" font-weight="700" fill="#1f2d3d">reportes</text>
+<text x="224.0" y="97" text-anchor="middle" font-size="12" fill="#4a5b6b">REPORTES_BI,</text>
+<text x="224.0" y="113" text-anchor="middle" font-size="12" fill="#4a5b6b">solo SELECT</text>
+<line x1="295" y1="79.0" x2="309" y2="79.0" stroke="#2980B9" stroke-width="2" marker-end="url(#fbi-arrow-h)"/>
+<rect x="312" y="4" width="136" height="150" rx="10" fill="#f4f8fc" stroke="#2980B9" stroke-width="1.5"/>
+<text x="380.0" y="64" text-anchor="middle" font-size="15" font-weight="700" fill="#1f2d3d">Driver ODBC</text>
+<text x="380.0" y="83" text-anchor="middle" font-size="15" font-weight="700" fill="#1f2d3d">de Firebird</text>
+<text x="380.0" y="105" text-anchor="middle" font-size="12" fill="#4a5b6b">DSN, 64 bits</text>
+<line x1="451" y1="79.0" x2="465" y2="79.0" stroke="#2980B9" stroke-width="2" marker-end="url(#fbi-arrow-h)"/>
+<rect x="468" y="4" width="136" height="150" rx="10" fill="#f4f8fc" stroke="#2980B9" stroke-width="1.5"/>
+<text x="536.0" y="66" text-anchor="middle" font-size="15" font-weight="700" fill="#1f2d3d">Power BI</text>
+<text x="536.0" y="84" text-anchor="middle" font-size="15" font-weight="700" fill="#1f2d3d">Desktop</text>
+<text x="536.0" y="104" text-anchor="middle" font-size="15" font-weight="700" fill="#1f2d3d">o Excel</text>
+<line x1="607" y1="79.0" x2="621" y2="79.0" stroke="#2980B9" stroke-width="2" stroke-dasharray="4 3" marker-end="url(#fbi-arrow-h)"/>
+<rect x="624" y="4" width="136" height="150" rx="10" fill="#ffffff" stroke="#2980B9" stroke-width="1.5" stroke-dasharray="6 4"/>
+<text x="692.0" y="38" text-anchor="middle" font-size="15" font-weight="700" fill="#1f2d3d">Gateway +</text>
+<text x="692.0" y="58" text-anchor="middle" font-size="15" font-weight="700" fill="#1f2d3d">servicio de</text>
+<text x="692.0" y="76" text-anchor="middle" font-size="15" font-weight="700" fill="#1f2d3d">Power BI</text>
+<text x="692.0" y="98" text-anchor="middle" font-size="12" fill="#4a5b6b">Opcional:</text>
+<text x="692.0" y="114" text-anchor="middle" font-size="12" fill="#4a5b6b">actualización</text>
+<text x="692.0" y="130" text-anchor="middle" font-size="12" fill="#4a5b6b">programada</text>
+</svg>
+<svg class="fbi-flow-v" viewBox="0 0 344 428" role="img" aria-labelledby="fbi-flow-v-t fbi-flow-v-d" font-family="Lato, 'Helvetica Neue', Arial, sans-serif">
+<title id="fbi-flow-v-t">Flujo de datos de Microsip a Power BI</title>
+<desc id="fbi-flow-v-d">Microsip, base Firebird .FDB, hacia el usuario de reportes REPORTES_BI con permiso solo de SELECT, hacia el driver ODBC de Firebird con DSN de 64 bits, hacia Power BI Desktop o Excel y, de forma opcional, hacia la puerta de enlace y el servicio de Power BI para la actualización programada.</desc>
+<defs><marker id="fbi-arrow-v" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2980B9"/></marker></defs>
+<rect x="2" y="2" width="340" height="64" rx="10" fill="#f4f8fc" stroke="#2980B9" stroke-width="1.5"/>
+<text x="172.0" y="30" text-anchor="middle" font-size="16" font-weight="700" fill="#1f2d3d">Microsip</text>
+<text x="172.0" y="50" text-anchor="middle" font-size="13" fill="#4a5b6b">Base Firebird (.FDB)</text>
+<line x1="172.0" y1="69" x2="172.0" y2="89" stroke="#2980B9" stroke-width="2" marker-end="url(#fbi-arrow-v)"/>
+<rect x="2" y="92" width="340" height="64" rx="10" fill="#f4f8fc" stroke="#2980B9" stroke-width="1.5"/>
+<text x="172.0" y="120" text-anchor="middle" font-size="16" font-weight="700" fill="#1f2d3d">Usuario de reportes</text>
+<text x="172.0" y="140" text-anchor="middle" font-size="13" fill="#4a5b6b">REPORTES_BI, solo SELECT</text>
+<line x1="172.0" y1="159" x2="172.0" y2="179" stroke="#2980B9" stroke-width="2" marker-end="url(#fbi-arrow-v)"/>
+<rect x="2" y="182" width="340" height="64" rx="10" fill="#f4f8fc" stroke="#2980B9" stroke-width="1.5"/>
+<text x="172.0" y="210" text-anchor="middle" font-size="16" font-weight="700" fill="#1f2d3d">Driver ODBC de Firebird</text>
+<text x="172.0" y="230" text-anchor="middle" font-size="13" fill="#4a5b6b">DSN, 64 bits</text>
+<line x1="172.0" y1="249" x2="172.0" y2="269" stroke="#2980B9" stroke-width="2" marker-end="url(#fbi-arrow-v)"/>
+<rect x="2" y="272" width="340" height="64" rx="10" fill="#f4f8fc" stroke="#2980B9" stroke-width="1.5"/>
+<text x="172.0" y="310" text-anchor="middle" font-size="16" font-weight="700" fill="#1f2d3d">Power BI Desktop o Excel</text>
+<line x1="172.0" y1="339" x2="172.0" y2="359" stroke="#2980B9" stroke-width="2" stroke-dasharray="4 3" marker-end="url(#fbi-arrow-v)"/>
+<rect x="2" y="362" width="340" height="64" rx="10" fill="#ffffff" stroke="#2980B9" stroke-width="1.5" stroke-dasharray="6 4"/>
+<text x="172.0" y="390" text-anchor="middle" font-size="16" font-weight="700" fill="#1f2d3d">Gateway + servicio de Power BI</text>
+<text x="172.0" y="410" text-anchor="middle" font-size="13" fill="#4a5b6b">Opcional: actualización programada</text>
+</svg>
+</figure>
+<p class="fbi-flow-caption">El flujo en una frase: Microsip guarda tus datos en su base Firebird (<code>.FDB</code>); un usuario de reportes (<code>REPORTES_BI</code>), con permiso solo de <code>SELECT</code>, los lee por medio del driver ODBC de Firebird (DSN de 64 bits) desde Power BI Desktop o Excel; y, si quieres que se actualicen solos en la nube, de forma opcional, por medio de la puerta de enlace y el servicio de Power BI.</p>
 <hr />
-<h2 id="antes-de-empezar">Antes de empezar (checklist)<a class="headerlink" href="#antes-de-empezar" title="Permanent link">&para;</a></h2>
+<h2 id="antes-de-empezar">Antes de empezar<a class="headerlink" href="#antes-de-empezar" title="Permanent link">&para;</a></h2>
+<div class="fbi-table">
 <table>
 <thead>
 <tr>
@@ -277,10 +385,12 @@
 </tr>
 </tbody>
 </table>
+</div>
 <p>La base de datos es de tu empresa: no necesitas permiso de Microsip para leerla. Sí conviene avisarle a tu distribuidor, porque es quien conoce tu instalación y quien la actualiza cuatro veces al año.</p>
 <p><strong>La contraseña de <code>SYSDBA</code>.</strong> Microsip instala Firebird con la contraseña de fábrica, que es pública en internet. Nuestra recomendación es que no se quede así. Cambiarla es decisión de tu distribuidor, porque es quien administra tu instalación: pregúntale si ya lo hizo.</p>
 <hr />
 <h2 id="1-instala-el-driver-odbc-correcto">1. Instala el driver ODBC correcto<a class="headerlink" href="#1-instala-el-driver-odbc-correcto" title="Permanent link">&para;</a></h2>
+<div class="fbi-table">
 <table>
 <thead>
 <tr>
@@ -302,16 +412,18 @@
 </tr>
 </tbody>
 </table>
+</div>
 <p>El driver v3.0 solo funciona con el cliente de Firebird 3.0 o superior (<code>fbclient.dll</code>). Si en la PC hay un <code>fbclient.dll</code> de la versión 2.5, no conecta. Fuente: firebirdsql.org.</p>
 <h3 id="32-o-64-bits">32 o 64 bits<a class="headerlink" href="#32-o-64-bits" title="Permanent link">&para;</a></h3>
 <p>El driver tiene que tener los mismos bits que el programa que lo va a usar, no que Windows. Power BI Desktop es de 64 bits: Microsoft ya no da soporte a la versión de 32 bits. Excel puede ser de 32 o de 64: en Excel, Archivo → Cuenta → Acerca de Excel lo dice. Microsip y Excel suelen ser de 32 bits y Power BI es de 64, así que en una misma PC es normal necesitar los dos.</p>
-<p>El driver se descarga del release oficial en GitHub (<code>FirebirdSQL/firebird-odbc-driver</code>, versión estable 3.0.1, archivo <code>win_installers.zip</code>). Después de instalar, en "Orígenes de datos ODBC (64 bits)" → pestaña <strong>Controladores</strong> aparece <strong>Firebird ODBC Driver</strong>, versión 3.00.01.18. Si vas a usar Excel de 32 bits, revisa que también aparezca en "Orígenes de datos ODBC (32 bits)"; si no, instala también el de 32 bits. Los instaladores no traen firma digital, así que Windows puede mostrar una advertencia al abrirlos.</p>
+<p>El driver se descarga del <a href="https://github.com/FirebirdSQL/firebird-odbc-driver/releases" target="_blank" rel="noopener">release oficial en GitHub</a> (<code>FirebirdSQL/firebird-odbc-driver</code>, versión estable 3.0.1, archivo <code>win_installers.zip</code>). Después de instalar, en "Orígenes de datos ODBC (64 bits)" → pestaña <strong>Controladores</strong> aparece <strong>Firebird ODBC Driver</strong>, versión 3.00.01.18. Si vas a usar Excel de 32 bits, revisa que también aparezca en "Orígenes de datos ODBC (32 bits)"; si no, instala también el de 32 bits. Los instaladores no traen firma digital, así que Windows puede mostrar una advertencia al abrirlos.</p>
 <hr />
 <h2 id="2-crea-el-usuario-de-reportes">2. Crea el usuario de reportes (dentro de Microsip)<a class="headerlink" href="#2-crea-el-usuario-de-reportes" title="Permanent link">&para;</a></h2>
 <p><strong>Por qué dentro de Microsip y no directo en Firebird:</strong> cuando Microsip se actualiza a una versión nueva, la actualización borra los usuarios de Firebird que no existen como usuarios de Microsip. Si creas el usuario de reportes solo en Firebird, un día tus reportes dejan de conectar sin que nadie sepa por qué. (Dato de campo de Factor BI.)</p>
 <p>Al pasar a Firebird 5.0 (por ejemplo, al instalar Microsip 2026), Power BI deja de conectar, porque Firebird 5.0 arranca sin ningún usuario. Para recuperarlo, en Administración del sistema → Usuarios abre el usuario de reportes, da clic en Modificar, escribe otra vez su contraseña y guarda. Los permisos del script no se pierden: no hace falta volver a correrlo.</p>
 <h3 id="21-da-de-alta-el-usuario-en-microsip">2.1 Da de alta el usuario en Microsip<a class="headerlink" href="#21-da-de-alta-el-usuario-en-microsip" title="Permanent link">&para;</a></h3>
-<ol>
+<p>Probado en Microsip 2024 (7.20) con un usuario administrador de Microsip:</p>
+<ol class="fbi-steps">
 <li>Abre Microsip y, en la barra de módulos, da clic en <strong>Administración del sistema</strong>. No pide empresa.</li>
 <li>En el panel izquierdo <strong>Catálogos</strong>, da clic en <strong>Usuarios</strong>.</li>
 <li>En la barra de herramientas, da clic en <strong>Nuevo</strong>. Se abre la ventana <strong>Usuario</strong>.</li>
@@ -330,9 +442,10 @@
 </ol>
 <p>Al guardar, Microsip crea el usuario también en Firebird, con la misma contraseña. Todavía no puede leer ninguna tabla: eso lo da el script del paso 2.2.</p>
 <p><strong>Opcional:</strong> si no quieres que ese usuario entre a Microsip, ábrelo, da clic en <strong>Modificar</strong> (el lápiz), cambia <strong>Estatus del usuario</strong> a <strong>Baja</strong> y guarda. Microsip ya no lo deja iniciar sesión, pero la conexión de Power BI y Excel sigue funcionando.</p>
+<p>El usuario de reportes no tiene derechos en ningún módulo de Microsip, así que no usa licencia.</p>
 <h3 id="22-dale-permiso-de-lectura-con-un-script">2.2 Dale permiso de lectura con un script<a class="headerlink" href="#22-dale-permiso-de-lectura-con-un-script" title="Permanent link">&para;</a></h3>
-<p>Firebird no tiene un "dar lectura a todo" en un solo comando. Este script da <code>SELECT</code> sobre las tablas que se usan para reportes (las 172 que sincroniza Vansync, marcadas en la página de Tablas), se salta las que no existan en tu versión y se puede volver a correr sin problema.</p>
-<pre><code class="sql">-- Factor BI · https://factorbi.github.io/microsip/power-bi/
+<p>Firebird no tiene un "dar lectura a todo" en un solo comando. Este script da <code>SELECT</code> sobre las tablas que se usan para reportes (las 172 que sincroniza Vansync), se salta las que no existan en tu versión y se puede volver a correr sin problema.</p>
+<div class="fbi-code"><pre><code class="sql">-- Factor BI · https://factorbi.github.io/microsip/power-bi/
 -- Licencia MIT · Copyright (c) 2026 Factor BI
 -- Probado con Firebird 3.0; los permisos funcionan en Firebird 5.0.
 SET TERM ^ ;
@@ -394,16 +507,17 @@ BEGIN
   END
 END^
 SET TERM ; ^
-COMMIT;</code></pre>
+COMMIT;</code></pre></div>
 <p>El script se corre como <code>SYSDBA</code> en IBExpert (o la herramienta que use tu distribuidor). Si tu usuario no se llama <code>REPORTES_BI</code>, cambia el nombre en la línea del <code>GRANT SELECT</code>.</p>
 <hr />
 <h2 id="3-configura-el-dsn">3. Configura el DSN<a class="headerlink" href="#3-configura-el-dsn" title="Permanent link">&para;</a></h2>
-<ol>
+<ol class="fbi-steps">
 <li>Abre "Orígenes de datos ODBC (64 bits)".</li>
 <li>Pestaña <strong>DSN de sistema</strong> → <strong>Agregar</strong>.</li>
 <li>Elige "Firebird ODBC Driver" → <strong>Finalizar</strong>.</li>
 </ol>
 <p>Se abre la ventana <strong>Firebird ODBC Setup</strong> (en inglés aunque Windows esté en español). No pide permisos de administrador. Llena la tabla:</p>
+<div class="fbi-table">
 <table>
 <thead>
 <tr>
@@ -445,13 +559,14 @@ COMMIT;</code></pre>
 </tr>
 </tbody>
 </table>
+</div>
 <p>Al final, <strong>Test connection</strong> debe decir <strong>"Connection successful!"</strong>. Si Excel es de 32 bits, repite lo mismo en "Orígenes de datos ODBC (32 bits)" con el mismo nombre de DSN: Windows acepta los dos.</p>
 <h3 id="cadena-de-conexion-sin-dsn">Cadena de conexión (sin DSN)<a class="headerlink" href="#cadena-de-conexion-sin-dsn" title="Permanent link">&para;</a></h3>
-<pre><code class="nohighlight">Driver={Firebird ODBC Driver};Dbname=localhost:C:\Datos Microsip\EMPRESA.FDB;Uid=REPORTES_BI;Pwd=****;Charset=NONE;</code></pre>
+<div class="fbi-code"><pre><code class="nohighlight">Driver={Firebird ODBC Driver};Dbname=localhost:C:\Datos Microsip\EMPRESA.FDB;Uid=REPORTES_BI;Pwd=****;Charset=NONE;</code></pre></div>
 <p>Útil si no quieres crear el DSN en cada PC. También funcionan las llaves <code>Database=</code>, <code>User=</code> y <code>Password=</code> en lugar de <code>Dbname=</code>, <code>Uid=</code> y <code>Pwd=</code>.</p>
 <hr />
 <h2 id="4-conecta-power-bi">4. Conecta Power BI<a class="headerlink" href="#4-conecta-power-bi" title="Permanent link">&para;</a></h2>
-<ol>
+<ol class="fbi-steps">
 <li>En la pantalla de inicio, <strong>Obtener datos de otros orígenes</strong>. En la ventana <strong>Obtener datos</strong>, escribe <code>ODBC</code> en el buscador, elige <strong>ODBC</strong> y da clic en <strong>Conectar</strong>.</li>
 <li>En <strong>Nombre de origen de datos (DSN)</strong> elige <code>Microsip_Reportes</code>.</li>
 <li>Abre <strong>Opciones avanzadas</strong> y pega el <a href="#consulta-ventas">query de ventas</a> en <strong>Instrucción SQL (opcional)</strong>. <strong>Aceptar</strong>.</li>
@@ -460,10 +575,10 @@ COMMIT;</code></pre>
 <li>Para traer datos nuevos: <strong>Actualizar</strong>, en la cinta Inicio.</li>
 </ol>
 <h3 id="cuida-tu-servidor-de-firebird">Cuida tu servidor de Firebird (no es un tema menor)<a class="headerlink" href="#cuida-tu-servidor-de-firebird" title="Permanent link">&para;</a></h3>
-<p>Power BI no le pregunta a tu servidor si puede. Al actualizar, <strong>carga varias tablas en paralelo</strong>: cada tabla o consulta es un query distinto contra Firebird, todos al mismo tiempo, y el gateway hace lo mismo cada vez que se programa la actualización. Es muy común que el servidor de Microsip sea una PC con pocos recursos, y que Firebird ya vaya lento porque la base creció. Si los queries de Power BI le caen encima en horario de operación, el que lo sufre es quien está facturando en Microsip.</p>
+<p>Power BI no le pregunta a tu servidor si puede. Al actualizar, <strong>carga varias tablas en paralelo</strong>: cada tabla o consulta es un query distinto contra Firebird, todos al mismo tiempo, y el gateway hace lo mismo cada vez que se programa la actualización. Es muy común que el servidor de Microsip sea una PC con pocos recursos, y que Firebird ya vaya lento porque la base creció. Si los queries de Power BI le caen encima en horario de operación, el que lo sufre son tus usuarios de Microsip.</p>
 <ul>
 <li><strong>Un solo query bien filtrado en lugar de muchas tablas sueltas.</strong> Por eso esta guía usa la consulta de ventas: una consulta, no diez.</li>
-<li><strong>Filtra por fecha.</strong> Una base de Microsip pasa fácil de 30 GB y la tabla de renglones de ventas puede tener millones de filas.</li>
+<li><strong>Filtra por fecha.</strong> Una base de Microsip puede pesar varios GB y la tabla de renglones de ventas puede tener millones de filas.</li>
 <li><strong>Actualiza fuera de horario</strong>, de madrugada.</li>
 <li><strong>Baja el paralelismo</strong> en Power BI Desktop: Archivo → Opciones y configuración → Opciones → Archivo actual → <strong>Carga de datos</strong> → <strong>Carga de tablas en paralelo</strong> → <strong>Una</strong>. Según Microsoft, este valor también se respeta en Power BI Service después de publicar.</li>
 </ul>
@@ -476,6 +591,7 @@ COMMIT;</code></pre>
 <p>Un dashboard sirve de verdad cuando tu equipo lo abre en el navegador o en el celular, sin Power BI Desktop. Para eso se publica en Power BI Service, y ahí aparecen dos cosas que conviene saber antes:</p>
 <p><strong>1. La puerta de enlace.</strong> Power BI en la nube no ve tu servidor de Firebird. Para que los datos se actualicen solos, instalas la <strong>puerta de enlace de datos local</strong> (on-premises data gateway) en una PC o servidor que esté siempre prendido y vea a Firebird. Esa máquina necesita el mismo driver ODBC y el mismo DSN de sistema, de 64 bits. Hay una versión "personal", pero depende de que esa PC esté prendida y no sirve para compartir; para una empresa, la estándar. Si nadie abre los reportes en dos meses, Power BI pausa la actualización, y después de cuatro fallas seguidas la desactiva.</p>
 <p><strong>Qué pide la máquina del gateway</strong> (checklist):</p>
+<div class="fbi-table">
 <table>
 <thead>
 <tr>
@@ -486,7 +602,7 @@ COMMIT;</code></pre>
 <tbody>
 <tr>
 <td>Windows</td>
-<td>Mínimo Windows 10, 11, o Windows Server 2019, 2022 o 2025, con .NET Framework 4.8. Microsoft recomienda <strong>Windows Server de 64 bits</strong>. Ojo: Windows Server 2016 y anteriores <strong>no están en la lista</strong>, y en una pyme es común que el servidor de Microsip sea así de viejo</td>
+<td>Mínimo Windows 10, 11, o Windows Server 2019, 2022 o 2025, con .NET Framework 4.8. Microsoft recomienda <strong>Windows Server de 64 bits</strong>. Ojo: Windows Server 2016 y anteriores <strong>no están en la lista</strong>.</td>
 </tr>
 <tr>
 <td>Hardware recomendado</td>
@@ -514,6 +630,7 @@ COMMIT;</code></pre>
 </tr>
 </tbody>
 </table>
+</div>
 <p><strong>2. Las licencias.</strong> Con la licencia gratuita solo ves tus propios reportes: no puedes compartirlos. Para compartir, <strong>quien publica y quien consulta necesitan licencia Pro</strong> (o todos Premium Per User). La excepción es pagar una capacidad dedicada (Fabric F64 o mayor), donde los usuarios gratuitos ya pueden ver. Con Pro el reporte se actualiza <strong>hasta 8 veces al día</strong>; con Premium o Fabric, hasta 48. Revisa si tu Microsoft 365 ya incluye Pro.</p>
 <p><strong>3. Dashboard contra reporte.</strong> En Power BI Service, un "dashboard" se arma fijando (pin) visuales de un reporte. Si fijas un visual suelto, el mosaico puede no respetar los filtros del reporte y no refleja cambios de diseño (si cambias una línea por barras, el dashboard sigue mostrando la línea). Por eso un dashboard y su reporte pueden mostrar cifras distintas. Para evitarlo, fija la <strong>página completa</strong> del reporte (mosaico en vivo) o comparte directamente el reporte.</p>
 <p>Fuentes: learn.microsoft.com, "Power BI service features by license type" (actualizada el 24 Ago 2026), "Configure scheduled refresh" (13 Feb 2026), "Create a Power BI dashboard from a report" (21 Abr 2026), "Install an on-premises data gateway" (15 Oct 2025) y "Update an on-premises data gateway" (28 Jul 2026). Sin precios: cambian seguido; consúltalos en microsoft.com.</p>
@@ -523,10 +640,10 @@ COMMIT;</code></pre>
 <p>Junta las dos fuentes de venta de Microsip, Ventas y Punto de Venta, en una sola lista, para que puedas compararlas o sumarlas.</p>
 <div class="admonition note">
 <p class="admonition-title">Nota</p>
-<p>Usa las mismas reglas que los reportes de ventas de Microsip 2026. Si en tu versión una tabla o campo cambió de nombre, revisa el diccionario de tablas.</p>
+<p>Usa las mismas reglas que los reportes de ventas de Microsip 2026.</p>
 </div>
 <h3 id="el-query-completo">El query completo<a class="headerlink" href="#el-query-completo" title="Permanent link">&para;</a></h3>
-<pre><code class="sql">-- Microsip: ventas sin costos, por renglón (Ventas + Punto de Venta)
+<div class="fbi-code"><pre><code class="sql">-- Microsip: ventas sin costos, por renglón (Ventas + Punto de Venta)
 -- Factor BI · https://factorbi.github.io/microsip/power-bi/#consulta-ventas
 -- Licencia MIT · Copyright (c) 2026 Factor BI
 -- Usa las mismas reglas que los reportes de ventas de Microsip:
@@ -577,22 +694,23 @@ LEFT JOIN LINEAS_ARTICULOS L  ON L.LINEA_ARTICULO_ID = A.LINEA_ARTICULO_ID
 LEFT JOIN GRUPOS_LINEAS G     ON G.GRUPO_LINEA_ID = L.GRUPO_LINEA_ID
 WHERE D.ESTATUS &lt;&gt; 'C'
   AND D.TIPO_DOCTO IN ('V', 'D')                          -- ventas y devoluciones
-  AND D.FECHA BETWEEN '2026-01-01' AND '2026-12-31'</code></pre>
+  AND D.FECHA BETWEEN '2026-01-01' AND '2026-12-31'</code></pre></div>
 <h3 id="explicado-por-bloques">Explicado por bloques<a class="headerlink" href="#explicado-por-bloques" title="Permanent link">&para;</a></h3>
 <h4 id="de-donde-sale-una-venta">De dónde sale una venta<a class="headerlink" href="#de-donde-sale-una-venta" title="Permanent link">&para;</a></h4>
 <p>Documento (<code>DOCTOS_VE</code>, <code>DOCTOS_PV</code>) y sus renglones (<code>_DET</code>).</p>
-<pre><code class="sql">FROM DOCTOS_VE D JOIN DOCTOS_VE_DET R ON R.DOCTO_VE_ID = D.DOCTO_VE_ID AND R.ROL &lt;&gt; 'C'</code></pre>
+<div class="fbi-code"><pre><code class="sql">FROM DOCTOS_VE D JOIN DOCTOS_VE_DET R ON R.DOCTO_VE_ID = D.DOCTO_VE_ID AND R.ROL &lt;&gt; 'C'</code></pre></div>
 <p>(igual con <code>DOCTOS_PV</code>). <code>ROL &lt;&gt; 'C'</code> deja fuera los renglones componentes, como hacen los reportes de Microsip.</p>
 <h4 id="como-se-excluyen-los-cancelados">Cómo se excluyen los cancelados<a class="headerlink" href="#como-se-excluyen-los-cancelados" title="Permanent link">&para;</a></h4>
-<pre><code class="sql">WHERE D.ESTATUS &lt;&gt; 'C'</code></pre>
+<p>Microsip no borra el documento cancelado: lo marca con <code>ESTATUS = 'C'</code> y conserva su fecha. Si solo filtras por fecha, lo sumas.</p>
+<div class="fbi-code"><pre><code class="sql">WHERE D.ESTATUS &lt;&gt; 'C'</code></pre></div>
 <h4 id="como-se-restan-las-devoluciones">Cómo se restan las devoluciones<a class="headerlink" href="#como-se-restan-las-devoluciones" title="Permanent link">&para;</a></h4>
 <p>El signo se invierte para que la venta neta cuadre con Microsip.</p>
-<pre><code class="sql">IIF(D.TIPO_DOCTO = 'D', -1, 1) * R.PRECIO_TOTAL_NETO</code></pre>
+<div class="fbi-code"><pre><code class="sql">IIF(D.TIPO_DOCTO = 'D', -1, 1) * R.PRECIO_TOTAL_NETO</code></pre></div>
 <p>Con <code>TIPO_DOCTO IN ('F', 'D')</code> en Ventas y <code>IN ('V', 'D')</code> en Punto de Venta.</p>
 <h4 id="como-se-convierte-a-moneda-nacional">Cómo se convierte a moneda nacional<a class="headerlink" href="#como-se-convierte-a-moneda-nacional" title="Permanent link">&para;</a></h4>
 <p>Tipo de cambio del documento, no el del día.</p>
-<pre><code class="sql">R.PRECIO_TOTAL_NETO * D.TIPO_CAMBIO</code></pre>
-<h4 id="clientes-vendedores-y-articulos">Clientes, vendedores y artículos<a class="headerlink" href="#clientes-vendedores-y-articulos" title="Permanent link">&para;</a></h4>
+<div class="fbi-code"><pre><code class="sql">R.PRECIO_TOTAL_NETO * D.TIPO_CAMBIO</code></pre></div>
+<h4 id="clientes-y-articulos">Clientes y artículos<a class="headerlink" href="#clientes-y-articulos" title="Permanent link">&para;</a></h4>
 <p>Los catálogos que dan nombre a cada renglón: <code>LEFT JOIN</code> a <code>CLIENTES</code>, <code>ARTICULOS</code>, <code>LINEAS_ARTICULOS</code> y <code>GRUPOS_LINEAS</code>.</p>
 <h3 id="como-validar-que-cuadra">Cómo validar que cuadra<a class="headerlink" href="#como-validar-que-cuadra" title="Permanent link">&para;</a></h3>
 <p>Corre el query para un mes cerrado y compara el total contra el reporte de ventas de Microsip del mismo mes. [VERIFICAR en sesión 49: cuál reporte de Microsip es el de referencia.]</p>
@@ -600,6 +718,7 @@ WHERE D.ESTATUS &lt;&gt; 'C'
 <p>Costos, márgenes, cuentas por cobrar. Tampoco junta varias bases: si tienes varias empresas, sucursales con Punto de Venta local o el histórico partido en dos bases, el query se corre en cada una por separado.</p>
 <hr />
 <h2 id="errores-comunes">Errores comunes<a class="headerlink" href="#errores-comunes" title="Permanent link">&para;</a></h2>
+<div class="fbi-table">
 <table>
 <thead>
 <tr>
@@ -647,7 +766,7 @@ WHERE D.ESTATUS &lt;&gt; 'C'
 <tr>
 <td>Los totales no cuadran con Microsip</td>
 <td>Estás sumando cancelados o sin restar devoluciones</td>
-<td>Usa el <a href="#consulta-ventas">query de ventas</a>, que ya lo resuelve</td>
+<td>Prueba con el <a href="#consulta-ventas">query de ventas</a>, consulta a tu distribuidor o <a href="https://www.factorbi.com/es/contact?utm_source=factorbi.github.io&amp;utm_medium=referral&amp;utm_campaign=microsip_docs" target="_blank" rel="noopener">contáctanos</a> para ayudarte con el query</td>
 </tr>
 <tr>
 <td>La base se pone lenta en horas pico</td>
@@ -656,21 +775,63 @@ WHERE D.ESTATUS &lt;&gt; 'C'
 </tr>
 </tbody>
 </table>
+</div>
 <hr />
 <h2 id="cuando-ya-no-alcanza">Cuando ya no alcanza<a class="headerlink" href="#cuando-ya-no-alcanza" title="Permanent link">&para;</a></h2>
 <p>Esta receta sirve bien para una base de datos, un analista y reportes que se actualizan una vez al día. Power BI conectado por ODBC ve <strong>una base a la vez</strong>, y en Microsip es muy común tener varias:</p>
 <ul>
 <li><strong>Varias empresas o razones sociales</strong>, cada una con su base.</li>
-<li><strong>Punto de Venta local en cada sucursal.</strong> Un supermercado con 9 tiendas puede tener 18 bases de Firebird. El valor está en ver todas juntas.</li>
+<li><strong>Punto de Venta local en cada sucursal.</strong> Un supermercado con 10 tiendas puede tener 20 bases de Firebird. El valor está en ver todas juntas.</li>
 <li><strong>Históricos partidos.</strong> Cuando una base crece mucho y Microsip se pone lento, a veces se le borra el histórico para recuperar velocidad. La operación mejora, pero tu historia queda repartida en dos o más bases, y un reporte conectado a la base nueva ya no ve los años anteriores.</li>
 </ul>
 <p>También se complica cuando la PC de la puerta de enlace se apaga, o cuando la persona que armó el reporte se va. Eso es lo que resolvemos en Factor BI: sincronizamos todas tus bases de Microsip a la nube de AWS con Vansync, las unimos en un solo lugar y entregamos los dashboards ya hechos, siempre de la mano de tu distribuidor Microsip.</p>
 <p>¿Y las metas de venta o el presupuesto que viven en Excel? Meterlos a un dashboard es trabajo de mantenimiento eterno. Con nuestro BI Agent le pides a Claude que cruce tus dashboards de QuickSight con ese Excel, un PDF o lo que tengas, y te contesta en minutos.</p>
 <p>Mira los reportes para Microsip en <a href="https://www.factorbi.com/es/reportes-microsip" target="_blank" rel="noopener">www.factorbi.com/es/reportes-microsip</a>.</p>
-<p><a class="btn btn-neutral" href="https://www.factorbi.com/es/contact?utm_source=factorbi.github.io&amp;utm_medium=referral&amp;utm_campaign=microsip_docs" target="_blank" rel="noopener">Contáctanos</a></p>
+<p><a class="btn btn-neutral fbi-cta" href="https://www.factorbi.com/es/contact?utm_source=factorbi.github.io&amp;utm_medium=referral&amp;utm_campaign=microsip_docs" target="_blank" rel="noopener">Contáctanos</a></p>
 <p><strong>¿Y con Claude o ChatGPT?</strong> Sí se puede analizar Microsip con IA, pero no subiendo tu base a un chat. Te explicamos cómo hacerlo con tus datos seguros en <a href="https://www.factorbi.com/es/ai" target="_blank" rel="noopener">factorbi.com</a>.</p>
 <hr />
 <p>Fuentes: firebirdsql.org (driver ODBC), learn.microsoft.com (conector ODBC de Power Query), microsip.com (Microsip 2026 y Firebird 5.0).</p>
+
+<script>
+(function () {
+  var boxes = document.querySelectorAll('.fbi-guide .fbi-code');
+  Array.prototype.forEach.call(boxes, function (box) {
+    var code = box.querySelector('code');
+    if (!code) return;
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'fbi-copy';
+    btn.textContent = 'Copiar';
+    btn.setAttribute('aria-label', 'Copiar el código');
+    function flash(msg) {
+      btn.textContent = msg;
+      setTimeout(function () { btn.textContent = 'Copiar'; }, 1600);
+    }
+    function fallback(text) {
+      var t = document.createElement('textarea');
+      t.value = text;
+      t.setAttribute('readonly', '');
+      t.style.position = 'fixed';
+      t.style.top = '-1000px';
+      document.body.appendChild(t);
+      t.select();
+      var ok = false;
+      try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
+      document.body.removeChild(t);
+      flash(ok ? 'Copiado' : 'No se pudo copiar');
+    }
+    btn.addEventListener('click', function () {
+      var text = code.textContent;
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(text).then(function () { flash('Copiado'); }, function () { fallback(text); });
+      } else {
+        fallback(text);
+      }
+    });
+    box.appendChild(btn);
+  });
+})();
+</script>
 
             </div>
           </div>
