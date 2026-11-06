@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="es" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="es" > <!--<![endif]-->
+<head>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-83822501-2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-83822501-2');
+  </script>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta name="author" content="Factor BI">
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+  <title>Power BI con Microsip</title>
+  <meta name="description" content="Conecta Power BI a la base Firebird de Microsip por ODBC: checklist, driver 32 o 64 bits, cadena de conexión, query de ventas y errores comunes.">
+  <link rel="canonical" href="https://factorbi.github.io/microsip/power-bi/">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": "Power BI con Microsip: conexión por ODBC paso a paso",
+  "description": "Conecta Power BI a la base Firebird de Microsip por ODBC: checklist, driver 32 o 64 bits, cadena de conexión, query de ventas y errores comunes.",
+  "inLanguage": "es-MX",
+  "datePublished": "2026-11-06",
+  "dateModified": "2026-11-06",
+  "author": {
+    "@type": "Organization",
+    "name": "Factor BI",
+    "url": "https://www.factorbi.com"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Factor BI",
+    "url": "https://www.factorbi.com"
+  },
+  "about": [
+    "Microsip",
+    "Firebird",
+    "Power BI"
+  ],
+  "mainEntityOfPage": "https://factorbi.github.io/microsip/power-bi/"
+}
+  </script>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/highlight.css">
+
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Power BI con Microsip";
+    var mkdocs_page_input_path = "microsip/power-bi.md";
+    var mkdocs_page_url = "/microsip/power-bi/";
+  </script>
+
+  <script src="../../js/jquery-2.1.1.min.js"></script>
+  <script src="../../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> Database Synchronization & ETL to AWS Cloud | Factor BI</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+
+
+            <li class="toctree-l1">
+
+    <a class="" href="../..">Home</a>
+	    </li>
+
+            <li class="toctree-l1">
+
+    <a class="" href="../../easyawssetup/">Link your AWS Account</a>
+	    </li>
+
+            <li class="toctree-l1">
+
+    <a class="" href="../../registration/">Factor BI Console</a>
+	    </li>
+
+            <li class="toctree-l1">
+
+    <a class="" href="../../installation/">Download Program</a>
+	    </li>
+
+            <li class="toctree-l1">
+
+    <a class="" href="../../firebird/">Firebird to MySQL Aurora</a>
+	    </li>
+
+            <li class="toctree-l1">
+
+    <a class="" href="../../sqlserver/">SQL Server to MySQL Aurora</a>
+	    </li>
+
+            <li class="toctree-l1">
+
+    <a class="" href="../../dbase/">dBase to MySQL Aurora</a>
+	    </li>
+
+            <li class="toctree-l1">
+
+    <a class="" href="../../visualfoxpro/">Visual FoxPro to MySQL Aurora</a>
+	    </li>
+
+            <li class="toctree-l1">
+
+    <a class="" href="../../sqlanywhere/">Sybase SQL Anywhere to MySQL Aurora</a>
+	    </li>
+
+            <li class="toctree-l1">
+
+    <a class="" href="../../mysql/">MySQL on-prem to AWS Aurora</a>
+	    </li>
+
+            <li class="toctree-l1">
+
+    <a class="" href="../../customdatajson/">Tables & Data to Sync</a>
+	    </li>
+
+            <li class="toctree-l1">
+
+    <a class="" href="../../bipostapi/">Loading and Transformation</a>
+	    </li>
+
+            <li class="toctree-l1">
+
+    <a class="" href="../../synctowindows/">Two-way Synchronization</a>
+	    </li>
+
+            <li class="toctree-l1">
+
+    <a class="" href="../../aspel/">Aspel</a>
+	    </li>
+
+            <li class="toctree-l1 current">
+
+    <a class="current" href="../">Microsip</a>
+	    </li>
+
+            <li class="toctree-l1">
+
+    <a class="" href="../../intelisis/">Intelisis</a>
+	    </li>
+
+            <li class="toctree-l1">
+
+    <a class="" href="../../soft-restaurant/">Soft Restaurant</a>
+	    </li>
+
+            <li class="toctree-l1">
+
+    <a class="" href="../../positouch/">POSitouch</a>
+	    </li>
+
+            <li class="toctree-l1">
+
+    <a class="" href="../../businessintelligence/">Business Intelligence</a>
+	    </li>
+
+            <li class="toctree-l1">
+
+    <a class="" href="../../csvtomysql/">CSV to MySQL Aurora</a>
+	    </li>
+
+            <li class="toctree-l1">
+
+    <a class="" href="../../setupaws/">Advanced AWS Setup</a>
+	    </li>
+
+            <li class="toctree-l1">
+
+    <a class="" href="../../troubleshooting/">Troubleshooting</a>
+	    </li>
+
+            <li class="toctree-l1">
+
+    <a class="" href="../../about/">About</a>
+	    </li>
+
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">Database Synchronization & ETL to AWS Cloud | Factor BI</a>
+      </nav>
+
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+
+
+
+    <li><a href="../">Microsip</a> &raquo;</li>
+    <li>Power BI con Microsip</li>
+    <li class="wy-breadcrumbs-aside">
+
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+
+                <h1 id="power-bi-con-microsip">Power BI con Microsip: conexión por ODBC paso a paso<a class="headerlink" href="#power-bi-con-microsip" title="Permanent link">&para;</a></h1>
+<p><em>Actualizado: 6 de noviembre de 2026</em></p>
+<p>Microsip guarda su información en Firebird, y Power BI no trae un conector nativo para Firebird. La forma de unirlos es un driver ODBC. Funciona, y lo usan muchas empresas, pero tiene tres detalles que casi nadie explica: el driver tiene que coincidir con tu versión de Firebird, tiene que coincidir con los bits de Power BI o de Excel, y el query tiene que saber qué ventas contar y cuáles no. Aquí están los tres.</p>
+<p>Casi todos los tutoriales de Power BI parten de un Excel: bajas reportes de Microsip, los juntas en un archivo maestro y ese archivo lo cargas a Power BI. Así solo te ahorras el último paso, las gráficas. Esta guía conecta Power BI directo a la base de Microsip, para que nadie tenga que bajar reportes a mano.</p>
+<div class="admonition note">
+<p class="admonition-title">Nota</p>
+<p>Microsip 2026 trae Firebird 5.0, pero no lo instala si en la PC ya hay un Firebird 3.0: primero hay que desinstalar el 3.0. Microsip 2027, que se espera para mayo de 2027, solo va a funcionar con Firebird 5.0. Antes de instalar nada, revisa cuál tienes.</p>
+</div>
+<hr />
+<h2 id="antes-de-empezar">Antes de empezar (checklist)<a class="headerlink" href="#antes-de-empezar" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Qué necesitas</th>
+<th>Dónde lo consigues</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Versión de Microsip y de Firebird (3.0 o 5.0)</td>
+<td>Tu distribuidor Microsip. Microsip no muestra su número de versión en pantalla (solo el año): clic derecho en <code>Microsip.exe</code> → Propiedades → Detalles. Firebird: en la lista de programas instalados de Windows aparece como <code>Firebird 3.0.5.33220 (x64)</code> o <code>Firebird 5.0.3.1683 (x64)</code>: el primer número es tu versión</td>
+</tr>
+<tr>
+<td>Nombre o IP del servidor donde corre Firebird</td>
+<td>Tu distribuidor o tu área de sistemas</td>
+</tr>
+<tr>
+<td>Ruta del archivo <code>.FDB</code> de la empresa</td>
+<td>Normalmente dentro de la carpeta <code>C:\Datos Microsip</code>. Es <strong>un solo archivo por empresa con todos los módulos</strong> (ventas, inventarios, cobranza, contabilidad). Si alguien te dice que hay un <code>VENTAS.FDB</code> y un <code>COMPRAS.FDB</code>, está confundido</td>
+</tr>
+<tr>
+<td>Un usuario para reportes</td>
+<td>Se crea una vez, dentro de Microsip (ver abajo). No uses <code>SYSDBA</code> para reportes</td>
+</tr>
+<tr>
+<td>Power BI Desktop instalado</td>
+<td>Gratis, desde Microsoft Store o microsoft.com</td>
+</tr>
+<tr>
+<td>El puerto 3050 abierto hacia el servidor, si Power BI está en otra PC</td>
+<td>Tu área de sistemas</td>
+</tr>
+</tbody>
+</table>
+<p>La base de datos es de tu empresa: no necesitas permiso de Microsip para leerla. Sí conviene avisarle a tu distribuidor, porque es quien conoce tu instalación y quien la actualiza cuatro veces al año.</p>
+<p><strong>La contraseña de <code>SYSDBA</code>.</strong> Microsip instala Firebird con la contraseña de fábrica, que es pública en internet. Nuestra recomendación es que no se quede así. Cambiarla es decisión de tu distribuidor, porque es quien administra tu instalación: pregúntale si ya lo hizo.</p>
+<hr />
+<h2 id="1-instala-el-driver-odbc-correcto">1. Instala el driver ODBC correcto<a class="headerlink" href="#1-instala-el-driver-odbc-correcto" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Tu Firebird</th>
+<th>Driver</th>
+<th>Nombre que aparece en Windows</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>3.0 o 5.0</td>
+<td>Firebird ODBC Driver <strong>v3.0</strong></td>
+<td>"Firebird ODBC Driver"</td>
+</tr>
+<tr>
+<td>2.5 o anterior (Microsip muy viejo)</td>
+<td>Firebird ODBC Driver <strong>v2.0.5</strong></td>
+<td>"Firebird/InterBase(r) driver"</td>
+</tr>
+</tbody>
+</table>
+<p>El driver v3.0 solo funciona con el cliente de Firebird 3.0 o superior (<code>fbclient.dll</code>). Si en la PC hay un <code>fbclient.dll</code> de la versión 2.5, no conecta. Fuente: firebirdsql.org.</p>
+<h3 id="32-o-64-bits">32 o 64 bits<a class="headerlink" href="#32-o-64-bits" title="Permanent link">&para;</a></h3>
+<p>El driver tiene que tener los mismos bits que el programa que lo va a usar, no que Windows. Power BI Desktop es de 64 bits: Microsoft ya no da soporte a la versión de 32 bits. Excel puede ser de 32 o de 64: en Excel, Archivo → Cuenta → Acerca de Excel lo dice. Microsip y Excel suelen ser de 32 bits y Power BI es de 64, así que en una misma PC es normal necesitar los dos.</p>
+<p>El driver se descarga del release oficial en GitHub (<code>FirebirdSQL/firebird-odbc-driver</code>, versión estable 3.0.1, archivo <code>win_installers.zip</code>). Después de instalar, en "Orígenes de datos ODBC (64 bits)" → pestaña <strong>Controladores</strong> aparece <strong>Firebird ODBC Driver</strong>, versión 3.00.01.18. Si vas a usar Excel de 32 bits, revisa que también aparezca en "Orígenes de datos ODBC (32 bits)"; si no, instala también el de 32 bits. Los instaladores no traen firma digital, así que Windows puede mostrar una advertencia al abrirlos.</p>
+<hr />
+<h2 id="2-crea-el-usuario-de-reportes">2. Crea el usuario de reportes (dentro de Microsip)<a class="headerlink" href="#2-crea-el-usuario-de-reportes" title="Permanent link">&para;</a></h2>
+<p><strong>Por qué dentro de Microsip y no directo en Firebird:</strong> cuando Microsip se actualiza a una versión nueva, la actualización borra los usuarios de Firebird que no existen como usuarios de Microsip. Si creas el usuario de reportes solo en Firebird, un día tus reportes dejan de conectar sin que nadie sepa por qué. (Dato de campo de Factor BI.)</p>
+<p>Al pasar a Firebird 5.0 (por ejemplo, al instalar Microsip 2026), Power BI deja de conectar, porque Firebird 5.0 arranca sin ningún usuario. Para recuperarlo, en Administración del sistema → Usuarios abre el usuario de reportes, da clic en Modificar, escribe otra vez su contraseña y guarda. Los permisos del script no se pierden: no hace falta volver a correrlo.</p>
+<h3 id="21-da-de-alta-el-usuario-en-microsip">2.1 Da de alta el usuario en Microsip<a class="headerlink" href="#21-da-de-alta-el-usuario-en-microsip" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Abre Microsip y, en la barra de módulos, da clic en <strong>Administración del sistema</strong>. No pide empresa.</li>
+<li>En el panel izquierdo <strong>Catálogos</strong>, da clic en <strong>Usuarios</strong>.</li>
+<li>En la barra de herramientas, da clic en <strong>Nuevo</strong>. Se abre la ventana <strong>Usuario</strong>.</li>
+<li>Pestaña <strong>General</strong>:
+<ul>
+<li><strong>Tipo de elemento:</strong> deja <strong>Usuario</strong>.</li>
+<li><strong>Nombre:</strong> <code>REPORTES_BI</code> (acepta mayúsculas y guion bajo).</li>
+<li><strong>Contraseña:</strong> y <strong>Confirmación:</strong> la contraseña del usuario, de hasta 20 caracteres. Es la misma que vas a usar en Power BI o en Excel.</li>
+<li><strong>Autorizar acciones a otros usuarios:</strong> sin marcar.</li>
+<li><strong>Empresas autorizadas:</strong> <strong>Una lista</strong>, y marca solo la empresa de la que vas a sacar reportes.</li>
+<li><strong>Estatus del usuario:</strong> <strong>Activo</strong>.</li>
+</ul>
+</li>
+<li>Pestaña <strong>Derechos</strong>: no marques nada. Microsip no obliga a dar ningún derecho.</li>
+<li>Da clic en <strong>Guardar y cerrar</strong>. El usuario aparece en la lista.</li>
+</ol>
+<p>Al guardar, Microsip crea el usuario también en Firebird, con la misma contraseña. Todavía no puede leer ninguna tabla: eso lo da el script del paso 2.2.</p>
+<p><strong>Opcional:</strong> si no quieres que ese usuario entre a Microsip, ábrelo, da clic en <strong>Modificar</strong> (el lápiz), cambia <strong>Estatus del usuario</strong> a <strong>Baja</strong> y guarda. Microsip ya no lo deja iniciar sesión, pero la conexión de Power BI y Excel sigue funcionando.</p>
+<h3 id="22-dale-permiso-de-lectura-con-un-script">2.2 Dale permiso de lectura con un script<a class="headerlink" href="#22-dale-permiso-de-lectura-con-un-script" title="Permanent link">&para;</a></h3>
+<p>Firebird no tiene un "dar lectura a todo" en un solo comando. Este script da <code>SELECT</code> sobre las tablas que se usan para reportes (las 172 que sincroniza Vansync, marcadas en la página de Tablas), se salta las que no existan en tu versión y se puede volver a correr sin problema.</p>
+<pre><code class="sql">-- Factor BI · https://factorbi.github.io/microsip/power-bi/
+-- Licencia MIT · Copyright (c) 2026 Factor BI
+-- Probado con Firebird 3.0; los permisos funcionan en Firebird 5.0.
+SET TERM ^ ;
+EXECUTE BLOCK AS
+  DECLARE VARIABLE T VARCHAR(63);
+BEGIN
+  FOR SELECT TRIM(RDB$RELATION_NAME) FROM RDB$RELATIONS
+      WHERE RDB$VIEW_BLR IS NULL
+        AND (RDB$SYSTEM_FLAG IS NULL OR RDB$SYSTEM_FLAG = 0)
+        AND TRIM(RDB$RELATION_NAME) IN (
+          'AGENTES', 'ALMACENES', 'ANTICIPOS_CC', 'ARTICULOS',
+          'ARTICULOS_DISCRETOS', 'BANCOS', 'BENEFICIARIOS', 'CAJAS',
+          'CAJEROS', 'CENTROS_COSTO', 'CFD_RECIBIDOS', 'CIUDADES',
+          'CLASIFICADORES_CAT', 'CLASIFICADORES_CAT_VALORES', 'CLAVES_ARTICULOS', 'CLAVES_CAT_SEC',
+          'CLAVES_CLIENTES', 'CLAVES_PROVEEDORES', 'CLIENTES', 'COBRADORES',
+          'CONCEPTOS_BA', 'CONCEPTOS_CC', 'CONCEPTOS_CP', 'CONCEPTOS_EMP',
+          'CONCEPTOS_IN', 'CONCEPTOS_NO', 'CONDICIONES_PAGO', 'CONDICIONES_PAGO_CP',
+          'CONSIGNATARIOS_CM', 'CUENTAS_BANCARIAS', 'CUENTAS_CO', 'DEPOSITOS_CC',
+          'DEPOSITOS_CC_DET', 'DEPTOS_CO', 'DEPTOS_NO', 'DESGLOSE_EN_DISCRETOS',
+          'DESGLOSE_EN_DISCRETOS_CM', 'DESGLOSE_EN_DISCRETOS_INVFIS', 'DESGLOSE_EN_DISCRETOS_PV', 'DESGLOSE_EN_DISCRETOS_VE',
+          'DIRS_CLIENTES', 'DOCTOS_BA', 'DOCTOS_BA_INFO_BAN', 'DOCTOS_CC',
+          'DOCTOS_CC_INFO_BAN', 'DOCTOS_CM', 'DOCTOS_CM_DET', 'DOCTOS_CM_LIGAS',
+          'DOCTOS_CM_LIGAS_DET', 'DOCTOS_CO', 'DOCTOS_CO_CFDI', 'DOCTOS_CO_DET',
+          'DOCTOS_CO_DET_CFDI', 'DOCTOS_CO_DET_INFO_BAN', 'DOCTOS_CP', 'DOCTOS_CP_INFO_BAN',
+          'DOCTOS_ENTRE_SIS', 'DOCTOS_IN', 'DOCTOS_IN_DET', 'DOCTOS_IN_DET_COMPRAS',
+          'DOCTOS_PROC_CANCEL', 'DOCTOS_PV', 'DOCTOS_PV_COBROS', 'DOCTOS_PV_DET',
+          'DOCTOS_PV_LIGAS', 'DOCTOS_PV_LIGAS_DET', 'DOCTOS_VE', 'DOCTOS_VE_DET',
+          'DOCTOS_VE_LIGAS', 'DOCTOS_VE_LIGAS_DET', 'EDOSCTA_BA', 'EDOSCTA_BA_DET',
+          'ELEMENTOS_CAT_CLASIF', 'EMPLEADOS', 'ESTADOS', 'EXCEP_EMPLEADOS',
+          'EXCEP_GENERALES', 'EXIS_DISCRETOS', 'FORMAS_COBRO', 'FORMAS_COBRO_CC',
+          'FORMAS_COBRO_CLIENTES', 'FORMAS_COBRO_DOCTOS', 'FORMATOS_EDOFIN', 'FORMATOS_EDOFIN_DET',
+          'GRUPOS_CUENTAS', 'GRUPOS_CUENTAS_DET', 'GRUPOS_LINEAS', 'HISTORIA_CAMBIARIA',
+          'IMPORTES_DOCTOS_CC', 'IMPORTES_DOCTOS_CC_IMPTOS', 'IMPORTES_DOCTOS_CP', 'IMPORTES_DOCTOS_CP_IMPTOS',
+          'IMPUESTOS', 'IMPUESTOS_ARTICULOS', 'IMPUESTOS_DOCTOS_CM', 'IMPUESTOS_DOCTOS_PV',
+          'IMPUESTOS_DOCTOS_PV_DET', 'IMPUESTOS_DOCTOS_VE', 'JUEGOS_DET', 'LIBRES_ARTICULOS',
+          'LIBRES_CARGOS_CC', 'LIBRES_CARGOS_CP', 'LIBRES_CLIENTES', 'LIBRES_COM_CM',
+          'LIBRES_COT_VE', 'LIBRES_CREDITOS_CC', 'LIBRES_CREDITOS_CP', 'LIBRES_CTAS_BAN',
+          'LIBRES_CUENTAS_CO', 'LIBRES_DEVCOM_CM', 'LIBRES_DEVFAC_VE', 'LIBRES_DEVREC_CM',
+          'LIBRES_DEVREM_VE', 'LIBRES_ENTRADAS_IN', 'LIBRES_FAC_VE', 'LIBRES_OCO_CM',
+          'LIBRES_PED_VE', 'LIBRES_POL_CO', 'LIBRES_PROVEEDOR', 'LIBRES_REC_CM',
+          'LIBRES_REM_VE', 'LIBRES_SALIDAS_IN', 'LINEAS_ARTICULOS', 'LISTAS_ATRIBUTOS',
+          'LUGARES_EXPEDICION', 'MONEDAS', 'MOVTOS_CAJAS', 'MOVTOS_CAJAS_CAJEROS',
+          'MOVTOS_CAJAS_FONDO', 'MOVTOS_EFVO_CAJA', 'NIVELES_ARTICULOS', 'NOMINAS',
+          'PAGOS_NOMINA', 'PAGOS_NOMINA_DET', 'PAGOS_NOMINA_VAC', 'PAISES',
+          'PEDIMENTOS', 'PLAZOS_COND_PAG', 'PLAZOS_COND_PAG_CP', 'POLITICAS_COMISIONES_VENDEDORES',
+          'PRESUPUESTOS', 'PROVEEDORES', 'PUESTOS_NO', 'REGISTRY',
+          'REPOSITORIO_CFDI', 'RFCS_LCO', 'ROLES_CLAVES_ARTICULOS', 'ROLES_CLAVES_CLIENTES',
+          'ROLES_CLAVES_PROVEEDORES', 'SALDOS_BA', 'SALDOS_CC', 'SALDOS_CO',
+          'SALDOS_CP', 'SALDOS_IN', 'SUCURSALES', 'SUCURSALES_CATALOGOS',
+          'SUCURSALES_CATALOGOS_DET', 'TIPOS_CLIENTES', 'TIPOS_IMPUESTOS', 'TIPOS_POLIZAS',
+          'TIPOS_PROV', 'TRASPASOS_BA', 'USOS_ANTICIPOS_CC', 'USOS_FOLIOS_FISCALES',
+          'USOS_FOLIOS_FISCALES_CANCELADOS', 'VENCIMIENTOS_CARGOS_CC', 'VENCIMIENTOS_CARGOS_CM', 'VENCIMIENTOS_CARGOS_CP',
+          'VENCIMIENTOS_CARGOS_VE', 'VENDEDORES', 'VIAS_EMBARQUE', 'ZONAS_CLIENTES'
+        )
+      INTO :T
+  DO
+  BEGIN
+    EXECUTE STATEMENT 'GRANT SELECT ON "' || :T || '" TO USER REPORTES_BI';
+  END
+END^
+SET TERM ; ^
+COMMIT;</code></pre>
+<p>El script se corre como <code>SYSDBA</code> en IBExpert (o la herramienta que use tu distribuidor). Si tu usuario no se llama <code>REPORTES_BI</code>, cambia el nombre en la línea del <code>GRANT SELECT</code>.</p>
+<hr />
+<h2 id="3-configura-el-dsn">3. Configura el DSN<a class="headerlink" href="#3-configura-el-dsn" title="Permanent link">&para;</a></h2>
+<ol>
+<li>Abre "Orígenes de datos ODBC (64 bits)".</li>
+<li>Pestaña <strong>DSN de sistema</strong> → <strong>Agregar</strong>.</li>
+<li>Elige "Firebird ODBC Driver" → <strong>Finalizar</strong>.</li>
+</ol>
+<p>Se abre la ventana <strong>Firebird ODBC Setup</strong> (en inglés aunque Windows esté en español). No pide permisos de administrador. Llena la tabla:</p>
+<table>
+<thead>
+<tr>
+<th>Campo (como aparece)</th>
+<th>Valor de ejemplo</th>
+<th>Nota</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Data Source Name (DSN)</td>
+<td><code>Microsip_Reportes</code></td>
+<td>El nombre que vas a elegir en Power BI</td>
+</tr>
+<tr>
+<td>Database</td>
+<td><code>localhost:C:\Datos Microsip\EMPRESA.FDB</code></td>
+<td>En la misma PC funcionan <code>localhost:ruta</code>, <code>localhost/3050:ruta</code> y la ruta sola. Una ruta con espacios no lleva comillas</td>
+</tr>
+<tr>
+<td>Client</td>
+<td>vacío</td>
+<td>Vacío usa el <code>fbclient.dll</code> de Windows. Llénalo solo si hay varias versiones de Firebird en la PC</td>
+</tr>
+<tr>
+<td>Database Account / Password</td>
+<td><code>REPORTES_BI</code> / la que definiste en Microsip</td>
+<td>Nunca <code>SYSDBA</code>. El DSN no guarda la contraseña de forma que sirva: Power BI y Excel te la piden al conectar</td>
+</tr>
+<tr>
+<td>Role</td>
+<td>vacío</td>
+<td>No escribas ningún rol</td>
+</tr>
+<tr>
+<td>Character Set</td>
+<td><code>NONE</code> (viene por defecto)</td>
+<td>Con <code>NONE</code> los acentos y la ñ salen bien</td>
+</tr>
+</tbody>
+</table>
+<p>Al final, <strong>Test connection</strong> debe decir <strong>"Connection successful!"</strong>. Si Excel es de 32 bits, repite lo mismo en "Orígenes de datos ODBC (32 bits)" con el mismo nombre de DSN: Windows acepta los dos.</p>
+<h3 id="cadena-de-conexion-sin-dsn">Cadena de conexión (sin DSN)<a class="headerlink" href="#cadena-de-conexion-sin-dsn" title="Permanent link">&para;</a></h3>
+<pre><code class="nohighlight">Driver={Firebird ODBC Driver};Dbname=localhost:C:\Datos Microsip\EMPRESA.FDB;Uid=REPORTES_BI;Pwd=****;Charset=NONE;</code></pre>
+<p>Útil si no quieres crear el DSN en cada PC. También funcionan las llaves <code>Database=</code>, <code>User=</code> y <code>Password=</code> en lugar de <code>Dbname=</code>, <code>Uid=</code> y <code>Pwd=</code>.</p>
+<hr />
+<h2 id="4-conecta-power-bi">4. Conecta Power BI<a class="headerlink" href="#4-conecta-power-bi" title="Permanent link">&para;</a></h2>
+<ol>
+<li>En la pantalla de inicio, <strong>Obtener datos de otros orígenes</strong>. En la ventana <strong>Obtener datos</strong>, escribe <code>ODBC</code> en el buscador, elige <strong>ODBC</strong> y da clic en <strong>Conectar</strong>.</li>
+<li>En <strong>Nombre de origen de datos (DSN)</strong> elige <code>Microsip_Reportes</code>.</li>
+<li>Abre <strong>Opciones avanzadas</strong> y pega el <a href="#consulta-ventas">query de ventas</a> en <strong>Instrucción SQL (opcional)</strong>. <strong>Aceptar</strong>.</li>
+<li>En las credenciales elige <strong>Base de datos</strong> y escribe <code>REPORTES_BI</code> y su contraseña.</li>
+<li>En la vista previa, <strong>Cargar</strong>. Con ODBC, Power BI importa los datos: no ofrece DirectQuery.</li>
+<li>Para traer datos nuevos: <strong>Actualizar</strong>, en la cinta Inicio.</li>
+</ol>
+<h3 id="cuida-tu-servidor-de-firebird">Cuida tu servidor de Firebird (no es un tema menor)<a class="headerlink" href="#cuida-tu-servidor-de-firebird" title="Permanent link">&para;</a></h3>
+<p>Power BI no le pregunta a tu servidor si puede. Al actualizar, <strong>carga varias tablas en paralelo</strong>: cada tabla o consulta es un query distinto contra Firebird, todos al mismo tiempo, y el gateway hace lo mismo cada vez que se programa la actualización. Es muy común que el servidor de Microsip sea una PC con pocos recursos, y que Firebird ya vaya lento porque la base creció. Si los queries de Power BI le caen encima en horario de operación, el que lo sufre es quien está facturando en Microsip.</p>
+<ul>
+<li><strong>Un solo query bien filtrado en lugar de muchas tablas sueltas.</strong> Por eso esta guía usa la consulta de ventas: una consulta, no diez.</li>
+<li><strong>Filtra por fecha.</strong> Una base de Microsip pasa fácil de 30 GB y la tabla de renglones de ventas puede tener millones de filas.</li>
+<li><strong>Actualiza fuera de horario</strong>, de madrugada.</li>
+<li><strong>Baja el paralelismo</strong> en Power BI Desktop: Archivo → Opciones y configuración → Opciones → Archivo actual → <strong>Carga de datos</strong> → <strong>Carga de tablas en paralelo</strong> → <strong>Una</strong>. Según Microsoft, este valor también se respeta en Power BI Service después de publicar.</li>
+</ul>
+<h3 id="en-excel">En Excel<a class="headerlink" href="#en-excel" title="Permanent link">&para;</a></h3>
+<p>(Excel 2016; en Excel 365 la ruta es <strong>Datos</strong> → <strong>Obtener datos</strong> → <strong>De otras fuentes</strong> → <strong>Desde ODBC</strong>)</p>
+<p><strong>Datos</strong> → <strong>Nueva consulta</strong> → <strong>De otras fuentes</strong> → <strong>De ODBC</strong>. La ventana y las credenciales son iguales a las de Power BI. Cuidado: el botón <strong>De Microsoft Query</strong> también usa ODBC, pero no deja pegar el query. Para traer datos nuevos: <strong>Datos</strong> → <strong>Actualizar todo</strong>.</p>
+<p>Por qué el query y no las tablas sueltas: una venta de Microsip vive en al menos cuatro tablas (documento, renglones, cliente, artículo), y además hay que quitar cancelados y restar devoluciones. Si cargas las tablas sueltas, ese trabajo lo haces en Power Query, y cada persona lo hace distinto.</p>
+<hr />
+<h2 id="5-publicarlo-para-verlo-en-el-navegador">5. Publicarlo para verlo en el navegador<a class="headerlink" href="#5-publicarlo-para-verlo-en-el-navegador" title="Permanent link">&para;</a></h2>
+<p>Un dashboard sirve de verdad cuando tu equipo lo abre en el navegador o en el celular, sin Power BI Desktop. Para eso se publica en Power BI Service, y ahí aparecen dos cosas que conviene saber antes:</p>
+<p><strong>1. La puerta de enlace.</strong> Power BI en la nube no ve tu servidor de Firebird. Para que los datos se actualicen solos, instalas la <strong>puerta de enlace de datos local</strong> (on-premises data gateway) en una PC o servidor que esté siempre prendido y vea a Firebird. Esa máquina necesita el mismo driver ODBC y el mismo DSN de sistema, de 64 bits. Hay una versión "personal", pero depende de que esa PC esté prendida y no sirve para compartir; para una empresa, la estándar. Si nadie abre los reportes en dos meses, Power BI pausa la actualización, y después de cuatro fallas seguidas la desactiva.</p>
+<p><strong>Qué pide la máquina del gateway</strong> (checklist):</p>
+<table>
+<thead>
+<tr>
+<th>Requisito</th>
+<th>Detalle</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Windows</td>
+<td>Mínimo Windows 10, 11, o Windows Server 2019, 2022 o 2025, con .NET Framework 4.8. Microsoft recomienda <strong>Windows Server de 64 bits</strong>. Ojo: Windows Server 2016 y anteriores <strong>no están en la lista</strong>, y en una pyme es común que el servidor de Microsip sea así de viejo</td>
+</tr>
+<tr>
+<td>Hardware recomendado</td>
+<td>8 núcleos, 8 GB de RAM, disco SSD. Al menos 10 GB libres para poder actualizarlo</td>
+</tr>
+<tr>
+<td>Siempre prendida</td>
+<td>Nada de laptops ni PCs que se suspendan. Mejor por cable que por WiFi</td>
+</tr>
+<tr>
+<td>Cuenta</td>
+<td>Se registra con una <strong>cuenta de trabajo de Microsoft 365</strong>, no con un Hotmail o Outlook personal. Quien instala tiene que ser administrador de esa PC</td>
+</tr>
+<tr>
+<td>Dónde no</td>
+<td>No en un controlador de dominio. Otros programas en la misma PC le pueden quitar rendimiento</td>
+</tr>
+<tr>
+<td>Driver</td>
+<td>El mismo driver ODBC de Firebird y el mismo DSN de sistema de 64 bits que usaste en Power BI Desktop</td>
+</tr>
+<tr>
+<td><strong>Mantenimiento</strong></td>
+<td>Microsoft saca una versión del gateway <strong>cada mes</strong> y solo da soporte a <strong>las últimas seis</strong>. Un gateway que nadie actualiza en medio año queda fuera de soporte, y un cambio de seguridad de Microsoft lo puede dejar sin funcionar (Microsoft avisó que su cambio de inicio de sesión, aplicado a más tardar el 31 Ago 2026, puede romper versiones viejas). Alguien tiene que tenerlo en su lista de pendientes</td>
+</tr>
+</tbody>
+</table>
+<p><strong>2. Las licencias.</strong> Con la licencia gratuita solo ves tus propios reportes: no puedes compartirlos. Para compartir, <strong>quien publica y quien consulta necesitan licencia Pro</strong> (o todos Premium Per User). La excepción es pagar una capacidad dedicada (Fabric F64 o mayor), donde los usuarios gratuitos ya pueden ver. Con Pro el reporte se actualiza <strong>hasta 8 veces al día</strong>; con Premium o Fabric, hasta 48. Revisa si tu Microsoft 365 ya incluye Pro.</p>
+<p><strong>3. Dashboard contra reporte.</strong> En Power BI Service, un "dashboard" se arma fijando (pin) visuales de un reporte. Si fijas un visual suelto, el mosaico puede no respetar los filtros del reporte y no refleja cambios de diseño (si cambias una línea por barras, el dashboard sigue mostrando la línea). Por eso un dashboard y su reporte pueden mostrar cifras distintas. Para evitarlo, fija la <strong>página completa</strong> del reporte (mosaico en vivo) o comparte directamente el reporte.</p>
+<p>Fuentes: learn.microsoft.com, "Power BI service features by license type" (actualizada el 24 Ago 2026), "Configure scheduled refresh" (13 Feb 2026), "Create a Power BI dashboard from a report" (21 Abr 2026), "Install an on-premises data gateway" (15 Oct 2025) y "Update an on-premises data gateway" (28 Jul 2026). Sin precios: cambian seguido; consúltalos en microsoft.com.</p>
+<hr />
+<h2 id="consulta-ventas">Consulta SQL de ventas para Microsip<a class="headerlink" href="#consulta-ventas" title="Permanent link">&para;</a></h2>
+<p>Este es el query que usamos como punto de partida para analizar ventas de Microsip. Es gratis, con licencia MIT: puedes copiarlo, cambiarlo y usarlo en Power BI, Excel, Data Manager [VERIFICAR en sesión 49] o donde quieras, tú o tu distribuidor Microsip. Trae ventas sin costos; los costos y márgenes dependen de cómo tu empresa maneja el inventario y no caben en un query genérico.</p>
+<p>Junta las dos fuentes de venta de Microsip, Ventas y Punto de Venta, en una sola lista, para que puedas compararlas o sumarlas.</p>
+<div class="admonition note">
+<p class="admonition-title">Nota</p>
+<p>Usa las mismas reglas que los reportes de ventas de Microsip 2026. Si en tu versión una tabla o campo cambió de nombre, revisa el diccionario de tablas.</p>
+</div>
+<h3 id="el-query-completo">El query completo<a class="headerlink" href="#el-query-completo" title="Permanent link">&para;</a></h3>
+<pre><code class="sql">-- Microsip: ventas sin costos, por renglón (Ventas + Punto de Venta)
+-- Factor BI · https://factorbi.github.io/microsip/power-bi/#consulta-ventas
+-- Licencia MIT · Copyright (c) 2026 Factor BI
+-- Usa las mismas reglas que los reportes de ventas de Microsip:
+--   sin cancelados, devoluciones restando, sin renglones componentes.
+-- Cambia las dos fechas del final de cada bloque.
+
+SELECT
+  'VENTAS'                                AS ORIGEN,
+  D.FECHA,
+  D.FOLIO,
+  D.TIPO_DOCTO,
+  C.NOMBRE                                AS CLIENTE,
+  A.NOMBRE                                AS ARTICULO,
+  L.NOMBRE                                AS LINEA,
+  G.NOMBRE                                AS GRUPO,
+  IIF(D.TIPO_DOCTO = 'D', -1, 1) * R.UNIDADES                         AS UNIDADES,
+  IIF(D.TIPO_DOCTO = 'D', -1, 1) * R.PRECIO_TOTAL_NETO * D.TIPO_CAMBIO AS VENTA_NETA_MN
+FROM DOCTOS_VE D
+JOIN DOCTOS_VE_DET R          ON R.DOCTO_VE_ID = D.DOCTO_VE_ID
+                              AND R.ROL &lt;&gt; 'C'            -- sin componentes
+LEFT JOIN CLIENTES C          ON C.CLIENTE_ID = D.CLIENTE_ID
+LEFT JOIN ARTICULOS A         ON A.ARTICULO_ID = R.ARTICULO_ID
+LEFT JOIN LINEAS_ARTICULOS L  ON L.LINEA_ARTICULO_ID = A.LINEA_ARTICULO_ID
+LEFT JOIN GRUPOS_LINEAS G     ON G.GRUPO_LINEA_ID = L.GRUPO_LINEA_ID
+WHERE D.ESTATUS &lt;&gt; 'C'                                    -- sin cancelados
+  AND D.TIPO_DOCTO IN ('F', 'D')                          -- facturas y devoluciones
+  AND D.FECHA BETWEEN '2026-01-01' AND '2026-12-31'
+
+UNION ALL
+
+SELECT
+  'PUNTO DE VENTA',
+  D.FECHA,
+  D.FOLIO,
+  D.TIPO_DOCTO,
+  C.NOMBRE,
+  A.NOMBRE,
+  L.NOMBRE,
+  G.NOMBRE,
+  IIF(D.TIPO_DOCTO = 'D', -1, 1) * R.UNIDADES,
+  IIF(D.TIPO_DOCTO = 'D', -1, 1) * R.PRECIO_TOTAL_NETO * D.TIPO_CAMBIO
+FROM DOCTOS_PV D
+JOIN DOCTOS_PV_DET R          ON R.DOCTO_PV_ID = D.DOCTO_PV_ID
+                              AND R.ROL &lt;&gt; 'C'
+LEFT JOIN CLIENTES C          ON C.CLIENTE_ID = D.CLIENTE_ID
+LEFT JOIN ARTICULOS A         ON A.ARTICULO_ID = R.ARTICULO_ID
+LEFT JOIN LINEAS_ARTICULOS L  ON L.LINEA_ARTICULO_ID = A.LINEA_ARTICULO_ID
+LEFT JOIN GRUPOS_LINEAS G     ON G.GRUPO_LINEA_ID = L.GRUPO_LINEA_ID
+WHERE D.ESTATUS &lt;&gt; 'C'
+  AND D.TIPO_DOCTO IN ('V', 'D')                          -- ventas y devoluciones
+  AND D.FECHA BETWEEN '2026-01-01' AND '2026-12-31'</code></pre>
+<h3 id="explicado-por-bloques">Explicado por bloques<a class="headerlink" href="#explicado-por-bloques" title="Permanent link">&para;</a></h3>
+<h4 id="de-donde-sale-una-venta">De dónde sale una venta<a class="headerlink" href="#de-donde-sale-una-venta" title="Permanent link">&para;</a></h4>
+<p>Documento (<code>DOCTOS_VE</code>, <code>DOCTOS_PV</code>) y sus renglones (<code>_DET</code>).</p>
+<pre><code class="sql">FROM DOCTOS_VE D JOIN DOCTOS_VE_DET R ON R.DOCTO_VE_ID = D.DOCTO_VE_ID AND R.ROL &lt;&gt; 'C'</code></pre>
+<p>(igual con <code>DOCTOS_PV</code>). <code>ROL &lt;&gt; 'C'</code> deja fuera los renglones componentes, como hacen los reportes de Microsip.</p>
+<h4 id="como-se-excluyen-los-cancelados">Cómo se excluyen los cancelados<a class="headerlink" href="#como-se-excluyen-los-cancelados" title="Permanent link">&para;</a></h4>
+<pre><code class="sql">WHERE D.ESTATUS &lt;&gt; 'C'</code></pre>
+<h4 id="como-se-restan-las-devoluciones">Cómo se restan las devoluciones<a class="headerlink" href="#como-se-restan-las-devoluciones" title="Permanent link">&para;</a></h4>
+<p>El signo se invierte para que la venta neta cuadre con Microsip.</p>
+<pre><code class="sql">IIF(D.TIPO_DOCTO = 'D', -1, 1) * R.PRECIO_TOTAL_NETO</code></pre>
+<p>Con <code>TIPO_DOCTO IN ('F', 'D')</code> en Ventas y <code>IN ('V', 'D')</code> en Punto de Venta.</p>
+<h4 id="como-se-convierte-a-moneda-nacional">Cómo se convierte a moneda nacional<a class="headerlink" href="#como-se-convierte-a-moneda-nacional" title="Permanent link">&para;</a></h4>
+<p>Tipo de cambio del documento, no el del día.</p>
+<pre><code class="sql">R.PRECIO_TOTAL_NETO * D.TIPO_CAMBIO</code></pre>
+<h4 id="clientes-vendedores-y-articulos">Clientes, vendedores y artículos<a class="headerlink" href="#clientes-vendedores-y-articulos" title="Permanent link">&para;</a></h4>
+<p>Los catálogos que dan nombre a cada renglón: <code>LEFT JOIN</code> a <code>CLIENTES</code>, <code>ARTICULOS</code>, <code>LINEAS_ARTICULOS</code> y <code>GRUPOS_LINEAS</code>.</p>
+<h3 id="como-validar-que-cuadra">Cómo validar que cuadra<a class="headerlink" href="#como-validar-que-cuadra" title="Permanent link">&para;</a></h3>
+<p>Corre el query para un mes cerrado y compara el total contra el reporte de ventas de Microsip del mismo mes. [VERIFICAR en sesión 49: cuál reporte de Microsip es el de referencia.]</p>
+<h3 id="que-no-incluye">Qué no incluye<a class="headerlink" href="#que-no-incluye" title="Permanent link">&para;</a></h3>
+<p>Costos, márgenes, cuentas por cobrar. Tampoco junta varias bases: si tienes varias empresas, sucursales con Punto de Venta local o el histórico partido en dos bases, el query se corre en cada una por separado.</p>
+<hr />
+<h2 id="errores-comunes">Errores comunes<a class="headerlink" href="#errores-comunes" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Síntoma</th>
+<th>Causa probable</th>
+<th>Qué hacer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Tu DSN no aparece en la lista de Power BI, o sale <code>ERROR [IM014] ... La arquitectura del DSN especificado no coincide entre el controlador y la aplicación.</code></td>
+<td>El DSN se creó solo en 32 bits</td>
+<td>Créalo en "Orígenes de datos ODBC (64 bits)"</td>
+</tr>
+<tr>
+<td><code>File Database is not found</code></td>
+<td>Ruta del <code>.FDB</code> mal escrita</td>
+<td>Copia la ruta exacta del archivo</td>
+</tr>
+<tr>
+<td><code>Unable to complete network request to host "localhost". -Failed to establish a connection.</code></td>
+<td>Puerto equivocado, o el servicio de Firebird apagado</td>
+<td>Revisa el puerto (3050 por defecto) y que el servicio esté corriendo</td>
+</tr>
+<tr>
+<td><code>Your user name and password are not defined. Ask your database administrator to set up a Firebird login.</code></td>
+<td>Usuario o contraseña equivocados</td>
+<td>Usa la contraseña que pusiste en Microsip</td>
+</tr>
+<tr>
+<td><code>Unable to connect to data source: library '...fbclient.dll' failed to load</code></td>
+<td>El campo Client apunta a un <code>fbclient.dll</code> que no existe</td>
+<td>Deja Client vacío</td>
+</tr>
+<tr>
+<td>Error de cliente o de versión</td>
+<td><code>fbclient.dll</code> de 2.5 con driver v3.0 (fuente: firebirdsql.org)</td>
+<td>Usa el cliente de tu versión de Firebird</td>
+</tr>
+<tr>
+<td><code>no permission for SELECT access to TABLE ...</code></td>
+<td>La tabla no está en el script de permisos</td>
+<td>Agrega la tabla al script y vuelve a correrlo</td>
+</tr>
+<tr>
+<td>Los totales no cuadran con Microsip</td>
+<td>Estás sumando cancelados o sin restar devoluciones</td>
+<td>Usa el <a href="#consulta-ventas">query de ventas</a>, que ya lo resuelve</td>
+</tr>
+<tr>
+<td>La base se pone lenta en horas pico</td>
+<td>Consultas pesadas sobre producción</td>
+<td>Modo Importar y actualización de madrugada</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="cuando-ya-no-alcanza">Cuando ya no alcanza<a class="headerlink" href="#cuando-ya-no-alcanza" title="Permanent link">&para;</a></h2>
+<p>Esta receta sirve bien para una base de datos, un analista y reportes que se actualizan una vez al día. Power BI conectado por ODBC ve <strong>una base a la vez</strong>, y en Microsip es muy común tener varias:</p>
+<ul>
+<li><strong>Varias empresas o razones sociales</strong>, cada una con su base.</li>
+<li><strong>Punto de Venta local en cada sucursal.</strong> Un supermercado con 9 tiendas puede tener 18 bases de Firebird. El valor está en ver todas juntas.</li>
+<li><strong>Históricos partidos.</strong> Cuando una base crece mucho y Microsip se pone lento, a veces se le borra el histórico para recuperar velocidad. La operación mejora, pero tu historia queda repartida en dos o más bases, y un reporte conectado a la base nueva ya no ve los años anteriores.</li>
+</ul>
+<p>También se complica cuando la PC de la puerta de enlace se apaga, o cuando la persona que armó el reporte se va. Eso es lo que resolvemos en Factor BI: sincronizamos todas tus bases de Microsip a la nube de AWS con Vansync, las unimos en un solo lugar y entregamos los dashboards ya hechos, siempre de la mano de tu distribuidor Microsip.</p>
+<p>¿Y las metas de venta o el presupuesto que viven en Excel? Meterlos a un dashboard es trabajo de mantenimiento eterno. Con nuestro BI Agent le pides a Claude que cruce tus dashboards de QuickSight con ese Excel, un PDF o lo que tengas, y te contesta en minutos.</p>
+<p>Mira los reportes para Microsip en <a href="https://www.factorbi.com/es/reportes-microsip" target="_blank" rel="noopener">www.factorbi.com/es/reportes-microsip</a>.</p>
+<p><a class="btn btn-neutral" href="https://www.factorbi.com/es/contact?utm_source=factorbi.github.io&amp;utm_medium=referral&amp;utm_campaign=microsip_docs" target="_blank" rel="noopener">Contáctanos</a></p>
+<p><strong>¿Y con Claude o ChatGPT?</strong> Sí se puede analizar Microsip con IA, pero no subiendo tu base a un chat. Te explicamos cómo hacerlo con tus datos seguros en <a href="https://www.factorbi.com/es/ai" target="_blank" rel="noopener">factorbi.com</a>.</p>
+<hr />
+<p>Fuentes: firebirdsql.org (driver ODBC), learn.microsoft.com (conector ODBC de Power Query), microsip.com (Microsip 2026 y Firebird 5.0).</p>
+
+            </div>
+          </div>
+          <footer>
+
+
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+
+      <p>© 2026 Factor BI</p>
+
+  </div>
+
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+
+    </span>
+</div>
+    <script src="../../js/theme.js"></script>
+
+</body>
+</html>
