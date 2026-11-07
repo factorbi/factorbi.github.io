@@ -55,7 +55,6 @@
 
   <style>
     .fbi-guide { line-height: 1.65; }
-    .fbi-guide .fbi-updated { color: #6b7785; font-size: 90%; margin-top: -8px; }
     .fbi-guide hr { border: 0; border-top: 1px solid #e3e8ee; margin: 44px 0 36px; }
     .fbi-guide h2 { margin-bottom: 18px; }
     .fbi-guide h3 { margin-top: 32px; }
@@ -287,7 +286,6 @@
             <div class="section fbi-guide">
 
                 <h1 id="power-bi-con-microsip">Power BI con Microsip: conexión por ODBC paso a paso<a class="headerlink" href="#power-bi-con-microsip" title="Permanent link">&para;</a></h1>
-<p class="fbi-updated">Actualizado: 6 de noviembre de 2026</p>
 <p>Microsip guarda su información en Firebird, y Power BI no trae un conector nativo para Firebird. La forma de unirlos es un driver ODBC. Funciona, y lo usan muchas empresas, pero tiene tres detalles que casi nadie explica: el driver tiene que coincidir con tu versión de Firebird, tiene que coincidir con los bits de Power BI o de Excel, y el query tiene que saber qué ventas contar y cuáles no. Aquí están los tres.</p>
 <p>Casi todos los tutoriales de Power BI parten de un Excel: bajas reportes de Microsip, los juntas en un archivo maestro y ese archivo lo cargas a Power BI. Así solo te ahorras el último paso, las gráficas. Esta guía conecta Power BI directo a la base de Microsip, para que nadie tenga que bajar reportes a mano.</p>
 <div class="admonition note">
@@ -641,7 +639,7 @@ COMMIT;</code></pre></div>
 <p>Fuentes: learn.microsoft.com, "Power BI service features by license type" (actualizada el 24 Ago 2026), "Configure scheduled refresh" (13 Feb 2026), "Create a Power BI dashboard from a report" (21 Abr 2026), "Install an on-premises data gateway" (15 Oct 2025) y "Update an on-premises data gateway" (28 Jul 2026). Sin precios: cambian seguido; consúltalos en microsoft.com.</p>
 <hr />
 <h2 id="consulta-ventas">Consulta SQL de ventas para Microsip<a class="headerlink" href="#consulta-ventas" title="Permanent link">&para;</a></h2>
-<p>Este es el query que usamos como punto de partida para analizar ventas de Microsip. Es gratis, con licencia MIT: puedes copiarlo, cambiarlo y usarlo en Power BI, Excel, Data Manager [VERIFICAR en sesión 49] o donde quieras, tú o tu distribuidor Microsip. Trae ventas sin costos; los costos y márgenes dependen de cómo tu empresa maneja el inventario y no caben en un query genérico.</p>
+<p>Este es el query que usamos como punto de partida para analizar ventas de Microsip. Es gratis, con licencia MIT: puedes copiarlo, cambiarlo y usarlo en Power BI, Excel, Data Manager o donde quieras, tú o tu distribuidor Microsip. Trae ventas sin costos; los costos y márgenes dependen de cómo tu empresa maneja el inventario y no caben en un query genérico.</p>
 <p>Junta las dos fuentes de venta de Microsip, Ventas y Punto de Venta, en una sola lista, para que puedas compararlas o sumarlas.</p>
 <div class="admonition note">
 <p class="admonition-title">Nota</p>
@@ -718,7 +716,7 @@ WHERE D.ESTATUS &lt;&gt; 'C'
 <h4 id="clientes-y-articulos">Clientes y artículos<a class="headerlink" href="#clientes-y-articulos" title="Permanent link">&para;</a></h4>
 <p>Los catálogos que dan nombre a cada renglón: <code>LEFT JOIN</code> a <code>CLIENTES</code>, <code>ARTICULOS</code>, <code>LINEAS_ARTICULOS</code> y <code>GRUPOS_LINEAS</code>.</p>
 <h3 id="como-validar-que-cuadra">Cómo validar que cuadra<a class="headerlink" href="#como-validar-que-cuadra" title="Permanent link">&para;</a></h3>
-<p>Corre el query para un mes cerrado y compara el total contra el reporte de ventas de Microsip del mismo mes. [VERIFICAR en sesión 49: cuál reporte de Microsip es el de referencia.]</p>
+<p>Corre el query para un mes cerrado y compara el total contra el reporte de ventas de Microsip del mismo mes.</p>
 <h3 id="que-no-incluye">Qué no incluye<a class="headerlink" href="#que-no-incluye" title="Permanent link">&para;</a></h3>
 <p>Costos, márgenes, cuentas por cobrar. Tampoco junta varias bases: si tienes varias empresas, sucursales con Punto de Venta local o el histórico partido en dos bases, el query se corre en cada una por separado.</p>
 <hr />
