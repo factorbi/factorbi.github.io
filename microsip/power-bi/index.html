@@ -28,7 +28,7 @@
   "description": "Conecta Power BI a la base Firebird de Microsip por ODBC: checklist, driver 32 o 64 bits, cadena de conexión, query de ventas y errores comunes.",
   "inLanguage": "es-MX",
   "datePublished": "2026-11-06",
-  "dateModified": "2026-11-06",
+  "dateModified": "2026-11-09",
   "author": {
     "@type": "Organization",
     "name": "Factor BI",
@@ -286,6 +286,10 @@
             <div class="section fbi-guide">
 
                 <h1 id="power-bi-con-microsip">Power BI con Microsip: conexión por ODBC paso a paso<a class="headerlink" href="#power-bi-con-microsip" title="Permanent link">&para;</a></h1>
+<div class="admonition note">
+<p class="admonition-title">Nota</p>
+<p>Esta guía está pensada para que la sigas con un asistente de IA. Pásale este link a ChatGPT, Claude o Gemini y pídele que te acompañe paso a paso; si no puede abrir links, copia y pega la página. El asistente te guía, pero los pasos los haces tú en tu PC, y al final cuadras el total contra el reporte Margen de utilidad de Microsip.</p>
+</div>
 <p>Microsip guarda su información en Firebird, y Power BI no trae un conector nativo para Firebird. La forma de unirlos es un driver ODBC. Funciona, y lo usan muchas empresas, pero tiene tres detalles que casi nadie explica: el driver tiene que coincidir con tu versión de Firebird, tiene que coincidir con los bits de Power BI o de Excel, y el query tiene que saber qué ventas contar y cuáles no. Aquí están los tres.</p>
 <p>Casi todos los tutoriales de Power BI parten de un Excel: bajas reportes de Microsip, los juntas en un archivo maestro y ese archivo lo cargas a Power BI. Así solo te ahorras el último paso, las gráficas. Esta guía conecta Power BI directo a la base de Microsip, para que nadie tenga que bajar reportes a mano.</p>
 <div class="admonition note">
@@ -651,29 +655,50 @@ COMMIT;</code></pre></div>
 -- Licencia MIT · Copyright (c) 2026 Factor BI
 -- Usa las mismas reglas que los reportes de ventas de Microsip:
 --   sin cancelados, devoluciones restando, sin renglones componentes.
--- Cambia las dos fechas del final de cada bloque.
+-- Cambia la fecha inicial al final de cada bloque.
 
 SELECT
   'VENTAS'                                AS ORIGEN,
   D.FECHA,
   D.FOLIO,
   D.TIPO_DOCTO,
+  CASE D.TIPO_DOCTO
+    WHEN 'C' THEN 'cotizacion'
+    WHEN 'D' THEN 'devolucionVenta'
+    WHEN 'F' THEN 'factura'
+    WHEN 'P' THEN 'pedido'
+    WHEN 'R' THEN 'remision'
+    WHEN 'r' THEN 'devolucionRemision'
+    ELSE D.TIPO_DOCTO END                 AS TIPO_DOCUMENTO,
   C.NOMBRE                                AS CLIENTE,
+  TC.NOMBRE                               AS TIPO_CLIENTE,
+  ZC.NOMBRE                               AS ZONA_CLIENTE,
+  V.NOMBRE                                AS VENDEDOR,
+  ALM.NOMBRE                              AS ALMACEN,
+  K.CLAVE_ARTICULO,
   A.NOMBRE                                AS ARTICULO,
   L.NOMBRE                                AS LINEA,
   G.NOMBRE                                AS GRUPO,
   IIF(D.TIPO_DOCTO = 'D', -1, 1) * R.UNIDADES                         AS UNIDADES,
-  IIF(D.TIPO_DOCTO = 'D', -1, 1) * R.PRECIO_TOTAL_NETO * D.TIPO_CAMBIO AS VENTA_NETA_MN
+  IIF(D.TIPO_DOCTO = 'D', -1, 1) * R.PRECIO_TOTAL_NETO AS VENTA_NETA_MN
 FROM DOCTOS_VE D
 JOIN DOCTOS_VE_DET R          ON R.DOCTO_VE_ID = D.DOCTO_VE_ID
                               AND R.ROL &lt;&gt; 'C'            -- sin componentes
 LEFT JOIN CLIENTES C          ON C.CLIENTE_ID = D.CLIENTE_ID
+LEFT JOIN TIPOS_CLIENTES TC    ON TC.TIPO_CLIENTE_ID = C.TIPO_CLIENTE_ID
+LEFT JOIN ZONAS_CLIENTES ZC    ON ZC.ZONA_CLIENTE_ID = C.ZONA_CLIENTE_ID
+LEFT JOIN VENDEDORES V         ON V.VENDEDOR_ID = D.VENDEDOR_ID
+LEFT JOIN ALMACENES ALM       ON ALM.ALMACEN_ID = D.ALMACEN_ID
 LEFT JOIN ARTICULOS A         ON A.ARTICULO_ID = R.ARTICULO_ID
+LEFT JOIN ROLES_CLAVES_ARTICULOS RK ON RK.ES_PPAL = 'S'   -- el rol de clave principal (solo hay uno)
+LEFT JOIN CLAVES_ARTICULOS K  ON K.ARTICULO_ID = R.ARTICULO_ID
+                              AND K.ROL_CLAVE_ART_ID = RK.ROL_CLAVE_ART_ID
 LEFT JOIN LINEAS_ARTICULOS L  ON L.LINEA_ARTICULO_ID = A.LINEA_ARTICULO_ID
 LEFT JOIN GRUPOS_LINEAS G     ON G.GRUPO_LINEA_ID = L.GRUPO_LINEA_ID
-WHERE D.ESTATUS &lt;&gt; 'C'                                    -- sin cancelados
+WHERE D.APLICADO = 'S'                                   -- solo documentos aplicados
+  AND D.ESTATUS &lt;&gt; 'C'                                    -- sin cancelados
   AND D.TIPO_DOCTO IN ('F', 'D')                          -- facturas y devoluciones
-  AND D.FECHA BETWEEN '2026-01-01' AND '2026-12-31'
+  AND D.FECHA &gt;= '2025-01-01'
 
 UNION ALL
 
@@ -682,22 +707,46 @@ SELECT
   D.FECHA,
   D.FOLIO,
   D.TIPO_DOCTO,
+  CASE D.TIPO_DOCTO
+    WHEN 'V' THEN 'nota'
+    WHEN 'D' THEN 'devolucionNota'
+    WHEN 'F' THEN 'facturaPV'
+    WHEN 'P' THEN 'cobroCreditoMostrador'
+    WHEN 'I' THEN 'ingresoCaja'
+    WHEN 'R' THEN 'retiroCaja'
+    WHEN 'O' THEN 'ordenVenta'
+    WHEN 'C' THEN 'notaCreditoPV'
+    ELSE D.TIPO_DOCTO END,
   C.NOMBRE,
+  TC.NOMBRE,
+  ZC.NOMBRE,
+  COALESCE(VR.NOMBRE, V.NOMBRE),          -- el del renglón; si no tiene, el del documento
+  ALM.NOMBRE,
+  K.CLAVE_ARTICULO,
   A.NOMBRE,
   L.NOMBRE,
   G.NOMBRE,
   IIF(D.TIPO_DOCTO = 'D', -1, 1) * R.UNIDADES,
-  IIF(D.TIPO_DOCTO = 'D', -1, 1) * R.PRECIO_TOTAL_NETO * D.TIPO_CAMBIO
+  IIF(D.TIPO_DOCTO = 'D', -1, 1) * R.PRECIO_TOTAL_NETO
 FROM DOCTOS_PV D
 JOIN DOCTOS_PV_DET R          ON R.DOCTO_PV_ID = D.DOCTO_PV_ID
                               AND R.ROL &lt;&gt; 'C'
 LEFT JOIN CLIENTES C          ON C.CLIENTE_ID = D.CLIENTE_ID
+LEFT JOIN TIPOS_CLIENTES TC    ON TC.TIPO_CLIENTE_ID = C.TIPO_CLIENTE_ID
+LEFT JOIN ZONAS_CLIENTES ZC    ON ZC.ZONA_CLIENTE_ID = C.ZONA_CLIENTE_ID
+LEFT JOIN VENDEDORES V         ON V.VENDEDOR_ID = D.VENDEDOR_ID
+LEFT JOIN VENDEDORES VR        ON VR.VENDEDOR_ID = R.VENDEDOR_ID
+LEFT JOIN ALMACENES ALM       ON ALM.ALMACEN_ID = D.ALMACEN_ID
 LEFT JOIN ARTICULOS A         ON A.ARTICULO_ID = R.ARTICULO_ID
+LEFT JOIN ROLES_CLAVES_ARTICULOS RK ON RK.ES_PPAL = 'S'   -- el rol de clave principal (solo hay uno)
+LEFT JOIN CLAVES_ARTICULOS K  ON K.ARTICULO_ID = R.ARTICULO_ID
+                              AND K.ROL_CLAVE_ART_ID = RK.ROL_CLAVE_ART_ID
 LEFT JOIN LINEAS_ARTICULOS L  ON L.LINEA_ARTICULO_ID = A.LINEA_ARTICULO_ID
 LEFT JOIN GRUPOS_LINEAS G     ON G.GRUPO_LINEA_ID = L.GRUPO_LINEA_ID
-WHERE D.ESTATUS &lt;&gt; 'C'
+WHERE D.APLICADO = 'S'
+  AND D.ESTATUS &lt;&gt; 'C'
   AND D.TIPO_DOCTO IN ('V', 'D')                          -- ventas y devoluciones
-  AND D.FECHA BETWEEN '2026-01-01' AND '2026-12-31'</code></pre></div>
+  AND D.FECHA &gt;= '2025-01-01'</code></pre></div>
 <h3 id="explicado-por-bloques">Explicado por bloques<a class="headerlink" href="#explicado-por-bloques" title="Permanent link">&para;</a></h3>
 <h4 id="de-donde-sale-una-venta">De dónde sale una venta<a class="headerlink" href="#de-donde-sale-una-venta" title="Permanent link">&para;</a></h4>
 <p>Documento (<code>DOCTOS_VE</code>, <code>DOCTOS_PV</code>) y sus renglones (<code>_DET</code>).</p>
@@ -706,17 +755,22 @@ WHERE D.ESTATUS &lt;&gt; 'C'
 <h4 id="como-se-excluyen-los-cancelados">Cómo se excluyen los cancelados<a class="headerlink" href="#como-se-excluyen-los-cancelados" title="Permanent link">&para;</a></h4>
 <p>Microsip no borra el documento cancelado: lo marca con <code>ESTATUS = 'C'</code> y conserva su fecha. Si solo filtras por fecha, lo sumas.</p>
 <div class="fbi-code"><pre><code class="sql">WHERE D.ESTATUS &lt;&gt; 'C'</code></pre></div>
+<h4 id="solo-documentos-aplicados">Solo documentos aplicados<a class="headerlink" href="#solo-documentos-aplicados" title="Permanent link">&para;</a></h4>
+<p>El query solo cuenta los documentos que ya están aplicados en Microsip.</p>
+<div class="fbi-code"><pre><code class="sql">WHERE D.APLICADO = 'S'</code></pre></div>
 <h4 id="como-se-restan-las-devoluciones">Cómo se restan las devoluciones<a class="headerlink" href="#como-se-restan-las-devoluciones" title="Permanent link">&para;</a></h4>
 <p>El signo se invierte para que la venta neta cuadre con Microsip.</p>
 <div class="fbi-code"><pre><code class="sql">IIF(D.TIPO_DOCTO = 'D', -1, 1) * R.PRECIO_TOTAL_NETO</code></pre></div>
 <p>Con <code>TIPO_DOCTO IN ('F', 'D')</code> en Ventas y <code>IN ('V', 'D')</code> en Punto de Venta.</p>
 <h4 id="como-se-convierte-a-moneda-nacional">Cómo se convierte a moneda nacional<a class="headerlink" href="#como-se-convierte-a-moneda-nacional" title="Permanent link">&para;</a></h4>
-<p>Tipo de cambio del documento, no el del día.</p>
-<div class="fbi-code"><pre><code class="sql">R.PRECIO_TOTAL_NETO * D.TIPO_CAMBIO</code></pre></div>
+<p>Microsip guarda el importe del renglón ya en moneda nacional, aunque el documento sea en dólares. No lo multipliques por el tipo de cambio: inflarías las ventas en otra moneda.</p>
+<div class="fbi-code"><pre><code class="sql">R.PRECIO_TOTAL_NETO</code></pre></div>
 <h4 id="clientes-y-articulos">Clientes y artículos<a class="headerlink" href="#clientes-y-articulos" title="Permanent link">&para;</a></h4>
-<p>Los catálogos que dan nombre a cada renglón: <code>LEFT JOIN</code> a <code>CLIENTES</code>, <code>ARTICULOS</code>, <code>LINEAS_ARTICULOS</code> y <code>GRUPOS_LINEAS</code>.</p>
+<p>Los catálogos que dan nombre a cada renglón: <code>LEFT JOIN</code> a <code>CLIENTES</code>, <code>TIPOS_CLIENTES</code>, <code>ZONAS_CLIENTES</code>, <code>ALMACENES</code>, <code>VENDEDORES</code>, <code>ARTICULOS</code>, <code>LINEAS_ARTICULOS</code> y <code>GRUPOS_LINEAS</code>.</p>
+<p>La clave del artículo es la principal: la de <code>CLAVES_ARTICULOS</code> cuyo rol tiene <code>ES_PPAL = 'S'</code> en <code>ROLES_CLAVES_ARTICULOS</code>. En Ventas, el vendedor es el del documento; en Punto de Venta, el del renglón y, si no tiene, el del documento.</p>
+<p><code>TIPO_DOCUMENTO</code> traduce la letra de <code>TIPO_DOCTO</code> a palabras: factura o devolución en Ventas, nota o devolución de nota en Punto de Venta.</p>
 <h3 id="como-validar-que-cuadra">Cómo validar que cuadra<a class="headerlink" href="#como-validar-que-cuadra" title="Permanent link">&para;</a></h3>
-<p>Corre el query para un mes cerrado y compara el total contra el reporte de ventas de Microsip del mismo mes.</p>
+<p>Corre el query para un mes cerrado y compara el total contra el reporte de Microsip <strong>Ventas &gt; Reportes &gt; Margen de utilidad</strong> del mismo mes. Para incluir Punto de Venta, marca en las opciones del reporte la casilla "Incluir las ventas de mostrador"; si no la marcas, compara solo los renglones con <code>ORIGEN = 'VENTAS'</code>.</p>
 <h3 id="que-no-incluye">Qué no incluye<a class="headerlink" href="#que-no-incluye" title="Permanent link">&para;</a></h3>
 <p>Costos, márgenes, cuentas por cobrar. Tampoco junta varias bases: si tienes varias empresas, sucursales con Punto de Venta local o el histórico partido en dos bases, el query se corre en cada una por separado.</p>
 <hr />
