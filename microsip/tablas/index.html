@@ -1,0 +1,1127 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="es" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="es" > <!--<![endif]-->
+<head>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-83822501-2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-83822501-2');
+  </script>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta name="author" content="Factor BI">
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+  <title>Tablas de Microsip</title>
+  <meta name="description" content="Diccionario de las 505 tablas de la base de datos de Microsip: descripción, tipo y módulo. Fíltralo en línea o descárgalo en CSV.">
+  <link rel="canonical" href="https://factorbi.github.io/microsip/tablas/">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": "Tablas de la base de datos de Microsip",
+  "description": "Diccionario de las 505 tablas de la base de datos de Microsip: descripción, tipo y módulo. Fíltralo en línea o descárgalo en CSV.",
+  "inLanguage": "es-MX",
+  "datePublished": "2026-11-09",
+  "dateModified": "2026-11-09",
+  "author": {
+    "@type": "Organization",
+    "name": "Factor BI",
+    "url": "https://www.factorbi.com"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Factor BI",
+    "url": "https://www.factorbi.com"
+  },
+  "about": [
+    "Microsip",
+    "Firebird",
+    "Diccionario de datos"
+  ],
+  "mainEntityOfPage": "https://factorbi.github.io/microsip/tablas/"
+}
+  </script>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/highlight.css">
+
+  <style>
+    .fbi-guide { line-height: 1.65; }
+    .fbi-guide hr { border: 0; border-top: 1px solid #e3e8ee; margin: 44px 0 36px; }
+    .fbi-guide h2 { margin-bottom: 18px; }
+    .fbi-guide h3 { margin-top: 32px; }
+    .fbi-guide h4 { margin-top: 28px; color: #2980B9; }
+    .fbi-guide :not(pre) > code { white-space: normal; background: #f3f6f9; border: 1px solid #e3e8ee; border-radius: 4px; color: #1f5f8b; padding: 1px 5px; font-size: 85%; }
+
+    .fbi-guide .fbi-flow { margin: 28px 0 8px; padding: 0; }
+    .fbi-guide .fbi-flow svg { display: block; width: 100%; height: auto; }
+    .fbi-guide .fbi-flow .fbi-flow-v { display: none; max-width: 420px; margin: 0 auto; }
+    .fbi-guide .fbi-flow-caption { color: #4a5b6b; font-size: 92%; }
+
+    .fbi-guide.section ol.fbi-steps { counter-reset: fbi-step; list-style: none; margin: 0 0 24px; padding: 0; }
+    .fbi-guide.section ol.fbi-steps > li { counter-increment: fbi-step; list-style: none; position: relative; margin: 0 0 12px; padding: 14px 16px 14px 58px; background: #fff; border: 1px solid #e3e8ee; border-radius: 10px; box-shadow: 0 1px 2px rgba(16, 24, 40, 0.05); }
+    .fbi-guide.section ol.fbi-steps > li::before { content: counter(fbi-step); position: absolute; left: 16px; top: 14px; width: 28px; height: 28px; border-radius: 50%; background: #2980B9; color: #fff; font-weight: 700; font-size: 14px; line-height: 28px; text-align: center; }
+    .fbi-guide.section ol.fbi-steps > li > ul { margin: 8px 0 0; }
+
+    .fbi-guide .admonition.note { background: #eef5fb; border-left: 4px solid #2980B9; border-radius: 0 10px 10px 0; padding: 14px 18px; margin: 24px 0; box-shadow: none; }
+    .fbi-guide .admonition.note .admonition-title { display: block; background: transparent; color: #2980B9; margin: 0 0 6px; padding: 0; font-weight: 700; }
+    .fbi-guide .admonition.note .admonition-title::before { content: none; }
+    .fbi-guide .admonition.note p:last-child { margin-bottom: 0; }
+
+    .fbi-guide .fbi-table { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 0 0 24px; border: 1px solid #e3e8ee; border-radius: 10px; box-shadow: 0 1px 2px rgba(16, 24, 40, 0.05); }
+    .fbi-guide .fbi-table table.docutils { width: 100%; margin: 0; border: 0; }
+    .fbi-guide .fbi-table table.docutils thead th { background: #f3f6f9; color: #1f2d3d; border: 0; border-bottom: 1px solid #e3e8ee; white-space: normal; }
+    .fbi-guide .fbi-table table.docutils td, .fbi-guide .fbi-table table.docutils th { min-width: 9em; padding: 10px 14px; vertical-align: top; line-height: 1.5; border-left: 0; }
+    .fbi-guide .fbi-table table.docutils:not(.field-list) tr:nth-child(2n-1) td { background: #fff; }
+    .fbi-guide .fbi-table table.docutils:not(.field-list) tr:nth-child(2n) td { background: #f8fafc; }
+    .fbi-guide .fbi-table table.docutils tr:last-child td { border-bottom: 0; }
+
+    .fbi-guide .fbi-code { position: relative; margin: 0 0 24px; }
+    .fbi-guide .fbi-code pre { margin: 0; padding: 0; background: #f6f8fa; border: 1px solid #e3e8ee; border-radius: 10px; overflow-x: auto; }
+    .fbi-guide .fbi-code pre code { background: transparent; border: 0; color: #24292f; font-size: 13px; line-height: 1.55; padding: 44px 16px 16px; }
+    .fbi-guide .fbi-code .fbi-copy { position: absolute; top: 8px; right: 8px; padding: 4px 12px; font-size: 13px; font-family: inherit; color: #2980B9; background: #fff; border: 1px solid #c9dcec; border-radius: 6px; cursor: pointer; }
+    .fbi-guide .fbi-code .fbi-copy:hover, .fbi-guide .fbi-code .fbi-copy:focus { background: #2980B9; color: #fff; outline: none; }
+
+    .fbi-guide .btn.btn-neutral.fbi-cta, .fbi-guide .btn.btn-neutral.fbi-cta:visited { background-color: #2980B9 !important; color: #fff !important; font-size: 110%; font-weight: 700; padding: 12px 32px; border-radius: 8px; box-shadow: 0 2px 6px rgba(41, 128, 185, 0.3); }
+    .fbi-guide .btn.btn-neutral.fbi-cta:hover { background-color: #1f6391 !important; color: #fff !important; }
+
+    @media (max-width: 600px) {
+      .fbi-guide .fbi-flow .fbi-flow-h { display: none; }
+      .fbi-guide .fbi-flow .fbi-flow-v { display: block; }
+      .fbi-guide.section ol.fbi-steps > li { padding-left: 52px; }
+    }
+
+    .fbi-guide .fbi-note-cta { margin: 14px 0 2px; }
+    .fbi-guide .fbi-sheet-bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; margin: 0 0 10px; }
+    .fbi-guide .fbi-sheet-bar output { color: #4a5b6b; font-size: 92%; }
+    .fbi-guide .fbi-sheet-bar .fbi-btns { display: flex; gap: 8px; }
+    .fbi-guide .fbi-btn { padding: 7px 14px; font-size: 14px; font-family: inherit; color: #2980B9; background: #fff; border: 1px solid #c9dcec; border-radius: 8px; cursor: pointer; }
+    .fbi-guide .fbi-btn:hover, .fbi-guide .fbi-btn:focus { background: #2980B9; color: #fff; outline: none; }
+    .fbi-guide .fbi-btn.fbi-btn-main { background: #2980B9; color: #fff; border-color: #2980B9; font-weight: 700; }
+    .fbi-guide .fbi-btn.fbi-btn-main:hover { background: #1f6391; }
+    .fbi-guide .fbi-sheet { max-height: 72vh; overflow: auto; -webkit-overflow-scrolling: touch; margin: 0 0 28px; border: 1px solid #d5dde5; border-radius: 10px; box-shadow: 0 1px 2px rgba(16, 24, 40, 0.05); background: #fff; }
+    .fbi-guide .fbi-sheet table { width: 100%; min-width: 640px; table-layout: fixed; border-collapse: separate; border-spacing: 0; margin: 0; font-size: 14px; }
+    .fbi-guide .fbi-sheet th, .fbi-guide .fbi-sheet td { padding: 7px 10px; border-right: 1px solid #edf1f5; border-bottom: 1px solid #edf1f5; text-align: left; vertical-align: top !important; line-height: 1.45; white-space: normal; overflow-wrap: break-word; }
+    .fbi-guide .fbi-sheet th:last-child, .fbi-guide .fbi-sheet td:last-child { border-right: 0; }
+    .fbi-guide .fbi-sheet thead tr:first-child th { position: sticky; top: 0; z-index: 3; background: #eaf1f8; color: #1f2d3d; font-weight: 700; cursor: pointer; user-select: none; white-space: nowrap; }
+    .fbi-guide .fbi-sheet thead tr:first-child th::after { content: " \2195"; color: #9fb3c6; font-weight: 400; }
+    .fbi-guide .fbi-sheet thead tr:first-child th[aria-sort=ascending]::after { content: " \2191"; color: #2980B9; }
+    .fbi-guide .fbi-sheet thead tr:first-child th[aria-sort=descending]::after { content: " \2193"; color: #2980B9; }
+    .fbi-guide .fbi-sheet thead tr.fbi-filters th { position: sticky; top: 33px; z-index: 3; background: #f5f8fb; padding: 5px 6px; }
+    .fbi-guide .fbi-sheet .fbi-filters input, .fbi-guide .fbi-sheet .fbi-filters select { width: 100%; min-width: 0; box-sizing: border-box; padding: 4px 6px; font-size: 13px; font-family: inherit; border: 1px solid #c9d3dd; border-radius: 6px; background: #fff; box-shadow: none; height: auto; }
+    .fbi-guide .fbi-sheet tbody tr:nth-child(2n) td { background: #fafbfd; }
+    .fbi-guide .fbi-sheet tbody tr:hover td { background: #eef5fb; }
+    .fbi-guide .fbi-sheet tbody tr:target td { background: #fff3c4; }
+    .fbi-guide .fbi-sheet td:first-child { overflow-wrap: anywhere; font-family: Inconsolata, Consolas, monospace; font-size: 13px; color: #1f5f8b; }
+    .fbi-guide .fbi-sheet th:nth-child(1) { width: 29%; } .fbi-guide .fbi-sheet th:nth-child(2) { width: 27%; }
+    .fbi-guide .fbi-sheet th:nth-child(3) { width: 12%; } .fbi-guide .fbi-sheet th:nth-child(4) { width: 15%; }
+    .fbi-guide .fbi-sheet .fbi-none { display: none; padding: 18px; color: #4a5b6b; }
+  </style>
+
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Tablas de Microsip";
+    var mkdocs_page_input_path = "microsip/tablas.md";
+    var mkdocs_page_url = "/microsip/tablas/";
+  </script>
+
+  <script src="../../js/jquery-2.1.1.min.js"></script>
+  <script src="../../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> Database Synchronization & ETL to AWS Cloud | Factor BI</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+
+
+            <li class="toctree-l1">
+
+    <a class="" href="../..">Home</a>
+	    </li>
+
+            <li class="toctree-l1">
+
+    <a class="" href="../../easyawssetup/">Link your AWS Account</a>
+	    </li>
+
+            <li class="toctree-l1">
+
+    <a class="" href="../../registration/">Factor BI Console</a>
+	    </li>
+
+            <li class="toctree-l1">
+
+    <a class="" href="../../installation/">Download Program</a>
+	    </li>
+
+            <li class="toctree-l1">
+
+    <a class="" href="../../firebird/">Firebird to MySQL Aurora</a>
+	    </li>
+
+            <li class="toctree-l1">
+
+    <a class="" href="../../sqlserver/">SQL Server to MySQL Aurora</a>
+	    </li>
+
+            <li class="toctree-l1">
+
+    <a class="" href="../../dbase/">dBase to MySQL Aurora</a>
+	    </li>
+
+            <li class="toctree-l1">
+
+    <a class="" href="../../visualfoxpro/">Visual FoxPro to MySQL Aurora</a>
+	    </li>
+
+            <li class="toctree-l1">
+
+    <a class="" href="../../sqlanywhere/">Sybase SQL Anywhere to MySQL Aurora</a>
+	    </li>
+
+            <li class="toctree-l1">
+
+    <a class="" href="../../mysql/">MySQL on-prem to AWS Aurora</a>
+	    </li>
+
+            <li class="toctree-l1">
+
+    <a class="" href="../../customdatajson/">Tables & Data to Sync</a>
+	    </li>
+
+            <li class="toctree-l1">
+
+    <a class="" href="../../bipostapi/">Loading and Transformation</a>
+	    </li>
+
+            <li class="toctree-l1">
+
+    <a class="" href="../../synctowindows/">Two-way Synchronization</a>
+	    </li>
+
+            <li class="toctree-l1">
+
+    <a class="" href="../../aspel/">Aspel</a>
+	    </li>
+
+            <li class="toctree-l1">
+
+    <a class="" href="../">Microsip</a>
+	    </li>
+
+            <li class="toctree-l1">
+
+    <a class="" href="../power-bi/">Power BI Microsip</a>
+	    </li>
+
+            <li class="toctree-l1 current">
+
+    <a class="current" href="./">Tablas Microsip</a>
+	    </li>
+
+            <li class="toctree-l1">
+
+    <a class="" href="../../intelisis/">Intelisis</a>
+	    </li>
+
+            <li class="toctree-l1">
+
+    <a class="" href="../../soft-restaurant/">Soft Restaurant</a>
+	    </li>
+
+            <li class="toctree-l1">
+
+    <a class="" href="../../positouch/">POSitouch</a>
+	    </li>
+
+            <li class="toctree-l1">
+
+    <a class="" href="../../businessintelligence/">Business Intelligence</a>
+	    </li>
+
+            <li class="toctree-l1">
+
+    <a class="" href="../../csvtomysql/">CSV to MySQL Aurora</a>
+	    </li>
+
+            <li class="toctree-l1">
+
+    <a class="" href="../../setupaws/">Advanced AWS Setup</a>
+	    </li>
+
+            <li class="toctree-l1">
+
+    <a class="" href="../../troubleshooting/">Troubleshooting</a>
+	    </li>
+
+            <li class="toctree-l1">
+
+    <a class="" href="../../about/">About</a>
+	    </li>
+
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">Database Synchronization & ETL to AWS Cloud | Factor BI</a>
+      </nav>
+
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+
+
+
+    <li><a href="../">Microsip</a> &raquo;</li>
+    <li>Tablas de Microsip</li>
+    <li class="wy-breadcrumbs-aside">
+
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section fbi-guide">
+<h1 id="tablas-de-microsip">Tablas de la base de datos de Microsip<a class="headerlink" href="#tablas-de-microsip" title="Permanent link">&para;</a></h1>
+<div class="admonition note">
+<p class="admonition-title">Nota</p>
+<p>Esta lista está pensada para que la uses con un asistente de IA. Pásale este link a ChatGPT, Claude o Gemini y pídele que te guíe para armar tu reporte: qué tablas usar y cómo unirlas. Si no puede abrir links, descarga el CSV y compártelo. Si tu reporte va a vivir en Power BI, sigue nuestra guía <a href="../power-bi/">Power BI con Microsip</a>. ¿Prefieres que lo armemos contigo?</p>
+<p class="fbi-note-cta"><a class="btn btn-neutral fbi-cta" href="https://www.factorbi.com/es/contact?utm_source=factorbi.github.io&amp;utm_medium=referral&amp;utm_campaign=microsip_docs" target="_blank" rel="noopener">Agenda una cita</a></p>
+</div>
+<p>Las 505 tablas de la base de datos de Microsip, agrupadas en 31 módulos. Filtra cada columna, ordena con un clic en el encabezado y descarga lo que filtraste en CSV.</p>
+<div class="fbi-sheet-bar"><output id="fbi-count" aria-live="polite"></output><div class="fbi-btns"><button type="button" class="fbi-btn" id="fbi-clear">Quitar filtros</button><button type="button" class="fbi-btn fbi-btn-main" id="fbi-csv">Descargar CSV</button></div></div>
+<div class="fbi-sheet" id="fbi-sheet">
+<table>
+<thead><tr><th>Tabla</th><th>Descripción</th><th>Tipo</th><th>Módulo</th><th>Notas</th></tr></thead>
+<tbody>
+<tr id="ACCIONES_CONTACTOS_CLIENTES"><td>ACCIONES_CONTACTOS_CLIENTES</td><td></td><td></td><td>General</td><td></td></tr>
+<tr id="ACCIONES_USUARIOS"><td>ACCIONES_USUARIOS</td><td></td><td></td><td>General</td><td></td></tr>
+<tr id="ACTIVOS_FIJOS"><td>ACTIVOS_FIJOS</td><td></td><td>Catalogo</td><td>Activos Fijos</td><td></td></tr>
+<tr id="ACUM_CUENTAS_CO_TEMP"><td>ACUM_CUENTAS_CO_TEMP</td><td></td><td></td><td>Contabilidad</td><td></td></tr>
+<tr id="ADUANAS"><td>ADUANAS</td><td></td><td>Catalogo</td><td>General</td><td></td></tr>
+<tr id="AGENTES"><td>AGENTES</td><td></td><td>Catalogo</td><td>Agentes</td><td></td></tr>
+<tr id="ALMACENES"><td>ALMACENES</td><td></td><td>Catalogo</td><td>General</td><td></td></tr>
+<tr id="ANTICIPOS_CC"><td>ANTICIPOS_CC</td><td>Anticipos Clientes</td><td>Mov</td><td>Por Cobrar</td><td>Parece que ya no se usa en las versiones nuevas de Microsip</td></tr>
+<tr id="ARCHIVOS_ADJUNTOS"><td>ARCHIVOS_ADJUNTOS</td><td></td><td></td><td>General</td><td></td></tr>
+<tr id="ARTICULOS"><td>ARTICULOS</td><td></td><td>Catalogo</td><td>Artículos</td><td></td></tr>
+<tr id="ARTICULOS_CLIENTES"><td>ARTICULOS_CLIENTES</td><td></td><td></td><td>Artículos</td><td></td></tr>
+<tr id="ARTICULOS_DISCRETOS"><td>ARTICULOS_DISCRETOS</td><td>Series y Lotes por artículos</td><td></td><td>Artículos</td><td>L=Lote, S=Serie</td></tr>
+<tr id="ARTICULOS_TIENDA_LINEA"><td>ARTICULOS_TIENDA_LINEA</td><td>Mapeos para Shopify</td><td></td><td>Artículos</td><td>CLAVE_SIS = SH se usa para Shopify</td></tr>
+<tr id="ARTICULOS_VARIANTES"><td>ARTICULOS_VARIANTES</td><td></td><td></td><td>Artículos</td><td></td></tr>
+<tr id="ARTICULOS_WEB"><td>ARTICULOS_WEB</td><td></td><td></td><td>Artículos</td><td></td></tr>
+<tr id="ATRIBUTOS"><td>ATRIBUTOS</td><td></td><td>Campo Particular</td><td>General</td><td>son los campos extra</td></tr>
+<tr id="ATRIB_ARTS_VARIANTES"><td>ATRIB_ARTS_VARIANTES</td><td></td><td></td><td>Artículos</td><td></td></tr>
+<tr id="AVISOS_INFONAVIT"><td>AVISOS_INFONAVIT</td><td></td><td></td><td>Nómina</td><td></td></tr>
+<tr id="BANCOS"><td>BANCOS</td><td>instituciones financieras</td><td>Maestro</td><td>Bancos</td><td></td></tr>
+<tr id="BENEFICIARIOS"><td>BENEFICIARIOS</td><td>Beneficiarios de pagos que van dentro de las polizas de egresos en contabilidad</td><td>Catalogo</td><td>Contabilidad</td><td></td></tr>
+<tr id="BITACORA"><td>BITACORA</td><td>cancelaciones del PV, peticiones y respuestas de timbrado y conexión a Banorte</td><td></td><td>N/A</td><td></td></tr>
+<tr id="BOOKMARKS_REPORTES"><td>BOOKMARKS_REPORTES</td><td></td><td></td><td>N/A</td><td></td></tr>
+<tr id="CAJAS"><td>CAJAS</td><td></td><td>Catalogo</td><td>Punto Venta</td><td></td></tr>
+<tr id="CAJAS_CAJEROS"><td>CAJAS_CAJEROS</td><td></td><td></td><td>Punto Venta</td><td></td></tr>
+<tr id="CAJEROS"><td>CAJEROS</td><td></td><td>Catalogo</td><td>Punto Venta</td><td></td></tr>
+<tr id="CAPAS_COSTOS"><td>CAPAS_COSTOS</td><td></td><td></td><td>Inventarios</td><td></td></tr>
+<tr id="CAPAS_PEDIMENTOS"><td>CAPAS_PEDIMENTOS</td><td></td><td></td><td>Inventarios</td><td></td></tr>
+<tr id="CARGOS_PERIODICOS_CC"><td>CARGOS_PERIODICOS_CC</td><td></td><td></td><td>Por Cobrar</td><td></td></tr>
+<tr id="CENTROS_COSTO"><td>CENTROS_COSTO</td><td></td><td>Catalogo</td><td>Contabilidad</td><td></td></tr>
+<tr id="CERT_CFD_PROV"><td>CERT_CFD_PROV</td><td></td><td></td><td>Fiscal</td><td></td></tr>
+<tr id="CFD_RECIBIDOS"><td>CFD_RECIBIDOS</td><td>CFDIs módulos CP y CM</td><td></td><td>Fiscal</td><td></td></tr>
+<tr id="CIUDADES"><td>CIUDADES</td><td></td><td>Maestro</td><td>General</td><td></td></tr>
+<tr id="CLASIFICADORES_CAT"><td>CLASIFICADORES_CAT</td><td>campos extra de clasificacion</td><td></td><td>Artículos</td><td></td></tr>
+<tr id="CLASIFICADORES_CAT_VALORES"><td>CLASIFICADORES_CAT_VALORES</td><td>listas validas (dropdown) de los campos extra de clasificacion</td><td></td><td>Artículos</td><td></td></tr>
+<tr id="CLAVES_ARTICULOS"><td>CLAVES_ARTICULOS</td><td></td><td>Claves</td><td>Artículos</td><td></td></tr>
+<tr id="CLAVES_CAT_SEC"><td>CLAVES_CAT_SEC</td><td>Claves para catálogos de otras tablas como TIPOS_CLIENTES, ALMACENES, AGENTES, etc.</td><td>Claves</td><td>General</td><td></td></tr>
+<tr id="CLAVES_CLIENTES"><td>CLAVES_CLIENTES</td><td></td><td>Claves</td><td>Clientes</td><td></td></tr>
+<tr id="CLAVES_EMPLEADOS"><td>CLAVES_EMPLEADOS</td><td></td><td>Claves</td><td>Personal</td><td></td></tr>
+<tr id="CLAVES_PROVEEDORES"><td>CLAVES_PROVEEDORES</td><td></td><td>Claves</td><td>Proveedores</td><td></td></tr>
+<tr id="CLIENTES"><td>CLIENTES</td><td></td><td>Catalogo</td><td>Clientes</td><td></td></tr>
+<tr id="COBRADORES"><td>COBRADORES</td><td></td><td>Catalogo</td><td>Agentes</td><td></td></tr>
+<tr id="COMANDOS_DISPOSITIVOS"><td>COMANDOS_DISPOSITIVOS</td><td></td><td>Config</td><td>Punto Venta</td><td></td></tr>
+<tr id="COMANDOS_TIPOS_DISPOSITIVOS"><td>COMANDOS_TIPOS_DISPOSITIVOS</td><td></td><td>Config</td><td>Punto Venta</td><td></td></tr>
+<tr id="COMIS_COB_TIPO_CLI"><td>COMIS_COB_TIPO_CLI</td><td>comisiones</td><td></td><td>Comisiones</td><td></td></tr>
+<tr id="COMIS_COB_ZONA"><td>COMIS_COB_ZONA</td><td>comisiones</td><td></td><td>Comisiones</td><td></td></tr>
+<tr id="COMIS_VEN_ART"><td>COMIS_VEN_ART</td><td>comisiones</td><td></td><td>Comisiones</td><td></td></tr>
+<tr id="COMIS_VEN_CLI"><td>COMIS_VEN_CLI</td><td>comisiones</td><td></td><td>Comisiones</td><td></td></tr>
+<tr id="COMIS_VEN_GRUPO"><td>COMIS_VEN_GRUPO</td><td>comisiones</td><td></td><td>Comisiones</td><td></td></tr>
+<tr id="COMIS_VEN_LINEA"><td>COMIS_VEN_LINEA</td><td>comisiones</td><td></td><td>Comisiones</td><td></td></tr>
+<tr id="COMIS_VEN_TIPO_CLI"><td>COMIS_VEN_TIPO_CLI</td><td>comisiones</td><td></td><td>Comisiones</td><td></td></tr>
+<tr id="COMIS_VEN_ZONA"><td>COMIS_VEN_ZONA</td><td>comisiones</td><td></td><td>Comisiones</td><td></td></tr>
+<tr id="COMPROM_ARTICULOS"><td>COMPROM_ARTICULOS</td><td>Reservados Inventario</td><td>Mov</td><td>Inventarios</td><td>¿cantidad reservada en pedidos?</td></tr>
+<tr id="CONCEPTOS_BA"><td>CONCEPTOS_BA</td><td>conceptos de tesorería - bancos</td><td>Maestro</td><td>Bancos</td><td></td></tr>
+<tr id="CONCEPTOS_CC"><td>CONCEPTOS_CC</td><td>conceptos de CXC</td><td>Maestro</td><td>Por Cobrar</td><td></td></tr>
+<tr id="CONCEPTOS_CP"><td>CONCEPTOS_CP</td><td>conceptos de CXP</td><td>Maestro</td><td>Por Pagar</td><td></td></tr>
+<tr id="CONCEPTOS_DIM"><td>CONCEPTOS_DIM</td><td>conceptos nómina para DIM</td><td>Maestro</td><td>Nómina</td><td></td></tr>
+<tr id="CONCEPTOS_DIM_NO"><td>CONCEPTOS_DIM_NO</td><td></td><td></td><td>Nómina</td><td></td></tr>
+<tr id="CONCEPTOS_EMP"><td>CONCEPTOS_EMP</td><td>propiedades de personal para nómina</td><td>Maestro</td><td>Personal</td><td></td></tr>
+<tr id="CONCEPTOS_IN"><td>CONCEPTOS_IN</td><td>conceptos de Inventarios</td><td>Maestro</td><td>Inventarios</td><td></td></tr>
+<tr id="CONCEPTOS_NO"><td>CONCEPTOS_NO</td><td>conceptos de nómina</td><td>Maestro</td><td>Nómina</td><td></td></tr>
+<tr id="CONDICIONES_PAGO"><td>CONDICIONES_PAGO</td><td>condición CXC</td><td>Maestro</td><td>Por Cobrar</td><td></td></tr>
+<tr id="CONDICIONES_PAGO_CP"><td>CONDICIONES_PAGO_CP</td><td>condición CXP</td><td>Maestro</td><td>Por Pagar</td><td></td></tr>
+<tr id="CONFIGURACION"><td>CONFIGURACION</td><td></td><td>Config</td><td>Punto Venta</td><td>Ya no existe</td></tr>
+<tr id="CONF_TICKETS_CAJAS"><td>CONF_TICKETS_CAJAS</td><td></td><td>Config</td><td>Punto Venta</td><td></td></tr>
+<tr id="CONF_TICKETS_CAJAS_PRNS"><td>CONF_TICKETS_CAJAS_PRNS</td><td></td><td>Config</td><td>Punto Venta</td><td></td></tr>
+<tr id="CONJUNTOS_SUCURSALES"><td>CONJUNTOS_SUCURSALES</td><td></td><td></td><td>Sucursales</td><td></td></tr>
+<tr id="CONJUNTOS_SUCURSALES_DET"><td>CONJUNTOS_SUCURSALES_DET</td><td></td><td></td><td>Sucursales</td><td></td></tr>
+<tr id="CONSIGNATARIOS_CM"><td>CONSIGNATARIOS_CM</td><td>consignatarios de mercancia</td><td>Catalogo</td><td>Compras</td><td></td></tr>
+<tr id="CONSTANCIAS_RET"><td>CONSTANCIAS_RET</td><td>retenciones en¿?</td><td></td><td>Fiscal</td><td></td></tr>
+<tr id="CONTACTOS_CLIENTES"><td>CONTACTOS_CLIENTES</td><td></td><td></td><td>Clientes</td><td></td></tr>
+<tr id="CONTACTOS_CLIENTES_ACCIONES"><td>CONTACTOS_CLIENTES_ACCIONES</td><td></td><td></td><td>Clientes</td><td></td></tr>
+<tr id="CONTRATOS_LFT"><td>CONTRATOS_LFT</td><td>contratos de nómina, según ley federal del trabajo</td><td>Catalogo</td><td>Nómina</td><td></td></tr>
+<tr id="CUENTAS_BANCARIAS"><td>CUENTAS_BANCARIAS</td><td>cuentas de banco</td><td>Catalogo</td><td>Bancos</td><td></td></tr>
+<tr id="CUENTAS_CO"><td>CUENTAS_CO</td><td>cuentas contables</td><td>Catalogo</td><td>Contabilidad</td><td></td></tr>
+<tr id="CUENTAS_CO_DIOT"><td>CUENTAS_CO_DIOT</td><td></td><td>Catalogo</td><td>Contabilidad</td><td></td></tr>
+<tr id="CUENTAS_NO"><td>CUENTAS_NO</td><td>relación de conceptos de nómina y cuentas contables</td><td></td><td>Nómina</td><td></td></tr>
+<tr id="DATOS_ADICIONALES"><td>DATOS_ADICIONALES</td><td>Claves SAT asignadas a Artículos</td><td></td><td>General</td><td></td></tr>
+<tr id="DEPOSITOS_CC"><td>DEPOSITOS_CC</td><td>Depósitos de Cxc</td><td></td><td>Por Cobrar</td><td></td></tr>
+<tr id="DEPOSITOS_CC_DET"><td>DEPOSITOS_CC_DET</td><td>Liga DOCTOS_CC con DEPOSITOS_CC</td><td></td><td>Por Cobrar</td><td></td></tr>
+<tr id="DEPTOS_CO"><td>DEPTOS_CO</td><td>centros de costo contabilidad</td><td>Catalogo</td><td>Contabilidad</td><td></td></tr>
+<tr id="DEPTOS_NO"><td>DEPTOS_NO</td><td>departamentos de nómina</td><td>Catalogo</td><td>Nómina</td><td></td></tr>
+<tr id="DERECHOS_ELEM_CAT_USUARIOS"><td>DERECHOS_ELEM_CAT_USUARIOS</td><td></td><td></td><td>General</td><td></td></tr>
+<tr id="DERECHOS_ELEM_CAT_USU_DET"><td>DERECHOS_ELEM_CAT_USU_DET</td><td></td><td></td><td>General</td><td></td></tr>
+<tr id="DESCRIP_POLIZAS"><td>DESCRIP_POLIZAS</td><td></td><td></td><td>Nómina</td><td></td></tr>
+<tr id="DESGLOSE_EN_DISCRETOS"><td>DESGLOSE_EN_DISCRETOS</td><td>Series en los movimientos</td><td></td><td>Inventarios</td><td></td></tr>
+<tr id="DESGLOSE_EN_DISCRETOS_CM"><td>DESGLOSE_EN_DISCRETOS_CM</td><td>Series en los movimientos de compras</td><td></td><td>Compras</td><td></td></tr>
+<tr id="DESGLOSE_EN_DISCRETOS_INVFIS"><td>DESGLOSE_EN_DISCRETOS_INVFIS</td><td>Series en los movimientos de inventario físico</td><td></td><td>Inventarios</td><td></td></tr>
+<tr id="DESGLOSE_EN_DISCRETOS_PV"><td>DESGLOSE_EN_DISCRETOS_PV</td><td>Series en los movimientos del Punto de Venta</td><td></td><td>Punto Venta</td><td></td></tr>
+<tr id="DESGLOSE_EN_DISCRETOS_TRAS_IN"><td>DESGLOSE_EN_DISCRETOS_TRAS_IN</td><td>Series en los movimientos en traspasos de inventarios</td><td></td><td>Traspasos</td><td></td></tr>
+<tr id="DESGLOSE_EN_DISCRETOS_VE"><td>DESGLOSE_EN_DISCRETOS_VE</td><td>Series en los movimientos de Ventas</td><td></td><td>Ventas</td><td></td></tr>
+<tr id="DESGLOSE_EN_PEDIMENTOS"><td>DESGLOSE_EN_PEDIMENTOS</td><td></td><td></td><td>Inventarios</td><td></td></tr>
+<tr id="DIRS_CLIENTES"><td>DIRS_CLIENTES</td><td>Sucursales y direcciones de consignatarios de clientes</td><td>Catalogo</td><td>Clientes</td><td></td></tr>
+<tr id="DISPOSITIVOS"><td>DISPOSITIVOS</td><td></td><td>Config</td><td>General</td><td></td></tr>
+<tr id="DISPOSITIVOS_CAJAS"><td>DISPOSITIVOS_CAJAS</td><td></td><td>Config</td><td>General</td><td></td></tr>
+<tr id="DOCTOS_BA"><td>DOCTOS_BA</td><td>Al parecer es el detalle y no hay cabecero ¿?</td><td>Mov</td><td>Bancos</td><td></td></tr>
+<tr id="DOCTOS_BA_INFO_BAN"><td>DOCTOS_BA_INFO_BAN</td><td>Info bancaria fiscal</td><td>Mov</td><td>Bancos</td><td></td></tr>
+<tr id="DOCTOS_CC"><td>DOCTOS_CC</td><td>Cuentas por Cobrar, CXC</td><td>Mov</td><td>Por Cobrar</td><td></td></tr>
+<tr id="DOCTOS_CC_INFO_BAN"><td>DOCTOS_CC_INFO_BAN</td><td></td><td></td><td>Por Cobrar</td><td></td></tr>
+<tr id="DOCTOS_CM"><td>DOCTOS_CM</td><td>Compras</td><td>Mov</td><td>Compras</td><td></td></tr>
+<tr id="DOCTOS_CM_DET"><td>DOCTOS_CM_DET</td><td>Compras Detalle</td><td>Detalle</td><td>Compras</td><td></td></tr>
+<tr id="DOCTOS_CM_LIGAS"><td>DOCTOS_CM_LIGAS</td><td>Mov Flujo Compras¿?</td><td>Lateral</td><td>Compras</td><td></td></tr>
+<tr id="DOCTOS_CM_LIGAS_DET"><td>DOCTOS_CM_LIGAS_DET</td><td>Mov Flujo Compras¿?</td><td>Lateral</td><td>Compras</td><td></td></tr>
+<tr id="DOCTOS_CM_PROEVE"><td>DOCTOS_CM_PROEVE</td><td>¿?</td><td></td><td>Compras</td><td></td></tr>
+<tr id="DOCTOS_CO"><td>DOCTOS_CO</td><td>Contabilidad</td><td>Mov</td><td>Contabilidad</td><td></td></tr>
+<tr id="DOCTOS_CONSOLIDADOS"><td>DOCTOS_CONSOLIDADOS</td><td></td><td></td><td>General</td><td></td></tr>
+<tr id="DOCTOS_CO_CFDI"><td>DOCTOS_CO_CFDI</td><td></td><td></td><td>Contabilidad</td><td></td></tr>
+<tr id="DOCTOS_CO_DET"><td>DOCTOS_CO_DET</td><td>Contabilidad Detalle</td><td>Detalle</td><td>Contabilidad</td><td></td></tr>
+<tr id="DOCTOS_CO_DET_CFDI"><td>DOCTOS_CO_DET_CFDI</td><td></td><td></td><td>Contabilidad</td><td></td></tr>
+<tr id="DOCTOS_CO_DET_DIOT"><td>DOCTOS_CO_DET_DIOT</td><td></td><td></td><td>Contabilidad</td><td></td></tr>
+<tr id="DOCTOS_CO_DET_INFO_BAN"><td>DOCTOS_CO_DET_INFO_BAN</td><td></td><td></td><td>Contabilidad</td><td></td></tr>
+<tr id="DOCTOS_CO_FILES"><td>DOCTOS_CO_FILES</td><td></td><td></td><td>Contabilidad</td><td>Ya no existe</td></tr>
+<tr id="DOCTOS_CP"><td>DOCTOS_CP</td><td>Cuentas por Pagar, CXP</td><td>Mov</td><td>Por Pagar</td><td></td></tr>
+<tr id="DOCTOS_CP_INFO_BAN"><td>DOCTOS_CP_INFO_BAN</td><td>¿? no trae info</td><td></td><td>Por Pagar</td><td></td></tr>
+<tr id="DOCTOS_ENTRE_SIS"><td>DOCTOS_ENTRE_SIS</td><td>Origen y destino de los documentos entre módulos</td><td></td><td>General</td><td></td></tr>
+<tr id="DOCTOS_IN"><td>DOCTOS_IN</td><td>Inventarios</td><td>Mov</td><td>Inventarios</td><td></td></tr>
+<tr id="DOCTOS_INVFIS"><td>DOCTOS_INVFIS</td><td>Inventario Fisico</td><td>Mov</td><td>Inventarios</td><td></td></tr>
+<tr id="DOCTOS_INVFIS_DET"><td>DOCTOS_INVFIS_DET</td><td>Inventario Fisico Detalle</td><td>Detalle</td><td>Inventarios</td><td></td></tr>
+<tr id="DOCTOS_IN_DET"><td>DOCTOS_IN_DET</td><td>Inventarios Detalle</td><td>Detalle</td><td>Inventarios</td><td></td></tr>
+<tr id="DOCTOS_IN_DET_COMPRAS"><td>DOCTOS_IN_DET_COMPRAS</td><td>Fecha última compra</td><td></td><td>Inventarios</td><td></td></tr>
+<tr id="DOCTOS_PEND_CC"><td>DOCTOS_PEND_CC</td><td>¿? no trae info</td><td></td><td>Por Cobrar</td><td></td></tr>
+<tr id="DOCTOS_PROC_CANCEL"><td>DOCTOS_PROC_CANCEL</td><td>Estatus de cancelación de CFDI. Al parecer sólo es de la última consulta hecha por el usuario.</td><td></td><td>Fiscal</td><td></td></tr>
+<tr id="DOCTOS_PV"><td>DOCTOS_PV</td><td>Punto de Venta</td><td>Mov</td><td>Punto Venta</td><td></td></tr>
+<tr id="DOCTOS_PV_COBROS"><td>DOCTOS_PV_COBROS</td><td></td><td></td><td>Punto Venta</td><td></td></tr>
+<tr id="DOCTOS_PV_COBROS_REFER"><td>DOCTOS_PV_COBROS_REFER</td><td></td><td></td><td>Punto Venta</td><td></td></tr>
+<tr id="DOCTOS_PV_DET"><td>DOCTOS_PV_DET</td><td>Punto de Venta Detalle</td><td>Detalle</td><td>Punto Venta</td><td></td></tr>
+<tr id="DOCTOS_PV_DET_TRAN_ELECT"><td>DOCTOS_PV_DET_TRAN_ELECT</td><td></td><td>Detalle</td><td>Punto Venta</td><td></td></tr>
+<tr id="DOCTOS_PV_LIGAS"><td>DOCTOS_PV_LIGAS</td><td>es como Aplica</td><td></td><td>Punto Venta</td><td></td></tr>
+<tr id="DOCTOS_PV_LIGAS_DET"><td>DOCTOS_PV_LIGAS_DET</td><td>es como AplicaID</td><td></td><td>Punto Venta</td><td></td></tr>
+<tr id="DOCTOS_PV_NOMBRES_OFERTAS_MM"><td>DOCTOS_PV_NOMBRES_OFERTAS_MM</td><td></td><td></td><td>Punto Venta</td><td></td></tr>
+<tr id="DOCTOS_PV_OFERTAS_MM"><td>DOCTOS_PV_OFERTAS_MM</td><td></td><td></td><td>Punto Venta</td><td></td></tr>
+<tr id="DOCTOS_PV_OFERTAS_MM_DET"><td>DOCTOS_PV_OFERTAS_MM_DET</td><td></td><td></td><td>Punto Venta</td><td></td></tr>
+<tr id="DOCTOS_PV_TRAN_PEND_TC"><td>DOCTOS_PV_TRAN_PEND_TC</td><td></td><td></td><td>Punto Venta</td><td></td></tr>
+<tr id="DOCTOS_RP"><td>DOCTOS_RP</td><td>Expedir un solo CFDI de recepción de pago de varios cobros</td><td>Mov</td><td>Por Cobrar</td><td></td></tr>
+<tr id="DOCTOS_RP_DET"><td>DOCTOS_RP_DET</td><td>Expedir un solo CFDI de recepción de pago de varios cobros</td><td>Detalle</td><td>Por Cobrar</td><td></td></tr>
+<tr id="DOCTOS_SUCURSALES"><td>DOCTOS_SUCURSALES</td><td>Ya no existe</td><td></td><td>General</td><td>Ya no existe</td></tr>
+<tr id="DOCTOS_TR"><td>DOCTOS_TR</td><td>Traslados y CFDI tipo T</td><td>Mov</td><td>Inventarios</td><td></td></tr>
+<tr id="DOCTOS_TR_DET"><td>DOCTOS_TR_DET</td><td>Traslados y CFDI tipo T</td><td>Detalle</td><td>Inventarios</td><td></td></tr>
+<tr id="DOCTOS_VE"><td>DOCTOS_VE</td><td>Ventas</td><td>Mov</td><td>Ventas</td><td></td></tr>
+<tr id="DOCTOS_VE_CAMPOS_ADDENDA"><td>DOCTOS_VE_CAMPOS_ADDENDA</td><td></td><td></td><td>Ventas</td><td></td></tr>
+<tr id="DOCTOS_VE_DET"><td>DOCTOS_VE_DET</td><td>Ventas Detalle</td><td>Detalle</td><td>Ventas</td><td></td></tr>
+<tr id="DOCTOS_VE_LIGAS"><td>DOCTOS_VE_LIGAS</td><td>es como Aplica</td><td></td><td>Ventas</td><td></td></tr>
+<tr id="DOCTOS_VE_LIGAS_DET"><td>DOCTOS_VE_LIGAS_DET</td><td>es como AplicaID</td><td></td><td>Ventas</td><td></td></tr>
+<tr id="DSCTOS_ARTCLI_ARTS"><td>DSCTOS_ARTCLI_ARTS</td><td>descuentos</td><td></td><td>Reglas</td><td></td></tr>
+<tr id="DSCTOS_ARTCLI_GRUPOS"><td>DSCTOS_ARTCLI_GRUPOS</td><td>descuentos</td><td></td><td>Reglas</td><td></td></tr>
+<tr id="DSCTOS_ARTCLI_LINEAS"><td>DSCTOS_ARTCLI_LINEAS</td><td>descuentos</td><td></td><td>Reglas</td><td></td></tr>
+<tr id="DSCTOS_ARTPRO_ARTS"><td>DSCTOS_ARTPRO_ARTS</td><td>descuentos</td><td></td><td>Reglas</td><td></td></tr>
+<tr id="DSCTOS_ARTPRO_GRUPOS"><td>DSCTOS_ARTPRO_GRUPOS</td><td>descuentos</td><td></td><td>Reglas</td><td></td></tr>
+<tr id="DSCTOS_ARTPRO_LINEAS"><td>DSCTOS_ARTPRO_LINEAS</td><td>descuentos</td><td></td><td>Reglas</td><td></td></tr>
+<tr id="DSCTOS_MAX_ARTS"><td>DSCTOS_MAX_ARTS</td><td>descuentos</td><td></td><td>Reglas</td><td></td></tr>
+<tr id="DSCTOS_MAX_GRUPOS"><td>DSCTOS_MAX_GRUPOS</td><td>descuentos</td><td></td><td>Reglas</td><td></td></tr>
+<tr id="DSCTOS_MAX_LINEAS"><td>DSCTOS_MAX_LINEAS</td><td>descuentos</td><td></td><td>Reglas</td><td></td></tr>
+<tr id="DSCTOS_PROMO_ARTS"><td>DSCTOS_PROMO_ARTS</td><td>descuentos</td><td></td><td>Reglas</td><td></td></tr>
+<tr id="DSCTOS_PROMO_GRUPOS"><td>DSCTOS_PROMO_GRUPOS</td><td>descuentos</td><td></td><td>Reglas</td><td></td></tr>
+<tr id="DSCTOS_PROMO_LINEAS"><td>DSCTOS_PROMO_LINEAS</td><td>descuentos</td><td></td><td>Reglas</td><td></td></tr>
+<tr id="DSCTOS_PROMO_PROV_ARTS"><td>DSCTOS_PROMO_PROV_ARTS</td><td>descuentos</td><td></td><td>Reglas</td><td></td></tr>
+<tr id="DSCTOS_PROMO_PROV_GRUPOS"><td>DSCTOS_PROMO_PROV_GRUPOS</td><td>descuentos</td><td></td><td>Reglas</td><td></td></tr>
+<tr id="DSCTOS_PROMO_PROV_LINEAS"><td>DSCTOS_PROMO_PROV_LINEAS</td><td>descuentos</td><td></td><td>Reglas</td><td></td></tr>
+<tr id="DSCTOS_VOL_ARTS"><td>DSCTOS_VOL_ARTS</td><td>descuentos</td><td></td><td>Reglas</td><td></td></tr>
+<tr id="DSCTOS_VOL_GLOBALES"><td>DSCTOS_VOL_GLOBALES</td><td>descuentos</td><td></td><td>Reglas</td><td></td></tr>
+<tr id="DSCTOS_VOL_GRUPOS"><td>DSCTOS_VOL_GRUPOS</td><td>descuentos</td><td></td><td>Reglas</td><td></td></tr>
+<tr id="DSCTOS_VOL_LINEAS"><td>DSCTOS_VOL_LINEAS</td><td>descuentos</td><td></td><td>Reglas</td><td></td></tr>
+<tr id="DSCTOS_VOL_PROV_ARTS"><td>DSCTOS_VOL_PROV_ARTS</td><td>descuentos</td><td></td><td>Reglas</td><td></td></tr>
+<tr id="DSCTOS_VOL_PROV_GLOB"><td>DSCTOS_VOL_PROV_GLOB</td><td>descuentos</td><td></td><td>Reglas</td><td></td></tr>
+<tr id="DSCTOS_VOL_PROV_GRUPOS"><td>DSCTOS_VOL_PROV_GRUPOS</td><td>descuentos</td><td></td><td>Reglas</td><td></td></tr>
+<tr id="DSCTOS_VOL_PROV_LINEAS"><td>DSCTOS_VOL_PROV_LINEAS</td><td>descuentos</td><td></td><td>Reglas</td><td></td></tr>
+<tr id="EDOSCTA_BA"><td>EDOSCTA_BA</td><td>Conciliacion</td><td>Mov</td><td>Bancos</td><td></td></tr>
+<tr id="EDOSCTA_BA_DET"><td>EDOSCTA_BA_DET</td><td>Conciliacion Detalle</td><td>Detalle</td><td>Bancos</td><td></td></tr>
+<tr id="ELEMENTOS_CAT_CLASIF"><td>ELEMENTOS_CAT_CLASIF</td><td>Clasificadores asignados a los artículos</td><td></td><td>Artículos</td><td>ELEMENTO_ID = ARTICULO_ID</td></tr>
+<tr id="EMPLEADOS"><td>EMPLEADOS</td><td>Personal</td><td>Catalogo</td><td>Personal</td><td></td></tr>
+<tr id="EMPRESAS_CONSOLIDAR"><td>EMPRESAS_CONSOLIDAR</td><td></td><td></td><td>General</td><td></td></tr>
+<tr id="EQUIVALENCIAS_IMPUESTOS"><td>EQUIVALENCIAS_IMPUESTOS</td><td>¿?</td><td></td><td>Fiscal</td><td></td></tr>
+<tr id="EQUIVALENCIAS_IMPUESTOS_DET"><td>EQUIVALENCIAS_IMPUESTOS_DET</td><td>¿?</td><td></td><td>Fiscal</td><td></td></tr>
+<tr id="EQUIVALENCIAS_MONEDAS"><td>EQUIVALENCIAS_MONEDAS</td><td>¿?</td><td></td><td>General</td><td></td></tr>
+<tr id="ESPECS_EDOFIN"><td>ESPECS_EDOFIN</td><td>Conciliacion</td><td>Sys</td><td>Bancos</td><td></td></tr>
+<tr id="ESTADOS"><td>ESTADOS</td><td></td><td>Maestro</td><td>General</td><td></td></tr>
+<tr id="ESTATUS_ASIMILADOS"><td>ESTATUS_ASIMILADOS</td><td></td><td></td><td>Nómina</td><td></td></tr>
+<tr id="EXCEP_EMPLEADOS"><td>EXCEP_EMPLEADOS</td><td>Excepciones de la Nomina</td><td>Mov</td><td>Nómina</td><td></td></tr>
+<tr id="EXCEP_EMPLEADOS_DET"><td>EXCEP_EMPLEADOS_DET</td><td>Excepciones de la Nomina Detalle</td><td>Detalle</td><td>Nómina</td><td></td></tr>
+<tr id="EXCEP_GENERALES"><td>EXCEP_GENERALES</td><td>Excepciones Generales de la Nomina</td><td></td><td>Nómina</td><td></td></tr>
+<tr id="EXIS_DISCRETOS"><td>EXIS_DISCRETOS</td><td>Existencias de las series</td><td>Resumen</td><td>Inventarios</td><td></td></tr>
+<tr id="FECHAS_BASE_COSTOS"><td>FECHAS_BASE_COSTOS</td><td></td><td></td><td>Inventarios</td><td></td></tr>
+<tr id="FOLIOS_CAJAS"><td>FOLIOS_CAJAS</td><td>Consecutivos</td><td>Config</td><td>Punto Venta</td><td></td></tr>
+<tr id="FOLIOS_COMPRAS"><td>FOLIOS_COMPRAS</td><td>Consecutivos</td><td>Config</td><td>Compras</td><td></td></tr>
+<tr id="FOLIOS_CONCEPTOS"><td>FOLIOS_CONCEPTOS</td><td></td><td></td><td>General</td><td></td></tr>
+<tr id="FOLIOS_FISCALES"><td>FOLIOS_FISCALES</td><td>Consecutivos</td><td>Config</td><td>General</td><td></td></tr>
+<tr id="FOLIOS_VENTAS"><td>FOLIOS_VENTAS</td><td>Consecutivos</td><td>Config</td><td>Ventas</td><td></td></tr>
+<tr id="FORMAS_COBRO"><td>FORMAS_COBRO</td><td>Formas de Cobro del Punto de Venta</td><td>Maestro</td><td>Punto Venta</td><td></td></tr>
+<tr id="FORMAS_COBRO_CC"><td>FORMAS_COBRO_CC</td><td>Formas de Cobro de CXC</td><td>Maestro</td><td>Por Cobrar</td><td></td></tr>
+<tr id="FORMAS_COBRO_CLIENTES"><td>FORMAS_COBRO_CLIENTES</td><td>Relación formas de cobro con clientes</td><td>Lateral</td><td>Clientes</td><td></td></tr>
+<tr id="FORMAS_COBRO_DENOM"><td>FORMAS_COBRO_DENOM</td><td>Denominaciones de los billetes y monedas</td><td>Config</td><td>Por Cobrar</td><td></td></tr>
+<tr id="FORMAS_COBRO_DOCTOS"><td>FORMAS_COBRO_DOCTOS</td><td>Formas de cobro en los documentos</td><td></td><td>Por Cobrar</td><td></td></tr>
+<tr id="FORMAS_COBRO_REFER"><td>FORMAS_COBRO_REFER</td><td>¿?</td><td></td><td>Por Cobrar</td><td></td></tr>
+<tr id="FORMATOS_EDOFIN"><td>FORMATOS_EDOFIN</td><td>Reporte</td><td>Sys</td><td>Contabilidad</td><td></td></tr>
+<tr id="FORMATOS_EDOFIN_DET"><td>FORMATOS_EDOFIN_DET</td><td>Reporte Detalle</td><td>Sys</td><td>Contabilidad</td><td></td></tr>
+<tr id="FORMATOS_TICKETS"><td>FORMATOS_TICKETS</td><td>Reporte</td><td>Sys</td><td>Punto Venta</td><td></td></tr>
+<tr id="FORMATOS_TICKETS_DET"><td>FORMATOS_TICKETS_DET</td><td>Reporte Detalle</td><td>Sys</td><td>Punto Venta</td><td></td></tr>
+<tr id="FRECUENCIAS_PAGO"><td>FRECUENCIAS_PAGO</td><td>Tipos de Periodo de Pago de Nómina</td><td>Maestro</td><td>Nómina</td><td></td></tr>
+<tr id="GRUPOS_ACTIVOS_FIJOS"><td>GRUPOS_ACTIVOS_FIJOS</td><td></td><td></td><td>Activos Fijos</td><td></td></tr>
+<tr id="GRUPOS_CARGOS_PERIODICOS_CC"><td>GRUPOS_CARGOS_PERIODICOS_CC</td><td></td><td></td><td>Por Cobrar</td><td></td></tr>
+<tr id="GRUPOS_CUENTAS"><td>GRUPOS_CUENTAS</td><td>Cuentas de Titulo en la Contabilidad</td><td>Config</td><td>Contabilidad</td><td></td></tr>
+<tr id="GRUPOS_CUENTAS_DET"><td>GRUPOS_CUENTAS_DET</td><td>Cuentas de Titulo en la Contabilidad</td><td>Config</td><td>Contabilidad</td><td></td></tr>
+<tr id="GRUPOS_LINEAS"><td>GRUPOS_LINEAS</td><td>Clasificador</td><td></td><td>Artículos</td><td></td></tr>
+<tr id="GRUPOS_LINEAS_WEB"><td>GRUPOS_LINEAS_WEB</td><td></td><td></td><td>Artículos</td><td></td></tr>
+<tr id="GRUPOS_MOV_PERIOD_BA"><td>GRUPOS_MOV_PERIOD_BA</td><td></td><td></td><td>Bancos</td><td></td></tr>
+<tr id="GRUPOS_PAGOS_ELECT"><td>GRUPOS_PAGOS_ELECT</td><td></td><td></td><td>Bancos</td><td></td></tr>
+<tr id="GRUPOS_POLIZAS_PERIOD_CO"><td>GRUPOS_POLIZAS_PERIOD_CO</td><td></td><td></td><td>Contabilidad</td><td></td></tr>
+<tr id="GRUPOS_RUTAS"><td>GRUPOS_RUTAS</td><td>Clasificador</td><td></td><td>Rutas</td><td></td></tr>
+<tr id="GTT_PROCESOS"><td>GTT_PROCESOS</td><td></td><td></td><td>¿?</td><td></td></tr>
+<tr id="HISTORIA_CAMBIARIA"><td>HISTORIA_CAMBIARIA</td><td></td><td>Lateral</td><td>General</td><td></td></tr>
+<tr id="IDS_CONVER"><td>IDS_CONVER</td><td></td><td></td><td>N/A</td><td></td></tr>
+<tr id="IMAGENES_ACTIVOS_FIJOS"><td>IMAGENES_ACTIVOS_FIJOS</td><td></td><td>Lateral</td><td>Activos Fijos</td><td></td></tr>
+<tr id="IMAGENES_ARTICULOS"><td>IMAGENES_ARTICULOS</td><td></td><td>Lateral</td><td>Artículos</td><td></td></tr>
+<tr id="IMAGENES_CAJAS"><td>IMAGENES_CAJAS</td><td></td><td>Lateral</td><td>Punto Venta</td><td></td></tr>
+<tr id="IMAGENES_CAJAS_DET"><td>IMAGENES_CAJAS_DET</td><td></td><td>Detalle</td><td>Punto Venta</td><td></td></tr>
+<tr id="IMAGENES_CLIENTES"><td>IMAGENES_CLIENTES</td><td></td><td>Lateral</td><td>Clientes</td><td></td></tr>
+<tr id="IMAGENES_EMPLEADOS"><td>IMAGENES_EMPLEADOS</td><td></td><td>Lateral</td><td>Personal</td><td></td></tr>
+<tr id="IMAGENES_PROVEEDORES"><td>IMAGENES_PROVEEDORES</td><td></td><td>Lateral</td><td>Proveedores</td><td></td></tr>
+<tr id="IMPORTES_DOCTOS_CC"><td>IMPORTES_DOCTOS_CC</td><td>Cuentas por Cobrar Detalle</td><td>Detalle</td><td>Por Cobrar</td><td></td></tr>
+<tr id="IMPORTES_DOCTOS_CC_IMPTOS"><td>IMPORTES_DOCTOS_CC_IMPTOS</td><td>Cuentas por Cobrar Impuestos</td><td>Impuestos</td><td>Por Cobrar</td><td></td></tr>
+<tr id="IMPORTES_DOCTOS_CP"><td>IMPORTES_DOCTOS_CP</td><td>Cuentas por Pagar Detalle</td><td>Detalle</td><td>Por Pagar</td><td></td></tr>
+<tr id="IMPORTES_DOCTOS_CP_IMPTOS"><td>IMPORTES_DOCTOS_CP_IMPTOS</td><td>Cuentas por Pagar Impuestos</td><td>Impuestos</td><td>Por Pagar</td><td></td></tr>
+<tr id="IMPORTES_DOCTOS_PEND_CC"><td>IMPORTES_DOCTOS_PEND_CC</td><td>¿?</td><td>Detalle</td><td>Por Cobrar</td><td></td></tr>
+<tr id="IMPUESTOS"><td>IMPUESTOS</td><td>Impuestos</td><td>Impuestos</td><td>General</td><td></td></tr>
+<tr id="IMPUESTOS_ARTICULOS"><td>IMPUESTOS_ARTICULOS</td><td>Relacion Articulo-Impuesto</td><td>Impuestos</td><td>Artículos</td><td></td></tr>
+<tr id="IMPUESTOS_DOCTOS_CM"><td>IMPUESTOS_DOCTOS_CM</td><td>Resumen Impuestos Compras</td><td>Impuestos</td><td>Compras</td><td></td></tr>
+<tr id="IMPUESTOS_DOCTOS_CM_DET"><td>IMPUESTOS_DOCTOS_CM_DET</td><td></td><td>Impuestos</td><td>Compras</td><td></td></tr>
+<tr id="IMPUESTOS_DOCTOS_PV"><td>IMPUESTOS_DOCTOS_PV</td><td>Resumen Impuestos Punto de Venta</td><td>Impuestos</td><td>Punto Venta</td><td></td></tr>
+<tr id="IMPUESTOS_DOCTOS_PV_DET"><td>IMPUESTOS_DOCTOS_PV_DET</td><td>Resumen Impuestos Punto de Venta</td><td>Impuestos</td><td>Punto Venta</td><td></td></tr>
+<tr id="IMPUESTOS_DOCTOS_VE"><td>IMPUESTOS_DOCTOS_VE</td><td>Resumen Impuestos Ventas</td><td>Impuestos</td><td>Ventas</td><td></td></tr>
+<tr id="IMPUESTOS_DOCTOS_VE_DET"><td>IMPUESTOS_DOCTOS_VE_DET</td><td>Resumen Impuestos Ventas</td><td>Impuestos</td><td>Ventas</td><td></td></tr>
+<tr id="IMPUESTOS_GRAVADOS"><td>IMPUESTOS_GRAVADOS</td><td>¿?</td><td>Impuestos</td><td>General</td><td></td></tr>
+<tr id="IMPUESTOS_GRAV_ART_TEMP"><td>IMPUESTOS_GRAV_ART_TEMP</td><td></td><td>Impuestos</td><td>General</td><td>Ya no existe</td></tr>
+<tr id="IMPUESTOS_GRAV_DOCTOS_CM"><td>IMPUESTOS_GRAV_DOCTOS_CM</td><td></td><td>Impuestos</td><td>Compras</td><td>Ya no existe</td></tr>
+<tr id="IMPUESTOS_GRAV_DOCTOS_PV"><td>IMPUESTOS_GRAV_DOCTOS_PV</td><td></td><td>Impuestos</td><td>Punto Venta</td><td>Ya no existe</td></tr>
+<tr id="IMPUESTOS_GRAV_DOCTOS_VE"><td>IMPUESTOS_GRAV_DOCTOS_VE</td><td></td><td>Impuestos</td><td>Ventas</td><td></td></tr>
+<tr id="INCAPACIDADES"><td>INCAPACIDADES</td><td></td><td></td><td>Nómina</td><td></td></tr>
+<tr id="INCIDENCIAS"><td>INCIDENCIAS</td><td></td><td>Mov</td><td>Nómina</td><td></td></tr>
+<tr id="INCIDENCIAS_ASISTENCIAS"><td>INCIDENCIAS_ASISTENCIAS</td><td></td><td></td><td>Nómina</td><td></td></tr>
+<tr id="INPC"><td>INPC</td><td></td><td></td><td>Nómina</td><td></td></tr>
+<tr id="JUEGOS_A_ENSAMBLAR"><td>JUEGOS_A_ENSAMBLAR</td><td></td><td></td><td>Artículos</td><td></td></tr>
+<tr id="JUEGOS_DET"><td>JUEGOS_DET</td><td>Relación Juego--&gt;Componente</td><td></td><td>Artículos</td><td></td></tr>
+<tr id="LEYENDAS_FISCALES"><td>LEYENDAS_FISCALES</td><td></td><td></td><td>General</td><td></td></tr>
+<tr id="LEYENDAS_FISCALES_DOCTOS"><td>LEYENDAS_FISCALES_DOCTOS</td><td></td><td></td><td>General</td><td></td></tr>
+<tr id="LIBRES_ACT_FIJOS"><td>LIBRES_ACT_FIJOS</td><td>Campos particulares Activos Fijos</td><td>Campo Particular</td><td>Activos Fijos</td><td></td></tr>
+<tr id="LIBRES_ARTICULOS"><td>LIBRES_ARTICULOS</td><td></td><td>Campo Particular</td><td>Artículos</td><td></td></tr>
+<tr id="LIBRES_CARGOS_CC"><td>LIBRES_CARGOS_CC</td><td></td><td>Campo Particular</td><td>Por Cobrar</td><td></td></tr>
+<tr id="LIBRES_CARGOS_CP"><td>LIBRES_CARGOS_CP</td><td></td><td>Campo Particular</td><td>Por Pagar</td><td></td></tr>
+<tr id="LIBRES_CARGOS_PER_CC"><td>LIBRES_CARGOS_PER_CC</td><td></td><td>Campo Particular</td><td>Por Cobrar</td><td></td></tr>
+<tr id="LIBRES_CLIENTES"><td>LIBRES_CLIENTES</td><td></td><td>Campo Particular</td><td>Clientes</td><td></td></tr>
+<tr id="LIBRES_COM_CM"><td>LIBRES_COM_CM</td><td>Campos libres factura de compra</td><td>Campo Particular</td><td>Compras</td><td></td></tr>
+<tr id="LIBRES_COT_VE"><td>LIBRES_COT_VE</td><td>Campos libres cotizaciones de venta</td><td>Campo Particular</td><td>Ventas</td><td></td></tr>
+<tr id="LIBRES_CREDITOS_CC"><td>LIBRES_CREDITOS_CC</td><td></td><td>Campo Particular</td><td>Por Cobrar</td><td></td></tr>
+<tr id="LIBRES_CREDITOS_CP"><td>LIBRES_CREDITOS_CP</td><td></td><td>Campo Particular</td><td>Por Pagar</td><td></td></tr>
+<tr id="LIBRES_CTAS_BAN"><td>LIBRES_CTAS_BAN</td><td></td><td>Campo Particular</td><td>Bancos</td><td></td></tr>
+<tr id="LIBRES_CUENTAS_CO"><td>LIBRES_CUENTAS_CO</td><td></td><td>Campo Particular</td><td>Contabilidad</td><td></td></tr>
+<tr id="LIBRES_DEVCOM_CM"><td>LIBRES_DEVCOM_CM</td><td>Campos libres devolción de compra</td><td>Campo Particular</td><td>Compras</td><td></td></tr>
+<tr id="LIBRES_DEVFAC_VE"><td>LIBRES_DEVFAC_VE</td><td>Campos libres devolución factura</td><td>Campo Particular</td><td>Ventas</td><td></td></tr>
+<tr id="LIBRES_DEVREC_CM"><td>LIBRES_DEVREC_CM</td><td>Campos libres devolución de recepción de compra</td><td>Campo Particular</td><td>Compras</td><td></td></tr>
+<tr id="LIBRES_DEVREM_VE"><td>LIBRES_DEVREM_VE</td><td>Campos libres devolución remisión</td><td>Campo Particular</td><td>Ventas</td><td></td></tr>
+<tr id="LIBRES_EMPLEADOS"><td>LIBRES_EMPLEADOS</td><td></td><td>Campo Particular</td><td>Personal</td><td></td></tr>
+<tr id="LIBRES_ENTRADAS_IN"><td>LIBRES_ENTRADAS_IN</td><td>Campos libres entradas de inventario</td><td>Campo Particular</td><td>Inventarios</td><td></td></tr>
+<tr id="LIBRES_FAC_VE"><td>LIBRES_FAC_VE</td><td>Campos libres facturas</td><td>Campo Particular</td><td>Ventas</td><td></td></tr>
+<tr id="LIBRES_INVFIS"><td>LIBRES_INVFIS</td><td></td><td>Campo Particular</td><td>Inventarios</td><td></td></tr>
+<tr id="LIBRES_OCO_CM"><td>LIBRES_OCO_CM</td><td>Campos libres ordenes de compra</td><td>Campo Particular</td><td>Compras</td><td></td></tr>
+<tr id="LIBRES_ORDVTA_PV"><td>LIBRES_ORDVTA_PV</td><td>Campos libres Orden de Venta en el Punto de Venta</td><td>Campo Particular</td><td>Punto Venta</td><td></td></tr>
+<tr id="LIBRES_PED_VE"><td>LIBRES_PED_VE</td><td>Campos libres pedidos</td><td>Campo Particular</td><td>Ventas</td><td></td></tr>
+<tr id="LIBRES_POL_CO"><td>LIBRES_POL_CO</td><td>Campos libres pólizas contabilidad</td><td>Campo Particular</td><td>Contabilidad</td><td></td></tr>
+<tr id="LIBRES_PROVEEDOR"><td>LIBRES_PROVEEDOR</td><td></td><td>Campo Particular</td><td>Proveedores</td><td></td></tr>
+<tr id="LIBRES_REC_CM"><td>LIBRES_REC_CM</td><td>Campos libres recepciones de compra</td><td>Campo Particular</td><td>Compras</td><td></td></tr>
+<tr id="LIBRES_REM_VE"><td>LIBRES_REM_VE</td><td>Campos libres remisiones</td><td>Campo Particular</td><td>Ventas</td><td></td></tr>
+<tr id="LIBRES_SALIDAS_IN"><td>LIBRES_SALIDAS_IN</td><td>Campos libres salidas de inventario</td><td>Campo Particular</td><td>Inventarios</td><td></td></tr>
+<tr id="LINEAS_ARTICULOS"><td>LINEAS_ARTICULOS</td><td>Clasificador Líneas</td><td>Catalogo</td><td>Artículos</td><td></td></tr>
+<tr id="LINEAS_ARTICULOS_WEB"><td>LINEAS_ARTICULOS_WEB</td><td>Shopify¿?</td><td></td><td>Artículos</td><td></td></tr>
+<tr id="LISTAS_ATRIBUTOS"><td>LISTAS_ATRIBUTOS</td><td>Valores de los campos libres tipo lista</td><td></td><td>General</td><td></td></tr>
+<tr id="LISTA_ELIM_HIST"><td>LISTA_ELIM_HIST</td><td></td><td></td><td>N/A</td><td></td></tr>
+<tr id="LUGARES_EXPEDICION"><td>LUGARES_EXPEDICION</td><td>Zona horaria para el timbrado CDFI</td><td></td><td>Fiscal</td><td></td></tr>
+<tr id="MENSAJES_GUIDS"><td>MENSAJES_GUIDS</td><td></td><td></td><td>N/A</td><td></td></tr>
+<tr id="MGRQ_DOCTOS_REQUISICIONES"><td>MGRQ_DOCTOS_REQUISICIONES</td><td></td><td></td><td>Requisiciones</td><td>Exsim</td></tr>
+<tr id="MGRQ_DOCTOS_REQUISICIONES_DET"><td>MGRQ_DOCTOS_REQUISICIONES_DET</td><td></td><td></td><td>Requisiciones</td><td>Exsim</td></tr>
+<tr id="MG_ALM_INVENTARIOS"><td>MG_ALM_INVENTARIOS</td><td></td><td></td><td>Manufactura</td><td>Exsim</td></tr>
+<tr id="MG_ALM_PRESENTACIONES"><td>MG_ALM_PRESENTACIONES</td><td></td><td></td><td>Manufactura</td><td>Exsim</td></tr>
+<tr id="MG_ALM_PRUEBAS_RENDIMIENTO"><td>MG_ALM_PRUEBAS_RENDIMIENTO</td><td></td><td></td><td>Manufactura</td><td>Exsim</td></tr>
+<tr id="MG_ARBOL_COMPONENTES"><td>MG_ARBOL_COMPONENTES</td><td></td><td></td><td>Manufactura</td><td>Exsim</td></tr>
+<tr id="MG_ARTICULOS_FAB"><td>MG_ARTICULOS_FAB</td><td></td><td></td><td>Manufactura</td><td>Exsim</td></tr>
+<tr id="MG_ARTICULOS_FAB_CENTROS"><td>MG_ARTICULOS_FAB_CENTROS</td><td></td><td></td><td>Manufactura</td><td>Exsim</td></tr>
+<tr id="MG_ARTICULOS_FAB_DOCTOS"><td>MG_ARTICULOS_FAB_DOCTOS</td><td></td><td></td><td>Manufactura</td><td>Exsim</td></tr>
+<tr id="MG_ARTICULOS_FAB_FASES"><td>MG_ARTICULOS_FAB_FASES</td><td></td><td></td><td>Manufactura</td><td>Exsim</td></tr>
+<tr id="MG_ARTICULOS_FAB_LIBRES"><td>MG_ARTICULOS_FAB_LIBRES</td><td></td><td></td><td>Manufactura</td><td>Exsim</td></tr>
+<tr id="MG_ARTICULOS_FAB_RITMOS"><td>MG_ARTICULOS_FAB_RITMOS</td><td></td><td></td><td>Manufactura</td><td>Exsim</td></tr>
+<tr id="MG_ARTICULOS_HIST_ESTRUCT"><td>MG_ARTICULOS_HIST_ESTRUCT</td><td></td><td></td><td>Manufactura</td><td>Exsim</td></tr>
+<tr id="MG_ARTS_EXPLOSION_MAT"><td>MG_ARTS_EXPLOSION_MAT</td><td></td><td></td><td>Manufactura</td><td>Exsim</td></tr>
+<tr id="MG_CALENDARIO"><td>MG_CALENDARIO</td><td></td><td></td><td>Manufactura</td><td>Exsim</td></tr>
+<tr id="MG_CALIDAD_HIST"><td>MG_CALIDAD_HIST</td><td></td><td></td><td>Manufactura</td><td>Exsim</td></tr>
+<tr id="MG_CALIDAD_HIST_DET"><td>MG_CALIDAD_HIST_DET</td><td></td><td></td><td>Manufactura</td><td>Exsim</td></tr>
+<tr id="MG_CALIDAD_PREFER"><td>MG_CALIDAD_PREFER</td><td></td><td></td><td>Manufactura</td><td>Exsim</td></tr>
+<tr id="MG_CALIDAD_PREFER_DET"><td>MG_CALIDAD_PREFER_DET</td><td></td><td></td><td>Manufactura</td><td>Exsim</td></tr>
+<tr id="MG_CAT_COSTOS"><td>MG_CAT_COSTOS</td><td></td><td></td><td>Manufactura</td><td>Exsim</td></tr>
+<tr id="MG_CENTROS_TRABAJO"><td>MG_CENTROS_TRABAJO</td><td></td><td></td><td>Manufactura</td><td>Exsim</td></tr>
+<tr id="MG_CENTROS_TRABAJO_COSTOS"><td>MG_CENTROS_TRABAJO_COSTOS</td><td></td><td></td><td>Manufactura</td><td>Exsim</td></tr>
+<tr id="MG_COMPONENTES"><td>MG_COMPONENTES</td><td></td><td></td><td>Manufactura</td><td>Exsim</td></tr>
+<tr id="MG_CONSUMOS_TEMP"><td>MG_CONSUMOS_TEMP</td><td></td><td></td><td>Manufactura</td><td>Exsim</td></tr>
+<tr id="MG_COSTOS_ARTICULOS"><td>MG_COSTOS_ARTICULOS</td><td></td><td></td><td>Manufactura</td><td>Exsim</td></tr>
+<tr id="MG_DERECHOS_USUARIOS"><td>MG_DERECHOS_USUARIOS</td><td></td><td></td><td>Manufactura</td><td>Exsim</td></tr>
+<tr id="MG_DOCTOS_DET_COMP_MNIVEL"><td>MG_DOCTOS_DET_COMP_MNIVEL</td><td></td><td></td><td>Manufactura</td><td>Exsim</td></tr>
+<tr id="MG_DOCTOS_DET_MNIVEL"><td>MG_DOCTOS_DET_MNIVEL</td><td></td><td></td><td>Manufactura</td><td>Exsim</td></tr>
+<tr id="MG_DOCTOS_MNIVEL"><td>MG_DOCTOS_MNIVEL</td><td></td><td></td><td>Manufactura</td><td>Exsim</td></tr>
+<tr id="MG_DOCTOS_MNIVEL_LIBRES"><td>MG_DOCTOS_MNIVEL_LIBRES</td><td></td><td></td><td>Manufactura</td><td>Exsim</td></tr>
+<tr id="MG_ERRORES_INTERNOS"><td>MG_ERRORES_INTERNOS</td><td></td><td></td><td>Manufactura</td><td>Exsim</td></tr>
+<tr id="MG_FASES"><td>MG_FASES</td><td></td><td></td><td>Manufactura</td><td>Exsim</td></tr>
+<tr id="MG_FOLIOS"><td>MG_FOLIOS</td><td></td><td></td><td>Manufactura</td><td>Exsim</td></tr>
+<tr id="MG_HIST_REGISTROS_PROD_FASES"><td>MG_HIST_REGISTROS_PROD_FASES</td><td></td><td></td><td>Manufactura</td><td>Exsim</td></tr>
+<tr id="MG_LIGAS_ENTRE_SIS"><td>MG_LIGAS_ENTRE_SIS</td><td></td><td></td><td>Manufactura</td><td>Exsim</td></tr>
+<tr id="MG_LINEAS_ARTICULOS"><td>MG_LINEAS_ARTICULOS</td><td></td><td></td><td>Manufactura</td><td>Exsim</td></tr>
+<tr id="MG_LINEAS_PROD"><td>MG_LINEAS_PROD</td><td></td><td></td><td>Manufactura</td><td>Exsim</td></tr>
+<tr id="MG_LOTES_DET_COMP_MNIVEL"><td>MG_LOTES_DET_COMP_MNIVEL</td><td></td><td></td><td>Manufactura</td><td>Exsim</td></tr>
+<tr id="MG_LOTES_DET_MNIVEL"><td>MG_LOTES_DET_MNIVEL</td><td></td><td></td><td>Manufactura</td><td>Exsim</td></tr>
+<tr id="MG_MAQUINAS"><td>MG_MAQUINAS</td><td></td><td></td><td>Manufactura</td><td>Exsim</td></tr>
+<tr id="MG_MNIVEL_VERSION"><td>MG_MNIVEL_VERSION</td><td></td><td></td><td>Manufactura</td><td>Exsim</td></tr>
+<tr id="MG_OPERARIOS"><td>MG_OPERARIOS</td><td></td><td></td><td>Manufactura</td><td>Exsim</td></tr>
+<tr id="MG_ORDENES_PROD"><td>MG_ORDENES_PROD</td><td></td><td></td><td>Manufactura</td><td>Exsim</td></tr>
+<tr id="MG_ORDENES_PROD_ARTS"><td>MG_ORDENES_PROD_ARTS</td><td></td><td></td><td>Manufactura</td><td>Exsim</td></tr>
+<tr id="MG_ORDENES_PROD_DOCTOS"><td>MG_ORDENES_PROD_DOCTOS</td><td></td><td></td><td>Manufactura</td><td>Exsim</td></tr>
+<tr id="MG_ORDENES_PROD_LIBRES"><td>MG_ORDENES_PROD_LIBRES</td><td></td><td></td><td>Manufactura</td><td>Exsim</td></tr>
+<tr id="MG_ORDENES_PROD_MAQ"><td>MG_ORDENES_PROD_MAQ</td><td></td><td></td><td>Manufactura</td><td>Exsim</td></tr>
+<tr id="MG_ORDENES_PROD_MAQ_DETL"><td>MG_ORDENES_PROD_MAQ_DETL</td><td></td><td></td><td>Manufactura</td><td>Exsim</td></tr>
+<tr id="MG_ORDENES_PROD_NEC_REQ"><td>MG_ORDENES_PROD_NEC_REQ</td><td></td><td></td><td>Manufactura</td><td>Exsim</td></tr>
+<tr id="MG_ORDENES_PROD_TRASPASOS"><td>MG_ORDENES_PROD_TRASPASOS</td><td></td><td></td><td>Manufactura</td><td>Exsim</td></tr>
+<tr id="MG_PERMISOS_USUARIOS"><td>MG_PERMISOS_USUARIOS</td><td></td><td></td><td>Manufactura</td><td>Exsim</td></tr>
+<tr id="MG_PREFER_DP"><td>MG_PREFER_DP</td><td></td><td></td><td>Manufactura</td><td>Exsim</td></tr>
+<tr id="MG_PREFER_LINEAS_ARTICULOS"><td>MG_PREFER_LINEAS_ARTICULOS</td><td></td><td></td><td>Manufactura</td><td>Exsim</td></tr>
+<tr id="MG_PREFER_MAQ"><td>MG_PREFER_MAQ</td><td></td><td></td><td>Manufactura</td><td>Exsim</td></tr>
+<tr id="MG_PREFER_MNIVEL"><td>MG_PREFER_MNIVEL</td><td></td><td></td><td>Manufactura</td><td>Exsim</td></tr>
+<tr id="MG_PROD_MERMA"><td>MG_PROD_MERMA</td><td></td><td></td><td>Manufactura</td><td>Exsim</td></tr>
+<tr id="MG_PRONO_ANUAL_SEM"><td>MG_PRONO_ANUAL_SEM</td><td></td><td></td><td>Manufactura</td><td>Exsim</td></tr>
+<tr id="MG_PRO_ALMACENES_MRP"><td>MG_PRO_ALMACENES_MRP</td><td></td><td></td><td>Manufactura</td><td>Exsim</td></tr>
+<tr id="MG_PRO_EXPLOSION_MRP"><td>MG_PRO_EXPLOSION_MRP</td><td></td><td></td><td>Manufactura</td><td>Exsim</td></tr>
+<tr id="MG_REP_EXP_TMP"><td>MG_REP_EXP_TMP</td><td></td><td></td><td>Manufactura</td><td>Exsim</td></tr>
+<tr id="MG_SUGERENCIA_FAB"><td>MG_SUGERENCIA_FAB</td><td></td><td></td><td>Manufactura</td><td>Exsim</td></tr>
+<tr id="MG_SUGERENCIA_FAB_SEM"><td>MG_SUGERENCIA_FAB_SEM</td><td></td><td></td><td>Manufactura</td><td>Exsim</td></tr>
+<tr id="MG_TRABAJOS"><td>MG_TRABAJOS</td><td></td><td></td><td>Manufactura</td><td>Exsim</td></tr>
+<tr id="MG_TRABAJOS_DET"><td>MG_TRABAJOS_DET</td><td></td><td></td><td>Manufactura</td><td>Exsim</td></tr>
+<tr id="MONEDAS"><td>MONEDAS</td><td></td><td>Maestro</td><td>General</td><td></td></tr>
+<tr id="MOVTOS_AHORRO_EMP"><td>MOVTOS_AHORRO_EMP</td><td></td><td>Mov</td><td>Nómina</td><td></td></tr>
+<tr id="MOVTOS_CAJAS"><td>MOVTOS_CAJAS</td><td>Apertura/Cierre de Cajas</td><td>Mov</td><td>Punto Venta</td><td></td></tr>
+<tr id="MOVTOS_CAJAS_CAJEROS"><td>MOVTOS_CAJAS_CAJEROS</td><td></td><td>Lateral</td><td>Punto Venta</td><td></td></tr>
+<tr id="MOVTOS_CAJAS_FONDO"><td>MOVTOS_CAJAS_FONDO</td><td>Fondo de Caja</td><td>Lateral</td><td>Punto Venta</td><td></td></tr>
+<tr id="MOVTOS_EFVO_CAJA"><td>MOVTOS_EFVO_CAJA</td><td>Efectivo de caja</td><td>Lateral</td><td>Punto Venta</td><td></td></tr>
+<tr id="NG_EXCLUSIONES_VISITAS"><td>NG_EXCLUSIONES_VISITAS</td><td>?</td><td></td><td>¿?</td><td></td></tr>
+<tr id="NG_PCTJE_VISITAS"><td>NG_PCTJE_VISITAS</td><td>?</td><td></td><td>¿?</td><td></td></tr>
+<tr id="NG_VISITAS"><td>NG_VISITAS</td><td>?</td><td></td><td>¿?</td><td></td></tr>
+<tr id="NIVELES_ARTICULOS"><td>NIVELES_ARTICULOS</td><td>Máximo, Minimo y Punto de Reorden en Articulos, a nivel Almacén y Localización</td><td>Lateral</td><td>Artículos</td><td></td></tr>
+<tr id="NOMINAS"><td>NOMINAS</td><td>Nómina</td><td>Mov</td><td>Nómina</td><td></td></tr>
+<tr id="OBSERVACIONES_VERIF_ART"><td>OBSERVACIONES_VERIF_ART</td><td></td><td></td><td>Artículos</td><td></td></tr>
+<tr id="OBS_VERIF_ART_DISCRETOS"><td>OBS_VERIF_ART_DISCRETOS</td><td></td><td></td><td>Artículos</td><td></td></tr>
+<tr id="OFERTAS_MM"><td>OFERTAS_MM</td><td></td><td></td><td>¿?</td><td></td></tr>
+<tr id="OFERTAS_MM_DET"><td>OFERTAS_MM_DET</td><td></td><td></td><td>¿?</td><td></td></tr>
+<tr id="PAGOS_NOMINA"><td>PAGOS_NOMINA</td><td>Nómina</td><td></td><td>Nómina</td><td></td></tr>
+<tr id="PAGOS_NOMINA_CANCELADOS"><td>PAGOS_NOMINA_CANCELADOS</td><td>Nómina</td><td></td><td>Nómina</td><td></td></tr>
+<tr id="PAGOS_NOMINA_DET"><td>PAGOS_NOMINA_DET</td><td>Nómina</td><td>Detalle</td><td>Nómina</td><td></td></tr>
+<tr id="PAGOS_NOMINA_VAC"><td>PAGOS_NOMINA_VAC</td><td>Nómina</td><td></td><td>Nómina</td><td></td></tr>
+<tr id="PAISES"><td>PAISES</td><td></td><td>Maestro</td><td>General</td><td></td></tr>
+<tr id="PEDIDOS_WEB"><td>PEDIDOS_WEB</td><td>Para Shopify¿?</td><td></td><td>Ventas</td><td></td></tr>
+<tr id="PEDIMENTOS"><td>PEDIMENTOS</td><td>Pedimentos</td><td></td><td>Inventarios</td><td></td></tr>
+<tr id="PERFILES_DIAS_INVENTARIO"><td>PERFILES_DIAS_INVENTARIO</td><td></td><td></td><td>Planeador</td><td></td></tr>
+<tr id="PERFIL_DIAS_INV_ALMACENES"><td>PERFIL_DIAS_INV_ALMACENES</td><td></td><td></td><td>Planeador</td><td></td></tr>
+<tr id="PERFIL_DIAS_INV_ARTICULOS"><td>PERFIL_DIAS_INV_ARTICULOS</td><td></td><td></td><td>Planeador</td><td></td></tr>
+<tr id="PERFIL_DIAS_INV_CLASIFICADORES"><td>PERFIL_DIAS_INV_CLASIFICADORES</td><td></td><td></td><td>Planeador</td><td></td></tr>
+<tr id="PERFIL_DIAS_INV_GRUPOS"><td>PERFIL_DIAS_INV_GRUPOS</td><td></td><td></td><td>Planeador</td><td></td></tr>
+<tr id="PERFIL_DIAS_INV_LINEAS"><td>PERFIL_DIAS_INV_LINEAS</td><td></td><td></td><td>Planeador</td><td></td></tr>
+<tr id="PERIODOS_VAC"><td>PERIODOS_VAC</td><td></td><td></td><td>Nómina</td><td></td></tr>
+<tr id="PLANES_VISITAS"><td>PLANES_VISITAS</td><td>Visitas</td><td>Mov</td><td>Visitas</td><td></td></tr>
+<tr id="PLANES_VISITAS_DET"><td>PLANES_VISITAS_DET</td><td>Visitas Detalle</td><td>Detalle</td><td>Visitas</td><td></td></tr>
+<tr id="PLANTILLAS_POL_CO"><td>PLANTILLAS_POL_CO</td><td></td><td></td><td>Contabilidad</td><td></td></tr>
+<tr id="PLANTILLAS_POL_CO_DET"><td>PLANTILLAS_POL_CO_DET</td><td></td><td></td><td>Contabilidad</td><td></td></tr>
+<tr id="PLAZOS_COND_PAG"><td>PLAZOS_COND_PAG</td><td>Plazo de Pago en Cuentas por Cobrar</td><td></td><td>Por Cobrar</td><td></td></tr>
+<tr id="PLAZOS_COND_PAG_CP"><td>PLAZOS_COND_PAG_CP</td><td>Plazo de Pago en Cuentas por Pagar</td><td></td><td>Por Pagar</td><td></td></tr>
+<tr id="POLITICAS_COMISIONES_COBRADORES"><td>POLITICAS_COMISIONES_COBRADORES</td><td>Políticas</td><td></td><td>Comisiones</td><td></td></tr>
+<tr id="POLITICAS_COMISIONES_VENDEDORES"><td>POLITICAS_COMISIONES_VENDEDORES</td><td>Políticas</td><td></td><td>Comisiones</td><td></td></tr>
+<tr id="POLITICAS_DSCTOS_ART_CLI"><td>POLITICAS_DSCTOS_ART_CLI</td><td>Políticas</td><td></td><td>Precios</td><td></td></tr>
+<tr id="POLITICAS_DSCTOS_MAXIMOS"><td>POLITICAS_DSCTOS_MAXIMOS</td><td>Políticas</td><td></td><td>Precios</td><td></td></tr>
+<tr id="POLITICAS_DSCTOS_PROMOCION"><td>POLITICAS_DSCTOS_PROMOCION</td><td>Políticas</td><td></td><td>Precios</td><td></td></tr>
+<tr id="POLITICAS_DSCTOS_PROMO_PROV"><td>POLITICAS_DSCTOS_PROMO_PROV</td><td>Políticas</td><td></td><td>Precios</td><td></td></tr>
+<tr id="POLITICAS_DSCTOS_VOLUMEN"><td>POLITICAS_DSCTOS_VOLUMEN</td><td>Políticas</td><td></td><td>Precios</td><td></td></tr>
+<tr id="POLITICAS_DSCTOS_VOL_PROV"><td>POLITICAS_DSCTOS_VOL_PROV</td><td>Políticas</td><td></td><td>Precios</td><td></td></tr>
+<tr id="POLITICAS_PRECIOS_CLIENTES"><td>POLITICAS_PRECIOS_CLIENTES</td><td>Políticas</td><td></td><td>Precios</td><td></td></tr>
+<tr id="POLITICAS_PRECIOS_PROV"><td>POLITICAS_PRECIOS_PROV</td><td>Políticas</td><td></td><td>Precios</td><td></td></tr>
+<tr id="POLIZAS"><td>POLIZAS</td><td></td><td></td><td>Contabilidad</td><td>esta vacia</td></tr>
+<tr id="POLIZAS_CFDI"><td>POLIZAS_CFDI</td><td></td><td></td><td>Contabilidad</td><td>esta vacia</td></tr>
+<tr id="PRECIOS_ARTICULOS"><td>PRECIOS_ARTICULOS</td><td>Detalle de Listas de Precios</td><td></td><td>Precios</td><td></td></tr>
+<tr id="PRECIOS_CLI_CLI"><td>PRECIOS_CLI_CLI</td><td></td><td></td><td>Precios</td><td></td></tr>
+<tr id="PRECIOS_CLI_TIPO"><td>PRECIOS_CLI_TIPO</td><td></td><td></td><td>Precios</td><td></td></tr>
+<tr id="PRECIOS_CLI_ZONA"><td>PRECIOS_CLI_ZONA</td><td></td><td></td><td>Precios</td><td></td></tr>
+<tr id="PRECIOS_COMPRA"><td>PRECIOS_COMPRA</td><td>Proveedores de los artículos</td><td></td><td>Precios</td><td></td></tr>
+<tr id="PRECIOS_COMPRA_DET"><td>PRECIOS_COMPRA_DET</td><td>Proveedores de los artículos</td><td></td><td>Precios</td><td></td></tr>
+<tr id="PRECIOS_EMPRESA"><td>PRECIOS_EMPRESA</td><td>Cabeceros de listas de precios de clientes</td><td></td><td>Precios</td><td></td></tr>
+<tr id="PRECIOS_PROV"><td>PRECIOS_PROV</td><td>Cabeceros de listas de precios de proveedores</td><td></td><td>Precios</td><td></td></tr>
+<tr id="PRESTAMOS_EMP"><td>PRESTAMOS_EMP</td><td>Préstamos al Personal</td><td></td><td>Nómina</td><td></td></tr>
+<tr id="PRESUPUESTOS"><td>PRESUPUESTOS</td><td>Presupuesto Contable a 12 periodos</td><td></td><td>Contabilidad</td><td></td></tr>
+<tr id="PROMOCIONES_TIPOS_TARJETAS"><td>PROMOCIONES_TIPOS_TARJETAS</td><td></td><td></td><td>Punto Venta</td><td>Ya no existe</td></tr>
+<tr id="PRORRATEOS_DET"><td>PRORRATEOS_DET</td><td>¿?</td><td></td><td>General</td><td></td></tr>
+<tr id="PROVEEDORES"><td>PROVEEDORES</td><td></td><td>Catalogo</td><td>Proveedores</td><td></td></tr>
+<tr id="PUESTOS_NO"><td>PUESTOS_NO</td><td>Puestos</td><td></td><td>Nómina</td><td></td></tr>
+<tr id="RAZONES_VIS_INEF"><td>RAZONES_VIS_INEF</td><td>Clasificador</td><td></td><td>Visitas</td><td></td></tr>
+<tr id="RECORDATORIOS"><td>RECORDATORIOS</td><td>Mensajes¿?</td><td>Config</td><td>General</td><td></td></tr>
+<tr id="REDONDEO_PRECIOS"><td>REDONDEO_PRECIOS</td><td></td><td>Config</td><td>Precios</td><td></td></tr>
+<tr id="REGISTRY"><td>REGISTRY</td><td></td><td>Sys</td><td>N/A</td><td></td></tr>
+<tr id="REG_PATRONALES"><td>REG_PATRONALES</td><td></td><td></td><td>Nómina</td><td></td></tr>
+<tr id="REPOSITORIO_CFDI"><td>REPOSITORIO_CFDI</td><td></td><td></td><td>Fiscal</td><td></td></tr>
+<tr id="REST_VTA_FORMA_COB"><td>REST_VTA_FORMA_COB</td><td></td><td></td><td>Restaurantes</td><td></td></tr>
+<tr id="REST_VTA_FORMA_COB_ART"><td>REST_VTA_FORMA_COB_ART</td><td></td><td></td><td>Restaurantes</td><td></td></tr>
+<tr id="REST_VTA_FORMA_COB_CLASIF"><td>REST_VTA_FORMA_COB_CLASIF</td><td></td><td></td><td>Restaurantes</td><td></td></tr>
+<tr id="REST_VTA_HORARIO"><td>REST_VTA_HORARIO</td><td></td><td></td><td>Restaurantes</td><td></td></tr>
+<tr id="REST_VTA_HORARIO_ART"><td>REST_VTA_HORARIO_ART</td><td></td><td></td><td>Restaurantes</td><td></td></tr>
+<tr id="REST_VTA_HORARIO_CLASIF"><td>REST_VTA_HORARIO_CLASIF</td><td></td><td></td><td>Restaurantes</td><td></td></tr>
+<tr id="RESUMEN_ELIM_HIST_IN"><td>RESUMEN_ELIM_HIST_IN</td><td></td><td></td><td>Inventarios</td><td></td></tr>
+<tr id="RFCS_LCO"><td>RFCS_LCO</td><td>Datos fiscales para CFDI 4.0</td><td></td><td>Clientes</td><td></td></tr>
+<tr id="ROLES_CLAVES_ARTICULOS"><td>ROLES_CLAVES_ARTICULOS</td><td>Claves</td><td>Claves</td><td>Artículos</td><td></td></tr>
+<tr id="ROLES_CLAVES_CLIENTES"><td>ROLES_CLAVES_CLIENTES</td><td>Claves</td><td>Claves</td><td>Clientes</td><td></td></tr>
+<tr id="ROLES_CLAVES_EMPLEADOS"><td>ROLES_CLAVES_EMPLEADOS</td><td>Claves</td><td>Claves</td><td>Personal</td><td></td></tr>
+<tr id="ROLES_CLAVES_PROVEEDORES"><td>ROLES_CLAVES_PROVEEDORES</td><td>Claves</td><td>Claves</td><td>Proveedores</td><td></td></tr>
+<tr id="ROLES_IMAGENES_ACTIVOS_FIJOS"><td>ROLES_IMAGENES_ACTIVOS_FIJOS</td><td></td><td>Config</td><td>Activos Fijos</td><td></td></tr>
+<tr id="ROLES_IMAGENES_ARTICULOS"><td>ROLES_IMAGENES_ARTICULOS</td><td></td><td>Config</td><td>Artículos</td><td></td></tr>
+<tr id="ROLES_IMAGENES_CLIENTES"><td>ROLES_IMAGENES_CLIENTES</td><td></td><td>Config</td><td>Clientes</td><td></td></tr>
+<tr id="ROLES_IMAGENES_EMPLEADOS"><td>ROLES_IMAGENES_EMPLEADOS</td><td></td><td>Config</td><td>Personal</td><td></td></tr>
+<tr id="ROLES_IMAGENES_PROVEEDORES"><td>ROLES_IMAGENES_PROVEEDORES</td><td></td><td>Config</td><td>Proveedores</td><td></td></tr>
+<tr id="RUTAS"><td>RUTAS</td><td>Rutas</td><td>Mov</td><td>Rutas</td><td></td></tr>
+<tr id="RUTAS_DET"><td>RUTAS_DET</td><td>Rutas Detalle</td><td>Detalle</td><td>Rutas</td><td></td></tr>
+<tr id="SALARIOS_MIN"><td>SALARIOS_MIN</td><td>Salario Mínimo de la Zona</td><td></td><td>Nómina</td><td></td></tr>
+<tr id="SALDOS_BA"><td>SALDOS_BA</td><td>acumulado</td><td>Saldos</td><td>Bancos</td><td></td></tr>
+<tr id="SALDOS_CC"><td>SALDOS_CC</td><td>acumulado</td><td>Saldos</td><td>Por Cobrar</td><td></td></tr>
+<tr id="SALDOS_CO"><td>SALDOS_CO</td><td>acumulado</td><td>Saldos</td><td>Contabilidad</td><td></td></tr>
+<tr id="SALDOS_CP"><td>SALDOS_CP</td><td>acumulado</td><td>Saldos</td><td>Por Pagar</td><td></td></tr>
+<tr id="SALDOS_EDOFIN"><td>SALDOS_EDOFIN</td><td>Creo que es el resultado de un SP, similar a spVerContResultados</td><td>Saldos</td><td>Contabilidad</td><td></td></tr>
+<tr id="SALDOS_IN"><td>SALDOS_IN</td><td>acumulado</td><td>Saldos</td><td>Inventarios</td><td></td></tr>
+<tr id="SEMAFOROS"><td>SEMAFOROS</td><td></td><td></td><td>N/A</td><td></td></tr>
+<tr id="SESIONES_SUCURSALES"><td>SESIONES_SUCURSALES</td><td></td><td></td><td>General</td><td></td></tr>
+<tr id="SNUBE_COMANDOS_AGENTE"><td>SNUBE_COMANDOS_AGENTE</td><td></td><td></td><td>Sincronización</td><td></td></tr>
+<tr id="SNUBE_CONCILIACION_INFO"><td>SNUBE_CONCILIACION_INFO</td><td></td><td></td><td>Sincronización</td><td></td></tr>
+<tr id="SNUBE_EVENTOS_TEMP"><td>SNUBE_EVENTOS_TEMP</td><td></td><td></td><td>Sincronización</td><td></td></tr>
+<tr id="SNUBE_GTT_EVENTOS"><td>SNUBE_GTT_EVENTOS</td><td></td><td></td><td>Sincronización</td><td></td></tr>
+<tr id="SNUBE_MAPEOS"><td>SNUBE_MAPEOS</td><td></td><td></td><td>Sincronización</td><td></td></tr>
+<tr id="SNUBE_SUCURSALES"><td>SNUBE_SUCURSALES</td><td></td><td></td><td>Sincronización</td><td></td></tr>
+<tr id="SNUBE_SUCURSALES_CONSULTAS"><td>SNUBE_SUCURSALES_CONSULTAS</td><td></td><td></td><td>Sincronización</td><td></td></tr>
+<tr id="SNUBE_SUCURSALES_DISPERSION"><td>SNUBE_SUCURSALES_DISPERSION</td><td></td><td></td><td>Sincronización</td><td></td></tr>
+<tr id="SNUBE_SUCURSALES_LLAVES"><td>SNUBE_SUCURSALES_LLAVES</td><td></td><td></td><td>Sincronización</td><td></td></tr>
+<tr id="SOLICITUDES_TRASPASO_IN"><td>SOLICITUDES_TRASPASO_IN</td><td></td><td>Mov</td><td>Traspasos</td><td></td></tr>
+<tr id="SOLICITUDES_TRASPASO_IN_DET"><td>SOLICITUDES_TRASPASO_IN_DET</td><td></td><td>Detalle</td><td>Traspasos</td><td></td></tr>
+<tr id="SUBCONTRATOS_EMP"><td>SUBCONTRATOS_EMP</td><td></td><td>Config</td><td>Nómina</td><td></td></tr>
+<tr id="SUB_MOVTOS_CC"><td>SUB_MOVTOS_CC</td><td>¿?</td><td></td><td>Por Cobrar</td><td></td></tr>
+<tr id="SUB_MOVTOS_CP"><td>SUB_MOVTOS_CP</td><td>¿?</td><td></td><td>Por Pagar</td><td></td></tr>
+<tr id="SUB_MOVTOS_IN"><td>SUB_MOVTOS_IN</td><td>¿?</td><td></td><td>Inventarios</td><td></td></tr>
+<tr id="SUB_MOVTOS_PV"><td>SUB_MOVTOS_PV</td><td>¿?</td><td></td><td>Punto Venta</td><td></td></tr>
+<tr id="SUB_MOVTOS_VE"><td>SUB_MOVTOS_VE</td><td>¿?</td><td></td><td>Ventas</td><td></td></tr>
+<tr id="SUCURSALES"><td>SUCURSALES</td><td></td><td>Catalogo</td><td>Sucursales</td><td></td></tr>
+<tr id="SUCURSALES_CATALOGOS"><td>SUCURSALES_CATALOGOS</td><td></td><td>Catalogo</td><td>Sucursales</td><td></td></tr>
+<tr id="SUCURSALES_CATALOGOS_DET"><td>SUCURSALES_CATALOGOS_DET</td><td></td><td>Catalogo</td><td>Sucursales</td><td></td></tr>
+<tr id="TABLAS_NO"><td>TABLAS_NO</td><td></td><td>Config</td><td>Nómina</td><td></td></tr>
+<tr id="TABLAS_NO_DET"><td>TABLAS_NO_DET</td><td></td><td>Config</td><td>Nómina</td><td></td></tr>
+<tr id="TARJETAS"><td>TARJETAS</td><td></td><td></td><td>Punto Venta</td><td>Ya no existe</td></tr>
+<tr id="TEMP_VENTAS_DESGL"><td>TEMP_VENTAS_DESGL</td><td></td><td>Sys</td><td>Ventas</td><td></td></tr>
+<tr id="TERCEROS_CO"><td>TERCEROS_CO</td><td></td><td></td><td>Contabilidad</td><td></td></tr>
+<tr id="TIPOS_BITACORAS"><td>TIPOS_BITACORAS</td><td></td><td>Config</td><td>General</td><td></td></tr>
+<tr id="TIPOS_CLIENTES"><td>TIPOS_CLIENTES</td><td>Tipo Cliente</td><td>Config</td><td>Clientes</td><td></td></tr>
+<tr id="TIPOS_CONTRATOS_LFT"><td>TIPOS_CONTRATOS_LFT</td><td></td><td>Config</td><td>Nómina</td><td></td></tr>
+<tr id="TIPOS_CTAS_BAN"><td>TIPOS_CTAS_BAN</td><td>Tipos Cuentas de Banco</td><td>Config</td><td>Bancos</td><td></td></tr>
+<tr id="TIPOS_DISPOSITIVOS"><td>TIPOS_DISPOSITIVOS</td><td>Tipo Dispositivo Punto Venta</td><td>Config</td><td>Punto Venta</td><td></td></tr>
+<tr id="TIPOS_IMPUESTOS"><td>TIPOS_IMPUESTOS</td><td>Tipo Impuesto</td><td>Config</td><td>General</td><td></td></tr>
+<tr id="TIPOS_ISN"><td>TIPOS_ISN</td><td>Impuesto Sobre Nómina</td><td>Config</td><td>Nómina</td><td></td></tr>
+<tr id="TIPOS_POLIZAS"><td>TIPOS_POLIZAS</td><td>Tipo Póliza</td><td>Config</td><td>Contabilidad</td><td></td></tr>
+<tr id="TIPOS_POLIZAS_DET"><td>TIPOS_POLIZAS_DET</td><td>Consecutivos</td><td>Config</td><td>Contabilidad</td><td></td></tr>
+<tr id="TIPOS_PROV"><td>TIPOS_PROV</td><td>Tipo Proveedor</td><td>Config</td><td>Compras</td><td></td></tr>
+<tr id="TIPOS_TABLAS_NO"><td>TIPOS_TABLAS_NO</td><td>Tipo Tablas Nómina</td><td>Config</td><td>Nómina</td><td></td></tr>
+<tr id="TIPOS_TARJETAS"><td>TIPOS_TARJETAS</td><td></td><td></td><td>Punto Venta</td><td>Ya no existe</td></tr>
+<tr id="TRASPASOS_BA"><td>TRASPASOS_BA</td><td>Traspasos Bancarios</td><td>Mov</td><td>Bancos</td><td></td></tr>
+<tr id="TRASPASOS_IN"><td>TRASPASOS_IN</td><td></td><td>Mov</td><td>Traspasos</td><td></td></tr>
+<tr id="TRASPASOS_IN_DET"><td>TRASPASOS_IN_DET</td><td></td><td>Detalle</td><td>Traspasos</td><td></td></tr>
+<tr id="TRASPASOS_IN_LIGAS"><td>TRASPASOS_IN_LIGAS</td><td></td><td>Mov</td><td>Traspasos</td><td></td></tr>
+<tr id="TRASPASOS_IN_LIGAS_DET"><td>TRASPASOS_IN_LIGAS_DET</td><td></td><td>Detalle</td><td>Traspasos</td><td></td></tr>
+<tr id="ULTIMO_CALCULO_VPD"><td>ULTIMO_CALCULO_VPD</td><td></td><td></td><td>Planeador</td><td></td></tr>
+<tr id="UNIDADES_VENTA"><td>UNIDADES_VENTA</td><td></td><td>Config</td><td>Ventas</td><td></td></tr>
+<tr id="USOS_ANTICIPOS_CC"><td>USOS_ANTICIPOS_CC</td><td>Aplicación de Anticipos Cxc</td><td>Mov</td><td>Por Cobrar</td><td></td></tr>
+<tr id="USOS_CAPAS_COSTOS"><td>USOS_CAPAS_COSTOS</td><td></td><td></td><td>Inventarios</td><td></td></tr>
+<tr id="USOS_CAPAS_PEDIMENTOS"><td>USOS_CAPAS_PEDIMENTOS</td><td></td><td></td><td>Inventarios</td><td></td></tr>
+<tr id="USOS_FOLIOS_FISCALES"><td>USOS_FOLIOS_FISCALES</td><td></td><td></td><td>Fiscal</td><td></td></tr>
+<tr id="USOS_FOLIOS_FISCALES_CANCELADOS"><td>USOS_FOLIOS_FISCALES_CANCELADOS</td><td></td><td></td><td>Fiscal</td><td></td></tr>
+<tr id="USOS_PERIODOS_VAC"><td>USOS_PERIODOS_VAC</td><td></td><td></td><td>Nómina</td><td></td></tr>
+<tr id="USUARIOS_SUCURSALES"><td>USUARIOS_SUCURSALES</td><td></td><td></td><td>Sucursales</td><td></td></tr>
+<tr id="USUARIOS_SUCURSALES_DET"><td>USUARIOS_SUCURSALES_DET</td><td></td><td></td><td>Sucursales</td><td></td></tr>
+<tr id="VACACIONES"><td>VACACIONES</td><td></td><td></td><td>Nómina</td><td></td></tr>
+<tr id="VALORES_ATRIB_ARTS_VARIANTES"><td>VALORES_ATRIB_ARTS_VARIANTES</td><td></td><td></td><td>Artículos</td><td></td></tr>
+<tr id="VARIANTES_ARTS"><td>VARIANTES_ARTS</td><td></td><td></td><td>Artículos</td><td></td></tr>
+<tr id="VARIANTES_ARTS_DET"><td>VARIANTES_ARTS_DET</td><td></td><td></td><td>Artículos</td><td></td></tr>
+<tr id="VENCIMIENTOS_CARGOS_CC"><td>VENCIMIENTOS_CARGOS_CC</td><td>Vencimientos Cuentas por Cobrar</td><td>Detalle</td><td>Por Cobrar</td><td></td></tr>
+<tr id="VENCIMIENTOS_CARGOS_CM"><td>VENCIMIENTOS_CARGOS_CM</td><td>Vencimientos Compras</td><td></td><td>Compras</td><td></td></tr>
+<tr id="VENCIMIENTOS_CARGOS_CP"><td>VENCIMIENTOS_CARGOS_CP</td><td>Vencimientos Cuentas por Pagar</td><td></td><td>Por Pagar</td><td></td></tr>
+<tr id="VENCIMIENTOS_CARGOS_PEND_CC"><td>VENCIMIENTOS_CARGOS_PEND_CC</td><td></td><td></td><td>Por Cobrar</td><td></td></tr>
+<tr id="VENCIMIENTOS_CARGOS_VE"><td>VENCIMIENTOS_CARGOS_VE</td><td>Vencimientos Ventas</td><td></td><td>Ventas</td><td></td></tr>
+<tr id="VENDEDORES"><td>VENDEDORES</td><td></td><td></td><td>Agentes</td><td></td></tr>
+<tr id="VERSIONES_DB"><td>VERSIONES_DB</td><td></td><td>Sys</td><td>N/A</td><td></td></tr>
+<tr id="VIAS_EMBARQUE"><td>VIAS_EMBARQUE</td><td></td><td></td><td>Ventas</td><td></td></tr>
+<tr id="VIATICOS_NO"><td>VIATICOS_NO</td><td>Viáticos para comprobar gastos</td><td>Mov</td><td>Nómina</td><td></td></tr>
+<tr id="VIATICOS_NO_CANCELADOS"><td>VIATICOS_NO_CANCELADOS</td><td></td><td></td><td>Nómina</td><td></td></tr>
+<tr id="VIATICOS_NO_DET"><td>VIATICOS_NO_DET</td><td>Detalle de viáticos</td><td>Detalle</td><td>Nómina</td><td></td></tr>
+<tr id="VISITAS"><td>VISITAS</td><td></td><td>Mov</td><td>Visitas</td><td></td></tr>
+<tr id="ZONAS_CLIENTES"><td>ZONAS_CLIENTES</td><td>Clasificador</td><td></td><td>Clientes</td><td></td></tr>
+</tbody>
+</table>
+<p id="fbi-none" class="fbi-none">Ninguna tabla coincide con los filtros.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Nota</p>
+<p>Las tablas marcadas "Ya no existe" estaban en versiones anteriores de Microsip. Para ver las tablas de tu propia base, corre:</p>
+</div>
+<div class="fbi-code"><pre><code class="sql">select rdb$relation_name
+from rdb$relations
+where rdb$view_blr is null
+and (rdb$system_flag is null or rdb$system_flag = 0)
+order by rdb$relation_name;</code></pre></div>
+<hr />
+<h2 id="tipos-de-documento">Tipos de documento<a class="headerlink" href="#tipos-de-documento" title="Permanent link">&para;</a></h2>
+<p>Qué significa cada letra de <code>TIPO_DOCTO</code> en las tablas de documentos, por módulo.</p>
+<div class="fbi-table ">
+<table class="docutils">
+<thead><tr><th>módulo</th><th>tabla</th><th>TIPO_DOCTO</th><th>tipoDocumento</th><th>estatus</th><th>SUBTIPO_DOCTO</th><th>observaciones</th></tr></thead>
+<tbody>
+<tr><td>VE</td><td><code>DOCTOS_VE</code></td><td><code>C</code></td><td>Cotización</td><td></td><td></td><td></td></tr>
+<tr><td>VE</td><td><code>DOCTOS_VE</code></td><td><code>D</code></td><td>Devolución de Venta</td><td></td><td>N</td><td>Devolución de producto</td></tr>
+<tr><td>VE</td><td><code>DOCTOS_VE</code></td><td><code>D</code></td><td>Devolución de Venta</td><td></td><td>A</td><td>Descuentos y bonificaciones, incluyendo el pronto pago</td></tr>
+<tr><td>VE</td><td><code>DOCTOS_VE</code></td><td><code>F</code></td><td>Factura</td><td>N</td><td></td><td></td></tr>
+<tr><td>VE</td><td><code>DOCTOS_VE</code></td><td><code>P</code></td><td>Pedido</td><td>P, S, E</td><td></td><td></td></tr>
+<tr><td>VE</td><td><code>DOCTOS_VE</code></td><td><code>R</code></td><td>Remisión</td><td>P, F, D</td><td></td><td></td></tr>
+<tr><td>VE</td><td><code>DOCTOS_VE</code></td><td><code>r</code></td><td>Devolución de Remisión</td><td></td><td></td><td></td></tr>
+<tr><td>CM</td><td><code>DOCTOS_CM</code></td><td><code>C</code></td><td>Factura de Compra</td><td></td><td></td><td></td></tr>
+<tr><td>CM</td><td><code>DOCTOS_CM</code></td><td><code>O</code></td><td>Orden de Compra</td><td></td><td></td><td></td></tr>
+<tr><td>CM</td><td><code>DOCTOS_CM</code></td><td><code>R</code></td><td>Recepción de Compra</td><td></td><td></td><td></td></tr>
+<tr><td>CM</td><td><code>DOCTOS_CM</code></td><td><code>D</code></td><td>Devolución de Compra</td><td></td><td>N</td><td>Devolución de producto al proveedor</td></tr>
+<tr><td>CM</td><td><code>DOCTOS_CM</code></td><td><code>D</code></td><td>Devolución de Compra</td><td></td><td>A</td><td>Descuentos y bonificaciones, incluyendo el pronto pago</td></tr>
+<tr><td>CM</td><td><code>DOCTOS_CM</code></td><td><code>r</code></td><td>Devolución de Recepción</td><td></td><td></td><td></td></tr>
+<tr><td>CC</td><td><code>DOCTOS_CC</code></td><td></td><td></td><td>N</td><td></td><td></td></tr>
+<tr><td>CC</td><td><code>DOCTOS_CC</code></td><td></td><td></td><td>P</td><td></td><td></td></tr>
+<tr><td>CC</td><td><code>IMPORTES_DOCTOS_CC</code></td><td><code>A</code></td><td></td><td></td><td></td><td></td></tr>
+<tr><td>CC</td><td><code>IMPORTES_DOCTOS_CC</code></td><td><code>C</code></td><td></td><td></td><td></td><td>cargo</td></tr>
+<tr><td>CC</td><td><code>IMPORTES_DOCTOS_CC</code></td><td><code>R</code></td><td></td><td></td><td></td><td>abono</td></tr>
+<tr><td>CC</td><td><code>IMPORTES_DOCTOS_CC</code></td><td><code>T</code></td><td></td><td></td><td></td><td>naturaleza: R=abono, C=cargo</td></tr>
+<tr><td>CC</td><td><code>CONCEPTOS_CC</code></td><td><code>V</code></td><td>Factura de Venta</td><td></td><td></td><td>cargo</td></tr>
+<tr><td>CC</td><td><code>CONCEPTOS_CC</code></td><td><code>D</code></td><td>Devolución Venta</td><td></td><td></td><td>abono</td></tr>
+<tr><td>CC</td><td><code>CONCEPTOS_CC</code></td><td><code>P</code></td><td>Cobro</td><td></td><td></td><td>abono</td></tr>
+<tr><td>CC</td><td><code>CONCEPTOS_CC</code></td><td><code>C</code></td><td>Cargo diverso</td><td></td><td></td><td>cargo</td></tr>
+<tr><td>CC</td><td><code>CONCEPTOS_CC</code></td><td><code>R</code></td><td>Crédito diverso</td><td></td><td></td><td>abono</td></tr>
+<tr><td>CC</td><td><code>CONCEPTOS_CC</code></td><td><code>H</code></td><td>Cheque Devuelto</td><td></td><td></td><td>cargo</td></tr>
+<tr><td>CC</td><td><code>CONCEPTOS_CC</code></td><td><code>N</code></td><td>Devolución Saldo</td><td></td><td></td><td>cargo</td></tr>
+<tr><td>PV</td><td><code>DOCTOS_PV</code></td><td><code>V</code></td><td>Nota de Venta Mostrador</td><td></td><td></td><td></td></tr>
+<tr><td>PV</td><td><code>DOCTOS_PV</code></td><td><code>D</code></td><td>Devolución de Venta Mostrador</td><td></td><td></td><td></td></tr>
+<tr><td>PV</td><td><code>DOCTOS_PV</code></td><td><code>F</code></td><td>Factura</td><td></td><td></td><td></td></tr>
+<tr><td>PV</td><td><code>DOCTOS_PV</code></td><td><code>P</code></td><td>Cobro Crédito Mostrador</td><td></td><td></td><td></td></tr>
+<tr><td>PV</td><td><code>DOCTOS_PV</code></td><td><code>I</code></td><td>Ingreso de Caja</td><td></td><td></td><td></td></tr>
+<tr><td>PV</td><td><code>DOCTOS_PV</code></td><td><code>R</code></td><td>Retiro de Caja</td><td></td><td></td><td></td></tr>
+<tr><td>PV</td><td><code>DOCTOS_PV</code></td><td><code>O</code></td><td>Orden de Venta</td><td></td><td></td><td></td></tr>
+<tr><td>PV</td><td><code>DOCTOS_PV</code></td><td><code>C</code></td><td>Nota de Crédito</td><td></td><td></td><td></td></tr>
+<tr><td>CO</td><td><code>DOCTOS_CO_DET_INFO_BAN</code></td><td><code>T</code></td><td>Transferencia</td><td></td><td></td><td></td></tr>
+<tr><td>CO</td><td><code>DOCTOS_CO_DET_INFO_BAN</code></td><td><code>O</code></td><td></td><td></td><td></td><td></td></tr>
+<tr><td>CO</td><td><code>DOCTOS_CO_DET_INFO_BAN</code></td><td><code>N</code></td><td></td><td></td><td></td><td></td></tr>
+<tr><td>CO</td><td><code>DOCTOS_CO_DET_INFO_BAN</code></td><td><code>C</code></td><td></td><td></td><td></td><td></td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="conceptos-de-inventario">Conceptos de inventario<a class="headerlink" href="#conceptos-de-inventario" title="Permanent link">&para;</a></h2>
+<p>Las entradas y salidas de inventario, con el signo con el que suman o restan a la existencia.</p>
+<div class="fbi-table ">
+<table class="docutils">
+<thead><tr><th>Origen</th><th>Concepto</th><th>Signo</th><th>MovTipo</th></tr></thead>
+<tbody>
+<tr><td><code>CM</code></td><td>Compra</td><td>1</td><td>Entrada</td></tr>
+<tr><td><code>CM</code></td><td>Recepcion de mercancia</td><td>1</td><td>Entrada</td></tr>
+<tr><td><code>EX</code></td><td>Traspaso (entrada)</td><td>1</td><td>Entrada</td></tr>
+<tr><td><code>IF</code></td><td>Inventario fisico (entrada)</td><td>1</td><td>Entrada</td></tr>
+<tr><td><code>IN</code></td><td>Ajuste (entrada)</td><td>1</td><td>Entrada</td></tr>
+<tr><td><code>IN</code></td><td>Compra</td><td>1</td><td>Entrada</td></tr>
+<tr><td><code>IN</code></td><td>Ensamble</td><td>1</td><td>Entrada</td></tr>
+<tr><td><code>IN</code></td><td>Inventario fisico (entrada)</td><td>1</td><td>Entrada</td></tr>
+<tr><td><code>IN</code></td><td>Saldo inicial</td><td>1</td><td>Entrada</td></tr>
+<tr><td><code>IN</code></td><td>Traspaso (entrada)</td><td>1</td><td>Entrada</td></tr>
+<tr><td><code>PV</code></td><td>Devolucion en mostrador</td><td>1</td><td>Entrada</td></tr>
+<tr><td><code>VE</code></td><td>Devolucion de remision</td><td>1</td><td>Entrada</td></tr>
+<tr><td><code>VE</code></td><td>Devolucion de venta</td><td>1</td><td>Entrada</td></tr>
+<tr><td><code>CM</code></td><td>Devolucion de compra</td><td>-1</td><td>Salida</td></tr>
+<tr><td><code>CM</code></td><td>Devolucion de recepcion</td><td>-1</td><td>Salida</td></tr>
+<tr><td><code>EX</code></td><td>Traspaso (salida)</td><td>-1</td><td>Salida</td></tr>
+<tr><td><code>IF</code></td><td>Inventario fisico (salida)</td><td>-1</td><td>Salida</td></tr>
+<tr><td><code>IN</code></td><td>Ajuste (salida)</td><td>-1</td><td>Salida</td></tr>
+<tr><td><code>IN</code></td><td>Consumo interno</td><td>-1</td><td>Salida</td></tr>
+<tr><td><code>IN</code></td><td>Devolucion de compra</td><td>-1</td><td>Salida</td></tr>
+<tr><td><code>IN</code></td><td>Devolucion de recepcion</td><td>-1</td><td>Salida</td></tr>
+<tr><td><code>IN</code></td><td>Ensamble</td><td>-1</td><td>Salida</td></tr>
+<tr><td><code>IN</code></td><td>Merma</td><td>-1</td><td>Salida</td></tr>
+<tr><td><code>IN</code></td><td>Inventario fisico (salida)</td><td>-1</td><td>Salida</td></tr>
+<tr><td><code>IN</code></td><td>Traspaso (salida)</td><td>-1</td><td>Salida</td></tr>
+<tr><td><code>VE</code></td><td>Venta</td><td>-1</td><td>Salida</td></tr>
+<tr><td><code>VE</code></td><td>Remision</td><td>-1</td><td>Salida</td></tr>
+<tr><td><code>PV</code></td><td>Venta en mostrador</td><td>-1</td><td>Salida</td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="acronimos">Acrónimos de módulos<a class="headerlink" href="#acronimos" title="Permanent link">&para;</a></h2>
+<p>Las dos letras con las que Microsip identifica cada módulo en sus tablas y columnas.</p>
+<div class="fbi-table ">
+<table class="docutils">
+<thead><tr><th>Acrónimo</th><th>Módulo correspondiente</th></tr></thead>
+<tbody>
+<tr><td><code>BA</code></td><td>Bancos</td></tr>
+<tr><td><code>CC</code></td><td>Cuentas por Cobrar</td></tr>
+<tr><td><code>CM</code></td><td>Compras</td></tr>
+<tr><td><code>CO</code></td><td>Contabilidad</td></tr>
+<tr><td><code>CP</code></td><td>Cuentas por Pagar</td></tr>
+<tr><td><code>EX</code></td><td>Exsim</td></tr>
+<tr><td><code>IF</code></td><td>Inventario Fisico</td></tr>
+<tr><td><code>IN</code></td><td>Inventarios</td></tr>
+<tr><td><code>NO</code></td><td>Nómina</td></tr>
+<tr><td><code>PV</code></td><td>Punto de Venta</td></tr>
+<tr><td><code>VE</code></td><td>Ventas</td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="tipos-de-renglon">Tipos de renglón<a class="headerlink" href="#tipos-de-renglon" title="Permanent link">&para;</a></h2>
+<p>Los valores de la columna <code>ROL</code> en los renglones de los documentos.</p>
+<div class="fbi-table ">
+<table class="docutils">
+<thead><tr><th>renglonTipo</th><th>Descripcion</th></tr></thead>
+<tbody>
+<tr><td><code>N</code></td><td>Normal</td></tr>
+<tr><td><code>C</code></td><td>Componente</td></tr>
+<tr><td><code>J</code></td><td>Juego</td></tr>
+<tr><td><code>E</code></td><td>Entrada</td></tr>
+<tr><td><code>S</code></td><td>Salida</td></tr>
+</tbody>
+</table>
+</div>
+<hr />
+<p>¿Falta una tabla o una descripción está mal? Contáctanos.</p>
+<p><a class="btn btn-neutral fbi-cta" href="https://www.factorbi.com/es/contact?utm_source=factorbi.github.io&amp;utm_medium=referral&amp;utm_campaign=microsip_docs" target="_blank" rel="noopener">Contáctanos</a></p>
+<p>Si vas a construir reportes sobre estas tablas, apóyate en tu distribuidor Microsip: es quien conoce tu instalación, y nosotros trabajamos de su mano.</p>
+<p>La hoja original sigue pública en <a href="https://docs.google.com/spreadsheets/d/1yxDkn5YG2icTwyRAVAIb7NOcx5DJGERQM8aFCo7lNz0/edit?usp=sharing" target="_blank" rel="noopener">Google Sheets</a>.</p>
+<p><strong>¿Y con Claude o ChatGPT?</strong> Sí se puede analizar Microsip con IA, pero no subiendo tu base a un chat. Te explicamos cómo hacerlo con tus datos seguros en <a href="https://www.factorbi.com/es/ai" target="_blank" rel="noopener">factorbi.com</a>.</p>
+
+<script>
+(function () {
+  var wrap = document.getElementById('fbi-sheet');
+  if (!wrap) return;
+  var table = wrap.querySelector('table'), tbody = table.tBodies[0];
+  var rows = Array.prototype.slice.call(tbody.rows);
+  var heads = table.tHead.rows[0].cells, ncol = heads.length;
+  var out = document.getElementById('fbi-count'), none = document.getElementById('fbi-none');
+  var selCols = { 2: true, 3: true };
+  function norm(s) { return (s || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim(); }
+  function cell(tr, i) { return tr.cells[i].textContent.trim(); }
+  var fr = table.tHead.insertRow(1), filters = [];
+  fr.className = 'fbi-filters';
+  for (var i = 0; i < ncol; i++) {
+    var th = document.createElement('th'), ctl;
+    if (selCols[i]) {
+      ctl = document.createElement('select');
+      var vals = {}; rows.forEach(function (tr) { vals[cell(tr, i)] = 1; });
+      var o = document.createElement('option'); o.value = ''; o.textContent = 'Todos'; ctl.appendChild(o);
+      Object.keys(vals).sort(function (a, b) { return a.localeCompare(b, 'es'); }).forEach(function (v) {
+        var op = document.createElement('option'); op.value = v; op.textContent = v === '' ? '(vacío)' : v; ctl.appendChild(op);
+      });
+      ctl.addEventListener('change', run);
+    } else {
+      ctl = document.createElement('input'); ctl.type = 'search'; ctl.placeholder = 'Filtrar';
+      ctl.addEventListener('input', run);
+    }
+    ctl.setAttribute('aria-label', 'Filtrar ' + heads[i].textContent);
+    filters.push(ctl); th.appendChild(ctl); fr.appendChild(th);
+  }
+  var hh = table.tHead.rows[0].offsetHeight;
+  Array.prototype.forEach.call(fr.cells, function (c) { c.style.top = hh + 'px'; });
+  function visible() { return rows.filter(function (tr) { return tr.style.display !== 'none'; }); }
+  function run() {
+    rows.forEach(function (tr) {
+      var ok = true;
+      for (var i = 0; i < ncol && ok; i++) {
+        var f = filters[i], v = f.value;
+        if (!v) continue;
+        ok = selCols[i] ? cell(tr, i) === v : norm(cell(tr, i)).indexOf(norm(v)) !== -1;
+      }
+      tr.style.display = ok ? '' : 'none';
+    });
+    var n = visible().length;
+    out.textContent = n === rows.length ? n + ' tablas' : n + ' de ' + rows.length + ' tablas';
+    none.style.display = n ? 'none' : 'block';
+  }
+  Array.prototype.forEach.call(heads, function (th, i) {
+    th.setAttribute('aria-sort', 'none');
+    th.addEventListener('click', function () {
+      var dir = th.getAttribute('aria-sort') === 'ascending' ? 'descending' : 'ascending';
+      Array.prototype.forEach.call(heads, function (h) { h.setAttribute('aria-sort', 'none'); });
+      th.setAttribute('aria-sort', dir);
+      rows.sort(function (a, b) {
+        var r = cell(a, i).localeCompare(cell(b, i), 'es', { sensitivity: 'base' });
+        return dir === 'ascending' ? r : -r;
+      });
+      rows.forEach(function (tr) { tbody.appendChild(tr); });
+    });
+  });
+  document.getElementById('fbi-clear').addEventListener('click', function () {
+    filters.forEach(function (f) { f.value = ''; }); run();
+  });
+  document.getElementById('fbi-csv').addEventListener('click', function () {
+    function q(s) { return '"' + s.replace(/"/g, '""') + '"'; }
+    var lines = [Array.prototype.map.call(heads, function (h) { return q(h.textContent.trim()); }).join(',')];
+    visible().forEach(function (tr) {
+      var r = []; for (var i = 0; i < ncol; i++) r.push(q(cell(tr, i))); lines.push(r.join(','));
+    });
+    var blob = new Blob(['\ufeff' + lines.join('\r\n')], { type: 'text/csv;charset=utf-8' });
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(blob); a.download = 'tablas-microsip.csv';
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    setTimeout(function () { URL.revokeObjectURL(a.href); }, 1000);
+  });
+  run();
+})();
+</script>
+
+<script>
+(function () {
+  var boxes = document.querySelectorAll('.fbi-guide .fbi-code');
+  Array.prototype.forEach.call(boxes, function (box) {
+    var code = box.querySelector('code');
+    if (!code) return;
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'fbi-copy';
+    btn.textContent = 'Copiar';
+    btn.setAttribute('aria-label', 'Copiar el código');
+    function flash(msg) {
+      btn.textContent = msg;
+      setTimeout(function () { btn.textContent = 'Copiar'; }, 1600);
+    }
+    function fallback(text) {
+      var t = document.createElement('textarea');
+      t.value = text;
+      t.setAttribute('readonly', '');
+      t.style.position = 'fixed';
+      t.style.top = '-1000px';
+      document.body.appendChild(t);
+      t.select();
+      var ok = false;
+      try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
+      document.body.removeChild(t);
+      flash(ok ? 'Copiado' : 'No se pudo copiar');
+    }
+    btn.addEventListener('click', function () {
+      var text = code.textContent;
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(text).then(function () { flash('Copiado'); }, function () { fallback(text); });
+      } else {
+        fallback(text);
+      }
+    });
+    box.appendChild(btn);
+  });
+})();
+</script>
+
+            </div>
+          </div>
+          <footer>
+
+
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+
+      <p>© 2026 Factor BI</p>
+
+  </div>
+
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+
+    </span>
+</div>
+    <script src="../../js/theme.js"></script>
+
+</body>
+</html>
